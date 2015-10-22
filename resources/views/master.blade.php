@@ -34,7 +34,7 @@
   <link rel="stylesheet" type="text/css" href="{{URL::asset('css/_con.min.css')}}" />
   
   <link rel="stylesheet" type="text/css" href="{{URL::asset('css/style.css')}}" />
-  
+     <link rel="stylesheet" href="{{URL::asset('jqwidgets/styles/jqx.base.css')}}" type="text/css" />
   <!-- Fancy Box -->
   <link rel="stylesheet" href="{{URL::asset('fancybox/source/jquery.fancybox.css')}}" type="text/css" media="screen" />
   <!-- Fancy Box -->
@@ -226,346 +226,23 @@
   <!-- /Yay Sidebar -->
             @yield('content')
         
-   <!-- Search Bar -->
-  <div class="search-bar">
-    <div class="layer-overlay"></div>
-    <div class="layer-content">
-      <form action="#!">
-        <!-- Header -->
-        <a class="search-bar-toggle grey-text text-darken-2" href="#!"><i class="mdi-navigation-close"></i></a>
-
-        <!-- Search Input -->
-        <div class="input-field">
-          <i class="mdi-action-search prefix"></i>
-          <input type="text" name="con-search" placeholder="Search...">
-        </div>
-
-        <!-- Search Results -->
-        <div class="search-results">
-
-          <div class="row">
-            <div class="col s12 l4">
-              <h4>Users</h4>
-
-              <div class="each-result">
-                <img src="{{URL::asset('images/user2.jpg')}}" alt="Felecia Castro" class="circle photo">
-                <div class="title">Felecia Castro</div>
-                <div class="label">Content Manager</div>
-              </div>
-
-              <div class="each-result">
-                <img src="assets/images/user3.jpg" alt="Max Brooks" class="circle photo">
-                <div class="title">Max Brooks</div>
-                <div class="label">Programmer</div>
-              </div>
-
-              <div class="each-result">
-                <img src="assets/images/user4.jpg" alt="Patsy Griffin" class="circle photo">
-                <div class="title">Patsy Griffin</div>
-                <div class="label">Support</div>
-              </div>
-
-              <div class="each-result">
-                <img src="assets/images/user6.jpg" alt="Vernon Garrett" class="circle photo">
-                <div class="title">Vernon Garrett</div>
-                <div class="label">Photographer</div>
-              </div>
-            </div>
-            <div class="col s12 l4">
-              <h4>Articles</h4>
-
-              <div class="each-result">
-                <div class="icon circle blue white-text">MD</div>
-                <div class="title">Material Design</div>
-                <div class="label nowrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi consequatur debitis veritatis dolorum, enim libero!</div>
-              </div>
-
-              <div class="each-result">
-                <div class="icon circle teal white-text">
-                  <i class="fa fa-dashboard"></i>
-                </div>
-                <div class="title">Admin Dashboard</div>
-                <div class="label nowrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi consequatur debitis veritatis dolorum, enim libero!</div>
-              </div>
-
-              <div class="each-result">
-                <div class="icon circle orange white-text">RD</div>
-                <div class="title">Responsive Design</div>
-                <div class="label nowrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi consequatur debitis veritatis dolorum, enim libero!</div>
-              </div>
-
-              <div class="each-result">
-                <div class="icon circle red white-text">
-                  <i class="fa fa-tablet"></i>
-                </div>
-                <div class="title">Mobile First</div>
-                <div class="label nowrap">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi consequatur debitis veritatis dolorum, enim libero!</div>
-              </div>
-            </div>
-            <div class="col s12 l4">
-              <h4>Posts</h4>
-
-              <div class="no-result">No results were found ;(</div>
-            </div>
-          </div>
-
-        </div>
-
-      </form>
-    </div>
-  </div>
-  <!-- /Search Bar -->
-
 
 
   <!--
   Chat
     .chat-light - light color scheme
 -->
-  <div class="chat">
-    <div class="layer-overlay"></div>
-
-    <div class="layer-content">
-
-      <!-- Contacts -->
-      <div class="contacts">
-        <!-- Top Bar -->
-        <div class="topbar">
-          <a href="#!" class="text">Chat</a>
-          <a href="#!" class="chat-toggle"><i class="mdi-navigation-close"></i></a>
-        </div>
-        <!-- /Top Bar -->
-
-        <div class="nano">
-          <div class="nano-content">
-
-            <span class="label">Online</span>
-
-            <div class="user">
-              <img src="assets/images/user2.jpg" alt="Felecia Castro" class="circle photo">
-
-              <div class="name">Felecia Castro</div>
-              <div class="status">Lorem status</div>
-
-              <div class="online"><i class="green-text fa fa-circle"></i>
-              </div>
-            </div>
-
-            <div class="user">
-              <img src="assets/images/user3.jpg" alt="Max Brooks" class="circle photo">
-
-              <div class="name">Max Brooks</div>
-              <div class="status">Lorem status</div>
-
-              <div class="online"><i class="green-text fa fa-circle"></i>
-              </div>
-            </div>
-
-            <div class="user">
-              <img src="assets/images/user4.jpg" alt="Patsy Griffin" class="circle photo">
-
-              <div class="name">Patsy Griffin</div>
-              <div class="status">Lorem status</div>
-
-              <div class="online"><i class="green-text fa fa-circle"></i>
-              </div>
-            </div>
-
-            <div class="user">
-              <img src="assets/images/user5.jpg" alt="Chloe Morgan" class="circle photo">
-
-              <div class="name">Chloe Morgan</div>
-              <div class="status">Lorem status</div>
-
-              <div class="online"><i class="green-text fa fa-circle"></i>
-              </div>
-            </div>
-
-            <div class="user">
-              <img src="assets/images/user6.jpg" alt="Vernon Garrett" class="circle photo">
-
-              <div class="name">Vernon Garrett</div>
-              <div class="status">Lorem status</div>
-
-              <div class="online"><i class="yellow-text fa fa-circle"></i>
-              </div>
-            </div>
-
-            <div class="user">
-              <img src="assets/images/user7.jpg" alt="Greg Mcdonalid" class="circle photo">
-
-              <div class="name">Greg Mcdonalid</div>
-              <div class="status">Lorem status</div>
-
-              <div class="online"><i class="yellow-text fa fa-circle"></i>
-              </div>
-            </div>
-
-            <div class="user">
-              <img src="assets/images/user8.jpg" alt="Christian Jackson" class="circle photo">
-
-              <div class="name">Christian Jackson</div>
-              <div class="status">Lorem status</div>
-
-              <div class="online"><i class="yellow-text fa fa-circle"></i>
-              </div>
-            </div>
-
-
-            <span class="label">Offline</span>
-
-            <div class="user">
-              <img src="assets/images/user9.jpg" alt="Willie Kelly" class="circle photo">
-
-              <div class="name">Willie Kelly</div>
-              <div class="status">Lorem status</div>
-            </div>
-
-            <div class="user">
-              <img src="assets/images/user10.jpg" alt="Jenny Phillips" class="circle photo">
-
-              <div class="name">Jenny Phillips</div>
-              <div class="status">Lorem status</div>
-            </div>
-
-            <div class="user">
-              <img src="assets/images/user11.jpg" alt="Darren Cunningham" class="circle photo">
-
-              <div class="name">Darren Cunningham</div>
-              <div class="status">Lorem status</div>
-            </div>
-
-            <div class="user">
-              <img src="assets/images/user12.jpg" alt="Sandra Cole" class="circle photo">
-
-              <div class="name">Sandra Cole</div>
-              <div class="status">Lorem status</div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <!-- /Contacts -->
-
-      <!-- Messages -->
-      <div class="messages">
-
-        <!-- Top Bar with back link -->
-        <div class="topbar">
-          <a href="#!" class="chat-toggle"><i class="mdi-navigation-close"></i></a>
-          <a href="#!" class="chat-back"><i class="mdi-hardware-keyboard-arrow-left"></i> Back</a>
-        </div>
-        <!-- /Top Bar with back link -->
-
-        <!-- All messages list -->
-        <div class="list">
-          <div class="nano scroll-bottom">
-            <div class="nano-content">
-
-              <div class="date">Monday, Feb 23, 8:23 pm</div>
-
-              <div class="from-me">
-                Hi, Felicia.
-                <br>How are you?
-              </div>
-
-              <div class="clear"></div>
-
-              <div class="from-them">
-                <img src="assets/images/user2.jpg" alt="John Doe" class="circle photo">Hi! I am good!
-              </div>
-
-              <div class="clear"></div>
-
-              <div class="from-me">
-                Glad to see you :)
-                <br>This long text is intended to show how the chat will display it.
-              </div>
-
-              <div class="clear"></div>
-
-              <div class="from-them">
-                <img src="assets/images/user2.jpg" alt="John Doe" class="circle photo">Also, we will send the longest word to show how it will fit in the chat window: <strong>Pneumonoultramicroscopicsilicovolcanoconiosis</strong>
-              </div>
-
-              <div class="date">Friday, Mar 10, 5:07 pm</div>
-
-              <div class="from-me">
-                Hi again!
-              </div>
-
-              <div class="clear"></div>
-
-              <div class="from-them">
-                <img src="assets/images/user2.jpg" alt="John Doe" class="circle photo">Hi! Glad to see you.
-              </div>
-
-              <div class="clear"></div>
-
-              <div class="from-me">
-                I want to add you in my Facebook.
-              </div>
-
-              <div class="clear"></div>
-
-              <div class="from-me">
-                Can you give me your page?
-              </div>
-
-              <div class="clear"></div>
-
-              <div class="from-them">
-                <img src="assets/images/user2.jpg" alt="John Doe" class="circle photo">I do not use Facebook. But you can follow me in Twitter.
-              </div>
-
-              <div class="clear"></div>
-
-              <div class="from-me">
-                It's good idea!
-              </div>
-
-              <div class="clear"></div>
-
-              <div class="from-them">
-                <img src="assets/images/user2.jpg" alt="John Doe" class="circle photo">You can find me here - <a href="https://twitter.com/nkdevv">https://twitter.com/nkdevv</a>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <!-- /All messages list -->
-
-        <!-- Send message -->
-        <div class="send">
-          <form action="#!">
-            <div class="input-field">
-              <input id="chat-message" type="text" name="chat-message">
-            </div>
-
-            <button class="btn waves-effect z-depth-0"><i class="mdi-content-send"></i>
-            </button>
-          </form>
-        </div>
-        <!-- /Send message -->
-
-      </div>
-      <!-- /Messages -->
-    </div>
-
-  </div>
-  <!-- /Chat -->
 
   <footer>&copy; 2015 <strong>nK</strong>. All rights reserved. <a href="http://themeforest.net/item/con-material-admin-dashboard-template/10621512?ref=_nK">Purchase</a>
   </footer>
 
   <!-- jQuery -->
   <script type="text/javascript" src="{{URL::asset('js/jquery.min.js')}}"></script>
-
+  <script type="text/javascript" src="{{URL::asset('jqwidgets/jqx-all.js')}}"></script>
   <!-- nanoScroller -->
   <script type="text/javascript" src="{{URL::asset('js/jquery.nanoscroller.min.js')}}"></script>
 
   <!-- Materialize -->
-  <script type="text/javascript" src="{{URL::asset('js/materialize.min.js')}}"></script>
   
   <!-- Google Prettify -->
   <script type="text/javascript" src="{{URL::asset('js/prettify.js')}}"></script>
@@ -580,7 +257,7 @@
   <!-- validate -->
   <script type="text/javascript" src="{{URL::asset('js/jquery.validate.js')}}"></script>
   <!-- validate -->
-  
+  <script type="text/javascript" src="{{URL::asset('js/jquery.form.min.js')}}"></script> 
   <script type="text/javascript">
   	$(document).ready(function(){
 		$('.top-menu li').mouseover(function(){
