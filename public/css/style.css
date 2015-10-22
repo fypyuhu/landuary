@@ -368,3 +368,7 @@ nav #user-dropdown ul {
 .rightside {
 	padding: 20px !important;
 }
+
+label.error {
+	color: #ff0000 !important;
+}

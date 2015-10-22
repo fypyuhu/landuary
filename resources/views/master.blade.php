@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="{{URL::asset('fancybox/source/jquery.fancybox.css')}}" type="text/css" media="screen" />
   <!-- Fancy Box -->
   @section('css')
-  @endsection
+  @show
   <!--[if lt IE 9]>
     <script src="assets/html5shiv/html5shiv.min.js"></script>
   <![endif]-->
@@ -577,6 +577,10 @@
   <script type="text/javascript" src="{{URL::asset('fancybox/source/jquery.fancybox.js')}}"></script>
   <!-- Fancy Box -->
   
+  <!-- validate -->
+  <script type="text/javascript" src="{{URL::asset('js/jquery.validate.js')}}"></script>
+  <!-- validate -->
+  
   <script type="text/javascript">
   	$(document).ready(function(){
 		$('.top-menu li').mouseover(function(){
@@ -700,7 +704,7 @@
 	}
   </script>
   @section('js')
-  @endsection
+  @show
 </body>
 
 </html>
