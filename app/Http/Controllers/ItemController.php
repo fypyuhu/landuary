@@ -20,7 +20,11 @@ class ItemController extends Controller {
 
         return view('admin.items', ['items' => Item::all()]);
     }
+    public function getCreate() {
 
+        return view('admin.addItem', ['items' => Item::all()]);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -43,7 +47,7 @@ class ItemController extends Controller {
     }
 
     public function getShow(Request $request) {
-        $items = DB::select(DB::raw('SELECT * FROM `items` where id not in (select child_id from item_relation)'));
+        $items = DB::select(DB::raw('SELECT * FROM `items` where id not in (select child_id from item_relation) AND items.status=1'));
 
         $data = array();
         foreach ($items as $item) {
@@ -52,9 +56,9 @@ class ItemController extends Controller {
             $row["item_number"] = $item->item_number;
             $row["weight"] = $item->weight;
             $row["transaction_type"] = $item->transaction_type;
-            $row["actions"] = '<a href="">Edit</a> / <a href="">Delete</a>';
+            $row["actions"] = '<a href="/admin/items/edit/'.$item->id.'" data-mode="ajax" >Edit</a> / <a href="/admin/items/delete/'.$item->id.'" data-mode="ajax">Delete</a>';
             $data[] = $row;
-            $sql = "select items.* from items join item_relation on items.id=item_relation.child_id where item_relation.parent_id='" . $item->id . "'";
+            $sql = "select items.* from items join item_relation on items.id=item_relation.child_id where items.status=1 AND item_relation.parent_id='" . $item->id . "'";
             $sub_items = DB::select(DB::raw($sql));
             foreach ($sub_items as $sub_item) {
                 $sub_row = array();
@@ -62,7 +66,7 @@ class ItemController extends Controller {
                 $sub_row["item_number"] =$sub_item->item_number;
                 $sub_row["weight"] =$sub_item->weight;
                 $sub_row["transaction_type"] = $sub_item->transaction_type;
-                $sub_row["actions"] = '<a href="">Edit</a> / <a href="">Delete</a>';
+                $sub_row["actions"] = '<a href="/admin/items/edit/'.$sub_item->id.'" data-mode="ajax" >Edit</a> / <a href="/admin/items/delete/'.$sub_item->id.'" data-mode="ajax">Delete</a>';
                 $data[] = $sub_row;
             }
         }
@@ -76,8 +80,24 @@ class ItemController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        //
+    public function getEdit($id) {
+        return view('admin.editItem',['current'=>Item::find($id),'items' => Item::all(),'parent'=>ItemRelation::where('child_id','=',$id)->first()]);
+    }
+    public function postEdit($id,Request $request) {
+        $item=Item::find($id);
+        $item->name = $request->item_name;
+        $item->item_number = $request->item_number;
+        $item->description = $request->item_desc;
+        $item->weight = $request->item_weight;
+        $item->transaction_type = $request->transaction_type;
+        $item->save();
+        ItemRelation::where('child_id','=',$id)->delete();
+        if ($request->has('show_parent_item_div')) {
+            $relation = new ItemRelation;
+            $relation->parent_id = $request->parent_item;
+            $relation->child_id = $item->id;
+            $relation->save();
+        }
     }
 
     /**
@@ -87,8 +107,8 @@ class ItemController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
+    public function getDelete($id) {
+        return view('admin.deleteItem',['id'=>$id,'isParent'=>ItemRelation::where('parent_id','=',$id)->first()]);
     }
 
     /**
@@ -97,8 +117,13 @@ class ItemController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-        //
+    public function postDelete($id,Request $request) {
+        $item=Item::find($id);
+        $item->status=0;
+        $item->save();
+        if($request->has('parent')){
+           
+        }
     }
 
 }

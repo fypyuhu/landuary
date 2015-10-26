@@ -258,7 +258,8 @@
   <script type="text/javascript" src="{{URL::asset('js/jquery.validate.js')}}"></script>
   <script type="text/javascript" src="{{URL::asset('js/additional-methods.min.js')}}"></script>
   <!-- validate -->
-  <script type="text/javascript" src="{{URL::asset('js/jquery.form.min.js')}}"></script> 
+  <script type="text/javascript" src="{{URL::asset('js/jquery.form.min.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/application.js')}}"></script>
   <script type="text/javascript">
   	$(document).ready(function(){
 		$('.top-menu li').mouseover(function(){
@@ -319,15 +320,15 @@
 				$(corr_div_id).slideDown('slow');
 			}
 		});
-		
-		$('.checkbox').click(function(e){
-			var corr_div_id = $(this).data('corr-div-id');
+		$( "body" ).on( "click",".checkbox",  function(e) {
+                    var corr_div_id = $(this).attr('data-corr-div-id');
 			if(!$(this).is(':checked')) {
 				$(corr_div_id).slideUp('slow');
 			} else {
 				$(corr_div_id).slideDown('slow');
 			}
-		});
+                });
+		
 		
 		$('.radiobutton').click(function(e){
 			var corr_div_id = $(this).data('corr-div-id');
