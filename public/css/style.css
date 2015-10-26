@@ -372,3 +372,7 @@ nav #user-dropdown ul {
 label.error {
 	color: #ff0000 !important;
 }
+
+.export-button {
+	cursor: pointer;
+}

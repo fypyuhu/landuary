@@ -8,7 +8,7 @@
     <div class="page-title">
 
         <div class="row">
-            <div class="col s12 m9 l10">
+            <div class="col s12 m9">
                 <h1>Manage Items</h1>
 
                 <ul>
@@ -32,7 +32,7 @@
         <div class="col s9">
             <div style="display: none">
                 <fieldset id="add-record">
-                    <legend> Item:</legend>
+                    <legend>Add Item:</legend>
                     <form method="POST" action="{{url('admin/items/create')}}" id="pageForm">
                         {{csrf_field()}}
                         <div class="row s12">
@@ -107,8 +107,12 @@
                 <legend>Items List:</legend>
                 <div class="row box">
                     <div id="jqxgrid"></div>
-                    <button type="button" class="waves-effect btn" onclick="$('#jqxgrid').jqxGrid('exportdata', 'xls', 'items');"><i class="fa fa-file-excel-o"></i>Export XLS</button>
-                     <button type="button" class="waves-effect btn" onclick="$('#jqxgrid').jqxGrid('exportdata', 'pdf', 'items');">Export PDF</button>
+                </div>
+                <div class="row">
+                	<div class="pull-right">
+                        <img class="export-button" onclick="$('#jqxgrid').jqxGrid('exportdata', 'xls', 'items');" src="{{URL::asset('images/xls_icon.png')}}" alt="Export to XLS">
+                        <img class="export-button" onclick="$('#jqxgrid').jqxGrid('exportdata', 'pdf', 'items');" src="{{URL::asset('images/pdf_icon.png')}}" alt="Export to PDF">
+                    </div>
                 </div>
             </fieldset>
         </div>
@@ -173,11 +177,11 @@
                     sortable: true,
                     filterable: true,
                     columns: [
-                        {text: 'Name', dataField: 'name'},
-                        {text: 'Number', dataField: 'item_number'},
-                        {text: 'Weight lb/kg', dataField: 'weight'},
-                        {text: 'Transaction Type', dataField: 'transaction_type'},
-                        {text: 'Actions', dataField: 'actions',sortable:false,filterable:false,exportable:false}
+                        {text: 'Name', dataField: 'name', sortable:false},
+                        {text: 'Number', dataField: 'item_number', sortable:false},
+                        {text: 'Weight lb/kg', dataField: 'weight', sortable:false},
+                        {text: 'Transaction Type', dataField: 'transaction_type', sortable:false},
+                        {text: 'Actions', cellsalign: 'center', dataField: 'actions',sortable:false,filterable:false,exportable:false}
                     ]
                 });
     });

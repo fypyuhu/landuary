@@ -48,25 +48,25 @@ class ItemController extends Controller {
         $data = array();
         foreach ($items as $item) {
             $row = array();
-            $row["name"] = "<b>" . $item->name . "</b>";
-            $row["item_number"] = "<b>" . $item->item_number . "</b>";
-            $row["weight"] = "<b>" . $item->weight . "</b>";
-            $row["transaction_type"] = "<b>" . $item->transaction_type . "</b>";
-            $row["actions"] = "<b>test</b>";
+            $row["name"] = $item->name;
+            $row["item_number"] = $item->item_number;
+            $row["weight"] = $item->weight;
+            $row["transaction_type"] = $item->transaction_type;
+            $row["actions"] = '<a href="">Edit</a> / <a href="">Delete</a>';
             $data[] = $row;
             $sql = "select items.* from items join item_relation on items.id=item_relation.child_id where item_relation.parent_id='" . $item->id . "'";
             $sub_items = DB::select(DB::raw($sql));
             foreach ($sub_items as $sub_item) {
                 $sub_row = array();
-                $sub_row["name"] =$sub_item->name;
+                $sub_row["name"] = '** '.$sub_item->name;
                 $sub_row["item_number"] =$sub_item->item_number;
                 $sub_row["weight"] =$sub_item->weight;
                 $sub_row["transaction_type"] = $sub_item->transaction_type;
-                $sub_row["actions"] = "test";
+                $sub_row["actions"] = '<a href="">Edit</a> / <a href="">Delete</a>';
                 $data[] = $sub_row;
             }
         }
-
+		
         echo "{\"data\":" . json_encode($data) . "}";
     }
 

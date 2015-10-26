@@ -14,7 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['prefix' => 'admin'], function () {
-    Route::controller('items', 'ItemController');
-});
 
+Route::group(['prefix' => 'admin'], function () {
+	Route::controller('items', 'ItemController');
+	Route::controller('carts', 'CartController');
+});

@@ -34,7 +34,7 @@
   <link rel="stylesheet" type="text/css" href="{{URL::asset('css/_con.min.css')}}" />
   
   <link rel="stylesheet" type="text/css" href="{{URL::asset('css/style.css')}}" />
-     <link rel="stylesheet" href="{{URL::asset('jqwidgets/styles/jqx.base.css')}}" type="text/css" />
+  <link rel="stylesheet" href="{{URL::asset('jqwidgets/styles/jqx.base.css')}}" type="text/css" />
   <!-- Fancy Box -->
   <link rel="stylesheet" href="{{URL::asset('fancybox/source/jquery.fancybox.css')}}" type="text/css" media="screen" />
   <!-- Fancy Box -->
@@ -256,6 +256,7 @@
   
   <!-- validate -->
   <script type="text/javascript" src="{{URL::asset('js/jquery.validate.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/additional-methods.min.js')}}"></script>
   <!-- validate -->
   <script type="text/javascript" src="{{URL::asset('js/jquery.form.min.js')}}"></script> 
   <script type="text/javascript">
@@ -341,13 +342,13 @@
 		
 		$('#chkbx_enb_cus_num').click(function(){
 			if(!$(this).is(':checked')) {
-				$('#customer_number').attr('disabled','disabled');
+				$('#number').attr('disabled','disabled');
 			} else {
-				$('#customer_number').removeAttr('disabled');
+				$('#number').removeAttr('disabled');
 			}
 		});
 		
-		$('#exchange_cart').click(function(){
+		$('#use_as_exchange_cart').click(function(){
 			$('#chkbx_enb_cus_num').trigger( "click" );
 		});
 		
