@@ -342,14 +342,18 @@
 		
 		$('#chkbx_enb_cus_num').click(function(){
 			if(!$(this).is(':checked')) {
-				$('#number').attr('disabled','disabled');
+				$('#number').attr('readonly','readonly');
 			} else {
-				$('#number').removeAttr('disabled');
+				$('#number').removeAttr('readonly');
 			}
 		});
 		
 		$('#use_as_exchange_cart').click(function(){
-			$('#chkbx_enb_cus_num').trigger( "click" );
+			if($(this).is(':checked')) {
+				$('#chkbx_enb_cus_num').trigger( "click" ).attr('disabled','disabled');
+			} else {
+				$('#chkbx_enb_cus_num').removeAttr('disabled').trigger( "click" );
+			}
 		});
 		
 		$('#price_by_weight').click(function(e){

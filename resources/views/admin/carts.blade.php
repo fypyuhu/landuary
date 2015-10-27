@@ -42,9 +42,9 @@
                 <div class="col s6">
                     <label>Cart Number:</label>
                     <div class="input-field">
-                      <input id="number" type="text" name="number" disabled="disabled">
+                      <input id="number" type="text" name="cart_number" readonly="readonly" value="{{ $get_max_number }}">
                     </div>
-                    <label for="number" class="error" id="error-number"></label>
+                    <label for="cart_number" class="error" id="error-cart-number"></label>
                 </div>
               </div>
               
@@ -59,7 +59,7 @@
                       <legend>Carts</legend>
                       <div class="row">
                         <div class="col s12">
-                          <input type="checkbox" name="use_as_exchange_cart" id="use_as_exchange_cart" class="checkbox" data-corr-div-id="#cart-status-div">
+                          <input type="checkbox" value="1" name="use_as_exchange_cart" id="use_as_exchange_cart" class="checkbox" data-corr-div-id="#cart-status-div">
                           <label for="use_as_exchange_cart">Use this as Exchange Cart</label>
                         </div>
                       </div>
@@ -73,7 +73,7 @@
                       <div class="row">
                         <label>Cart Status:</label>
                         <div class="input-field">
-                          <select name="status" disabled="disabled" id="status">
+                          <select name="status" id="status">
                             <option value="">Please Select</option>
                             <option value="In" selected="selected">In</option>
                             <option value="Out">Out</option>
@@ -129,12 +129,12 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-		$("#status").jqxComboBox({width: '100%', autoDropDownHeight: true});
+		$("#status").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $("#customer_number").jqxComboBox({width: '100%', autoDropDownHeight: true});
 		
 		$("#pageForm").validate({
             rules: {
-                number: "required",
+                cart_number: "required",
                 tare_weight: "required",
                 status: "required",
                 cart_current_location: { required:"#use_as_exchange_cart:checked" },
@@ -157,7 +157,7 @@
                 {
                     datatype: "json",
                     datafields: [
-                        {name: 'number'},
+                        {name: 'cart_number'},
                         {name: 'tare_weight'},
                         {name: 'status'},
                         {name: 'use_as_exchange_cart'},
@@ -177,7 +177,7 @@
                     sortable: true,
                     filterable: true,
                     columns: [
-                        {text: 'Number', dataField: 'number', sortable:false},
+                        {text: 'Number', dataField: 'cart_number', sortable:false},
                         {text: 'Tare Weight lb/kg', dataField: 'tare_weight', sortable:false},
                         {text: 'Status', dataField: 'status', sortable:false},
                         {text: 'Exchange Cart', dataField: 'use_as_exchange_cart', sortable:false},

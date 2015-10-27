@@ -17,7 +17,7 @@ class CartController extends Controller
      */
     public function getIndex()
     {
-        return view('admin.carts', ['carts' => Cart::all()]);
+        return view('admin.carts', ['carts' => Cart::all(), 'get_max_number' => $this->generateAutoNumber()]);
     }
 
     /**
@@ -38,8 +38,8 @@ class CartController extends Controller
      */
     public function postCreate(Request $request)
     {
-        $cart = new cart;
-		$cart->number = $request->number;
+        $cart = new Cart;
+		$cart->cart_number = $request->cart_number;
 		$cart->use_as_exchange_cart = $request->use_as_exchange_cart;
 		$cart->tare_weight = $request->tare_weight;
 		$cart->status = $request->status;
@@ -72,7 +72,7 @@ class CartController extends Controller
         $data = array();
         foreach ($carts as $cart) {
             $row = array();
-            $row["number"] = $cart->number;
+            $row["cart_number"] = $cart->cart_number;
             $row["tare_weight"] = $cart->tare_weight;
             $row["status"] = $cart->status;
             $row["use_as_exchange_cart"] = $cart->use_as_exchange_cart;
@@ -82,6 +82,21 @@ class CartController extends Controller
 		
         echo "{\"data\":" . json_encode($data) . "}";
     }
+	
+	
+	/** 
+	  * Custom Functions
+	 */
+	 
+	 private function generateAutoNumber() {
+	 	$max_cart_number = Cart::max('cart_number');
+		return $max_cart_number+1;
+	 }
+	 
+	 /** 
+	  * End Custom Functions
+	 */
+	
 
     /**
      * Show the form for editing the specified resource.
