@@ -122,7 +122,7 @@ class ItemController extends Controller {
         $item->status=0;
         $item->save();
         if($request->has('parent')){
-           
+           DB::statement("Update `items` Set items.status='0' where id in (select child_id from item_relation where parent_id='".$id."')");
         }
     }
 
