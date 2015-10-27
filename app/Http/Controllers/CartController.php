@@ -6,18 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
-use DB;
 
-class CartController extends Controller
-{
+class CartController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
-    {
-        return view('admin.carts', ['carts' => Cart::all(), 'get_max_number' => $this->generateAutoNumber()]);
+    public function getIndex() {
+        return view('admin.carts');
     }
 
     /**
@@ -25,9 +23,8 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function getCreate() {
+        return view('admin.carts.add', [ 'get_max_number' => $this->generateAutoNumber()]);
     }
 
     /**
@@ -36,38 +33,19 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function postCreate(Request $request)
-    {
+    public function postCreate(Request $request) {
         $cart = new Cart;
-		$cart->cart_number = $request->cart_number;
-		$cart->use_as_exchange_cart = $request->use_as_exchange_cart;
-		$cart->tare_weight = $request->tare_weight;
-		$cart->status = $request->status;
-		$cart->cart_current_location = $request->cart_current_location;
-		$cart->customer_number = $request->customer_number;
-		$cart->save();
+        $cart->cart_number = $request->cart_number;
+        //$cart->use_as_exchange_cart = $request->use_as_exchange_cart;
+        $cart->tare_weight = $request->tare_weight;
+        $cart->status = $request->status;
+        //$cart->cart_current_location = $request->cart_current_location;
+        //$cart->customer_number = $request->customer_number;
+        $cart->save();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-	
-	/**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getShow(Request $request)
-    {
-        $carts = DB::select(DB::raw('SELECT * FROM `carts`'));
+    public function getShow(Request $request) {
+        $carts = Cart::where('is_deleted','=','1')->get();
 
         $data = array();
         foreach ($carts as $cart) {
@@ -76,27 +54,24 @@ class CartController extends Controller
             $row["tare_weight"] = $cart->tare_weight;
             $row["status"] = $cart->status;
             $row["use_as_exchange_cart"] = $cart->use_as_exchange_cart;
-            $row["actions"] = '<a href="">Edit</a> / <a href="">Delete</a>';
+            $row["actions"] = '<a data-mode="ajax" href="/admin/carts/edit/' . $cart->id . '">Edit</a> / <a data-mode="ajax" href="/admin/carts/delete/' . $cart->id . '">Delete</a>';
             $data[] = $row;
         }
-		
+
         echo "{\"data\":" . json_encode($data) . "}";
     }
-	
-	
-	/** 
-	  * Custom Functions
-	 */
-	 
-	 private function generateAutoNumber() {
-	 	$max_cart_number = Cart::max('cart_number');
-		return $max_cart_number+1;
-	 }
-	 
-	 /** 
-	  * End Custom Functions
-	 */
-	
+
+    /**
+     * Custom Functions
+     */
+    private function generateAutoNumber() {
+        $max_cart_number = Cart::max('cart_number');
+        return $max_cart_number + 1;
+    }
+
+    /**
+     * End Custom Functions
+     */
 
     /**
      * Show the form for editing the specified resource.
@@ -104,31 +79,28 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function getEdit($id) {
+        return view('admin.carts.edit', ['cart' => Cart::find($id)]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function postEdit($id,Request $request) {
+        $cart = Cart::find($id);
+        $cart->cart_number = $request->cart_number;
+        //$cart->use_as_exchange_cart = $request->use_as_exchange_cart;
+        $cart->tare_weight = $request->tare_weight;
+        $cart->status = $request->status;
+        //$cart->cart_current_location = $request->cart_current_location;
+        //$cart->customer_number = $request->customer_number;
+        $cart->save();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function getDelete($id) {
+         return view('admin.carts.delete', ['id' => $id]);
     }
+    public function postDelete($id) {
+        $cart = Cart::find($id);
+        $cart->is_deleted=0;
+        $cart->save();
+    }
+
 }

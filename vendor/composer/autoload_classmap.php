@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddIsDeletedToCart' => $baseDir . '/database/migrations/2015_10_27_161844_add_isDeleted_toCart.php',
     'ChangeItemTable' => $baseDir . '/database/migrations/2015_10_26_182539_change_item_table.php',
     'CreateCartsTable' => $baseDir . '/database/migrations/2015_10_23_132912_create_carts_table.php',
     'CreateItemRelationTable' => $baseDir . '/database/migrations/2015_10_21_172719_create_ItemRelation_table.php',
