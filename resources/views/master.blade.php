@@ -295,14 +295,6 @@
 			$(corr_div_id).fadeIn('slow');
 		});
 		
-		$('.create-clone-button').click(function(e){
-			e.preventDefault();
-			var corr_div_id = $(this).data('corr-div-id');
-			var clone = $(corr_div_id).find('.records_list').clone();
-			clone.appendTo($(this).parents('.row').prev('.layout_table'));
-			$(this).parents('.row').prev('.layout_table').animate({ scrollTop: $(this).parents('.row').prev('.layout_table')[0].scrollHeight}, 1000);
-		});
-		
 		$('#non_tracked_cart').click(function(e){
 			var corr_div_id = $(this).data('corr-div-id');
 			if($(this).is(':checked')) {
@@ -328,18 +320,6 @@
 				$(corr_div_id).slideDown('slow');
 			}
                 });
-		
-		
-		$('.radiobutton').click(function(e){
-			var corr_div_id = $(this).data('corr-div-id');
-			var set_class = $(this).data('set-class');
-			$(set_class).slideUp('slow');
-			if(!$(this).is(':checked')) {
-				$(corr_div_id).slideUp('slow');
-			} else {
-				$(corr_div_id).slideDown('slow');
-			}
-		});
 		
 		$('#chkbx_enb_cus_num').click(function(){
 			if(!$(this).is(':checked')) {

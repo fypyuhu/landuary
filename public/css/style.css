@@ -91,6 +91,13 @@ textarea {
 	background: #f0f0f0;
 }
 
+.tax-page.layout_table,
+.tax-page.layout_table .row .col,
+.tax-page.layout_table .records_list,
+.tax-page.layout_table .row .col {
+	border: none;
+}
+
 fieldset {
 	background: #ffffff;
 	border: 1px solid #cccccc;
@@ -375,4 +382,8 @@ label.error {
 
 .export-button {
 	cursor: pointer;
+}
+
+.taxes {
+	display: none;
 }

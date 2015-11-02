@@ -7,10 +7,18 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'ChangeItemTable' => $baseDir . '/database/migrations/2015_10_26_182539_change_item_table.php',
+    'ChangeTaxesTable' => $baseDir . '/database/migrations/2015_10_29_132452_change_taxes_table.php',
     'CreateCartsTable' => $baseDir . '/database/migrations/2015_10_23_132912_create_carts_table.php',
+    'CreateCustomersBillingsTable' => $baseDir . '/database/migrations/2015_11_02_122556_create_customers_billings_table.php',
+    'CreateCustomersDepartmentsTable' => $baseDir . '/database/migrations/2015_10_30_162312_create_customers_departments_table.php',
+    'CreateCustomersItemsTable' => $baseDir . '/database/migrations/2015_10_30_162324_create_customers_items_table.php',
+    'CreateCustomersTable' => $baseDir . '/database/migrations/2015_10_30_162122_create_customers_table.php',
+    'CreateCustomersTaxesTable' => $baseDir . '/database/migrations/2015_10_30_162339_create_customers_taxes_table.php',
     'CreateItemRelationTable' => $baseDir . '/database/migrations/2015_10_21_172719_create_ItemRelation_table.php',
     'CreateItemTable' => $baseDir . '/database/migrations/2015_10_21_171522_create_Item_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateTaxesComponentsTable' => $baseDir . '/database/migrations/2015_10_28_142400_create_taxes_components_table.php',
+    'CreateTaxesTable' => $baseDir . '/database/migrations/2015_10_28_142140_create_taxes_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
@@ -86,6 +94,7 @@ return array(
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
     'ModifyCartsTable' => $baseDir . '/database/migrations/2015_10_27_104421_modify_carts_table.php',
+    'ModifyTaxesComponentsTable' => $baseDir . '/database/migrations/2015_10_28_150512_modify_taxes_components_table.php',
     'PHPUnit_Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit_Extensions_GroupTestSuite' => $vendorDir . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
     'PHPUnit_Extensions_PhptTestCase' => $vendorDir . '/phpunit/phpunit/src/Extensions/PhptTestCase.php',
@@ -520,4 +529,5 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'UpdateTaxesTableRemoveColumn' => $baseDir . '/database/migrations/2015_10_29_133621_update_taxes_table_remove_column.php',
 );
