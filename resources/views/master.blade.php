@@ -270,23 +270,6 @@
 			$(this).find('ul').slideUp('slow');
 		});
 		
-		$('.ctabs').find('li').click(function(e){
-			$('.ctabs').find('li').removeClass('current');
-			$(this).addClass('current');
-			var corr_div_id = $(this).data('corr-div-id');
-			toggle('.tab-content', corr_div_id);
-		});
-		
-		$('#add_billing_address').click(function(e){
-			var corr_div_id = $(this).data('corr-div-id');
-			$(corr_div_id).fadeIn('slow');
-		});
-		
-		$('#same_as_shipping').click(function(e){
-			var corr_div_id = $(this).data('corr-div-id');
-			$(corr_div_id).fadeOut('slow');
-		});
-		
 		$('.pricing-rd-btn').click(function(){
 			var corr_content_div_class = $(this).data('div-set');
 			var corr_div_id = $(this).data('corr-div-id');
