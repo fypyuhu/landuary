@@ -1,20 +1,48 @@
 <fieldset id="add-record" style="width: 705px;">
     <legend>Add Customer:</legend>
-    <form action="#!" id="customer-form">
+    <form action="/admin/cutomers/create" Method="POST" id="customer-form">
         <div class="row">
             <div class="col m6 s12">
                 <label>Name:</label>
                 <div class="input-field">
-                    <input id="ship_to_name" type="text" name="ship_to_name">
+                    <input id="ship_to_name" type="text" onblur="return checkError('Custome Name', 'ship_to_name')" name="ship_to_name">
                 </div>
                 <label for="ship_to_name" class="error" id="error-ship_to_name"></label>
             </div>    
             <div class="col m6 s12">
                 <label>Customer Number:</label>
                 <div class="input-field">
-                    <input id="customer_number" type="text" name="customer_number">
+                    <input id="customer_number" type="text" onblur="return checkError('Custome Number', 'customer_number')" name="customer_number">
                 </div>
                 <label for="customer_number" class="error" id="error-customer_number"></label>
+            </div>  
+
+        </div>
+        <div class="row">
+            <div class="col s2" style="padding:4px;">
+                <label>Use Department:</label>
+                <input type="checkbox" name="use_department"  id="use_department" value="1">
+                <label for="use_department"></label>
+            </div>
+        </div>
+        <div class="row" id="department_div" style="display:none;">
+            <div class="col m5 s8">
+                <label>Department Name:</label>
+                <div class="input-field">
+                    <input id="department" type="text"  name="department">
+                </div>
+            </div>
+            <div class="col m1 s4" style="margin-top:20px;">
+                <div class="input-field">
+                    <button class="waves-effect btn" type="button" onclick="addDepartment()">+</button>
+                </div>
+            </div>
+            <div class="col m6 s12">
+                <label>List:</label>
+                <select name="department_list" id="department_list">
+
+                </select>
+
             </div>  
 
         </div>
@@ -210,7 +238,7 @@
             </fieldset>
         </section>
         <section class="row tab-content no-topmargin items-tab">
-            <div class="row price-div-set" id="div-price-by-weight" style="margin-bottom:15px; display:none;">
+            <div class="row price-div-set" id="div-price-by-weight" style="margin-bottom:15px; ">
                 <div class="col m3 s12" style="margin-top:0;">
                     <label>Price Per lb/kg:</label>
                     <div class="input-field">
@@ -242,36 +270,22 @@
                     </div>
                     <label for="bill_type" class="error" id="error-bill_type"></label>
                     <div class="col s2 center-align">
-                        <button class="waves-effect btn" onclick="getItemDetail()">+</button>
+                        <button class="waves-effect btn" type="button" onclick="getItemDetail()">+</button>
                     </div>
                 </div>
             </div>
 
-            <div class="row layout_table">
+            <div class="row layout_table" id="item_record_list">
                 <div class="row heading">
-                    <div class="col s3" id="t-category">Category</div>
-                    <div class="col s2">Name</div>
+                    <div class="col s3" id="t-category">Item</div>
+                    <div class="col s2">Sub Item</div>
                     <div class="col s2 right-align">Weight</div>
                     <div class="col s3" id="t-type">Transaction Type</div>
                     <div class="col s2 center-align">Taxable</div>
                     <div class="col s2" style="display:none;" id="price-heading">Price</div>
                 </div>
-                <div class="row records_list">
-                    <div class="col s3" id="t-category-rec">Category A</div>
-                    <div class="col s2">Item A</div>
-                    <div class="col s2 right-align">10</div>
-                    <div class="col s3" id="t-type-rec">Both</div>
-                    <div class="col s2 center-align" style="padding:4px;">
-                        <input type="checkbox" name="chkbx_taxable" id="chkbx_taxable">
-                        <label for="chkbx_taxable"></label>
-                    </div>
-                    <label for="bill_type" class="error" id="error-bill_type"></label>
-                    <div class="col s2" style="display:none;" id="price-field">
-                        <div class="input-field"><input type="text" /></div>
-                        <label for="bill_type" class="error" id="error-bill_type"></label>
-                    </div>
-                </div>
-                <div class="row records_list">
+
+                <div class="row records_list" id="records_list_no_record">
                     <div class="col s12 center-align"><strong>No products have been assigned to this customer yet.</strong></div>
                 </div>
             </div>
@@ -291,14 +305,19 @@
     </form>
     <div class="row">
         <div class="pull-right">
-            <button class="waves-effect btn" id="previous-btn" style="display:none;" onclick="changeTab(0);">Previous</button>
-            <button class="waves-effect btn" id="next-btn" onclick="changeTab(1);">Next</button>
-            <button class="waves-effect btn" id="save-btn" style="display:none;" onclick="">Save</button>
+            <button class="waves-effect btn" type="button" id="previous-btn" style="display:none;" onclick="changeTab(0);">Previous</button>
+            <button class="waves-effect btn" type="button" id="next-btn" onclick="changeTab(1);">Next</button>
+            <button class="waves-effect btn" type="button" id="save-btn" style="display:none;" onclick="changeTab(1);">Save</button>
         </div>
     </div>
 </fieldset>
 
 <script>
+    function addDepartment() {
+        if ($('#department').val() != "") {
+            $("#department_list").jqxComboBox('addItem', {label: $('#department').val(), checked: true});
+        }
+    }
     function taxError()
     {
         if ($("#reseller_number").val() == "" && ($("#exemp_certificate").val() == "")) {
@@ -309,22 +328,37 @@
             $("#error-examp_tax").html('');
         }
     }
-    function getItemDetail(){
-        if($('#parent_item').jqxComboBox('getSelectedIndex') != "-1"){
-            var val=$('#parent_item').val();
-            if($('#chile_item').jqxComboBox('getSelectedIndex') != "-1"){
-                val=$('#chile_item').val();
+    function getItemDetail() {
+        if ($('#parent_item').jqxComboBox('getSelectedIndex') != "-1") {
+            var val = $('#parent_item').val();
+            var parent = 1;
+            if ($('#child_item').jqxComboBox('getSelectedIndex') != "-1") {
+                val = $('#child_item').val();
+                parent = 0;
             }
-            
+
             $.ajax({
-                    url: "/admin/customers/get-children/"+val,
-                    context: document.body
-                }).done(function (html) {
-                    $('#child_item').jqxComboBox('destroy');
-                    $('#child_select_box_div').html('');
-                    $('#child_select_box_div').html(html);
-                    $("#child_item").jqxComboBox({width: '250', autoDropDownHeight: true});
-                });
+                url: "/admin/customers/item-detail/" + val,
+                context: document.body
+            }).done(function (html) {
+                $('#item_record_list').append(html);
+                $('#records_list_no_record').hide();
+                if ($("#price_by_weight").is(':checked')) {
+                    $('.price-field, #price-heading').css('display', 'none');
+                    $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
+                    $('#div-price-by-weight').fadeIn('slow');
+                }
+                else if ($("#price_by_item").is(':checked')) {
+                    $('#div-price-by-weight').css('display', 'none');
+                    $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+                    $('.price-field, #price-heading').fadeIn('slow');
+                }
+                else if ($("#price_by_both").is(':checked')) {
+                    $('#div-price-by-weight').fadeIn('slow');
+                    $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+                    $('.price-field, #price-heading').fadeIn('slow');
+                }
+            });
         }
     }
     function checkError(field, id) {
@@ -360,20 +394,6 @@
                 activeTab = "billing";
                 $("li[data-corr-div-id='#billing-tab']").addClass("current");
                 $("li[data-corr-div-id='.items-tab']").removeClass("current");
-                return;
-            } else if (activeTab === "exchangecarts") {
-                $(".items-tab").show();
-                $("#exchangecarts-tab").hide();
-                activeTab = "items";
-                $("li[data-corr-div-id='.items-tab']").addClass("current");
-                $("li[data-corr-div-id='#exchangecarts-tab']").removeClass("current");
-                return;
-            } else if (activeTab === "departments") {
-                $("#exchangecarts-tab").show();
-                $("#departments-tab").hide();
-                activeTab = "exchangecarts";
-                $("li[data-corr-div-id='#exchangecarts-tab']").addClass("current");
-                $("li[data-corr-div-id='#departments-tab']").removeClass("current");
                 $("#save-btn").hide();
                 $("#next-btn").show();
                 return;
@@ -416,6 +436,9 @@
                         activeTab = "items";
                         $("li[data-corr-div-id='.items-tab']").addClass("current");
                         $("li[data-corr-div-id='#billing-tab']").removeClass("current");
+                        $("#next-btn").hide();
+                        $("#save-btn").show();
+
                     }
                     if ($("#chkbx_taxable_exampt").is(':checked'))
                     {
@@ -430,6 +453,9 @@
                             activeTab = "items";
                             $("li[data-corr-div-id='.items-tab']").addClass("current");
                             $("li[data-corr-div-id='#billing-tab']").removeClass("current");
+                            $("#next-btn").hide();
+                            $("#save-btn").show();
+
                         }
                     }
                 }
@@ -437,23 +463,15 @@
                 return;
             }
             else if (activeTab === "items") {
-                $("#exchangecarts-tab").show();
-                $(".items-tab").hide();
-                activeTab = "exchangecarts";
-                $("li[data-corr-div-id='#exchangecarts-tab']").addClass("current");
-                $("li[data-corr-div-id='.items-tab']").removeClass("current");
-                return;
-            } else if (activeTab === "exchangecarts") {
-                $("#departments-tab").show();
-                $("#exchangecarts-tab").hide();
-                activeTab = "departments";
-                $("li[data-corr-div-id='#departments-tab']").addClass("current");
-                $("li[data-corr-div-id='#exchangecarts-tab']").removeClass("current");
-                $("#next-btn").hide();
-                $("#save-btn").show();
-                return;
-            } else if (activeTab === "departments") {
-                return;
+                if (checkError('Customer Name', 'ship_to_name') && checkError('Customer Number', 'customer_number')) {
+                    var options = {
+                        success: showResponse
+                    };
+                    function showResponse(responseText, statusText, xhr, $form) {
+                        location.reload();
+                    }
+                    $('#customer-form').ajaxSubmit(options);
+                }
             }
         }
     }
@@ -472,10 +490,11 @@
                 $(corr_div_id).slideDown('slow');
             }
         });
-        $("#bill_type").jqxComboBox({width: '150', autoDropDownHeight: true});
-        $("#sales_tax_authority").jqxComboBox({width: '400', autoDropDownHeight: true});
-        $("#parent_item").jqxComboBox({width: '250', autoDropDownHeight: true});
-        $("#child_item").jqxComboBox({width: '250', autoDropDownHeight: true});
+        $("#bill_type").jqxComboBox({width: '150', autoComplete: true, autoDropDownHeight: true});
+        $("#sales_tax_authority").jqxComboBox({width: '400', autoComplete: true, autoDropDownHeight: true});
+        $("#department_list").jqxComboBox({width: '280', autoComplete: true, autoDropDownHeight: true, checkboxes: true});
+        $("#parent_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true});
+        $("#child_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true});
         $('#bill_type').on('change', function () {
             if ($(this).jqxComboBox('getSelectedIndex') == "-1") {
                 $("#error-bill_type").html('Bill Type is required');
@@ -487,27 +506,38 @@
         $('#parent_item').on('change', function () {
             if ($(this).jqxComboBox('getSelectedIndex') != "-1") {
                 $.ajax({
-                    url: "/admin/customers/get-children/"+$("#parent_item").val(),
+                    url: "/admin/customers/get-children/" + $("#parent_item").val(),
                     context: document.body
                 }).done(function (html) {
                     $('#child_item').jqxComboBox('destroy');
                     $('#child_select_box_div').html('');
                     $('#child_select_box_div').html(html);
-                    $("#child_item").jqxComboBox({width: '250', autoDropDownHeight: true});
+                    if ($('#child_item').has('option').length > 0) {
+                        $("#child_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true});
+                    }
+                    else {
+                        $("#child_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true, disabled: true});
+                    }
+
                 });
             }
         });
         if ($('#parent_item').jqxComboBox('getSelectedIndex') != "-1") {
-                $.ajax({
-                    url: "/admin/customers/get-children/"+$("#parent_item").val(),
-                    context: document.body
-                }).done(function (html) {
-                    $('#child_item').jqxComboBox('destroy');
-                    $('#child_select_box_div').html('');
-                    $('#child_select_box_div').html(html);
-                    $("#child_item").jqxComboBox({width: '250', autoDropDownHeight: true});
-                });
-            }
+            $.ajax({
+                url: "/admin/customers/get-children/" + $("#parent_item").val(),
+                context: document.body
+            }).done(function (html) {
+                $('#child_item').jqxComboBox('destroy');
+                $('#child_select_box_div').html('');
+                $('#child_select_box_div').html(html);
+                if ($('#child_item').has('option').length > 0) {
+                    $("#child_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true});
+                }
+                else {
+                    $("#child_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true, disabled: true});
+                }
+            });
+        }
         $('#sales_tax_authority').on('change', function () {
             if ($(this).jqxComboBox('getSelectedIndex') == "-1") {
                 $("#error-sales_tax_authority").html('Sales Tax is required');
@@ -519,6 +549,30 @@
         $('#same_as_shipping').click(function (e) {
             var corr_div_id = $(this).data('corr-div-id');
             $(corr_div_id).fadeOut('slow');
+        });
+        $('#use_department').click(function (e) {
+            if (!$(this).is(':checked')) {
+                $('#department_div').slideUp('slow');
+            } else {
+                $('#department_div').slideDown('slow');
+            }
+        });
+        $('#price_by_weight').click(function (e) {
+            $('.price-field, #price-heading').css('display', 'none');
+            $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
+            $('#div-price-by-weight').fadeIn('slow');
+        });
+
+        $('#price_by_item').click(function (e) {
+            $('#div-price-by-weight').css('display', 'none');
+            $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+            $('.price-field, #price-heading').fadeIn('slow');
+        });
+
+        $('#price_by_both').click(function (e) {
+            $('#div-price-by-weight').fadeIn('slow');
+            $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+            $('.price-field, #price-heading').fadeIn('slow');
         });
     });
 </script>

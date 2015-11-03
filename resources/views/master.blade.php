@@ -326,23 +326,7 @@
 		
 		
 		
-		$('#price_by_weight').click(function(e){
-			$('#price-field, #price-heading').css('display', 'none');
-			$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
-			$('#div-price-by-weight').fadeIn('slow');
-		});
 		
-		$('#price_by_item').click(function(e){
-			$('#div-price-by-weight').css('display', 'none');
-			$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
-			$('#price-field, #price-heading').fadeIn('slow');
-		});
-		
-		$('#price_by_both').click(function(e){
-			$('#div-price-by-weight').fadeIn('slow');
-			$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
-			$('#price-field, #price-heading').fadeIn('slow');
-		});
 		
 		$("a#inline").fancybox({
 			'hideOnContentClick': true
