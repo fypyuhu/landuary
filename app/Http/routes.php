@@ -18,5 +18,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin'], function () {
 	Route::controller('items', 'ItemController');
 	Route::controller('carts', 'CartController');
-        Route::controller('customers', 'CustomerController');
+    Route::controller('customers', 'CustomerController');
+	Route::controller('taxes', 'TaxController');
+	Route::controller('out', 'OutController');
 });
