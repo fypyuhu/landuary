@@ -278,14 +278,6 @@
 			$(corr_div_id).fadeIn('slow');
 		});
 		
-		$('.create-clone-button').click(function(e){
-			e.preventDefault();
-			var corr_div_id = $(this).data('corr-div-id');
-			var clone = $(corr_div_id).find('.records_list').clone();
-			clone.appendTo($(this).parents('.row').prev('.layout_table'));
-			$(this).parents('.row').prev('.layout_table').animate({ scrollTop: $(this).parents('.row').prev('.layout_table')[0].scrollHeight}, 1000);
-		});
-		
 		$('#non_tracked_cart').click(function(e){
 			var corr_div_id = $(this).data('corr-div-id');
 			if($(this).is(':checked')) {
@@ -311,8 +303,6 @@
 				$(corr_div_id).slideDown('slow');
 			}
                 });
-		
-		
 		$('.radiobutton').click(function(e){
 			var corr_div_id = $(this).data('corr-div-id');
 			var set_class = $(this).data('set-class');
@@ -324,24 +314,12 @@
 			}
 		});
 		
-		
-		
-		$('#price_by_weight').click(function(e){
-			$('#price-field, #price-heading').css('display', 'none');
-			$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
-			$('#div-price-by-weight').fadeIn('slow');
-		});
-		
-		$('#price_by_item').click(function(e){
-			$('#div-price-by-weight').css('display', 'none');
-			$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
-			$('#price-field, #price-heading').fadeIn('slow');
-		});
-		
-		$('#price_by_both').click(function(e){
-			$('#div-price-by-weight').fadeIn('slow');
-			$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
-			$('#price-field, #price-heading').fadeIn('slow');
+		$('#chkbx_enb_cus_num').click(function(){
+			if(!$(this).is(':checked')) {
+				$('#number').attr('readonly','readonly');
+			} else {
+				$('#number').removeAttr('readonly');
+			}
 		});
 		
 		$("a#inline").fancybox({
