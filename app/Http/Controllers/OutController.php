@@ -31,7 +31,22 @@ class OutController extends Controller
 		$items = Item::where('status', '>=', '0')->get();
 		$customers = DB::table('customers')->get();
 		$depts = DB::table('customers_departments')->where('customer_id', '=', $request->customer_id)->get();
-		return view('admin.out.customer', ['depts' => $depts, 'items' => $items, 'customers' => $customers]);
+		$current_customer = DB::table('customers')->where('id', '=', $request->customer_id)->get();
+		
+		return view('admin.out.customer', ['depts' => $depts, 'items' => $items, 'customers' => $customers, 'current_customer' => $current_customer[0]]);
+	}
+	
+	public function postItem(Request $request) {
+		$coci = new CustomerOutgoingCartItem;
+		$coci->name = $request->item_name;
+        $item->item_number = $request->item_number;
+        $item->description = $request->item_desc;
+        $item->weight = $request->item_weight;
+        $item->transaction_type = $request->transaction_type;
+        $item->save();
+		
+		$items = Item::where('status', '>=', '0')->get();
+		return view('admin.out.item', ['items' => $items]);
 	}
 
     /**
