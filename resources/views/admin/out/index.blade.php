@@ -28,10 +28,11 @@
 
     </div>
     <!-- /Breadcrumb -->
-
+	
+    <div id="loadAjaxFrom">
+	<form method="post" action="" id="pageForm">
     <div class="row no-rightmargin">
       <div class="col s12 m5 margin-right-md">
-          <div id="customer-info">
           <fieldset>
               <legend>Customer Information:</legend>
               <div class="row">
@@ -56,48 +57,48 @@
               <div class="row">
                 <div class="col s12">
                   <div class="input-field">
-                    <input id="name" type="text" name="name" placeholder="Name" readonly="readonly">
+                    <input id="customer_name" type="text" name="customer_name" placeholder="Name" readonly="readonly">
                   </div>
                 </div>
               </div>
             </fieldset>
-          </div>
           
-          <fieldset>    
+          <fieldset id="cartAjaxResponse">    
               <legend>Cart Information</legend>
               <div class="row">
                 <div class="col m4 s12">
-                  <div class="input-field">
-                      <select name="cart_number" id="cart_number">
-                        <option value="" disabled selected>Cart Number</option>
+                  <div class="input-field" id="exchange-cart-div">
+                      <select name="cart_number" id="cart_number_dropdown">
+                        <option value="">Cart Number</option>
                         @foreach($carts as $cart)
-                        <option value="{{$cart->id}}">{{$cart->id}}</option>
+                        <option value="{{$cart->id}}">{{$cart->cart_number}}</option>
                         @endforeach
                       </select>
                   </div>
-                </div>
-                <div class="col m4 s12">
-                  <div class="input-field">
-                    <input id="tare_weight" type="text" name="tare_weight" placeholder="Tare Weight">
+                  <div class="input-field" id="non-tracked-cart-div" style="display:none;">
+                  	<input id="cart_number_textfield" type="text" name="cart_number" placeholder="Cart Number">
                   </div>
                 </div>
                 <div class="col m4 s12">
                   <div class="input-field">
-                      <select name="gender">
-                        <option value="" disabled selected>Ship Date</option>
-                      </select>
+                    <input id="tare_weight" type="text" name="tare_weight" placeholder="Tare Weight" readonly="readonly">
+                  </div>
+                </div>
+                <div class="col m4 s12">
+                  <div class="input-field">
+                      <input id="ship_date" type="text" name="ship_date" placeholder="Ship Date">
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col m6 s12">
-                  <input type="checkbox" name="exchange" id="exchange" checked="checked">
-                  <label for="exchange">Exchange Cart</label>
+                  <input type="checkbox" name="is_exchange_cart" id="is_exchange_cart" value="1" checked="checked">
+                  <label for="is_exchange_cart">Exchange Cart</label>
                 </div>
                 <div class="col m4 s12 pull-right">
                   <label for="status">Status</label>
                   <div class="input-field">
-                    <input type="text" name="status" id="status" disabled="disabled" value="Auto Fill">
+                    <input type="text" name="status" id="status" placeholder="Cart Status" readonly="readonly" value="In">
                   </div>
                 </div>
               </div>
@@ -116,15 +117,11 @@
           <fieldset id="itemAjaxResponse">
               <legend>Items List:</legend>
               <div class="row box">
-                  <form method="post" action="{{url('admin/out/item')}}" id="itemForm">
                   {{csrf_field()}}
                   <div class="row no-topmargin">
                     <div class="col m8 s12">
                       <select name="item_id" id="item_id">
                         <option value="">Item Number</option>
-                        @foreach($items as $item)
-                        <option value="{{$item->id}}">{{$item->item_number}}</option>
-                        @endforeach
                       </select>
                       <label for="item_id" class="error"></label>
                     </div>
@@ -141,7 +138,6 @@
                     <button class="waves-effect btn">Remove</button>
                     <button class="btn btn-disabled">Clear</button>
                   </div>
-                  </form>
                   <div class="row layout_table">
                     <div class="row heading">
                         <div class="col s3">Item Number</div>
@@ -150,20 +146,19 @@
                         <div class="col s2 right-align">Weight</div>
                     </div>
                     <div class="row records_list">
-                        <div class="col s3">Item 1</div>
-                        <div class="col s5">Lorem Ipsum doller sit</div>
-                        <div class="col s2 right-align">4</div>
-                        <div class="col s2 right-align">4 KG</div>
+                        <h5 class="center-align">No Items have been added to this cart yet.</h5>
                     </div>
                   </div>
               </div>
-              <div class="row">
+              <div class="row" id="weights-div">
                 <div class="col m4 s12">
+                  <label>Gross Weight</label>
                   <div class="input-field">
                     <input id="gross_weight" type="text" name="gross_weight" placeholder="Gross Weight">
                   </div>
                 </div>
                 <div class="col m4 s12">
+                  <label>Net Weight</label>
                   <div class="input-field">
                     <input id="net_weight" type="text" name="net_weight" placeholder="Net Weight">
                   </div>
@@ -171,6 +166,8 @@
               </div>
           </fieldset>
       </div>
+    </div>
+    </form>
     </div>
 
   </section>
@@ -181,32 +178,104 @@
 @section('js')
 <script>
     $(document).ready(function () {
-		$("#customer, #cart_number, #item_id").jqxComboBox({width: '100%', autoDropDownHeight: true});
+		$("#customer, #cart_number_dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true});
+		$("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
 		$("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
 		
 		$( "body" ).on( "change", "#customer", function(e) {
 			$('.loading').css('display', 'block');
 			var cus_id = $(this).val();
-			var url = "{{url('admin/out/customer-info')}}";
+			var url = "{{url('admin/out/ajax-form')}}";
 			$.ajax({
 				url: url,
 				type: 'GET',
 				data: { customer_id: cus_id },
 				success: function(response)
 				{
-					$('#customer-info').html(response);
+					$('#loadAjaxFrom').html(response);
 					$('.loading').css('display', 'none');
 				}
 			});
 		});
 		
-		$("#itemForm").validate({
-			rules: {
-				item_id: "required",
-				quantity: {
-					required: true,
-					digits: true,
+		$( "body" ).on( "change", "#cart_number_dropdown", function(e) {
+			$('.loading').css('display', 'block');
+			var cart_id = $('#cart_number_dropdown').val();
+			var url = "{{url('admin/out/cart-info')}}";
+			$.ajax({
+				url: url,
+				type: 'GET',
+				data: { cart_id: cart_id },
+				success: function(response)
+				{
+					$('#cartAjaxResponse').html(response);
+					$('#gross_weight').val($('#tare_weight').val());
+					$('.loading').css('display', 'none');
 				}
+			});
+		});
+		
+		$( "body" ).on( "click", "#button-add-item", function(e) {
+			e.preventDefault();
+			var item_id = $('#item_id').val();
+			var stopProcess = false;
+			
+			$( ".item-cart" ).each(function() {
+			  	if(item_id == $(this).val()) {
+					stopProcess = true;
+			  		return false;
+				}
+			});
+			
+			if(!stopProcess) {
+				$('.loading').css('display', 'block');
+				var quantity = $('#quantity').val();
+				var url = "{{url('admin/out/add-item')}}";
+				$.ajax({
+					url: url,
+					type: 'GET',
+					data: { item_id: item_id, quantity: quantity },
+					success: function(response)
+					{
+						$('.no-item').css('display', 'none');
+						$('#add-item-list').append(response);
+						$('.loading').css('display', 'none');
+					}
+				});
+				
+				var gross_weight_field_value = $('#gross_weight').val();
+				var net_weight_field_value = $('#net_weight').val();
+				var url = "{{url('admin/out/weights')}}";
+				$.ajax({
+					url: url,
+					type: 'GET',
+					data: { item_id: item_id, gross_weight: gross_weight_field_value, net_weight: net_weight_field_value },
+					success: function(response)
+					{
+						$('#weights-div').html(response);
+						$('.loading').css('display', 'none');
+					}
+				});
+			} else {
+				alert('This item is already in the cart please select another item.');
+			}
+		});
+		
+		$( "body" ).on( "click", "#is_exchange_cart", function(e) {
+			if(!$(this).is(':checked')) {
+				$('#exchange-cart-div').css('display', 'none');
+				$('#non-tracked-cart-div').fadeIn('slow');
+				$('#tare_weight').removeAttr('readonly');
+			} else {
+				$('#non-tracked-cart-div').css('display', 'none');
+				$('#exchange-cart-div').fadeIn('slow');
+				$('#tare_weight').attr('readonly');
+			}
+		});
+		
+		/*$("#pageForm").validate({
+			rules: {
+				customer_name: "required"
 			},
 			submitHandler: function (form) {
 				$('.loading').css('display', 'block');
@@ -219,7 +288,7 @@
 				}
 				$(form).ajaxSubmit(options);
 			}
-		});
+		});*/
     });
 </script>
 @endsection

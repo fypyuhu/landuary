@@ -20,35 +20,45 @@ class OutController extends Controller
     public function getIndex()
     {
 		$carts = Cart::all();
-		$items = Item::where('status', '>=', '0')->get();
 		$customers = DB::table('customers')->get();
 		$depts = DB::table('customers_departments')->get();
-        return view('admin.out.index', ['carts' => $carts, 'items' => $items, 'customers' => $customers, 'depts' => $depts]);
+        return view('admin.out.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts]);
     }
 	
-	public function getCustomerInfo(Request $request) {
+	public function getAjaxForm(Request $request) {
 		$carts = Cart::all();
-		$items = Item::where('status', '>=', '0')->get();
+		$items = DB::table('items')
+					->join('customers_items', 'items.id', '=', 'customers_items.item_id')
+					->select('items.*')
+					->where('items.status', '>', 0)
+					->where('customers_items.customer_id', '=', $request->customer_id)
+					->get();
 		$customers = DB::table('customers')->get();
 		$depts = DB::table('customers_departments')->where('customer_id', '=', $request->customer_id)->get();
 		$current_customer = DB::table('customers')->where('id', '=', $request->customer_id)->get();
 		
-		return view('admin.out.customer', ['depts' => $depts, 'items' => $items, 'customers' => $customers, 'current_customer' => $current_customer[0]]);
+		return view('admin.out.form', ['depts' => $depts, 'carts' => $carts, 'items' => $items, 'customers' => $customers, 'current_customer' => $current_customer[0]]);
 	}
 	
-	public function postItem(Request $request) {
-		$coci = new CustomerOutgoingCartItem;
-		$coci->name = $request->item_name;
-        $item->item_number = $request->item_number;
-        $item->description = $request->item_desc;
-        $item->weight = $request->item_weight;
-        $item->transaction_type = $request->transaction_type;
-        $item->save();
-		
-		$items = Item::where('status', '>=', '0')->get();
-		return view('admin.out.item', ['items' => $items]);
+	public function getAddItem(Request $request) {
+	    $item = DB::table('items')->where('id', '=', $request->item_id)->get();
+		$quantity = $request->quantity;
+		return view('admin.out.addItem', ['item' => $item[0], 'quantity' => $quantity]);
 	}
-
+	
+	public function getCartInfo(Request $request) {
+		$carts = Cart::all();
+	    $cart = DB::table('carts')->where('id', '=', $request->cart_id)->get();
+		return view('admin.out.getCart', ['current_cart' => $cart[0], 'carts' => $carts]);
+	}
+	
+	public function getWeights(Request $request) {
+		$item = DB::table('items')->where('id', '=', $request->item_id)->get();
+		$gross_weight = $request->gross_weight + $item[0]->weight;
+		$net_weight = $request->net_weight + $item[0]->weight;
+		return view('admin.out.weight', ['gross_weight' => $gross_weight, 'net_weight' => $net_weight]);
+	}
+	
     /**
      * Show the form for creating a new resource.
      *
