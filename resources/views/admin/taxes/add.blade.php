@@ -26,7 +26,7 @@
             <div class="col m4 s12">
                 <label>Agency name</label>
                 <div class="input-field">
-                    <input type="text" name="agency_name" id="agency_name" value="test" />
+                    <input type="text" name="agency_name" id="agency_name" />
                 </div>
                 <label for="agency_name" class="error">Example: Arizona Dept. of Revenue</label>
             </div>
