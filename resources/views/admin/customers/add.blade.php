@@ -1,6 +1,7 @@
 <fieldset id="add-record" style="width: 705px;">
     <legend>Add Customer:</legend>
-    <form action="/admin/cutomers/create" Method="POST" id="customer-form">
+    <form action="/admin/customers/create" Method="POST" id="customer-form">
+        {{csrf_field()}}
         <div class="row">
             <div class="col m6 s12">
                 <label>Name:</label>
@@ -39,7 +40,7 @@
             </div>
             <div class="col m6 s12">
                 <label>List:</label>
-                <select name="department_list" id="department_list">
+                <select name="department_list[]"  multiple id="department_list">
 
                 </select>
 
@@ -108,10 +109,10 @@
                 <h2>Billing Address</h2>
                 <div class="row">
                     <div class="col m6 s12">
-                        <input type="radio" name="billing_address" id="add_billing_address" data-corr-div-id="#billing-address-div" class="radiobutton" /><label for="add_billing_address">Add Billing Address</label>
+                        <input type="radio" name="billing_address" value="1" id="add_billing_address" data-corr-div-id="#billing-address-div" class="radiobutton" /><label for="add_billing_address">Add Billing Address</label>
                     </div>
                     <div class="col m6 s12">
-                        <input type="radio" name="billing_address" id="same_as_shipping" checked="checked" data-corr-div-id="#billing-address-div" /><label for="same_as_shipping" style="margin-right:0;">Same as Shipping Address</label>
+                        <input type="radio" name="billing_address" value="0" id="same_as_shipping" checked="checked" data-corr-div-id="#billing-address-div" /><label for="same_as_shipping" style="margin-right:0;">Same as Shipping Address</label>
                     </div>
                 </div>
                 <div style="display:none;" id="billing-address-div">
@@ -198,11 +199,11 @@
                 <legend>Tax</legend>
                 <div class="row">
                     <div class="col s12">
-                        <input type="radio" name="chkbx_taxable" checked="checked" id="chkbx_taxable" data-set-class=".set-taxable" data-corr-div-id="#taxable-div" class="radiobutton">
+                        <input type="radio" value="1" name="chkbx_taxable" checked="checked" id="chkbx_taxable" data-set-class=".set-taxable" data-corr-div-id="#taxable-div" class="radiobutton">
                         <label for="chkbx_taxable">Taxable</label>
                     </div>
                     <div class="col s12">
-                        <input type="radio" name="chkbx_taxable" id="chkbx_taxable_exampt" data-set-class=".set-taxable" data-corr-div-id="#taxable-exampt-div" class="radiobutton">
+                        <input type="radio" value="0" name="chkbx_taxable" id="chkbx_taxable_exampt" data-set-class=".set-taxable" data-corr-div-id="#taxable-exampt-div" class="radiobutton">
                         <label for="chkbx_taxable_exampt">Tax Exempt</label>
                     </div>
                 </div>
@@ -228,9 +229,9 @@
                     <div class="col s6">
                         <label>Sales Tax:</label>
                         <select name="sales_tax_authority" id="sales_tax_authority">
-                            <option value="1">Sales Tax Rule 1</option>
-                            <option value="2">Sales Tax Rule 2</option>
-                            <option value="3">Sales Tax Rule 3</option>
+                            @foreach($taxes as $tax)
+                            <option value="{{$tax->id}}">{{$tax->tax_name}}</option>
+                            @endforeach
                         </select>
                         <label for="sales_tax_authority" class="error" id="error-sales_tax_authority"></label>
                     </div>
@@ -242,9 +243,9 @@
                 <div class="col m3 s12" style="margin-top:0;">
                     <label>Price Per lb/kg:</label>
                     <div class="input-field">
-                        <input id="price-by-weight" type="text" name="price-by-weight">
+                        <input id="price-by-weight" type="text" name="price_by_weight">
                     </div>
-                    <label for="bill_type" class="error" id="error-bill_type"></label>
+                    <label for="price-by-weight" class="error" id="error-price-by-weight"></label>
                 </div>
             </div>
 
@@ -294,9 +295,9 @@
             <legend>Pricing</legend>
             <div class="row">
                 <strong style="margin-right: 15px;">Select billing by:</strong>
-                <input type="radio" checked="checked" name="price_option" id="price_by_weight" class="pricing-rd-btn" /><label for="price_by_weight">Weight</label>
-                <input type="radio" name="price_option" id="price_by_item" class="pricing-rd-btn" /><label for="price_by_item">Item</label>
-                <input type="radio" name="price_option" id="price_by_both" class="pricing-rd-btn" /><label for="price_by_both">Both</label>
+                <input type="radio" value="0" checked="checked" name="price_option" id="price_by_weight" class="pricing-rd-btn" /><label for="price_by_weight">Weight</label>
+                <input type="radio" value="1" name="price_option" id="price_by_item" class="pricing-rd-btn" /><label for="price_by_item">Item</label>
+                <input type="radio" value="2" name="price_option" id="price_by_both" class="pricing-rd-btn" /><label for="price_by_both">Both</label>
             </div>
         </section>
         <div class="row">
@@ -316,6 +317,12 @@
     function addDepartment() {
         if ($('#department').val() != "") {
             $("#department_list").jqxComboBox('addItem', {label: $('#department').val(), checked: true});
+            $('#department_list_jqxComboBox').append($('<option>', {
+                value: $('#department').val(),
+                text: $('#department').val(),
+                selected:'selected'
+            }));
+            $('#department').val('');
         }
     }
     function taxError()
@@ -464,12 +471,13 @@
             }
             else if (activeTab === "items") {
                 if (checkError('Customer Name', 'ship_to_name') && checkError('Customer Number', 'customer_number')) {
-                    var options = {
-                        success: showResponse
-                    };
                     function showResponse(responseText, statusText, xhr, $form) {
                         location.reload();
                     }
+                    var options = {
+                        success: showResponse
+                    };
+
                     $('#customer-form').ajaxSubmit(options);
                 }
             }
@@ -492,7 +500,7 @@
         });
         $("#bill_type").jqxComboBox({width: '150', autoComplete: true, autoDropDownHeight: true});
         $("#sales_tax_authority").jqxComboBox({width: '400', autoComplete: true, autoDropDownHeight: true});
-        $("#department_list").jqxComboBox({width: '280', autoComplete: true, autoDropDownHeight: true, checkboxes: true});
+        $("#department_list").jqxComboBox({width: '280', autoComplete: true, multiSelect: true, autoDropDownHeight: true, checkboxes: true});
         $("#parent_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true});
         $("#child_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true});
         $('#bill_type').on('change', function () {

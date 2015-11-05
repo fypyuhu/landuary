@@ -7,6 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddIsDeletedToCart' => $baseDir . '/database/migrations/2015_10_27_161844_add_isDeleted_toCart.php',
+    'AddPriceToCustomerItems' => $baseDir . '/database/migrations/2015_11_04_155806_add_price_to_customer_items.php',
+    'AddSoftDeleteToCustomers' => $baseDir . '/database/migrations/2015_11_04_165319_add_soft_delete_to_customers.php',
+    'AddTaxableToCustomerTaxes' => $baseDir . '/database/migrations/2015_11_04_151615_add_taxable_to_customer_taxes.php',
+    'ChangeCutomerTable' => $baseDir . '/database/migrations/2015_11_03_163215_change_cutomer_table.php',
     'ChangeItemTable' => $baseDir . '/database/migrations/2015_10_26_182539_change_item_table.php',
     'ChangeTaxesTable' => $baseDir . '/database/migrations/2015_10_29_132452_change_taxes_table.php',
     'CreateCartsTable' => $baseDir . '/database/migrations/2015_10_23_132912_create_carts_table.php',
@@ -24,6 +28,7 @@ return array(
     'CreateTaxesTable' => $baseDir . '/database/migrations/2015_10_28_142140_create_taxes_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'DropTaxableCutomerTaxesTable' => $baseDir . '/database/migrations/2015_11_03_184658_drop_taxable_cutomer_taxes_table.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',

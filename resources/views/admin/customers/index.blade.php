@@ -48,43 +48,28 @@
 </section>
 @endsection
 @section('js')
-<script type="text/javascript" src="{{URL::asset('js/jquery.steps.min.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
 
-/*
 
 
-        var url = "{{url('admin/items/show')}}";
+        var url = "{{url('admin/customers/show')}}";
         // prepare the data
         var source =
                 {
                     datatype: "json",
                     datafields: [
                         {name: 'name'},
-                        {name: 'item_number'},
-                        {name: 'weight'},
-                        {name: 'transaction_type'},
-                        {name: 'actions'},
-                        {name:'status' }
+                        {name: 'number'},
+                        {name: 'phone'},
+                        {name: 'actions'}
                         
                     ],
                     id: 'id',
                     url: url,
                     root: 'data'
                 };
-        var rowRenderer = function (row, column, value, defaultHtml, columnSettings, rowData) {
-            if(rowData.status==="1"){
-                    var element = $(defaultHtml);
-                    element.css({ 'font-weight': 'bold'});
-                    return element[0].outerHTML;
-                }
-            else if(column==="name" && rowData.status==="0"){
-                 var element = $(defaultHtml);
-                    element.css({ 'margin-left': '20px'});
-                    return element[0].outerHTML;
-            }    
-        };
+
         var dataAdapter = new $.jqx.dataAdapter(source);
         $("#jqxgrid").jqxGrid(
                 {
@@ -95,14 +80,13 @@
                     sortable: true,
                     filterable: true,
                     columns: [
-                        {text: 'Name', width:'30%',dataField: 'name', sortable: false,cellsrenderer: rowRenderer},
-                        {text: 'Number', width:'15%' ,dataField: 'item_number', sortable: false,cellsrenderer: rowRenderer},
-                        {text: 'Weight lb/kg', width:'15%', dataField: 'weight', sortable: false,cellsrenderer: rowRenderer},
-                        {text: 'Transaction Type', width:'20%', dataField: 'transaction_type', sortable: false,cellsrenderer: rowRenderer},
+                        {text: 'Name', width:'30%',dataField: 'name'},
+                        {text: 'Customer Number', width:'25%' ,dataField: 'number'},
+                        {text: 'Phone', width:'25%', dataField: 'phone'},
                         {text: 'Actions', width:'20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
-    */});
+    });
 </script>
 
 @endsection
