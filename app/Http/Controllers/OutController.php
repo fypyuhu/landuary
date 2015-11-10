@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Out;
 use App\Models\Cart;
 use App\Models\Item;
+use App\Models\OutgoingCart;
+use App\Models\CustomerOutgoingCartItem;
 use DB;
 
 class OutController extends Controller
@@ -23,6 +25,11 @@ class OutController extends Controller
 		$customers = DB::table('customers')->get();
 		$depts = DB::table('customers_departments')->get();
         return view('admin.out.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts]);
+    }
+	
+	public function getCarts()
+    {
+        return view('admin.out.carts');
     }
 	
 	public function getAjaxForm(Request $request) {
@@ -54,19 +61,44 @@ class OutController extends Controller
 	
 	public function getWeights(Request $request) {
 		$item = DB::table('items')->where('id', '=', $request->item_id)->get();
-		$gross_weight = $request->gross_weight + $item[0]->weight;
-		$net_weight = $request->net_weight + $item[0]->weight;
+		$gross_weight = $request->gross_weight + ($item[0]->weight * $request->num_items);
+		$net_weight = $request->net_weight + ($item[0]->weight * $request->num_items);
 		return view('admin.out.weight', ['gross_weight' => $gross_weight, 'net_weight' => $net_weight]);
 	}
 	
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * 
+     * @return \Illuminate\Http\Response 
      */
-    public function create()
+    public function postCreate(Request $request)
     {
-        //
+        $ogc = new OutgoingCart;
+		$ogc->customer_id = $request->customer;
+		$ogc->department_id = $request->department;
+		$ogc->cart_id = $request->has('cart_number_textfield') ? $request->cart_number_textfield : $request->cart_number_dropdown;
+		$ogc->shipping_date = date('Y-m-d', strtotime($request->ship_date));
+		$ogc->gross_weight = $request->gross_weight;
+		$ogc->net_weight = $request->net_weight;
+		$ogc->status = 'Ready';
+		if ($request->has('is_exchange_cart')) {
+			$ogc->is_exchange_cart = $request->is_exchange_cart;
+			$ogc->cart_id = $request->cart_number_dropdown;
+		} else {
+			$ogc->cart_id = $request->cart_number_textfield;
+		}
+		
+		$ogc->save();
+		
+		foreach($request->item_cart as $key=>$value) {
+			$ogc_item = new CustomerOutgoingCartItem;
+			$ogc_item->outgoing_cart_id = $ogc->id;
+			$ogc_item->item_id = $value;
+			$ogc_item->quantity = $request->item_quantity[$key];
+			$ogc_item->save();
+		}
+		
+		return back();
     }
 
     /**

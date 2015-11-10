@@ -22,4 +22,5 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::controller('taxes', 'TaxController');
 	Route::controller('out', 'OutController');
         Route::controller('shiping-manifest', 'ShipmentController');
+	Route::controller('profile', 'UserProfileController');
 });
