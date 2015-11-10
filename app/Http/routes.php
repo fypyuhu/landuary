@@ -21,4 +21,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::controller('customers', 'CustomerController');
 	Route::controller('taxes', 'TaxController');
 	Route::controller('out', 'OutController');
+	Route::controller('profile', 'UserProfileController');
 });

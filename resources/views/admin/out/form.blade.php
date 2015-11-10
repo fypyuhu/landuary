@@ -1,4 +1,4 @@
-<form method="post" action="" id="pageForm">
+<form method="post" action="/admin/out/create" id="pageForm">
 <div class="row no-rightmargin">
   <div class="col s12 m5 margin-right-md">
       <fieldset>
@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col s12">
               <div class="input-field">
-                <input id="name" type="text" name="name" value="{{$current_customer->shipping_name}}" placeholder="Name" readonly="readonly">
+                <input id="name" type="text" name="name" value="{{$current_customer->name}}" placeholder="Name" readonly="readonly">
               </div>
             </div>
           </div>
@@ -35,13 +35,16 @@
           <legend>Cart Information</legend>
           <div class="row">
             <div class="col m4 s12">
-              <div class="input-field">
-                  <select name="cart_number" id="cart_number_dropdown">
+              <div class="input-field" id="exchange-cart-div">
+                  <select name="cart_number_dropdown" id="cart_number_dropdown">
                     <option value="">Cart Number</option>
                     @foreach($carts as $cart)
                     <option value="{{$cart->id}}">{{$cart->cart_number}}</option>
                     @endforeach
                   </select>
+              </div>
+              <div class="input-field" id="non-tracked-cart-div" style="display:none;">
+                <input id="cart_number_textfield" type="text" name="cart_number_textfield" placeholder="Cart Number">
               </div>
             </div>
             <div class="col m4 s12">
@@ -51,19 +54,19 @@
             </div>
             <div class="col m4 s12">
               <div class="input-field">
-                  <input id="ship_date" type="text" name="ship_date" placeholder="Ship Date">
+                  <input id="ship_date" type="text" name="ship_date" placeholder="Ship Date" class="dateInput">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col m6 s12">
-              <input type="checkbox" name="exchange_cart" id="exchange_cart" checked="checked">
-              <label for="exchange">Exchange Cart</label>
+              <input type="checkbox" name="is_exchange_cart" id="is_exchange_cart" value="1" checked="checked">
+              <label for="is_exchange_cart">Exchange Cart</label>
             </div>
             <div class="col m4 s12 pull-right">
               <label for="status">Status</label>
               <div class="input-field">
-                <input type="text" name="status" id="status" disabled="disabled" value="Auto Fill">
+                <input type="text" name="status" id="status" placeholder="Cart Status" readonly="readonly" value="In">
               </div>
             </div>
           </div>
@@ -71,9 +74,8 @@
       
       <div class="row">
         <div class="col pull-right">
-          <button class="waves-effect btn">Save</button>
-          <button class="waves-effect btn">Clear</button>
-          <button class="waves-effect btn">Exit</button>
+          <button type="submit" class="waves-effect btn">Save</button>
+          <button type="reset" class="waves-effect btn">Clear</button>
         </div>
       </div>
   </div>
@@ -99,10 +101,8 @@
                 </div>
               </div>
               <div class="row">
-                <button type="submit" class="waves-effect btn" id="button-add-item">Add</button>
-                <button class="waves-effect btn">Edit</button>
+                <button class="waves-effect btn" id="button-add-item">Add</button>
                 <button class="waves-effect btn">Remove</button>
-                <button class="btn btn-disabled">Clear</button>
               </div>
               <div class="row layout_table">
                 <div class="row heading">

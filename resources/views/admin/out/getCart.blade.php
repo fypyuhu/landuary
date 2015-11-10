@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col m4 s12">
       <div class="input-field" id="exchange-cart-div">
-          <select name="cart_number" id="cart_number_dropdown">
+          <select name="cart_number_dropdown" id="cart_number_dropdown">
             <option value="">Cart Number</option>
             @foreach($carts as $cart)
             <option value="{{$cart->id}}" {{$cart->id == $current_cart->id ? 'selected="selected"' : ''}}>{{$cart->cart_number}}</option>

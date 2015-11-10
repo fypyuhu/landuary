@@ -10,7 +10,7 @@
 
       <div class="row">
         <div class="col s12 m9 l10">
-          <h1>Outgoing Carts</h1>
+          <h1>Incomming Carts</h1>
 
           <ul>
             <li>
@@ -68,7 +68,7 @@
               <div class="row">
                 <div class="col m4 s12">
                   <div class="input-field" id="exchange-cart-div">
-                      <select name="cart_number" id="cart_number_dropdown">
+                      <select name="cart_number_dropdown" id="cart_number_dropdown">
                         <option value="">Cart Number</option>
                         @foreach($carts as $cart)
                         <option value="{{$cart->id}}">{{$cart->cart_number}}</option>
@@ -76,7 +76,7 @@
                       </select>
                   </div>
                   <div class="input-field" id="non-tracked-cart-div" style="display:none;">
-                  	<input id="cart_number_textfield" type="text" name="cart_number" placeholder="Cart Number">
+                  	<input id="cart_number_textfield" type="text" name="cart_number_textfield" placeholder="Cart Number">
                   </div>
                 </div>
                 <div class="col m4 s12">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col m4 s12">
                   <div class="input-field">
-                      <input id="ship_date" type="text" name="ship_date" placeholder="Ship Date">
+                      <input id="ship_date" type="text" name="ship_date" placeholder="Ship Date" class="dateInput">
                   </div>
                 </div>
               </div>
@@ -106,9 +106,8 @@
           
           <div class="row">
             <div class="col pull-right">
-              <button class="waves-effect btn">Save</button>
-              <button class="waves-effect btn">Clear</button>
-              <button class="waves-effect btn">Exit</button>
+              <button type="submit" class="waves-effect btn">Save</button>
+              <button type="reset" class="waves-effect btn">Clear</button>
             </div>
           </div>
       </div>
@@ -133,10 +132,8 @@
                     </div>
                   </div>
                   <div class="row">
-                    <button type="submit" class="waves-effect btn" id="button-add-item">Add</button>
-                    <button class="waves-effect btn">Edit</button>
+                    <button class="waves-effect btn" id="button-add-item">Add</button>
                     <button class="waves-effect btn">Remove</button>
-                    <button class="btn btn-disabled">Clear</button>
                   </div>
                   <div class="row layout_table">
                     <div class="row heading">
@@ -239,17 +236,17 @@
 					{
 						$('.no-item').css('display', 'none');
 						$('#add-item-list').append(response);
-						$('.loading').css('display', 'none');
 					}
 				});
 				
 				var gross_weight_field_value = $('#gross_weight').val();
 				var net_weight_field_value = $('#net_weight').val();
+				var num_items = $('.item-cart').length;
 				var url = "{{url('admin/out/weights')}}";
 				$.ajax({
 					url: url,
 					type: 'GET',
-					data: { item_id: item_id, gross_weight: gross_weight_field_value, net_weight: net_weight_field_value },
+					data: { num_items: num_items, item_id: item_id, gross_weight: gross_weight_field_value, net_weight: net_weight_field_value },
 					success: function(response)
 					{
 						$('#weights-div').html(response);
