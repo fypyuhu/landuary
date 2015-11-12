@@ -389,7 +389,7 @@ label.error {
 }
 
 .loading {
-	position:absolute;
+	position:fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -466,6 +466,12 @@ label.error {
 	height: 65px;
 	border-radius: 50%;
 	background: #666666;
+	overflow: hidden;
+}
+
+.profile-pic img {
+	width: 65px;
+	height: 65px;
 }
 
 .oBtnSubtle {
@@ -499,4 +505,13 @@ label.error {
 
 .edit-div {
 	display: none;
+}
+
+.p-wrapper {
+	width: 814px;
+	margin: 0 auto;
+}
+
+table td {
+	padding: 5px 10px;
 }

@@ -63,9 +63,9 @@
                     	<label>Country:</label>
                     	<select name="country" id="country">
                             <option value="">Please Select</option>
-                            <option value="">Germany</option>
-                            <option value="">USA</option>
-                            <option value="">UK</option>
+                            @foreach($countries as $country)
+                            <option value="{{ $country->country_name }}">{{ $country->country_name }}</option>
+                            @endforeach
                         </select>
                         <label for="country" class="error"></label>
                     </div>
@@ -216,7 +216,9 @@
 				},
 				website: "required",
 				tax_id_number: "required",
-				logo: "required",
+				logo: {
+      				extension: "jpg|jpeg|png"
+				},
 				contact_name: "required",
 				contact_designation: "required",
 				contact_email: {

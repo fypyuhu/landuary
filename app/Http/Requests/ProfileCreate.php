@@ -33,7 +33,6 @@ class ProfileCreate extends Request
 			'phone' => 'required',
 			'fax' => 'required',
 			'email' => 'required|email',
-			'logo' => 'required',
 			'contact_name' => 'required',
 			'contact_designation' => 'required',
 			'contact_email' => 'required',

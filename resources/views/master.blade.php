@@ -47,7 +47,7 @@
 </head>
 
 <body>
-
+<div class="loading"><img src="{{URL::asset('images/ajax-loader.gif')}}" alt="" /></div>
 
   <!--
   Top Navbar
@@ -332,6 +332,39 @@
 		$(show).fadeIn('slow');
 	}
   </script>
+  
+  <script src="{{URL::asset('js/print/jQuery.print.js')}}"></script>
+  <script type='text/javascript'>
+	//<![CDATA[
+	$(function() {
+		$("#ele2").find('.print-link').on('click', function() {
+			//Print ele2 with default options
+			$.print("#ele2");
+		});
+		$("#ele4").find('button').on('click', function() {
+			//Print ele4 with custom options
+			$("#ele4").print({
+				//Use Global styles
+				globalStyles : false,
+				//Add link with attrbute media=print
+				mediaPrint : false,
+				//Custom stylesheet
+				stylesheet : "http://fonts.googleapis.com/css?family=Inconsolata",
+				//Print in a hidden iframe
+				iframe : false,
+				//Don't print this
+				noPrintSelector : ".avoid-this",
+				//Add this at top
+				prepend : "Hello World!!!<br/>",
+				//Add this on bottom
+				append : "<br/>Buh Bye!"
+			});
+		});
+		// Fork https://github.com/sathvikp/jQuery.print for the full list of options
+	});
+	//]]>
+  </script>
+  
   @section('js')
   @show
 </body>

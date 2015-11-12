@@ -9,7 +9,7 @@
 
       <div class="row">
         <div class="col s12 m9 l10">
-          <h1>Outgoing Carts</h1>
+          <h1>Incomming Carts</h1>
 
           <ul>
             <li>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="col m4 s12">
                   <div class="input-field">
-                      <input id="ship_date" type="text" name="ship_date" placeholder="Ship Date" class="dateInput">
+                      <input id="receiving_date" type="text" name="receiving_date" placeholder="Receiving Date" class="dateInput">
                   </div>
                 </div>
               </div>
@@ -181,7 +181,7 @@
 		$( "body" ).on( "change", "#customer", function(e) {
 			$('.loading').css('display', 'block');
 			var cus_id = $(this).val();
-			var url = "{{url('admin/out/ajax-form')}}";
+			var url = "{{url('admin/in/ajax-form')}}";
 			$.ajax({
 				url: url,
 				type: 'GET',
@@ -197,7 +197,7 @@
 		$( "body" ).on( "change", "#cart_number_dropdown", function(e) {
 			$('.loading').css('display', 'block');
 			var cart_id = $('#cart_number_dropdown').val();
-			var url = "{{url('admin/out/cart-info')}}";
+			var url = "{{url('admin/in/cart-info')}}";
 			$.ajax({
 				url: url,
 				type: 'GET',
@@ -226,7 +226,7 @@
 			if(!stopProcess) {
 				$('.loading').css('display', 'block');
 				var quantity = $('#quantity').val();
-				var url = "{{url('admin/out/add-item')}}";
+				var url = "{{url('admin/in/add-item')}}";
 				$.ajax({
 					url: url,
 					type: 'GET',
@@ -241,7 +241,7 @@
 				var gross_weight_field_value = $('#gross_weight').val();
 				var net_weight_field_value = $('#net_weight').val();
 				var num_items = $('.item-cart').length;
-				var url = "{{url('admin/out/weights')}}";
+				var url = "{{url('admin/in/weights')}}";
 				$.ajax({
 					url: url,
 					type: 'GET',
