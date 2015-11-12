@@ -15,4 +15,8 @@ class Customer extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+    public function scopeOrganization($query) {
+        return $query->where('organization', 1);
+    }
+
 }

@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     protected $table="items";
+    public function scopeOrganization($query) {
+        return $query->where('organization', 1);
+    }
+
 }

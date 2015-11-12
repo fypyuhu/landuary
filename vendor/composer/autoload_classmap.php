@@ -28,9 +28,14 @@ return array(
     'CreateIncomingCartsTable' => $baseDir . '/database/migrations/2015_11_12_135235_create_incoming_carts_table.php',
     'CreateItemRelationTable' => $baseDir . '/database/migrations/2015_10_21_172719_create_ItemRelation_table.php',
     'CreateItemTable' => $baseDir . '/database/migrations/2015_10_21_171522_create_Item_table.php',
+    'CreateOrganizationTable' => $baseDir . '/database/migrations/2015_11_11_172655_create_organization_table.php',
     'CreateOutgoingCartsTable' => $baseDir . '/database/migrations/2015_11_03_122010_create_outgoing_carts_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+<<<<<<< HEAD
     'CreateReceivingManifestTable' => $baseDir . '/database/migrations/2015_11_12_155138_create_receiving_manifest_table.php',
+=======
+    'CreateShipingManifest' => $baseDir . '/database/migrations/2015_11_10_172443_Create_shiping_manifest.php',
+>>>>>>> 581a2ef5f5a5970a8293eebc010cd18ed4f3119d
     'CreateTaxesComponentsTable' => $baseDir . '/database/migrations/2015_10_28_142400_create_taxes_components_table.php',
     'CreateTaxesTable' => $baseDir . '/database/migrations/2015_10_28_142140_create_taxes_table.php',
     'CreateUserProfileTable' => $baseDir . '/database/migrations/2015_11_10_124534_create_user_profile_table.php',
@@ -545,9 +550,5 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
-    'Update2CustomersTable' => $baseDir . '/database/migrations/2015_11_05_171550_update2_customers_table.php',
-    'Update3CustomersTable' => $baseDir . '/database/migrations/2015_11_05_172001_update3_customers_table.php',
-    'Update4CustomersTable' => $baseDir . '/database/migrations/2015_11_05_172009_update4_customers_table.php',
     'UpdateCustomersDepartmentsTable' => $baseDir . '/database/migrations/2015_11_02_153329_update_customers_departments_table.php',
-    'UpdateCustomersTable' => $baseDir . '/database/migrations/2015_11_05_171324_update_customers_table.php',
 );
