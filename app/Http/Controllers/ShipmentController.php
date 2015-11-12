@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\CustomerDepartment;
+use App\Models\OutgoingCart;
+use App\Models\ShipManifest;
+use App\Models\CustomerOutgoingCartItem;
 class ShipmentController extends Controller
 {
     /**
@@ -23,31 +26,31 @@ class ShipmentController extends Controller
         $active_customer=Customer::find($id);
         $customers=Customer::all();
         $departments=CustomerDepartment::find($id);
-        return view('admin.shiping.details',["customers"=>$customers,"active_customer"=>$active_customer,"departments"=>$departments]);
+        $carts=OutgoingCart::where('customer_id','=',$id)->get();
+        return view('admin.shiping.details',["carts"=>$carts,"customers"=>$customers,"active_customer"=>$active_customer,"departments"=>$departments]);
     }
-    public function create()
+    public function postCreate(Request $request)
     {
-        //
+        $manifest=new ShipManifest;
+        $manifest->customer_id=$request->customer;
+        $manifest->department_id=$request->department;
+        $manifest->shipping_date=date('Y-m-d',strtotime($request->ship_date));
+        $manifest->description=$request->discription;
+        if($request->has('carts')){
+            $carts=implode(",",$request->carts);
+             $manifest->outgoing_cart_id=$carts;
+        }
+        $manifest->save();
+        return redirect('/admin/shiping-manifest/recipt/'.$manifest->id);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function getRecipt($id){
+        $manifest=ShipManifest::find($id);
+        $customer=Customer::find($manifest->customer_id);
+        $items=CustomerOutgoingCartItem::getCartItemsById($id);
+        return view('admin.shiping.recipt',['items'=>$items,'customer'=>$customer,'manifest'=>$manifest]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+   public function show($id)
     {
         //
     }

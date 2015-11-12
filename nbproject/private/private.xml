@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/laundry/resources/views/admin/shiping/index.blade.php</file>
-            <file>file:/D:/laundry/app/Http/Controllers/ShipmentController.php</file>
-            <file>file:/D:/laundry/resources/views/admin/customers/add.blade.php</file>
-            <file>file:/D:/laundry/resources/views/admin/shiping/details.blade.php</file>
+            <file>file:/D:/laundry/app/Models/OutgoingCart.php</file>
+            <file>file:/D:/laundry/app/Models/Tax.php</file>
+            <file>file:/D:/laundry/app/Http/Controllers/CartController.php</file>
+            <file>file:/D:/laundry/app/Models/TaxComponent.php</file>
+            <file>file:/D:/laundry/app/Models/UserProfile.php</file>
         </group>
     </open-files>
 </project-private>

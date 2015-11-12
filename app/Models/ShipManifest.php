@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Out extends Model
+class ShipManifest extends Model
 {
+    protected $table = "shipping_manifest";
     public function scopeOrganization($query) {
         return $query->where('organization', 1);
     }

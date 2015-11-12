@@ -74,13 +74,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <div class="row">
-                    <div class="col pull-right">
-                        <button class="waves-effect btn">Save</button>
-                        <button class="waves-effect btn">Clear</button>
-                        <button class="waves-effect btn">Exit</button>
-                    </div>
-                </div>
+                
             </div>
 
             <div class="col s12 m7">

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Update2CustomersTable extends Migration
+class CreateOrganizationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,11 @@ class Update2CustomersTable extends Migration
      */
     public function up()
     {
-        Schema::table('customers', function ($table) {
-			$table->string('name')->change();
-		});
+        Schema::create('organizations', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+        });
     }
 
     /**

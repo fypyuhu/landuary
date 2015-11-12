@@ -1,4 +1,5 @@
-<form action="/admin/shiping-manifest/create" Method="POST">
+<form action="/admin/shiping-manifest/create" Method="POST" id="pageForm">
+    {{csrf_field()}}
     <div class="col s12 m5">
         <fieldset>
             <legend>Shipping Manifest:</legend>
@@ -14,7 +15,7 @@
                 <div class="col m6 s12">
                     <label>Department:</label>
                     <select name="department" id="department">
-                        <option value="-1" selected>Select Department</option>
+                        <option value="0" selected>Select Department</option>
                         @if($departments)
                         @foreach($departments as $department)
                         <option value="{{$department->id}}" >{{$departments->department_name}}</option>
@@ -33,8 +34,8 @@
                 </div>
                 <div class="col m6 s12">
                     <label>Enter Ship Date:</label>
-                         <div id="ship_date" type="text" name="ship_date"></div>
-                  
+                    <div id="ship_date" type="text" name="ship_date"></div>
+
                 </div>
             </div>
 
@@ -42,16 +43,15 @@
                 <div class="col s12">
                     <label>Special text to appear after detail section for this manifest (different than manifest ending lines):</label>
                     <div class="input-field">
-                        <textarea id="name" name="name"></textarea>
+                        <textarea id="name" name="discription"></textarea>
                     </div>
                 </div>
             </div>
         </fieldset>
         <div class="row">
             <div class="col pull-right">
-                <button class="waves-effect btn">Save</button>
+                <button class="waves-effect btn" type="submit">Save</button>
                 <button class="waves-effect btn">Clear</button>
-                <button class="waves-effect btn">Exit</button>
             </div>
         </div>
     </div>
@@ -67,23 +67,28 @@
                             <label for="all_carts"></label>
                         </div>
                         <div class="col s2">Cart Number</div>
-                        <div class="col s2">No. of Items</div>
                         <div class="col s2 center-align">Date Created</div>
                         <div class="col s3 right-align">Net Weight lb/kg</div>
                         <div class="col s2 center-align">Actions</div>
                     </div>
+                    @if(!$carts->isEmpty())
+                    @foreach($carts as $cart)
                     <div class="row records_list">
                         <div class="col s1 center-align chkbx">
-                            <input type="checkbox" name="all_carts" id="all_carts">
-                            <label for="all_carts"></label>
+                            <input type="checkbox" class="all_cart_checkbox" name="carts[{{$cart->id}}]" value="{{$cart->id}}" id="carts[{{$cart->id}}]">
+                            <label for="carts[{{$cart->id}}]"></label>
                         </div>
-                        <div class="col s2">01</div>
-                        <div class="col s2">02</div>
-                        <div class="col s2 center-align">12-12-2012</div>
-                        <div class="col s3 right-align">4 KG</div>
+                        <div class="col s2">{{$cart->cart_id}}</div>
+                        <div class="col s2">{{$cart->shipping_date}}</div>
+                        <div class="col s3 right-align">{{$cart->net_weight}}</div>
                         <div class="col s2 center-align"><a href="?action=edit" class="edit-button">View/Edit</a><a href="#add-record" class="edit-button hidden">View/Edit</a></div>
                     </div>
-                    
+                    @endforeach
+                    @else
+                    <div class="row records_list">
+                        <div class="col s12 center-align"><strong>No Carts.</strong></div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </fieldset>
@@ -91,9 +96,17 @@
 </form>
 <script>
     $(function () {
+        $('#all_carts').change(function () {
+            if ($(this).is(":checked")) {
+                $(".all_cart_checkbox").prop( "checked", true );
+            }
+            else{
+                $(".all_cart_checkbox").prop( "checked", false );
+            }
+        });
         $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
-        $("#ship_date").jqxDateTimeInput({ min: new Date(),width: 'auto', height: '25px' });
+        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px'});
         $('#customer').on('change', function () {
             if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val() != "-1") {
                 $(".loading").css("display", "block");
@@ -106,5 +119,6 @@
                 });
             }
         });
+          
     });
 </script>
