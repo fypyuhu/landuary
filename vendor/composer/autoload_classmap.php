@@ -31,11 +31,8 @@ return array(
     'CreateOrganizationTable' => $baseDir . '/database/migrations/2015_11_11_172655_create_organization_table.php',
     'CreateOutgoingCartsTable' => $baseDir . '/database/migrations/2015_11_03_122010_create_outgoing_carts_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-<<<<<<< HEAD
     'CreateReceivingManifestTable' => $baseDir . '/database/migrations/2015_11_12_155138_create_receiving_manifest_table.php',
-=======
     'CreateShipingManifest' => $baseDir . '/database/migrations/2015_11_10_172443_Create_shiping_manifest.php',
->>>>>>> 581a2ef5f5a5970a8293eebc010cd18ed4f3119d
     'CreateTaxesComponentsTable' => $baseDir . '/database/migrations/2015_10_28_142400_create_taxes_components_table.php',
     'CreateTaxesTable' => $baseDir . '/database/migrations/2015_10_28_142140_create_taxes_table.php',
     'CreateUserProfileTable' => $baseDir . '/database/migrations/2015_11_10_124534_create_user_profile_table.php',
