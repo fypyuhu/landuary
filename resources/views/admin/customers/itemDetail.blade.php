@@ -9,6 +9,6 @@
         <input type="hidden" name="customer_items_field[{{$item->id or $parent->id}}]"  value="{{$item->id or $parent->id}}">
     </div>
     <div class="col s2 price-field" style="display:none;"  >
-        <div class="input-field"><input type="text" name="price_field[{{$item->id}}]"/></div>
+        <div class="input-field"><input type="text" id="{{$item->id}}_price_field" name="price_field[{{$item->id}}]"/></div>
     </div>
 </div>

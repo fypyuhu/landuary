@@ -11,11 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/',['middleware' => 'guest', ['except' => 'getLogout'], function () {
     return view('welcome');
+}]);
+Route::get('/logout', function () {
+    Auth::logout();
 });
-
-Route::group(['prefix' => 'admin'], function () {
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 	Route::controller('items', 'ItemController');
 	Route::controller('carts', 'CartController');
     Route::controller('customers', 'CustomerController');
