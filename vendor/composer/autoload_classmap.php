@@ -6,7 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddCustomePriceToCustomerItems' => $baseDir . '/database/migrations/2015_11_16_165342_add_custome_price_to_customer_items.php',
     'AddIsDeletedToCart' => $baseDir . '/database/migrations/2015_10_27_161844_add_isDeleted_toCart.php',
+    'AddOrganozationToUsersTable' => $baseDir . '/database/migrations/2015_11_13_162516_add_organozation_to_users_table.php',
     'AddPriceToCustomerItems' => $baseDir . '/database/migrations/2015_11_04_155806_add_price_to_customer_items.php',
     'AddSoftDeleteToCustomers' => $baseDir . '/database/migrations/2015_11_04_165319_add_soft_delete_to_customers.php',
     'AddTaxableToCustomerTaxes' => $baseDir . '/database/migrations/2015_11_04_151615_add_taxable_to_customer_taxes.php',
