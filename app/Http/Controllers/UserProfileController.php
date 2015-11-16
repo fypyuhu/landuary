@@ -8,6 +8,13 @@ use App\Http\Controllers\Controller;
 use App\Models\UserProfile;
 use App\Http\Requests\ProfileCreate;
 use App\Models\Country;
+use App\Models\Customer;
+use App\Models\Tax;
+use App\Models\TaxComponent;
+use App\Models\Item;
+use App\Models\ItemRelation;
+use DB;
+
 
 class UserProfileController extends Controller
 {
@@ -113,6 +120,96 @@ class UserProfileController extends Controller
 		$user_profile = UserProfile::where('user_id', '=', $user_id)->get();
 		$countries = Country::all();
 		return view('admin.profile.ajaxForm', [ 'user' => $user_profile[0], 'countries' => $countries ]);
+	}
+	
+	public function getStep1() {
+		$current = array('current', '', '');
+		return view('admin.profile.step1.index', [ 'current' => $current ]);
+	}
+	
+	public function getStep2() {
+		$current = array('current', 'current', '');
+		return view('admin.profile.step2.index', [ 'current' => $current ]);
+	}
+	
+	public function getStep3() {
+		$current = array('current', 'current', 'current');
+		return view('admin.profile.step3.index', [ 'current' => $current ]);
+	}
+	
+	public function getTaxesShow() {
+		$records = Tax::take(1)->get();
+        $data = array();
+        foreach ($records as $record) {
+            $row = array();
+			$row["tax_type"] = $record->tax_type;
+            $row["tax_name"] = $record->tax_name;
+            $row["agency_name"] = $record->agency_name;
+            $row["tax_rate"] = $record->tax_rate > 0 ? $record->tax_rate : '';
+			$row["actions"] = '<a href="/admin/taxes/edit/'.$record->id.'" data-mode="ajax" >Edit</a> / <a href="/admin/taxes/delete/'.$record->id.'" data-mode="ajax">Delete</a>';
+            $data[] = $row;
+			
+			$components = DB::table('taxes')
+            ->join('taxes_components', 'taxes.id', '=', 'taxes_components.tax_id')
+            ->select('taxes.*', 'taxes_components.*')
+			->where('taxes_components.tax_id', '=', $record->id)
+			->where('taxes.tax_type', 'combined')
+            ->get();
+			
+            foreach ($components as $component) {
+                $sub_row = array();
+				$sub_row["tax_type"] = '--';
+				$sub_row["tax_name"] = '--';
+                $sub_row["component_name"] = '** '.$component->component_name;
+                $sub_row["agency_name"] =$component->agency_name;
+                $sub_row["tax_rate"] =$component->tax_rate;
+                $sub_row["actions"] = '<a href="/admin/taxes/edit/'.$record->id.'" data-mode="ajax" >Edit</a> / <a href="/admin/taxes/delete/'.$record->id.'" data-mode="ajax">Delete</a>';
+                $data[] = $sub_row;
+            }
+        }
+        echo "{\"data\":" . json_encode($data) . "}";
+	}
+	
+	public function getItemsShow() {
+		$items = DB::select(DB::raw('SELECT * FROM `items` where id not in (select child_id from item_relation) AND items.status=1 LIMIT 1'));
+        $data = array();
+        foreach ($items as $item) {
+            $row = array();
+            $row["name"] = $item->name;
+            $row["item_number"] = $item->item_number;
+            $row["status"] = '1';
+            $row["weight"] = $item->weight;
+            $row["transaction_type"] = $item->transaction_type;
+            $row["actions"] = '<a href="/admin/items/edit/' . $item->id . '" data-mode="ajax" >Edit</a> / <a href="/admin/items/delete/' . $item->id . '" data-mode="ajax">Delete</a>';
+            $data[] = $row;
+            $sql = "select items.* from items join item_relation on items.id=item_relation.child_id where items.status=1 AND item_relation.parent_id='" . $item->id . "'";
+            $sub_items = DB::select(DB::raw($sql));
+            foreach ($sub_items as $sub_item) {
+                $sub_row = array();
+                $sub_row["name"] = $sub_item->name;
+                $sub_row["item_number"] = $sub_item->item_number;
+                $sub_row["status"] = '0';
+                $sub_row["weight"] = $sub_item->weight;
+                $sub_row["transaction_type"] = $sub_item->transaction_type;
+                $sub_row["actions"] = '<a href="/admin/items/edit/' . $sub_item->id . '" data-mode="ajax" >Edit</a> / <a href="/admin/items/delete/' . $sub_item->id . '" data-mode="ajax">Delete</a>';
+                $data[] = $sub_row;
+            }
+        }
+        echo "{\"data\":" . json_encode($data) . "}";
+	}
+	
+	public function getCustomersShow() {
+		$records = Customer::take(1)->get();
+        $data = array();
+        foreach ($records as $record) {
+            $row = array();
+            $row["name"] = $record->name;
+            $row["number"] = $record->customer_number;
+            $row["phone"] = $record->shipping_phone;
+            $row["actions"] = '<a href="/admin/customers/edit/' . $record->id . '" data-mode="ajax" >Edit</a> / <a href="/admin/customers/delete/' . $record->id . '" data-mode="ajax">Delete</a>';
+            $data[] = $row;
+        }
+        echo "{\"data\":" . json_encode($data) . "}";
 	}
 
     /**

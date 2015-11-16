@@ -9,6 +9,8 @@ use App\Models\OutgoingCart;
 use App\Models\Cart;
 use App\Models\Item;
 use App\Models\CustomerOutgoingCartItem;
+use App\Models\Customer;
+use App\Models\CustomerDepartment;
 use DB;
 
 class OutController extends Controller

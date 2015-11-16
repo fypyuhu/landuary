@@ -16,7 +16,7 @@
               <a href="#"><i class="fa fa-home"></i> Home</a>  <i class="fa fa-angle-right"></i>
             </li>
 
-            <li><a href='dashboard.html'>Outgoing Carts</a>
+            <li><a href='dashboard.html'>Incoming Carts</a>
             </li>
           </ul>
         </div>
@@ -29,13 +29,15 @@
     <!-- /Breadcrumb -->
 	
     <div id="loadAjaxFrom">
-	<form method="post" action="" id="pageForm">
+	<form method="post" action="/admin/in/create" id="pageForm">
+    {{csrf_field()}}
     <div class="row no-rightmargin">
       <div class="col s12 m5 margin-right-md">
           <fieldset>
               <legend>Customer Information:</legend>
               <div class="row">
                 <div class="col m6 s12">
+                  <label>Customer</label>
                   <select name="customer" id="customer">
                     <option value="">Customer</option>
                     @foreach ($customers as $customer)
@@ -44,6 +46,7 @@
                   </select>
                 </div>
                 <div class="col m6 s12">
+                  <label>Department</label>
                   <select name="department" id="department">
                     <option value="">Dept</option>
                     @foreach ($depts as $dept)
@@ -55,8 +58,9 @@
               
               <div class="row">
                 <div class="col s12">
+                  <label>Customer Name</label>
                   <div class="input-field">
-                    <input id="customer_name" type="text" name="customer_name" placeholder="Name" readonly="readonly">
+                    <input id="customer_name" type="text" name="customer_name" readonly="readonly">
                   </div>
                 </div>
               </div>
@@ -66,6 +70,7 @@
               <legend>Cart Information</legend>
               <div class="row">
                 <div class="col m4 s12">
+                  <label>Cart Number</label>
                   <div class="input-field" id="exchange-cart-div">
                       <select name="cart_number_dropdown" id="cart_number_dropdown">
                         <option value="">Cart Number</option>
@@ -75,18 +80,18 @@
                       </select>
                   </div>
                   <div class="input-field" id="non-tracked-cart-div" style="display:none;">
-                  	<input id="cart_number_textfield" type="text" name="cart_number_textfield" placeholder="Cart Number">
+                  	<input id="cart_number_textfield" type="text" name="cart_number_textfield">
                   </div>
                 </div>
                 <div class="col m4 s12">
+                  <label>Tare Weight</label>
                   <div class="input-field">
-                    <input id="tare_weight" type="text" name="tare_weight" placeholder="Tare Weight" readonly="readonly">
+                    <input id="tare_weight" type="text" name="tare_weight" readonly="readonly">
                   </div>
                 </div>
                 <div class="col m4 s12">
-                  <div class="input-field">
-                      <input id="receiving_date" type="text" name="receiving_date" placeholder="Receiving Date" class="dateInput">
-                  </div>
+                  <label>Receiving Date</label>
+                  <div name="receiving_date" id="receiving_date" class="calendar"></div>
                 </div>
               </div>
               <div class="row">
@@ -95,9 +100,9 @@
                   <label for="is_exchange_cart">Exchange Cart</label>
                 </div>
                 <div class="col m4 s12 pull-right">
-                  <label for="status">Status</label>
+                  <label>Status</label>
                   <div class="input-field">
-                    <input type="text" name="status" id="status" placeholder="Cart Status" readonly="readonly" value="In">
+                    <input type="text" name="status" id="status" readonly="readonly" value="In">
                   </div>
                 </div>
               </div>
@@ -115,17 +120,18 @@
           <fieldset id="itemAjaxResponse">
               <legend>Items List:</legend>
               <div class="row box">
-                  {{csrf_field()}}
                   <div class="row no-topmargin">
                     <div class="col m8 s12">
+                      <label>Item Number</label>
                       <select name="item_id" id="item_id">
                         <option value="">Item Number</option>
                       </select>
                       <label for="item_id" class="error"></label>
                     </div>
                     <div class="col m4 s12">
+                      <label>Quantity</label>
                       <div class="input-field">
-                        <input id="quantity" type="text" name="quantity" placeholder="Quantity">
+                        <input id="quantity" type="text" name="quantity">
                       </div>
                       <label for="quantity" class="error"></label>
                     </div>
@@ -150,13 +156,13 @@
                 <div class="col m4 s12">
                   <label>Gross Weight</label>
                   <div class="input-field">
-                    <input id="gross_weight" type="text" name="gross_weight" placeholder="Gross Weight">
+                    <input id="gross_weight" type="text" name="gross_weight">
                   </div>
                 </div>
                 <div class="col m4 s12">
                   <label>Net Weight</label>
                   <div class="input-field">
-                    <input id="net_weight" type="text" name="net_weight" placeholder="Net Weight">
+                    <input id="net_weight" type="text" name="net_weight">
                   </div>
                 </div>
               </div>

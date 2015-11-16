@@ -548,4 +548,7 @@ return array(
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UpdateCustomersDepartmentsTable' => $baseDir . '/database/migrations/2015_11_02_153329_update_customers_departments_table.php',
+    'UpdateCustomersIncomingCartsItemsTable' => $baseDir . '/database/migrations/2015_11_13_102420_update_customers_incoming_carts_items_table.php',
+    'UpdateReceivingManifestTable' => $baseDir . '/database/migrations/2015_11_13_115226_update_receiving_manifest_table.php',
+    'UpdateReceivingManifistTable' => $baseDir . '/database/migrations/2015_11_12_181958_update_receiving_manifist_table.php',
 );

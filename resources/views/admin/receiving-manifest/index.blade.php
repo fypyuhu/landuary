@@ -59,13 +59,13 @@
                     </div> 
                     <div class="col m6 s12">
                       <label>From:</label>
-                      <select name="department_range_1" id="department_range_1">
+                      <select name="department_from" id="department_from">
                         <option value="">Select Department</option>
                       </select>
                     </div>
                     <div class="col m6 s12">
                       <label>To:</label>
-                      <select name="department_range_2" id="department_range_2">
+                      <select name="department_to" id="department_to">
                         <option value="">Select Department</option>
                       </select>
                     </div>
@@ -77,15 +77,11 @@
                     </div> 
                     <div class="col m6 s12">
                       <label>From:</label>
-                      <div class="input-field">
-                        <input id="name" type="text" name="name">
-                      </div>
+                      <div id="date_from" type="text" name="date_from" class="calendar"></div>
                     </div>
                     <div class="col m6 s12">
                       <label>To:</label>
-                      <div class="input-field">
-                        <input id="name" type="text" name="name">
-                      </div>
+                      <div id="date_to" type="text" name="date_to" class="calendar"></div>
                     </div>
                   </div>
                   
@@ -106,7 +102,7 @@
 <script>
 	$(document).ready(function () {
 		$("#customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
-		$("#department_range_1, #department_range_2").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
+		$("#department_from, #department_to").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
 		
 		$("body").on('change', '#customer', function(e){
 			$('.loading').css('display', 'block');

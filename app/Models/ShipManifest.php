@@ -10,5 +10,10 @@ class ShipManifest extends Model
     public function scopeOrganization($query) {
         return $query->where('organization', 1);
     }
+	
+	public function customer()
+    {
+		return $this->hasOne('App\Models\Customer', 'id');
+    }
 
 }

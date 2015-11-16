@@ -16,60 +16,58 @@
                 <p>Phone: (800) 326-9860</p>
             </div>
             <div class="pull-right">
-                <p>Manifest #: 200<br />
-                Ship Date: 11/06/2015</p>
+                <p>Manifest #: {{$manifest->id}}<br />
+                Receiving Date:<br />
+                From: {{$manifest->date_from}} - {{$manifest->date_to}}</p>
             </div>
         </div>
         <div class="row">
             <div class="pull-left">
-                <p>Deliver To:<br />
-                Customer Number: 0001<br />
-                Department: NA</p>
+                <p><strong>Deliver To:</strong><br />
+                Customer Number: {{$customer->customer_number}}<br />
+                <strong>Department:</strong><br />
+                @if ($department_range[0] != '')
+                From: {{$department_range[0]}}<br /> 
+                @endif
+                
+                @if ($department_range[1] != '')
+                To: {{$department_range[1]}}</p>
+                @endif
             </div>
             <div class="pull-right">
-                <p>Baptist Hospital<br />
-                123 N.19th Avenue<br />
-                Phoenix AZ 85015</p>
+                <p>{{$customer->name}}<br />
+                {{$customer->shipping_address}}<br />
+                {{$customer->shipping_city}} {{$customer->shipping_state}} {{$customer->shipping_zipcode}}</p>
             </div>
         </div>
         <div class="row">
             <table>
                 <tr>
-                    <th>Num</th>
+                    <th>Sr.</th>
                     <th>Cart #</th>
                     <th>Item #</th>
                     <th>Description</th>
                     <th class="align-right">Qty</th>
                     <th class="align-right">Net Weight</th>
                 </tr>
+                @foreach($items as $key=>$item)
                 <tr>
-                    <td>01</td>
-                    <td>100001</td>
-                    <td>02</td>
-                    <td>King Sheets</td>
-                    <td class="align-right">50</td>
-                    <td class="align-right">50.0</td>
+                    <td>{{$key+1}}</td>
+                    <td>{{$item->incoming_cart_id}}</td>
+                    <td>{{$item->item_number}}</td>
+                    <td>{{$item->description}}</td>
+                    <td class="align-right">{{$item->quantity}}</td>
+                    <td class="align-right">{{$item->weight * $item->quantity}}</td>
                 </tr>
-                <tr>
-                    <td>01</td>
-                    <td>100001</td>
-                    <td>02</td>
-                    <td>King Sheets</td>
-                    <td class="align-right">50</td>
-                    <td class="align-right">50.0</td>
-                </tr>
+                @endforeach
             </table>
         </div>
         <hr />
         <div class="row">
-            <div class="pull-left">
-                <p>Numbered Carts: 0<br />
-                Other Items: 1</p>
-            </div>
             <div class="pull-right">
-                <p>Total Gross Weight: 0.0<br />
-                Total Net Weight: 50.0<br />
-                Total Shippment Weight: 50.0</p>
+                <p>Total Gross Weight: {{$items[0]->gross_weight}}<br />
+                Total Net Weight: {{$items[0]->net_weight}}<br />
+                Total Shippment Weight: {{$items[0]->gross_weight}}</p>
             </div>
         </div>
     </div>

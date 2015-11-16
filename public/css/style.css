@@ -515,3 +515,41 @@ label.error {
 table td {
 	padding: 5px 10px;
 }
+
+.steps {
+	padding: 15px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.steps .col {
+	text-align: center;
+	padding: 0;
+}
+
+.steps p {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.step {
+	margin: 0 auto;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background: #d32e2e;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 12px;
+	text-align: center;
+	text-transform: uppercase;
+	padding-top: 13px;
+}
+
+.step: last-child {
+	margin-right: 0; 
+}
+
+.step.current {
+	background: #70bcf9;
+}

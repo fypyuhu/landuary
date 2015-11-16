@@ -25,4 +25,5 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::controller('profile', 'UserProfileController');
 	Route::controller('receiving-manifest', 'ReceivingManifestController');
     Route::controller('shiping-manifest', 'ShipmentController');
+	Route::controller('manifests', 'ManifestController');
 });

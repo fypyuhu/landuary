@@ -10,5 +10,4 @@ class UserProfile extends Model
     public function scopeOrganization($query) {
         return $query->where('organization', 1);
     }
-
 }

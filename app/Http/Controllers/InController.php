@@ -81,7 +81,7 @@ class InController extends Controller
 		$ogc->receiving_date = date('Y-m-d', strtotime($request->receiving_date));
 		$ogc->gross_weight = $request->gross_weight;
 		$ogc->net_weight = $request->net_weight;
-		$ogc->status = 'Ready';
+		$ogc->status = 'In';
 		if ($request->has('is_exchange_cart')) {
 			$ogc->is_exchange_cart = $request->is_exchange_cart;
 			$ogc->cart_id = $request->cart_number_dropdown;
@@ -93,7 +93,7 @@ class InController extends Controller
 		
 		foreach($request->item_cart as $key=>$value) {
 			$ogc_item = new CustomerIncomingCartItem;
-			$ogc_item->outgoing_cart_id = $ogc->id;
+			$ogc_item->incoming_cart_id = $ogc->id;
 			$ogc_item->item_id = $value;
 			$ogc_item->quantity = $request->item_quantity[$key];
 			$ogc_item->save();
@@ -101,6 +101,11 @@ class InController extends Controller
 		
 		return back();
     }
+	
+	public function getInCartsList() {
+		$incoming_carts = IncomingCart::inCartsList();
+		return view('admin.in.inCartsList', [ 'carts' => $incoming_carts ]);
+	}
 
     /**
      * Store a newly created resource in storage.
@@ -130,7 +135,12 @@ class InController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+	 
+	public function getEdit($id) {
+		return view('admin.in.edit');
+	}
+	
+    public function postEdit($id)
     {
         //
     }

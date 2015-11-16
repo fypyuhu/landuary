@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\ReceivingManifest;
 use App\Models\Customer;
 use App\Models\CustomerDepartment;
+use App\Models\CustomerIncomingCartItem;
+use App\Models\IncomingCart;
+use App\Models\Item;
 
 class ReceivingManifestController extends Controller
 {
@@ -17,7 +21,7 @@ class ReceivingManifestController extends Controller
      */
     public function getIndex()
     {
-		$customers = Customer::all();
+		$customers = ReceivingManifest::getCustomerByIncomingCart();
         return view('admin.receiving-manifest.index', ['customers' => $customers]);
     }
 	
@@ -28,12 +32,41 @@ class ReceivingManifestController extends Controller
      */
 	public function postCreate(Request $request) {
 		$rm = new ReceivingManifest;
-		return view('admin.receiving-manifest.receipt');
-		//return redirect()->route('admin/receiving-manifest/receipt');
+		$rm->customer_id = $request->customer;
+		$rm->department_from = $request->department_from;
+		$rm->department_to = $request->department_to;
+		$rm->date_from = date('Y-m-d', strtotime($request->date_from));
+		$rm->date_to = date('Y-m-d', strtotime($request->date_to));
+		$rm->save();
+		return redirect('/admin/receiving-manifest/receipt/'.$rm->id);
 	}
 	
-	public function getReceipt() {
-		return view('admin.receiving-manifest.receipt');
+	public function getReceipt($id, Request $request) {
+		$manifest = ReceivingManifest::find($id);
+		$customer = Customer::find($manifest->customer_id)->get();
+		if($manifest->department_from != '' && $manifest->department_to != '') {
+			$departments = CustomerDepartment::whereBetween('id', [$manifest->department_from, $manifest->department_to])->get();
+			$department_from = $departments[0]->department_name;
+			$department_to = $departments[count($departments)-1]->department_name;
+		}
+		else if($manifest->department_from != '' || $manifest->department_to != '') {
+			$departments = CustomerDepartment::where('id', '=', $manifest->department_from)->orWhere('id', '=', $manifest->department_to)->get();
+			if($manifest->department_from != '') {
+				$department_from = $departments[0]->department_name;
+				$department_to = '';
+			} else {
+				$department_to = $departments[0]->department_name;
+				$department_from = '';
+			}
+		} else {
+			$departments = '';
+			$department_from = '';
+			$department_to = '';
+		}
+		
+		$items = ReceivingManifest::getCustomerIncomingCartItems($manifest->customer_id, $manifest->date_from, $manifest->date_to);
+		$department_range = array($department_from, $department_to);
+		return view('admin.receiving-manifest.receipt', [ 'manifest' => $manifest, 'customer' => $customer[0], 'departments' => $departments, 'department_range' => $department_range, 'items' => $items ]);
 	}
 	
 	public function getAjaxForm(Request $request) {
@@ -44,19 +77,23 @@ class ReceivingManifestController extends Controller
 		return view('admin.receiving-manifest.ajaxForm', [ 'customers' => $customers, 'departments' => $departments, 'current' => $current[0] ]);
 	}
 	
+	/**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
 	public function store(Request $request)
     {
         //	
 	}
 	
     /**
-     * Show the form for creating a new resource.		return view('admin.receiving-man     * @return \Illuminate\Http\Response
-ted resource in storage.
+     * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-	
     public function show($id)
     {
         //

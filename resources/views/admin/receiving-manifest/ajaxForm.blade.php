@@ -27,7 +27,7 @@
             </div> 
             <div class="col m6 s12">
               <label>From:</label>
-              <select name="department_range_1" id="department_range_1">
+              <select name="department_from" id="department_from">
                 <option value="">Select Department</option>
                 @foreach($departments as $department)
                 	<option value="{{$department->id}}">{{$department->department_name}}</option>
@@ -36,7 +36,7 @@
             </div>
             <div class="col m6 s12">
               <label>To:</label>
-              <select name="department_range_2" id="department_range_2">
+              <select name="department_to" id="department_to">
                 <option value="">Select Department</option>
                 @foreach($departments as $department)
                 	<option value="{{$department->id}}">{{$department->department_name}}</option>
@@ -51,15 +51,11 @@
             </div> 
             <div class="col m6 s12">
               <label>From:</label>
-              <div class="input-field">
-                <input id="name" type="text" name="name">
-              </div>
+              <div id="date_from" type="text" name="date_from" class="calendar"></div>
             </div>
             <div class="col m6 s12">
               <label>To:</label>
-              <div class="input-field">
-                <input id="name" type="text" name="name">
-              </div>
+              <div id="date_to" type="text" name="date_to" class="calendar"></div>
             </div>
           </div>
           
@@ -73,7 +69,8 @@
 <script>
 $(document).ready(function () {
 	$("#customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
-	$("#department_range_1, #department_range_2").jqxComboBox({width: '100%', autoDropDownHeight: true, {{count($departments) > 0 ? 'disabled: false' : 'disabled: true'}} });
+	$("#department_from, #department_to").jqxComboBox({width: '100%', autoDropDownHeight: true, {{count($departments) > 0 ? 'disabled: false' : 'disabled: true'}} });
+	$(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
 	
 	$('#pageForm').validate({
 		rules: {

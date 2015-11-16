@@ -60,7 +60,7 @@
                         </div>
                         <div class="col m6 s12">
                             <label>Enter Ship Date:</label>
-                                <div id="ship_date" type="text" name="ship_date"></div>
+                                <div id="ship_date" type="text" name="ship_date" class="calendar"></div>
                             
                         </div>
                     </div>
@@ -123,9 +123,7 @@
                     $(".loading").css("display","none");
                 });
             }
-        });
-        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px' });
-        
+        });     
     });
     
 </script>
