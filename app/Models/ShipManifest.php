@@ -13,7 +13,7 @@ class ShipManifest extends Model
 	
 	public function customer()
     {
-		return $this->hasOne('App\Models\Customer', 'id');
+		return $this->belongsTo('App\Models\Customer', 'customer_id');
     }
 
 }

@@ -18,21 +18,36 @@ class ManifestController extends Controller
      */
     public function getIndex()
     {
-		$shipping_manifests = ShipManifest::all();
-		$receiving_manifests = ReceivingManifest::all();
-        return view('admin.manifests.index', [ 'shipping_manifests' => $shipping_manifests, 'receiving_manifests' => $receiving_manifests ]);
+	return view('admin.manifests.index');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getShowShipping()
     {
-        //
+        $ship_manifests = ShipManifest::with('customer')->get();
+        $data = array();
+        foreach ($ship_manifests as $manifest) {
+            $row = array();
+            $row["id"] = $manifest->id;
+            $row["name"] = $manifest->customer->name;
+            $row["date"] = $manifest->shipping_date;
+            $row["actions"] = '<a href="/admin/shiping-manifest/receipt/'.$manifest->id.'">View</a>';
+            $data[] = $row;
+        }
+        echo "{\"data\":" . json_encode($data) . "}";
     }
-
+     public function getShowReceiving()
+    {
+        $receiving_manifests = ReceivingManifest::with('customer')->get();
+        $data = array();
+        foreach ($receiving_manifests as $manifest) {
+            $row = array();
+            $row["id"] = $manifest->id;
+            $row["name"] = $manifest->customer->name;
+            $row["date"] = $manifest->created_at;
+            $row["actions"] = '<a href="/admin/receiving-manifest/receipt/'.$manifest->id.'">View</a>';
+            $data[] = $row;
+        }
+        echo "{\"data\":" . json_encode($data) . "}";
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -50,10 +65,7 @@ class ManifestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+    
 
     /**
      * Show the form for editing the specified resource.

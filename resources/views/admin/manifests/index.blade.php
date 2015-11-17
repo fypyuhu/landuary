@@ -4,137 +4,120 @@
 <section class="content-wrap">
 
 
-<!-- Breadcrumb -->
-<div class="page-title">
+    <!-- Breadcrumb -->
+    <div class="page-title">
 
-  <div class="row">
-    <div class="col s12 m9 l10">
-      <h1>Manifests</h1>
-
-      <ul>
-        <li>
-          <a href="#"><i class="fa fa-home"></i> Home</a>  <i class="fa fa-angle-right"></i>
-        </li>
-
-        <li><a href='dashboard.html'>Manifests</a>
-        </li>
-      </ul>
-    </div>
-    <div class="col s12 m3 l2 right-align">
-      <a href="#!" class="btn grey lighten-3 grey-text z-depth-0 chat-toggle"><i class="fa fa-comments"></i></a>
-    </div>
-  </div>
-
-</div>
-<!-- /Breadcrumb -->
-
-<div class="row no-rightmargin" id="adjustment">
-    <div class="col s6">
-      <div class="row" style="margin-bottom: 20px;">
-      	<h5>Receiving Manifest Filter:</h5>
         <div class="row">
-        	<div class="col m6 s12">
-            	<label>Customer</label>
-            	<select id="rm_customer" name="rm_customer">
-                	<option value="">Please Select</option>
-                    <option value="1">Customer A</option>
-                    <option value="2">Customer B</option>
-                </select>
+            <div class="col s12 m9 l10">
+                <h1>Manifests</h1>
+
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa fa-home"></i> Home</a>  <i class="fa fa-angle-right"></i>
+                    </li>
+
+                    <li><a href='dashboard.html'>Manifests</a>
+                    </li>
+                </ul>
             </div>
-            <div class="col m6 s12">
-            	<label>Receiving Date</label>
-            	<div id="receiving_date" name="receiving_date" class="calendar"></div>
+            <div class="col s12 m3 l2 right-align">
+                <a href="#!" class="btn grey lighten-3 grey-text z-depth-0 chat-toggle"><i class="fa fa-comments"></i></a>
             </div>
         </div>
-        <div class="row">
-            <button type="submit" class="waves-effect btn">Save</button>
-            <button class="waves-effect btn">Clear</button>
-        </div>
-      </div>
-      <div class="row">
-          <fieldset>
-              <legend>Receiving Manifests:</legend>
-              <div class="row box">
-                  <div class="row layout_table no-topmargin">
-                    <div class="row heading">
-                        <div class="col s3">Manifest Number</div>
-                        <div class="col s3">Customer Name</div>
-                        <div class="col s3">Created On</div>
-                        <div class="col s3 center-align">Action</div>
-                    </div>
-                    @foreach($receiving_manifests as $manifest)
-                    <div class="row records_list">
-                        <div class="col s3">{{$manifest->id}}</div>
-                        <div class="col s3">{{$manifest->customer->name}}</div>
-                        <div class="col s3">{{$manifest->created_at}}</div>
-                        <div class="col s3 center-align"><a href="/admin/receiving-manifest/receipt/{{$manifest->id}}">View</a></div>
-                    </div>
-                    @endforeach
-                  </div>
-              </div>
-          </fieldset>
-      </div>
+
     </div>
+    <!-- /Breadcrumb -->
+
+       <div class="row">
+            <fieldset>
+                <legend>Shipping Manifests:</legend>
+                <div class="row box">
+                    <div id="jqxgrid"></div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset>
+                <legend>Receiving Manifests:</legend>
+                <div class="row box">
+                    <div id="jqxgrid1"></div>
+                </div>
+            </fieldset>
+        </div>
     
-    <div class="col s6">
-      <div class="row" style="margin-bottom:20px;">
-      	<h5>Shipping Manifest Filter:</h5>
-        <div class="row">
-        	<div class="col m6 s12">
-            	<label>Customer</label>
-            	<select id="rm_customer" name="rm_customer">
-                	<option value="">Please Select</option>
-                    <option value="1">Customer A</option>
-                    <option value="2">Customer B</option>
-                </select>
-            </div>
-            <div class="col m6 s12">
-            	<label>Receiving Date</label>
-            	<div id="receiving_date" name="receiving_date" class="calendar"></div>
-            </div>
-        </div>
-        <div class="row">
-            <button type="submit" class="waves-effect btn">Save</button>
-            <button class="waves-effect btn">Clear</button>
-        </div>
-      </div>
-      <div class="row">
-          <fieldset>
-              <legend>Shipping Manifests:</legend>
-              <div class="row box">
-                  <div class="row layout_table no-topmargin">
-                    <div class="row heading">
-                        <div class="col s2">Manifest Number</div>
-                        <div class="col s3">Customer Name</div>
-                        <div class="col s3">From</div>
-                        <div class="col s2">To</div>
-                        <div class="col s2 center-align">Action</div>
-                    </div>
-                    @foreach($shipping_manifests as $manifest)
-                    <div class="row records_list">
-                        <div class="col s2">{{$manifest->id}}</div>
-                        <div class="col s3">{{$manifest->customer->id}}</div>
-                        <div class="col s3">{{$manifest->date_from}}</div>
-                        <div class="col s2">{{$manifest->date_to}}</div>
-                        <div class="col s2 center-align"><a href="/admin/receiving-manifest/receipt/{{$manifest->id}}">View</a></div>
-                    </div>
-                    @endforeach
-                  </div>
-              </div>
-          </fieldset>
-      </div>
-    </div>
-</div>
 </section>
 
 <!-- /Main Content -->
 @endsection
 
 @section('js')
-	<script type="text/javascript">
-    	$(document).ready(function(e) {
-			$("#rm_customer, #sp_customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
-			$(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
-		});
-    </script>
+<script type="text/javascript">
+    $(document).ready(function (e) {
+        var url = "{{url('admin/manifests/show-shipping')}}";
+// prepare the data
+        var source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        {name: 'id'},
+                        {name: 'name'},
+                        {name: 'date', type: 'date'},
+                        {name: 'actions'}
+
+                    ],
+                    id: 'id',
+                    url: url,
+                    root: 'data'
+                };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+        $("#jqxgrid").jqxGrid(
+                {
+                    width: "100%",
+                    source: dataAdapter,
+                    pageable: true,
+                    autoheight: true,
+                    sortable: true,
+                    filterable: true,
+                    columns: [
+                        {text: 'Manifest Number', width: '10%', dataField: 'id'},
+                        {text: 'Customer Name', width: '45%', dataField: 'name',filtertype: 'checkedlist'},
+                        {text: 'Shipping Date', width: '25%', dataField: 'date', filtertype: 'date', cellsformat: 'dd-MMMM-yyyy'},
+                        {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
+                    ]
+                });
+                url = "{{url('admin/manifests/show-receiving')}}";
+ source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        {name: 'id'},
+                        {name: 'name'},
+                        {name: 'date', type: 'date'},
+                        {name: 'actions'}
+
+                    ],
+                    id: 'id',
+                    url: url,
+                    root: 'data'
+                };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+        $("#jqxgrid1").jqxGrid(
+                {
+                    width: "100%",
+                    source: dataAdapter,
+                    pageable: true,
+                    autoheight: true,
+                    sortable: true,
+                    filterable: true,
+                    columns: [
+                        {text: 'Manifest Number', width: '10%', dataField: 'id'},
+                        {text: 'Customer Name', width: '45%', dataField: 'name',filtertype: 'checkedlist'},
+                        {text: 'Created On', width: '25%', dataField: 'date', filtertype: 'date', cellsformat: 'dd-MMMM-yyyy'},
+                        {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
+                    ]
+                });
+    });
+</script>
 @endsection
