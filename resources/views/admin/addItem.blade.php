@@ -70,8 +70,7 @@
                 </fieldset>
 <script>
      $(document).ready(function () {
-
-     $("#transaction_type").jqxComboBox({width: '200', autoDropDownHeight: true});
+     	$("#transaction_type").jqxComboBox({width: '200', autoDropDownHeight: true});
         $("#parent_item").jqxComboBox({width: '400', autoDropDownHeight: true});
         $("#pageForm").validate({
             rules: {

@@ -72,6 +72,59 @@
         <img src="{{URL::asset('images/logo.png')}}" alt="Con">
       </a>
       <!-- /Logo -->
+      
+      <div class="toggle-btn"></div>
+      <div id="reports-nav">
+          <div class="row">
+              <div class="col s12">
+                <h4>Reports</h4>
+                <ul class="col s4">
+                    <li><a href="javascript:void(0);">Manifests</a>
+                    </li>
+                    <li><a href="customers.php">Customers</a>
+                    </li>
+                    <li><a href="items.php">Items</a>
+                    </li>
+                    <li><a href="carts.php">Carts</a>
+                    </li>
+                    <li><a href="tax.php">Tax</a>
+                    </li>
+                    <li><a href="invoice.php">Invoice</a>
+                    </li>
+                    <li><a href="manifest.php">Manifest</a>
+                    </li>
+                    <li><a href="bin-tickets.php">Bin Tickets</a>
+                    </li>
+                </ul>
+                <ul class="col s4">
+                    <li><a href="javascript:void(0);">Reports</a>
+                    </li>
+                    <li><a href="javascript:void(0);">Manifest Report</a>
+                    </li>
+                    <li><a href="javascript:void(0);">Production Report</a>
+                    </li>
+                    <li><a href="javascript:void(0);">Audit Report</a>
+                    </li>
+                    <li><a href="javascript:void(0);">Rewash Reconciliation</a>
+                    </li>
+                </ul>
+                <ul class="col s4">
+                    <li><a href="javascript:void(0);">Company Profile</a>
+                    </li>
+                    <li><a href="items.php">Account</a>
+                    </li>
+                    <li><a href="items.php">Users</a>
+                    </li>
+                    <li><a href="items.php">Privacy</a>
+                    </li>
+                    <li style="background:none !important;">&nbsp;
+                    </li>
+                    <li><a href="items.php"><i class="fa fa-sign-out"></i> Sign Out</a>
+                    </li>
+                </ul>
+              </div>
+          </div>
+      </div>
 
       <!-- Menu -->
       <ul>
@@ -199,23 +252,23 @@
       <div class="nano-content">
         <ul>
           <li class="label">Menu</li>
-          <li style="background:#20405a;">
+          <li>
             <a href="in.php" class="waves-effect waves-blue"><i class="fa fa-magic"></i> In</a>
           </li>
           
-          <li  style="background:#809db6;">
+          <li>
             <a href="out.php" class="waves-effect waves-blue"><i class="fa fa-magic"></i> Out</a>
           </li>
           
-          <li style="background:#e55327;">
+          <li>
             <a href="shipping-manifest.php" class="waves-effect waves-blue"><i class="fa fa-magic"></i> Shipping Manifest</a>
           </li>
           
-          <li  style="background:#92320f;">
+          <li>
             <a href="receiving-manifest.php" class="waves-effect waves-blue"><i class="fa fa-magic"></i> Receiving Manifest</a>
           </li>
           
-          <li  style="background:#ad873b;">
+          <li>
             <a href="javascript:void(0);" class="waves-effect waves-blue"><i class="fa fa-magic"></i> Today</a>
           </li>
         </ul>
@@ -323,6 +376,10 @@
 		
 		$("a#inline").fancybox({
 			'hideOnContentClick': true
+		});
+		
+		$( ".toggle-btn" ).click(function() {
+		    $('#reports-nav').slideToggle( "slow" );
 		});
 		
 	});
