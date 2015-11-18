@@ -29,7 +29,7 @@ class ManifestController extends Controller
             $row["id"] = $manifest->id;
             $row["name"] = $manifest->customer->name;
             $row["date"] = $manifest->shipping_date;
-            $row["actions"] = '<a href="/admin/shiping-manifest/receipt/'.$manifest->id.'">View</a>';
+            $row["actions"] = '<a href="/admin/shiping-manifest/recipt/'.$manifest->id.'">View</a>';
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";
