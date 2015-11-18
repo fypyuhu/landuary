@@ -27,29 +27,30 @@
 
     </div>
     <!-- /Breadcrumb -->
-   <div class="row">
-       <div class="col m10 s12">
-           <div class="row">
-              <ul class="ctabs">
-                <li class="current" data-corr-div-id="#receiving-manifest-div">Receiving Manifests</li>
-                <li data-corr-div-id="#shipping-manifest-div">Shipping Manifests</li>
-              </ul>
-           </div>
-           <div class="row tab-content first no-topmargin" id="receiving-manifest-div">
+    <div class="row">
+        <div class="col m10 s12">
+            <div class="row">
+                <ul class="ctabs">
+                    <li class="current" data-corr-div-id="#receiving-manifest-div">Receiving Manifests</li>
+                    <li data-corr-div-id="#shipping-manifest-div">Shipping Manifests</li>
+                </ul>
+            </div>
+            <div class="row tab-content first no-topmargin" id="receiving-manifest-div">
                 <div class="row no-topmargin" style="margin-bottom:25px;">
                     <div class="col m6 s12">
                         <div class="row">
                             <label>Select Customer:</label>
                             <select name="r_customer" id="r_customer">
-                                <option value="">Please Select</option>
-                                <option value="1">Customer A</option>
-                                <option value="2">Customer B</option>
+                                <option value="-1">Please Select</option>
+                                @foreach($customers as $customer)
+                                <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="row">
                             <div class="col m6 s12">
                                 <label>From:</label>
-                                <div id="r_date_from" name="r_date_from" class="calendar"></div>
+                                <div id="r_date_from" name="r_date_from" ></div>
                             </div>
                             <div class="col m6 s12">
                                 <label>To:</label>
@@ -58,7 +59,7 @@
                         </div>
                         <div class="row">
                             <div class="row">
-                                <button type="submit" class="waves-effect btn">Filter</button>
+                                <button type="buton" class="waves-effect btn" onclick="$('#jqxgrid1').jqxGrid('updatebounddata');">Filter</button>
                                 <button type="reset" class="waves-effect btn">Clear</button>
                             </div>
                         </div>
@@ -73,21 +74,22 @@
                     </fieldset>
                 </div>
             </div>
-           <div class="row tab-content no-topmargin" id="shipping-manifest-div">
+            <div class="row tab-content no-topmargin" id="shipping-manifest-div">
                 <div class="row no-topmargin" style="margin-bottom:25px;">
                     <div class="col m6 s12">
                         <div class="row">
                             <label>Select Customer:</label>
                             <select name="s_customer" id="s_customer">
-                                <option value="">Please Select</option>
-                                <option value="1">Customer A</option>
-                                <option value="2">Customer B</option>
+                                <option value="-1">Please Select</option>
+                                @foreach($customers as $customer)
+                                <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="row">
                             <div class="col m6 s12">
                                 <label>From:</label>
-                                <div id="s_date_from" name="s_date_from" class="calendar"></div>
+                                <div id="s_date_from" name="s_date_from" ></div>
                             </div>
                             <div class="col m6 s12">
                                 <label>To:</label>
@@ -96,7 +98,7 @@
                         </div>
                         <div class="row">
                             <div class="row">
-                                <button type="submit" class="waves-effect btn">Filter</button>
+                                <button type="button" class="waves-effect btn" onclick="$('#jqxgrid').jqxGrid('updatebounddata');">Filter</button>
                                 <button type="reset" class="waves-effect btn">Clear</button>
                             </div>
                         </div>
@@ -110,10 +112,10 @@
                         </div>
                     </fieldset>
                 </div>
-           </div>
-       </div>
-   </div>
-    
+            </div>
+        </div>
+    </div>
+
 </section>
 
 <!-- /Main Content -->
@@ -122,11 +124,12 @@
 @section('js')
 <script type="text/javascript">
     $(document).ready(function (e) {
-	    $("#r_customer, #s_customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
-		$("#r_date_from, #r_date_to, #s_date_from, #s_date_to").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
-		
-        var url = "{{url('admin/manifests/show-shipping')}}";
-// prepare the data
+        var oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+        $('#s_date_from, #r_date_from').jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+        $("#r_customer, #s_customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
+        $("#r_date_to,  #s_date_to").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+
         var source =
                 {
                     datatype: "json",
@@ -137,29 +140,60 @@
                         {name: 'actions'}
 
                     ],
-                    id: 'id',
-                    url: url,
-                    root: 'data'
+                    cache: false,
+                    url: '/admin/manifests/show-shipping',
+                    filter: function ()
+                    {
+                        // update the grid and send a request to the server.
+                        $("#jqxgrid").jqxGrid('updatebounddata', 'filter');
+                    },
+                    root: 'data',
+                    beforeprocessing: function (data)
+                    {
+                        if (data != null)
+                        {
+                            source.totalrecords = data.TotalRows;
+                        }
+                    }
                 };
+        var dataAdapter = new $.jqx.dataAdapter(source, {
+            loadError: function (xhr, status, error)
+            {
+                alert(error);
+            },
+            formatData: function (data) {
+                $.extend(data, {
+                    name: $('#s_customer').val(),
+                    start_date: $("#s_date_from").val(),
+                    end_date: $("#s_date_to").val()
+                });
+                return data;
+            }
+        });
 
-        var dataAdapter = new $.jqx.dataAdapter(source);
         $("#jqxgrid").jqxGrid(
                 {
                     width: "100%",
                     source: dataAdapter,
-                    pageable: true,
-                    autoheight: true,
-                    sortable: true,
                     filterable: true,
+                    sortable: false,
+                    autoheight: true,
+                    pageable: true,
+                    virtualmode: true,
+                    showfiltermenuitems: false,
+                    rendergridrows: function (obj)
+                    {
+                        return obj.data;
+                    },
                     columns: [
-                        {text: 'Manifest Number', width: '10%', dataField: 'id'},
-                        {text: 'Customer Name', width: '45%', dataField: 'name',filtertype: 'checkedlist'},
+                        {text: 'Manifest Number', width: '20%', dataField: 'id'},
+                        {text: 'Customer Name', width: '35%', dataField: 'name', filtertype: 'checkedlist'},
                         {text: 'Shipping Date', width: '25%', dataField: 'date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
                         {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
-                url = "{{url('admin/manifests/show-receiving')}}";
- source =
+        url = "{{url('admin/manifests/show-receiving')}}";
+        source =
                 {
                     datatype: "json",
                     datafields: [
@@ -169,23 +203,54 @@
                         {name: 'actions'}
 
                     ],
-                    id: 'id',
+                    cache: false,
                     url: url,
-                    root: 'data'
+                    filter: function ()
+                    {
+                        // update the grid and send a request to the server.
+                        $("#jqxgrid1").jqxGrid('updatebounddata', 'filter');
+                    },
+                    root: 'data',
+                    beforeprocessing: function (data)
+                    {
+                        if (data != null)
+                        {
+                            source.totalrecords = data.TotalRows;
+                        }
+                    }
                 };
 
-        var dataAdapter = new $.jqx.dataAdapter(source);
+        var dataAdapter = new $.jqx.dataAdapter(source, {
+            loadError: function (xhr, status, error)
+            {
+                alert(error);
+            },
+            formatData: function (data) {
+                $.extend(data, {
+                    name: $('#r_customer').val(),
+                    start_date: $("#r_date_from").val(),
+                    end_date: $("#r_date_to").val()
+                });
+                return data;
+            }
+        });
         $("#jqxgrid1").jqxGrid(
                 {
                     width: "100%",
                     source: dataAdapter,
-                    pageable: true,
-                    autoheight: true,
-                    sortable: true,
                     filterable: true,
+                    sortable: false,
+                    autoheight: true,
+                    pageable: true,
+                    virtualmode: true,
+                    showfiltermenuitems: false,
+                    rendergridrows: function (obj)
+                    {
+                        return obj.data;
+                    },
                     columns: [
                         {text: 'Manifest Number', width: '10%', dataField: 'id'},
-                        {text: 'Customer Name', width: '45%', dataField: 'name',filtertype: 'checkedlist'},
+                        {text: 'Customer Name', width: '45%', dataField: 'name', filtertype: 'checkedlist'},
                         {text: 'Created On', width: '25%', dataField: 'date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
                         {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
