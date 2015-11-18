@@ -70,7 +70,8 @@ class UserProfileController extends Controller
     }
 	
 	public function getView(Request $request) {
-		$user_id = isset($request->user_id) ? $request->user_id : 2;
+		$user = $request->user();
+		$user_id = $user->id;
 		$user_profile = UserProfile::where('user_id', '=', $user_id)->get();
 		$countries = Country::all();
 		return view('admin.profile.view', [ 'user' => $user_profile[0], 'countries' => $countries ]);

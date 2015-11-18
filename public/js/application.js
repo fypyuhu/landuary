@@ -29,5 +29,16 @@ $(document).ready(function () {
 		clone.appendTo($(this).parents('.row').prev('.layout_table'));
 		$(this).parents('.row').prev('.layout_table').animate({ scrollTop: $(this).parents('.row').prev('.layout_table')[0].scrollHeight}, 1000);
 	});
+	
+	$( "body" ).on( "click", ".ctabs li", function(e) {
+		$('.ctabs').find('li').removeClass('current');
+		$(this).addClass('current');
+		var corr_div_id = $(this).data('corr-div-id');
+		toggle('.tab-content', corr_div_id);
+	});
 });
 
+function toggle(hide, show) {
+	$(hide).css('display', 'none');
+	$(show).fadeIn('slow');
+}

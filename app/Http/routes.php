@@ -16,8 +16,11 @@ Route::get('/',['middleware' => 'guest', ['except' => 'getLogout'], function () 
 }]);
 Route::get('/logout', function () {
     Auth::logout();
+	return view('welcome');
 });
 Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 	Route::controller('items', 'ItemController');
 	Route::controller('carts', 'CartController');

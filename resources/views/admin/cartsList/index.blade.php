@@ -16,7 +16,7 @@
                         <a href="#"><i class="fa fa-home"></i> Home</a>  <i class="fa fa-angle-right"></i>
                     </li>
 
-                    <li><a href='dashboard.html'>Manifests</a>
+                    <li><a href='dashboard.html'>Carts</a>
                     </li>
                 </ul>
             </div>
@@ -31,11 +31,11 @@
        <div class="col m10 s12">
            <div class="row">
               <ul class="ctabs">
-                <li class="current" data-corr-div-id="#receiving-manifest-div">Receiving Manifests</li>
-                <li data-corr-div-id="#shipping-manifest-div">Shipping Manifests</li>
+                <li class="current" data-corr-div-id="#incoming-carts-div">Incoming Carts</li>
+                <li data-corr-div-id="#outgoing-carts-div">Outgoing Carts</li>
               </ul>
            </div>
-           <div class="row tab-content first no-topmargin" id="receiving-manifest-div">
+           <div class="row tab-content first no-topmargin" id="incoming-carts-div">
                 <div class="row no-topmargin" style="margin-bottom:25px;">
                     <div class="col m6 s12">
                         <div class="row">
@@ -66,14 +66,42 @@
                 </div>
                 <div class="row">
                     <fieldset>
-                        <legend>Receiving Manifests:</legend>
+                        <legend>Incoming Carts:</legend>
                         <div class="row box">
-                            <div id="jqxgrid1"></div>
+                            <!--<div id="jqxgrid1"></div>-->
+                            <div class="row box">
+                              <div class="row layout_table no-topmargin">
+                                <div class="row heading">
+                                    <div class="col s1">Cart Number</div>
+                                    <div class="col s2">Tran. Date</div>
+                                    <div class="col s1">Customer Number</div>
+                                    <div class="col s1">Dept</div>
+                                    <div class="col s2">No. of Items</div>
+                                    <div class="col s2">Gross Weight lb/kg</div>
+                                    <div class="col s1">Net Weight lb/kg</div>
+                                    <div class="col s1">Invoiced</div>
+                                    <div class="col s1 center-align">Actions</div>
+                                </div>
+                                @foreach($carts as $cart)
+                                <div class="row records_list">
+                                    <div class="col s1 right-align">{{$cart->incoming_cart_id}}</div>
+                                    <div class="col s2">{{$cart->receiving_date}}</div>
+                                    <div class="col s1 right-align">{{$cart->customer_number}}</div>
+                                    <div class="col s1">{{$cart->department_name}}</div>
+                                    <div class="col s2 right-align">{{$cart->number_of_items}}</div>
+                                    <div class="col s2 right-align">{{$cart->net_weight}}</div>
+                                    <div class="col s1 right-align">{{$cart->gross_weight}}</div>
+                                    <div class="col s1 right-align">No</div>
+                                    <div class="col s1 center-align"><a href="/admin/in/edit/{{$cart->incoming_cart_id}}" data-mode="ajax" >View/Edit</a></div>
+                                </div>
+                                @endforeach
+                              </div>
+                          </div>
                         </div>
                     </fieldset>
                 </div>
             </div>
-           <div class="row tab-content no-topmargin" id="shipping-manifest-div">
+           <div class="row tab-content no-topmargin" id="outgoing-carts-div">
                 <div class="row no-topmargin" style="margin-bottom:25px;">
                     <div class="col m6 s12">
                         <div class="row">
@@ -104,7 +132,7 @@
                 </div>
                 <div class="row">
                     <fieldset>
-                        <legend>Shipping Manifests:</legend>
+                        <legend>Outgoing Carts:</legend>
                         <div class="row box">
                             <div id="jqxgrid"></div>
                         </div>

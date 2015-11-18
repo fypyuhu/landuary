@@ -42,7 +42,7 @@ class ManifestController extends Controller
             $row = array();
             $row["id"] = $manifest->id;
             $row["name"] = $manifest->customer->name;
-            $row["date"] = $manifest->created_at;
+            $row["date"] = date('d F, Y', strtotime($manifest->created_at));
             $row["actions"] = '<a href="/admin/receiving-manifest/receipt/'.$manifest->id.'">View</a>';
             $data[] = $row;
         }

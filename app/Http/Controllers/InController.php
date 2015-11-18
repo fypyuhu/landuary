@@ -17,7 +17,7 @@ class InController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function getIndex()
@@ -104,7 +104,7 @@ class InController extends Controller
 	
 	public function getInCartsList() {
 		$incoming_carts = IncomingCart::inCartsList();
-		return view('admin.in.inCartsList', [ 'carts' => $incoming_carts ]);
+		return view('admin.cartsList.index', [ 'carts' => $incoming_carts ]);
 	}
 
     /**
