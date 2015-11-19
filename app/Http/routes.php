@@ -32,4 +32,9 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 	Route::controller('receiving-manifest', 'ReceivingManifestController');
     Route::controller('shiping-manifest', 'ShipmentController');
 	Route::controller('manifests', 'ManifestController');
+	Route::controller('carts-list', 'CartsListController');
+});
+
+Route::get('/admin', function () {
+	return view('admin.index');
 });

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -62,6 +64,34 @@ class AuthController extends Controller
             //'password' => 'required|confirmed|min:6',
         ]);
     }
+	
+	public function postRegister(Request $request) {
+		$user = $this->create($request->all());
+		
+		$up = new UserProfile;
+		$up->user_id = $user->id;
+		$up->legal_name = $request['legal_name'];
+		$up->street_address = $request['street_address'];
+		$up->city = $request['city'];
+		$up->state = $request['state'];
+		$up->zipcode = $request['zipcode'];
+		$up->country = $request['country'];
+		$up->phone = $request['phone'];
+		$up->fax = $request['fax'];
+		$up->email = $request['email'];
+		$up->website = $request['website'];
+		$up->contact_name = $request['contact_name'];
+		$up->contact_designation = $request['contact_designation'];
+		$up->contact_email = $request['contact_email'];
+		$up->save();
+		
+		//return response()->view('registerSuccess', $request->all());
+		return redirect()->route('success');
+	}
+	
+	public function getSuccess() {
+		return view('registerSuccess');
+	}
 
     /**
      * Create a new user instance after a valid registration.
@@ -70,34 +100,16 @@ class AuthController extends Controller
      * @return User
      */
     protected function create(array $data)
-    {
-		$u = new User;
-		$u->first_name = $data['legal_name'];
-		$u->email = $data['email'];
-		$u->save();
-		
-		$up = new UserProfile;
-		$up->user_id = $u->id;
-		$up->legal_name = $data['legal_name'];
-		$up->street_address = $data['street_address'];
-		$up->city = $data['city'];
-		$up->state = $data['state'];
-		$up->zipcode = $data['zipcode'];
-		$up->country = $data['country'];
-		$up->phone = $data['phone'];
-		$up->fax = $data['fax'];
-		$up->email = $data['email'];
-		$up->website = $data['website'];
-		$up->contact_name = $data['contact_name'];
-		$up->contact_designation = $data['contact_designation'];
-		$up->contact_email = $data['contact_email'];
-		$up->save();
-		return response()->view('registerSuccess', $data);
-		
+    {	
         /*return User::create([
             'first_name' => $data['legal_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);*/
+		
+		return User::create([
+            'first_name' => $data['legal_name'],
+            'email' => $data['email']
+        ]);
     }
 }

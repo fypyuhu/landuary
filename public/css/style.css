@@ -608,3 +608,112 @@ table td {
 .toggle-btn.selected {
 	background: url(../images/mul.jpg);
 }
+
+.getting-started {
+	background: #ecf0f4;
+	padding: 30px;
+}
+
+.logo-cont {
+	width: 56px;
+	height: 56px;
+	text-align: center;
+	line-height: 56px;
+	margin-right: 20px;
+	border: 1px solid #e3e3e3;
+}
+
+.logo-sect {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding-bottom: 30px;
+	border-bottom: 5px solid #e3eaf3; 
+}
+
+h4 span.guide {
+	background-position: 12px -941px;
+    background-size: 47px;
+    cursor: pointer;
+	background-image: url(../images/download.svg);
+	background-repeat: no-repeat;
+	padding-left: 40px;
+	font-size: 17px;
+}
+
+.video-box {
+	height: 70px;
+	padding: 15px;
+	color: #ffffff;
+}
+
+.video-box .label {
+	font-size: 15px; 
+	font-weight: bold;
+}
+
+.one {
+	background: #4295b0;
+}
+
+.two {
+	background: #99417b;
+}
+
+.three {
+	background: #fc8618;
+}
+
+.trial {
+	border: 1px solid #EFB328;
+	padding: 20px;
+}
+
+.alert-icon {
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    background-size: 40px;
+    vertical-align: bottom;
+    background-position: 0px -440px;
+}
+
+.secondary-color-sprite {
+    background-repeat: no-repeat;
+    background-image: url(../images/download.svg);
+}
+
+.graph-box {
+	padding: 30px;
+	background: #ecf0f4;
+	margin-top: 30px;
+}
+
+.graph-box h4 a {
+	font-size: 15px;
+}
+
+.graph-bar {
+	height: 45px;
+}
+
+.gb-one {
+	background: #f4e4bc;
+}
+
+.gb-two {
+	background: #f2c1c4;
+}
+
+.gb-three {
+	background: #c6e4c5;
+}
+
+.gb-detail {
+	font-size: 18px;
+	color: #999999;
+	font-weight: normal;
+}
+
+aside.yaybar {
+	z-index: 100000;
+}

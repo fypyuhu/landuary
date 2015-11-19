@@ -130,10 +130,9 @@ class OutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    public function getEdit($id) {
+		return view('admin.out.edit');
+	}
 
     /**
      * Update the specified resource in storage.

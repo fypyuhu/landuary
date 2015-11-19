@@ -9,7 +9,7 @@
 
         <div class="row">
             <div class="col s12 m9 l10">
-                <h1>Manifests</h1>
+                <h1>Carts</h1>
 
                 <ul>
                     <li>
@@ -28,7 +28,7 @@
     </div>
     <!-- /Breadcrumb -->
    <div class="row">
-       <div class="col m10 s12">
+       <div class="row">
            <div class="row">
               <ul class="ctabs">
                 <li class="current" data-corr-div-id="#incoming-carts-div">Incoming Carts</li>
@@ -68,35 +68,7 @@
                     <fieldset>
                         <legend>Incoming Carts:</legend>
                         <div class="row box">
-                            <!--<div id="jqxgrid1"></div>-->
-                            <div class="row box">
-                              <div class="row layout_table no-topmargin">
-                                <div class="row heading">
-                                    <div class="col s1">Cart Number</div>
-                                    <div class="col s2">Tran. Date</div>
-                                    <div class="col s1">Customer Number</div>
-                                    <div class="col s1">Dept</div>
-                                    <div class="col s2">No. of Items</div>
-                                    <div class="col s2">Gross Weight lb/kg</div>
-                                    <div class="col s1">Net Weight lb/kg</div>
-                                    <div class="col s1">Invoiced</div>
-                                    <div class="col s1 center-align">Actions</div>
-                                </div>
-                                @foreach($carts as $cart)
-                                <div class="row records_list">
-                                    <div class="col s1 right-align">{{$cart->incoming_cart_id}}</div>
-                                    <div class="col s2">{{$cart->receiving_date}}</div>
-                                    <div class="col s1 right-align">{{$cart->customer_number}}</div>
-                                    <div class="col s1">{{$cart->department_name}}</div>
-                                    <div class="col s2 right-align">{{$cart->number_of_items}}</div>
-                                    <div class="col s2 right-align">{{$cart->net_weight}}</div>
-                                    <div class="col s1 right-align">{{$cart->gross_weight}}</div>
-                                    <div class="col s1 right-align">No</div>
-                                    <div class="col s1 center-align"><a href="/admin/in/edit/{{$cart->incoming_cart_id}}" data-mode="ajax" >View/Edit</a></div>
-                                </div>
-                                @endforeach
-                              </div>
-                          </div>
+                            <div id="jqxgrid"></div>
                         </div>
                     </fieldset>
                 </div>
@@ -134,7 +106,7 @@
                     <fieldset>
                         <legend>Outgoing Carts:</legend>
                         <div class="row box">
-                            <div id="jqxgrid"></div>
+                            <div id="jqxgrid1"></div>
                         </div>
                     </fieldset>
                 </div>
@@ -153,15 +125,20 @@
 	    $("#r_customer, #s_customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
 		$("#r_date_from, #r_date_to, #s_date_from, #s_date_to").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
 		
-        var url = "{{url('admin/manifests/show-shipping')}}";
+		var url = "{{url('admin/carts-list/show-incoming')}}";
 // prepare the data
         var source =
                 {
                     datatype: "json",
                     datafields: [
-                        {name: 'id'},
-                        {name: 'name'},
-                        {name: 'date', type: 'date'},
+                        {name: 'incoming_cart_id'},
+                        {name: 'receiving_date', type: 'date'},
+                        {name: 'customer_number'},
+						{name: 'department_name'},
+						{name: 'number_of_items'},
+						{name: 'net_weight'},
+						{name: 'gross_weight'},
+						{name: 'invoiced'},
                         {name: 'actions'}
 
                     ],
@@ -180,20 +157,34 @@
                     sortable: true,
                     filterable: true,
                     columns: [
-                        {text: 'Manifest Number', width: '10%', dataField: 'id'},
-                        {text: 'Customer Name', width: '45%', dataField: 'name',filtertype: 'checkedlist'},
-                        {text: 'Shipping Date', width: '25%', dataField: 'date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
-                        {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
+                        {text: 'Cart Number', width: '11%', dataField: 'incoming_cart_id'},
+						{text: 'Tran. Date', width: '12%', dataField: 'receiving_date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
+                        {text: 'Customer Number', width: '11%', dataField: 'customer_number',filtertype: 'checkedlist'},
+						{text: 'Dept', width: '11%', dataField: 'department_name',filtertype: 'checkedlist'},
+						{text: 'No. of Items', width: '11%', dataField: 'number_of_items',filtertype: 'checkedlist'},
+						{text: 'Gross Weight lb/kg', width: '11%', dataField: 'net_weight',filtertype: 'checkedlist'},
+						{text: 'Net Weight lb/kg', width: '11%', dataField: 'gross_weight',filtertype: 'checkedlist'},
+						{text: 'Invoiced', width: '11%', dataField: 'invoiced',filtertype: 'checkedlist'},
+                        {text: 'Actions', width: '11%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
-                url = "{{url('admin/manifests/show-receiving')}}";
+				
+				
+				
+                url = "{{url('admin/carts-list/show-outgoing')}}";
  source =
                 {
                     datatype: "json",
                     datafields: [
-                        {name: 'id'},
-                        {name: 'name'},
-                        {name: 'date', type: 'date'},
+                        {name: 'outgoing_cart_id'},
+                        {name: 'shipping_date', type: 'date'},
+                        {name: 'customer_number'},
+						{name: 'department_name'},
+						{name: 'number_of_items'},
+						{name: 'net_weight'},
+						{name: 'gross_weight'},
+						{name: 'status'},
+						{name: 'is_exchange_cart'},
                         {name: 'actions'}
 
                     ],
@@ -212,10 +203,16 @@
                     sortable: true,
                     filterable: true,
                     columns: [
-                        {text: 'Manifest Number', width: '10%', dataField: 'id'},
-                        {text: 'Customer Name', width: '45%', dataField: 'name',filtertype: 'checkedlist'},
-                        {text: 'Created On', width: '25%', dataField: 'date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
-                        {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
+                        {text: 'Cart Number', width: '10%', dataField: 'outgoing_cart_id'},
+						{text: 'Ship Date', width: '10%', dataField: 'shipping_date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
+                        {text: 'Customer Number', width: '10%', dataField: 'customer_number',filtertype: 'checkedlist'},
+						{text: 'Dept', width: '10%', dataField: 'department_name',filtertype: 'checkedlist'},
+						{text: 'No. of Items', width: '10%', dataField: 'number_of_items',filtertype: 'checkedlist'},
+						{text: 'Gross Weight lb/kg', width: '10%', dataField: 'net_weight',filtertype: 'checkedlist'},
+						{text: 'Net Weight lb/kg', width: '10%', dataField: 'gross_weight',filtertype: 'checkedlist'},
+						{text: 'Status', width: '10%', dataField: 'status',filtertype: 'checkedlist'},
+						{text: 'Exchange Cart', width: '10%', dataField: 'is_exchange_cart',filtertype: 'checkedlist'},
+                        {text: 'Actions', width: '10%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
     });

@@ -101,11 +101,6 @@ class InController extends Controller
 		
 		return back();
     }
-	
-	public function getInCartsList() {
-		$incoming_carts = IncomingCart::inCartsList();
-		return view('admin.cartsList.index', [ 'carts' => $incoming_carts ]);
-	}
 
     /**
      * Store a newly created resource in storage.
