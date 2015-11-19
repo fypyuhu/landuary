@@ -18,25 +18,36 @@ class ManifestController extends Controller
      */
     public function getIndex()
     {
-	return view('admin.manifests.index');
+        $customers=Customer::all();
+	return view('admin.manifests.index',['customers'=>$customers]);
     }
-    public function getShowShipping()
+    public function getShowShipping(Request $request)
     {
-        $ship_manifests = ShipManifest::with('customer')->get();
+        if($request->name!="-1"){
+            $ship_manifests = ShipManifest::with('customer')->where('customer_id','=',$request->name)->whereBetween('shipping_date', [date("Y-m-d",strtotime($request->start_date)), date("Y-m-d",strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+        }
+        else{
+            $ship_manifests = ShipManifest::with('customer')->whereBetween('shipping_date', [date("Y-m-d",strtotime($request->start_date)), date("Y-m-d",strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+        }
         $data = array();
         foreach ($ship_manifests as $manifest) {
             $row = array();
             $row["id"] = $manifest->id;
             $row["name"] = $manifest->customer->name;
             $row["date"] = $manifest->shipping_date;
-            $row["actions"] = '<a href="/admin/shiping-manifest/receipt/'.$manifest->id.'">View</a>';
+            $row["actions"] = '<a href="/admin/shiping-manifest/recipt/'.$manifest->id.'">View</a>';
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";
     }
-     public function getShowReceiving()
+     public function getShowReceiving(Request $request)
     {
-        $receiving_manifests = ReceivingManifest::with('customer')->get();
+        if($request->name!="-1"){
+            $receiving_manifests = ReceivingManifest::with('customer')->where('customer_id','=',$request->name)->whereBetween('created_at', [date("Y-m-d",strtotime($request->start_date)), date("Y-m-d",strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+        }
+        else{
+            $receiving_manifests = ReceivingManifest::with('customer')->whereBetween('created_at', [date("Y-m-d",strtotime($request->start_date)), date("Y-m-d",strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+        }
         $data = array();
         foreach ($receiving_manifests as $manifest) {
             $row = array();
