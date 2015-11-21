@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\UserProfile;
 use App\Http\Requests\ProfileCreate;
+use App\Http\Requests\ResetPassword;
 use App\Models\Country;
 use App\Models\Customer;
 use App\Models\Tax;
 use App\Models\TaxComponent;
 use App\Models\Item;
 use App\Models\ItemRelation;
+use App\Models\InitialValue;
+use Hash;
 use DB;
 
 
@@ -23,10 +27,13 @@ class UserProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
+		$user = $request->user();
+		$user_id = $user->id;
+		$user_profile = UserProfile::where('user_id', '=', $user_id)->get();
 		$countries = Country::all();
-        return view('admin.profile.index', ['countries'=>$countries]);
+        return view('admin.profile.index', ['countries'=>$countries, 'user' => $user_profile[0]]);
     }
 
     /**
@@ -69,13 +76,39 @@ class UserProfileController extends Controller
 		return redirect()->route('admin/profile/view');
     }
 	
-	public function getView(Request $request) {
-		$user = $request->user();
-		$user_id = $user->id;
-		$user_profile = UserProfile::where('user_id', '=', $user_id)->get();
-		$countries = Country::all();
-		return view('admin.profile.view', [ 'user' => $user_profile[0], 'countries' => $countries ]);
-	}
+	public function postEditProfile($id, ProfileCreate $request)
+    {
+		$up = UserProfile::find($id);
+		$up->legal_name = $request->legal_name;
+		$up->street_address = $request->street_address;
+		$up->city = $request->city;
+		$up->state = $request->state;
+		$up->zipcode = $request->zipcode;
+		$up->country = $request->country;
+		$up->phone = $request->phone;
+		$up->fax = $request->fax;
+		$up->email = $request->email;
+		$up->website = $request->website;
+		$up->tax_id_number = $request->tax_id_number;
+		
+		if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+			$fileName = time() . $request->file('logo')->getClientOriginalName(); // getting image extension
+			$destinationPath = public_path() . "/uploads/profile";
+			$request->file('logo')->move($destinationPath, $fileName);
+			$up->logo = $fileName;
+		}
+		
+		$up->contact_name = $request->contact_name;
+		$up->contact_designation = $request->contact_designation;
+		$up->contact_email = $request->contact_email;
+		/*$up->linen_rental = $request->linen_rental;
+		$up->healthcare = $request->healthcare;
+		$up->hospitality = $request->hospitality;
+		$up->vacational_rentals = $request->vacational_rentals;
+		$up->customer_own_goods = $request->customer_own_goods;*/
+		$up->save();
+		return redirect('admin/profile/view');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -124,18 +157,23 @@ class UserProfileController extends Controller
 	}
 	
 	public function getStep1() {
-		$current = array('current', '', '');
+		$current = array('current', '', '', '');
 		return view('admin.profile.step1.index', [ 'current' => $current ]);
 	}
 	
 	public function getStep2() {
-		$current = array('current', 'current', '');
+		$current = array('current', 'current', '', '');
 		return view('admin.profile.step2.index', [ 'current' => $current ]);
 	}
 	
 	public function getStep3() {
-		$current = array('current', 'current', 'current');
+		$current = array('current', 'current', 'current', '');
 		return view('admin.profile.step3.index', [ 'current' => $current ]);
+	}
+	
+	public function getStep4() {
+		$current = array('current', 'current', 'current', 'current');
+		return view('admin.profile.step4.index', [ 'current' => $current ]);
 	}
 	
 	public function getTaxesShow() {
@@ -211,6 +249,43 @@ class UserProfileController extends Controller
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";
+	}
+	
+	public function postInitialValues(Request $request) {
+		$user = $request->user();
+		$init_val = new InitialValue;
+		$init_val->organization_id = $user->organization_id;
+		$init_val->invoice_number = $request->invoice_number;
+		$init_val->standard_tare_weight = $request->standard_tare_weight;
+		$init_val->cart_number = $request->cart_number;
+		$init_val->save();
+		
+		return redirect('admin/profile');
+	}
+	
+	public function getView(Request $request) {
+		$user = $request->user();
+		$user_id = $user->id;
+		$user_profile = UserProfile::where('user_id', '=', $user_id)->get();
+		$countries = Country::all();
+		return view('admin.profile.view', [ 'user' => $user_profile[0], 'countries' => $countries ]);
+	}
+	
+	public function getResetPassword() {
+		return view('admin.profile.resetPassword');
+	}
+	
+	public function postResetPassword(ResetPassword $request) {
+		$user = $request->user();
+		$u = User::find($user->id);
+		$u->password = bcrypt($request->password);
+		
+		if(Hash::check($request->current_password, $user->password)) {		
+			$u->save();
+			return redirect('admin/profile/reset-password')->with('status', 'Your password has been updated successfully.');
+		} else {
+			return redirect('admin/profile/reset-password')->with('status', 'Your have entered invalid current password.');
+		}
 	}
 
     /**

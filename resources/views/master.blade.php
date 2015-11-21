@@ -9,7 +9,8 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
   <link rel="icon" type="image/png" href="{{URL::asset('images/icon.png')}}">
 
@@ -58,68 +59,20 @@
 -->
   <nav class="navbar-top">
     <div class="nav-wrapper">
-
-      <!-- Sidebar toggle -->
-      <a href="#" class="yay-toggle">
-        <div class="burg1"></div>
-        <div class="burg2"></div>
-        <div class="burg3"></div>
-      </a>
-      <!-- Sidebar toggle -->
-
-      <!-- Logo -->
-      <a href="#!" class="brand-logo">
-        <img src="{{URL::asset('images/logo.png')}}" alt="Con">
-      </a>
-      <!-- /Logo -->
       
       <div class="toggle-btn"></div>
       <div id="reports-nav">
           <div class="row">
               <div class="col s12">
                 <h4>Reports</h4>
-                <ul class="col s4">
-                    <li><a href="javascript:void(0);">Manifests</a>
+                <ul class="row">
+                    <li><a href="{{url('admin/manifests')}}">Shipping Manifests</a>
                     </li>
-                    <li><a href="customers.php">Customers</a>
+                    <li><a href="{{url('admin/manifests')}}">Receiving Manifests</a>
                     </li>
-                    <li><a href="items.php">Items</a>
+                    <li><a href="{{url('admin/carts-list')}}">In Cart</a>
                     </li>
-                    <li><a href="carts.php">Carts</a>
-                    </li>
-                    <li><a href="tax.php">Tax</a>
-                    </li>
-                    <li><a href="invoice.php">Invoice</a>
-                    </li>
-                    <li><a href="manifest.php">Manifest</a>
-                    </li>
-                    <li><a href="bin-tickets.php">Bin Tickets</a>
-                    </li>
-                </ul>
-                <ul class="col s4">
-                    <li><a href="javascript:void(0);">Reports</a>
-                    </li>
-                    <li><a href="javascript:void(0);">Manifest Report</a>
-                    </li>
-                    <li><a href="javascript:void(0);">Production Report</a>
-                    </li>
-                    <li><a href="javascript:void(0);">Audit Report</a>
-                    </li>
-                    <li><a href="javascript:void(0);">Rewash Reconciliation</a>
-                    </li>
-                </ul>
-                <ul class="col s4">
-                    <li><a href="javascript:void(0);">Company Profile</a>
-                    </li>
-                    <li><a href="items.php">Account</a>
-                    </li>
-                    <li><a href="items.php">Users</a>
-                    </li>
-                    <li><a href="items.php">Privacy</a>
-                    </li>
-                    <li style="background:none !important;">&nbsp;
-                    </li>
-                    <li><a href="items.php"><i class="fa fa-sign-out"></i> Sign Out</a>
+                    <li><a href="{{url('admin/carts-list')}}">Out Carts</a>
                     </li>
                 </ul>
               </div>
@@ -129,8 +82,13 @@
       <!-- Menu -->
       <ul>
         <li class="user">
-          <a class="dropdown-button" href="#!" data-activates="user-dropdown">
-            <img src="{{URL::asset('images/user.jpg')}}" alt="John Doe" class="circle">John Doe<i class="mdi-navigation-expand-more right"></i>
+          <a class="dropdown-button" href="javascript:void(0);">
+          	@if ($user_profile->logo != '')
+            <img src="{{URL::asset('uploads/profile')}}/{{$user_profile->logo}}" alt="{{$user->first_name}}" class="circle">
+            @else 
+            <span class="logo">{{$user->first_name}}</span>&nbsp;&nbsp;&nbsp;
+            @endif
+            {{$user->first_name}}<i class="mdi-navigation-expand-more right"></i>
           </a>
 
           <div id="user-dropdown" class="dropdown-content">
@@ -138,52 +96,40 @@
               <div class="row">
                   <div class="col s12">
                   	<h4>Premier Laundry and Linen Supply LLC</h4>
-                  	<ul class="col s4">
+                  	<ul class="col s6">
                     	<li><a href="javascript:void(0);">Settings</a>
                         </li>
-                        <li><a href="customers.php">Customers</a>
+                        <li><a href="{{url('admin/customers')}}">Customers</a>
                         </li>
-                        <li><a href="items.php">Items</a>
+                        <li><a href="{{url('admin/items')}}">Items</a>
                         </li>
-                        <li><a href="carts.php">Carts</a>
+                        <li><a href="{{url('admin/carts')}}">Carts</a>
                         </li>
-                        <li><a href="tax.php">Tax</a>
+                        <li><a href="{{url('admin/taxes')}}">Tax</a>
                         </li>
-                        <li><a href="invoice.php">Invoice</a>
+                        <li><a href="javascript:void(0);">Invoice</a>
                         </li>
-                        <li><a href="manifest.php">Manifest</a>
+                        <li><a href="{{url('admin/manifests')}}">Manifest</a>
                         </li>
-                        <li><a href="bin-tickets.php">Bin Tickets</a>
+                        <li><a href="javascript:void(0);">Bin Tickets</a>
                         </li>
                         <li style="background:none !important;">&nbsp;
                         </li>
-                        <li style="background: #42a5f5 !important;"><a href="adjustment.php" style="color: #ffffff !important;">Adjustment</a>
+                        <li style="background: #42a5f5 !important;"><a href="javascript:void(0);" style="color: #ffffff !important;">Adjustment</a>
                         </li>
                     </ul>
-                    <ul class="col s4">
-                    	<li><a href="javascript:void(0);">Reports</a>
-                        </li>
-                        <li><a href="javascript:void(0);">Manifest Report</a>
-                        </li>
-                        <li><a href="javascript:void(0);">Production Report</a>
-                        </li>
-                        <li><a href="javascript:void(0);">Audit Report</a>
-                        </li>
-                        <li><a href="javascript:void(0);">Rewash Reconciliation</a>
-                        </li>
-                    </ul>
-                    <ul class="col s4">
+                    <ul class="col s6">
                     	<li><a href="javascript:void(0);">Company Profile</a>
                         </li>
-                        <li><a href="items.php">Account</a>
+                        <li><a href="{{url('admin/profile')}}">Account</a>
                         </li>
-                        <li><a href="items.php">Users</a>
+                        <li><a href="javascript:void(0);">Users</a>
                         </li>
-                        <li><a href="items.php">Privacy</a>
+                        <li><a href="javascript:void(0);">Privacy</a>
                         </li>
                         <li style="background:none !important;">&nbsp;
                         </li>
-                        <li><a href="items.php"><i class="fa fa-sign-out"></i> Sign Out</a>
+                        <li><a href="{{url('logout')}}"><i class="fa fa-sign-out"></i> Sign Out</a>
                         </li>
                     </ul>
                   </div>
@@ -192,29 +138,6 @@
         </li>
       </ul>
       <!-- /Menu -->
-      <ul class="top-menu">
-        <li>
-        	<a href="javascript:void(0);">Main</a>
-            <ul>
-            	<li><a href="#">Incoming Cart</a></li>
-                <li><a href="#">Carts Ready to Ship</a></li>
-                <li><a href="#">Pending Orders</a></li>
-                <li><a href="#">Outgoing Cart</a></li>
-                <li><a href="#">Fill Ordres</a></li>
-                <li><a href="#">Rewash Cart</a></li>
-                <li><a href="#">Shipping Manifest</a></li>
-                <li><a href="#">Receiving Manifest</a></li>
-            </ul>
-        </li>
-        <li>
-        	<a href="javascript:void(0);">Help</a>
-            <ul>
-            	<li><a href="#">Laundry-Track Manual (PDF)</a></li>
-                <li><a href="#">System Info</a></li>
-                <li><a href="#">About</a></li>
-            </ul>
-        </li>
-      </ul>
     </div>
   </nav>
   <!-- /Top Navbar -->
@@ -234,42 +157,33 @@
     .yay-shrink   - shrink content width
 -->
   <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures yay-light yay-static">
-
-    <div class="top">
-      <div>
-        <!-- Sidebar toggle -->
-        <a href="#" class="yay-toggle">
-          <div class="burg1"></div>
-          <div class="burg2"></div>
-          <div class="burg3"></div>
-        </a>
-        <!-- Sidebar toggle -->
-      </div>
-    </div>
-
-
+    <!-- Logo -->
+    <a href="#!" class="brand-logo">
+      <img src="{{URL::asset('images/logo.png')}}" alt="Con">
+    </a>
+    <!-- /Logo -->
     <div class="nano">
       <div class="nano-content">
         <ul>
           <li class="label">Menu</li>
           <li>
-            <a href="in.php" class="waves-effect waves-blue"><i class="fa fa-magic"></i> In</a>
+            <a href="{{url('admin/in')}}" class="waves-effect waves-blue fag fa-in">In</a>
           </li>
           
           <li>
-            <a href="out.php" class="waves-effect waves-blue"><i class="fa fa-magic"></i> Out</a>
+            <a href="{{url('admin/out')}}" class="waves-effect waves-blue fag fa-out">Out</a>
           </li>
           
           <li>
-            <a href="shipping-manifest.php" class="waves-effect waves-blue"><i class="fa fa-magic"></i> Shipping Manifest</a>
+            <a href="{{url('admin/shiping-manifest')}}" class="waves-effect waves-blue fag fa-shipping">Shipping Manifest</a>
           </li>
           
           <li>
-            <a href="receiving-manifest.php" class="waves-effect waves-blue"><i class="fa fa-magic"></i> Receiving Manifest</a>
+            <a href="{{url('admin/receiving-manifest')}}" class="waves-effect waves-blue fag fa-receiving">Receiving Manifest</a>
           </li>
           
           <li>
-            <a href="javascript:void(0);" class="waves-effect waves-blue"><i class="fa fa-magic"></i> Today</a>
+            <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-today">Today</a>
           </li>
         </ul>
 
@@ -294,6 +208,7 @@
   <script type="text/javascript" src="{{URL::asset('jqwidgets/jqx-all.js')}}"></script>
   <!-- nanoScroller -->
   <script type="text/javascript" src="{{URL::asset('js/jquery.nanoscroller.min.js')}}"></script>
+  
 
   <!-- Materialize -->
   
@@ -382,6 +297,10 @@
 		    $('#reports-nav').slideToggle( "slow" );
 		});
 		
+		$( ".dropdown-button" ).click(function() {
+		    $('#user-dropdown').slideToggle( "slow" );
+		});
+		
 	});
 	
 	function toggle(hide, show) {
@@ -421,7 +340,6 @@
 	});
 	//]]>
   </script>
-  
   @section('js')
   @show
 </body>

@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Http\Requests\Register;
 use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Models\UserProfile;
+use App\Models\Organization;
 
 class AuthController extends Controller
 {
@@ -65,28 +67,36 @@ class AuthController extends Controller
         ]);
     }
 	
-	public function postRegister(Request $request) {
-		$user = $this->create($request->all());
+	public function postRegister(Register $request) {
+		$org = new Organization;
+		$org->name = $request->legal_name;
+		$org->save();
+		
+		$u = new User;
+		$u->first_name = $request->legal_name;
+		$u->email = $request->email;
+		$u->organization_id = $org->id;
+		$u->save();
 		
 		$up = new UserProfile;
-		$up->user_id = $user->id;
-		$up->legal_name = $request['legal_name'];
-		$up->street_address = $request['street_address'];
-		$up->city = $request['city'];
-		$up->state = $request['state'];
-		$up->zipcode = $request['zipcode'];
-		$up->country = $request['country'];
-		$up->phone = $request['phone'];
-		$up->fax = $request['fax'];
-		$up->email = $request['email'];
-		$up->website = $request['website'];
-		$up->contact_name = $request['contact_name'];
-		$up->contact_designation = $request['contact_designation'];
-		$up->contact_email = $request['contact_email'];
+		$up->user_id = $u->id;
+		$up->legal_name = $request->legal_name;
+		$up->street_address = $request->street_address;
+		$up->city = $request->city;
+		$up->state = $request->state;
+		$up->zipcode = $request->zipcode;
+		$up->country = $request->country;
+		$up->phone = $request->phone;
+		$up->fax = $request->fax;
+		$up->email = $request->email;
+		$up->website = $request->website;
+		$up->contact_name = $request->contact_name;
+		$up->contact_designation = $request->contact_designation;
+		$up->contact_email = $request->contact_email;
 		$up->save();
 		
-		//return response()->view('registerSuccess', $request->all());
-		return redirect()->route('success');
+		return response()->view('registerSuccess', $request->all());
+		//return redirect('/registerSuccess');
 	}
 	
 	public function getSuccess() {
@@ -101,15 +111,10 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {	
-        /*return User::create([
+        return User::create([
             'first_name' => $data['legal_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]);*/
-		
-		return User::create([
-            'first_name' => $data['legal_name'],
-            'email' => $data['email']
         ]);
     }
 }

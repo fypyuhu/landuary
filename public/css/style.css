@@ -264,22 +264,26 @@ input[type=date].error:not([readonly]), input[type=datetime-local].error:not([re
 #user-dropdown {
     top: 100% !important;
     right: 0 !important;
-    width: 45% !important;
-	height: 357px !important;
+    width: 30% !important;
 	border: 1px solid #dee1ec;
 	border-top: 10px solid #42a5f5;
 }
 
 #reports-nav {
-    top: 40px !important;
+    top: 100% !important;
     left: 50% !important;
-    width: 40% !important;
-	margin-left: -20% !important;
+    width: 20% !important;
+	margin-left: -10% !important;
 	border: 1px solid #dee1ec;
 	border-top: 10px solid #42a5f5;
 	position: absolute;
 	display: none;
 	background: #ffffff;
+}
+
+#reports-nav ul li {
+    display: block !important;
+    width: 100%;
 }
 
 #user-dropdown h4,
@@ -477,11 +481,15 @@ label.error {
 }
 
 .profile-pic {
-	width: 65px;
-	height: 65px;
+	width: 70px;
+	height: 70px;
 	border-radius: 50%;
-	background: #666666;
+	background: #ffffff;
 	overflow: hidden;
+	text-align: center;
+	font-weight: bold;
+	line-height: 65px;
+	border: 1px solid #cccccc;
 }
 
 .profile-pic img {
@@ -510,7 +518,7 @@ label.error {
 }
 
 .oTable {
-	background-color: #ffffff;
+	background-color: #FBFBFB;
 	padding: 15px;
 }
 
@@ -595,14 +603,15 @@ table td {
 }
 
 .toggle-btn {
-	width: 50px;
-	height: 40px;
+	width: 64px;
+	height: 56px;
 	position: absolute;
 	top: 0;
 	left: 50%;
 	margin-left: -25px;
 	background: url(../images/plus.jpg);
 	cursor: pointer;
+	background-size: 100%;
 }
 
 .toggle-btn.selected {
@@ -716,4 +725,79 @@ h4 span.guide {
 
 aside.yaybar {
 	z-index: 100000;
+	position: fixed !important;
+}
+
+.yaybar.yay-light .nano-content>ul>li>a {
+	text-indent: 25px !important;
+	font-size: 14px !important;
+}
+
+.fag {
+	background-size: 20px !important;
+	background-repeat: no-repeat !important;
+	background-position: 14px 14px !important;
+}
+
+.fa-in {
+	background-image: url(../images/incart-ico.png) !important;
+}
+
+.fa-out {
+	background-image: url(../images/outcart-ico.png) !important;
+}
+
+.fa-receiving {
+	background-image: url(../images/receiving-ico.png) !important;
+}
+
+.fa-shipping {
+	background-image: url(../images/shipping-ico.png) !important;
+}
+
+.fa-today {
+	background-image: url(../images/cal-ico.png) !important;
+}
+
+.navbar-top {
+	background: #edf2f9;
+}
+
+.brand-logo {
+	background-color: #0f2134;
+	padding-top:25px;
+	margin-bottom:20px;
+	display: block;
+	text-align: center;
+	border-bottom: 1px solid #3d5772;
+	padding-bottom: 25px;
+}
+
+.brand-logo img {
+	width: 90%;
+}
+
+.dropdown-content {
+	opacity: 1 !important;
+}
+
+.btn-trial {
+	background: #fff600;
+	font-size: 18px;
+	padding: 8px 15px;
+	color: #6d6b3f;
+	border: 1px solid #ffffff;
+	height: 50px;
+	line-height: 35px;
+	margin-left: 10px;
+}
+
+.logo {
+	font-family: 'Lobster', cursive;
+	text-transform: uppercase;
+	color: #ffffff;
+	background: #193048;
+	border-radius: 50%;
+	padding: 0 10px;
+	display: inline-block;
 }

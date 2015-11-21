@@ -36,6 +36,13 @@ $(document).ready(function () {
 		var corr_div_id = $(this).data('corr-div-id');
 		toggle('.tab-content', corr_div_id);
 	});
+	
+	$( "body" ).on( "click", ".ctabsleft a", function(e) {
+		$('.ctabsleft').find('a').removeClass('isCurrent');
+		$(this).addClass('isCurrent');
+		var corr_div_id = $(this).data('corr-div-id');
+		toggle('.tab-content', corr_div_id);
+	});
 });
 
 function toggle(hide, show) {

@@ -12,7 +12,47 @@
 
         <script src="{{URL::asset('jquery.bxslider/jquery.bxslider.js')}}"></script>
         <link href="{{URL::asset('jquery.bxslider/jquery.bxslider.css')}}" rel="stylesheet" />
-
+        
+		<style type="text/css">
+			.btn {
+				text-decoration: none;
+				color: #FFF;
+				background-color: #42A5F5;
+				text-align: center;
+				letter-spacing: .5px;
+				box-shadow: 0 1px 2px rgba(0,0,0,.26);
+				-webkit-transition: .2s ease-out;
+				transition: .2s ease-out;
+				cursor: pointer;
+			}
+			
+			.waves-effect {
+				position: relative;
+				cursor: pointer;
+				display: inline-block;
+				overflow: hidden;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				-webkit-tap-highlight-color: transparent;
+				z-index: 1;
+				will-change: opacity,transform;
+				-webkit-transition: all .3s ease-out;
+				transition: all .3s ease-out;
+			}
+			
+			.btn-trial {
+				background: #fff600;
+				font-size: 18px;
+				padding: 8px 15px;
+				color: #6d6b3f;
+				border: 1px solid #ffffff;
+				height: 50px;
+				line-height: 35px;
+				margin-left: 15px;
+			}
+        </style>
         <script type="text/javascript">
     $(document).ready(function () {
         $('.bxslider').bxSlider({
@@ -39,12 +79,16 @@
         <div class="container">	
             <div class="col-sm-12" id="home-content">
                 <div class="col-sm-12 col-md-6">
-                    <h1>Welcome to Laundry Tech Pro.</h1><p>Your complete laundry management software solution. Hospital laundry, hotel laundry, restaurant and textile rentals online management software solution.</p>
+                    <h1>Welcome to Laundry Tech Pro.</h1>
+                    <p>Your complete laundry management software solution. Hospital laundry, hotel laundry, restaurant and textile rentals online management software solution.</p>
+                    <div class="row">
+                    	<a href="{{url('register')}}" class="waves-effect btn btn-trial">Get Free Trial</a>
+                    </div>
                 </div>
                 <div class="col-sm-12 col-md-4 pull-right">
                     <div class="signin-panel col-sm-12">
                         @if (count($errors))
-                        <ul>
+                        <ul style="list-style: none;" class="alert alert-danger">
                             @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
                             @endforeach
@@ -53,7 +97,7 @@
                         <form method="post" action="/auth/login">
                             {{csrf_field()}}
                             <div class="form-field" style="margin-bottom: 15px;">
-                                <input type="email" value="{{ old('email') }}" name="email" placeholder="Eail" class="full-width" />
+                                <input type="email" value="{{ old('email') }}" name="email" placeholder="Email" class="full-width" />
                             </div>
                             <div class="form-field">
                                 <input type="password" name="password" placeholder="Password" />
