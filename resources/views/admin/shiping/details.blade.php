@@ -5,10 +5,10 @@
             <legend>Shipping Manifest:</legend>
             <div class="row">
                 <div class="col m6 s12">
-                    <label>Customer Number:</label>
+                    <label>Customer Name:</label>
                     <select name="customer" id="customer">
                         @foreach($customers as $customer)
-                        <option value="{{$customer->id}}" @if($customer->id==$active_customer->id) selected="selected" @endif >{{$customer->customer_number}}</option>
+                        <option value="{{$customer->id}}" @if($customer->id==$active_customer->id) selected="selected" @endif >{{$customer->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -27,9 +27,9 @@
 
             <div class="row">
                 <div class="col m6 s12">
-                    <label>Ship to Name:</label>
+                    <label>Customer Number:</label>
                     <div class="input-field">
-                        <input id="name" type="text" name="name" disabled="disabled" value="{{$active_customer->name}}">
+                        <input id="name" type="text" name="name" disabled="disabled" value="{{$active_customer->customer_number}}">
                     </div>
                 </div>
                 <div class="col m6 s12">
@@ -81,7 +81,7 @@
                         <div class="col s2">{{$cart->cart_id}}</div>
                         <div class="col s2">{{$cart->shipping_date}}</div>
                         <div class="col s3 right-align">{{$cart->net_weight}}</div>
-                        <div class="col s2 center-align"><a href="?action=edit" class="edit-button">View/Edit</a><a href="#add-record" class="edit-button hidden">View/Edit</a></div>
+                        <div class="col s2 center-align"><a href="/admin/out/edit/{{$cart->cart_id}}" data-mode="ajax" class="edit-button">View</a></div>
                     </div>
                     @endforeach
                     @else
@@ -106,7 +106,7 @@
         });
         $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
-        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px'});
+        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'dd-MM-yyyy'});
         $('#customer').on('change', function () {
             if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val() != "-1") {
                 $(".loading").css("display", "block");

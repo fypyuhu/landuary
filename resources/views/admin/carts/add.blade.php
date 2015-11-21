@@ -59,12 +59,12 @@
                         <label for="cart_current_location" class="error" id="error-cart-current-location"></label>
                     </div>
                     <div class="row">
-                        <label>Customer Number:</label>
+                        <label>Customer Name:</label>
                         <div class="input-field">
                             <select name="customer_number" id="customer_number">
-                                <option value="">Please Select</option>
-                                <option value="01">01</option>
-                                <option value="02">02</option>
+                                @foreach($customers as $customer)
+                                <option value="{{$customer->id}}">{{$customer->name}}</option>>
+                                @endforeach
                             </select>
                         </div>
                         <label for="customer_number" class="error" id="error-customer-number"></label>

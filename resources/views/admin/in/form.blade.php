@@ -9,7 +9,7 @@
               <select name="customer" id="customer">
                 <option value="">Customer</option>
                 @foreach ($customers as $customer)
-                <option value="{{$customer->id}}" {{$customer->id == $current_customer->id ? 'selected="selected"' : ''}}>{{$customer->customer_number}}</option>
+                <option value="{{$customer->id}}" {{$customer->id == $current_customer->id ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
                 @endforeach
               </select>
             </div>
@@ -26,9 +26,9 @@
           
           <div class="row">
             <div class="col s12">
-              <label>Name</label>
+              <label>Customer Number</label>
               <div class="input-field">
-                <input id="name" type="text" name="name" value="{{$current_customer->name}}" readonly="readonly">
+                <input id="name" type="text" name="name" value="{{$current_customer->customer_number}}" readonly="readonly">
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
           <div class="row">
             <div class="col m4 s12">
               <label>Cart Number</label>
-              <div class="input-field" id="exchange-cart-div">
+              <div class="input-field" id="exchange-cart-div" style="display:none;">
                   <select name="cart_number_dropdown" id="cart_number_dropdown">
                     <option value="">Cart Number</option>
                     @foreach($carts as $cart)
@@ -47,16 +47,16 @@
                     @endforeach
                   </select>
               </div>
-              <div class="input-field" id="non-tracked-cart-div" style="display:none;">
-                <input id="cart_number_textfield" type="text" name="cart_number_textfield">
-              </div>
-            </div>
-            <div class="col m4 s12">
-              <label>Tare Weight</label>
-              <div class="input-field">
-                <input id="tare_weight" type="text" name="tare_weight">
-              </div>
-            </div>
+              <div class="input-field" id="non-tracked-cart-div" >
+                  	<input id="cart_number_textfield" type="text" value="44" readonly="readonly" name="cart_number_textfield">
+                  </div>
+                </div>
+                <div class="col m4 s12">
+                  <label>Tare Weight</label>
+                  <div class="input-field">
+                    <input id="tare_weight"  value="100" type="text" name="tare_weight" readonly="readonly">
+                  </div>
+                </div>
             <div class="col m4 s12">
               <label>Receiving Date</label>
               <div id="receiving_date" name="receiving_date" class="calendar"></div>
@@ -64,10 +64,10 @@
           </div>
           <div class="row">
             <div class="col m6 s12">
-              <input type="checkbox" name="is_exchange_cart" id="is_exchange_cart" value="1" checked="checked">
+              <input type="checkbox" name="is_exchange_cart" id="is_exchange_cart" value="1" >
               <label for="is_exchange_cart">Exchange Cart</label>
             </div>
-            <div class="col m4 s12 pull-right">
+            <div class="col m4 s12 pull-right" style="display: none;">
               <label for="status">Status</label>
               <div class="input-field">
                 <input type="text" name="status" id="status" value="In">
@@ -93,7 +93,6 @@
                 <div class="col m8 s12">
                   <label>Item Number</label>
                   <select name="item_id" id="item_id">
-                    <option value="">Item Number</option>
                     @foreach ($items as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
@@ -107,15 +106,16 @@
                 </div>
               </div>
               <div class="row">
-                <button class="waves-effect btn" id="button-add-item">Add</button>
-                <button class="waves-effect btn">Remove</button>
+                <button class="waves-effect btn" id="button-add-item" type="button">Add</button>
+                
               </div>
               <div class="row layout_table">
                 <div class="row heading">
                     <div class="col s3">Item Number</div>
-                    <div class="col s5">Item Description</div>
+                    <div class="col s3">Item Description</div>
                     <div class="col s2 right-align">Quantity</div>
                     <div class="col s2 right-align">Weight</div>
+                    <div class="col s2 right-align">Action</div>
                 </div>
                 <div class="row records_list no-item">
                     <h5 class="center-align">No Items have been added to this cart yet.</h5>
@@ -133,13 +133,13 @@
             <div class="col m4 s12">
               <label>Gross Weight</label>
               <div class="input-field">
-                <input id="gross_weight" type="text" name="gross_weight">
+                <input id="gross_weight" type="text" onblur="calculateNetWeight()"value="100" name="gross_weight">
               </div>
             </div>
             <div class="col m4 s12">
               <label>Net Weight</label>
               <div class="input-field">
-                <input id="net_weight" type="text" name="net_weight">
+                <input id="net_weight" type="text" value="0" name="net_weight">
               </div>
             </div>
           </div>

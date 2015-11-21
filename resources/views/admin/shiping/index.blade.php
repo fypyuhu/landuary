@@ -35,11 +35,11 @@
                     <legend>Shipping Manifest:</legend>
                     <div class="row">
                         <div class="col m6 s12">
-                            <label>Customer Number:</label>
+                            <label>Customer Name:</label>
                             <select name="customer" id="customer">
                                 <option value="-1" selected="selected">Please select a customer</option>
                                 @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->customer_number}}</option>
+                                <option value="{{$customer->id}}">{{$customer->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -53,7 +53,7 @@
 
                     <div class="row">
                         <div class="col m6 s12">
-                            <label>Ship to Name:</label>
+                            <label>Customer Number:</label>
                             <div class="input-field">
                                 <input id="name" type="text" name="name" disabled="disabled" value="Auto Fill">
                             </div>
@@ -111,6 +111,7 @@
 @section('js')
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'dd-MM-yyyy'});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
          $('#customer').on('change', function () {
             if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val()!="-1") {

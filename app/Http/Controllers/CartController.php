@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Customer;
 
 class CartController extends Controller {
 
@@ -24,7 +25,9 @@ class CartController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function getCreate() {
-        return view('admin.carts.add', [ 'get_max_number' => $this->generateAutoNumber()]);
+
+        $customers = Customer::all();
+        return view('admin.carts.add', [ 'customers' => $customers, 'get_max_number' => $this->generateAutoNumber()]);
     }
 
     /**
@@ -36,16 +39,18 @@ class CartController extends Controller {
     public function postCreate(Request $request) {
         $cart = new Cart;
         $cart->cart_number = $request->cart_number;
-        //$cart->use_as_exchange_cart = $request->use_as_exchange_cart;
         $cart->tare_weight = $request->tare_weight;
         $cart->status = $request->status;
-        //$cart->cart_current_location = $request->cart_current_location;
-        //$cart->customer_number = $request->customer_number;
+        $cart->cart_current_location = $request->cart_current_location;
+        if ($request->has('use_as_exchange_cart')) {
+            $cart->customer_number = $request->customer_number;
+            $cart->use_as_exchange_cart = $request->use_as_exchange_cart;
+        }
         $cart->save();
     }
 
     public function getShow(Request $request) {
-        $carts = Cart::where('is_deleted','=','1')->get();
+        $carts = Cart::where('is_deleted', '=', '1')->get();
 
         $data = array();
         foreach ($carts as $cart) {
@@ -83,7 +88,7 @@ class CartController extends Controller {
         return view('admin.carts.edit', ['cart' => Cart::find($id)]);
     }
 
-    public function postEdit($id,Request $request) {
+    public function postEdit($id, Request $request) {
         $cart = Cart::find($id);
         $cart->cart_number = $request->cart_number;
         //$cart->use_as_exchange_cart = $request->use_as_exchange_cart;
@@ -95,11 +100,12 @@ class CartController extends Controller {
     }
 
     public function getDelete($id) {
-         return view('admin.carts.delete', ['id' => $id]);
+        return view('admin.carts.delete', ['id' => $id]);
     }
+
     public function postDelete($id) {
         $cart = Cart::find($id);
-        $cart->is_deleted=0;
+        $cart->is_deleted = 0;
         $cart->save();
     }
 

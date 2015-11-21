@@ -100,7 +100,7 @@
                         {text: 'Name', width:'30%',dataField: 'name', sortable: false,cellsrenderer: rowRenderer},
                         {text: 'Number', width:'15%' ,dataField: 'item_number', sortable: false,cellsrenderer: rowRenderer},
                         {text: 'Weight lb/kg', width:'15%', dataField: 'weight', sortable: false,cellsrenderer: rowRenderer},
-                        {text: 'Transaction Type', width:'20%', dataField: 'transaction_type', sortable: false,cellsrenderer: rowRenderer},
+                        {text: 'Tracking Type', width:'20%', dataField: 'transaction_type', sortable: false,cellsrenderer: rowRenderer},
                         {text: 'Actions', width:'20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });

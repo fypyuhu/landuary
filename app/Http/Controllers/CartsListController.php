@@ -33,7 +33,7 @@ class CartsListController extends Controller
 			$row["net_weight"] = $cart->net_weight;
 			$row["gross_weight"] = $cart->gross_weight;
 			$row["invoiced"] = 'No';
-            $row["actions"] = '<a href="/admin/in/edit/'.$cart->incoming_cart_id.'" data-mode="ajax">View/Edit</a>';
+            $row["actions"] = '<a href="/admin/in/receipt/'.$cart->id.'" >View</a>';
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";
@@ -41,6 +41,25 @@ class CartsListController extends Controller
 	
 	public function getShowOutgoing() {
 		$outgoing_carts = OutgoingCart::outCartsList();
+		$data = array();
+        foreach ($outgoing_carts as $cart) {
+            $row = array();
+            $row["outgoing_cart_id"] = $cart->outgoing_cart_id;
+            $row["shipping_date"] = $cart->shipping_date;
+            $row["customer_number"] = $cart->customer_number;
+			$row["department_name"] = $cart->department_name;
+			$row["number_of_items"] = $cart->number_of_items;
+			$row["net_weight"] = $cart->net_weight;
+			$row["gross_weight"] = $cart->gross_weight;
+			$row["status"] = $cart->status;
+			$row["is_exchange_cart"] = $cart->is_exchange_cart > 0 ? 'Yes' : 'No';
+            $row["actions"] = '<a href="/admin/out/edit/'.$cart->outgoing_cart_id.'" data-mode="ajax">View/Edit</a>';
+            $data[] = $row;
+        }
+        echo "{\"data\":" . json_encode($data) . "}";
+	}
+        public function getShowReady() {
+		$outgoing_carts = OutgoingCart::readyCartsList();
 		$data = array();
         foreach ($outgoing_carts as $cart) {
             $row = array();

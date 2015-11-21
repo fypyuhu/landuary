@@ -34,11 +34,12 @@ class InController extends Controller
     }
 	
 	public function getAjaxForm(Request $request) {
-		$carts = Cart::all();
+		$carts = Cart::where('customer_number','=',$request->customer_id)->get();
 		$items = DB::table('items')
 					->join('customers_items', 'items.id', '=', 'customers_items.item_id')
 					->select('items.*')
 					->where('items.status', '>', 0)
+                                        ->where('items.transaction_type', '=', 'In')
 					->where('customers_items.customer_id', '=', $request->customer_id)
 					->get();
 		$customers = Customer::all();
@@ -62,9 +63,8 @@ class InController extends Controller
 	
 	public function getWeights(Request $request) {
 		$item = Item::where('id', '=', $request->item_id)->get();
-		$gross_weight = $request->gross_weight + ($item[0]->weight * $request->num_items);
-		$net_weight = $request->net_weight + ($item[0]->weight * $request->num_items);
-		return view('admin.in.weight', ['gross_weight' => $gross_weight, 'net_weight' => $net_weight]);
+		return ($item[0]->weight * $request->num_items);
+		
 	}
 
     /**
@@ -99,7 +99,7 @@ class InController extends Controller
 			$ogc_item->save();
 		}
 		
-		return back();
+		return redirect('/admin/in/receipt/'.$ogc->id);
     }
 
     /**
@@ -108,6 +108,16 @@ class InController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function getReceipt($id){
+        $cart=IncomingCart::find($id);
+        $department=CustomerDepartment::find($cart->department_id);
+        $customer=Customer::find($cart->customer_id);
+        $items=CustomerIncomingCartItem::getItems($id);
+        return view('admin.in.receipt',['cart'=>$cart,
+            'department'=>$department,
+            'customer'=>$customer,
+            'items'=>$items]);
+    }
     public function store(Request $request)
     {
         //

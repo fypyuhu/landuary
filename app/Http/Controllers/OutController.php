@@ -34,11 +34,12 @@ class OutController extends Controller
     }
 	
 	public function getAjaxForm(Request $request) {
-		$carts = Cart::all();
+		$carts = Cart::where('customer_number','=',$request->customer_id)->get();
 		$items = DB::table('items')
 					->join('customers_items', 'items.id', '=', 'customers_items.item_id')
 					->select('items.*')
 					->where('items.status', '>', 0)
+                                        ->where('items.transaction_type', '=', 'Out')
 					->where('customers_items.customer_id', '=', $request->customer_id)
 					->get();
 		$customers = Customer::all();
@@ -99,9 +100,18 @@ class OutController extends Controller
 			$ogc_item->save();
 		}
 		
-		return back();
+		return redirect('/admin/out/receipt/'.$ogc->id);
     }
-
+      public function getReceipt($id){
+        $cart=OutgoingCart::find($id);
+        $department=CustomerDepartment::find($cart->department_id);
+        $customer=Customer::find($cart->customer_id);
+        $items=CustomerOutgoingCartItem::getItems($id);
+        return view('admin.out.receipt',['cart'=>$cart,
+            'department'=>$department,
+            'customer'=>$customer,
+            'items'=>$items]);
+    }
     /**
      * Store a newly created resource in storage.
      *
