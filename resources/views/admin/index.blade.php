@@ -2,7 +2,7 @@
 @section('content')
 <!-- Main Content -->
 <section class="content-wrap">
-    
+
     <div class="row getting-started">
         <div class="row">
             <h4>Getting Started With Laundry | <span class="guide">Welcome Guide</span></h4>
@@ -25,84 +25,59 @@
             <div class="col m1 s12">&nbsp;</div>
         </div>
     </div>
-    
+
     <div class="row logo-sect">
-    	<div class="logo-cont pull-left">Logo</div>
+        <div class="logo-cont pull-left">Logo</div>
         <div class="pull-left">
             <h4>Quetzal Works</h4>
             Thursday, November 19 2015
         </div>
     </div>
-    
+
     <div class="row trial">
-    	<div class="alert-content">
-        	<span class="secondary-color-sprite alert-icon"></span>
+        <div class="alert-content">
+            <span class="secondary-color-sprite alert-icon"></span>
             <span style="font-size: 16px;"><strong>Your trial ends in 1 day!</strong></span>
         </div>
         <div class="alert-content">
-        	<span>Feel free to keep testing Laundry Tech.</span>
+            <span>Feel free to keep testing Laundry Tech.</span>
             <a href="#">Subscribe Now</a>
         </div>
     </div>
-    
+
     <div class="row graph-box">
-    	<h4>Income <a href="#" class="pull-right">Create an invoice</a></h4>
+        <h4>Income <a href="#" class="pull-right">Create an invoice</a></h4>
         <div class="row" style="margin-top:30px;">
-        	<div class="col m4 s12">
-            	<div class="row graph-bar gb-one"></div>
+            <div class="col m4 s12">
+                <div class="row graph-bar gb-one"></div>
                 <div class="row gb-detail">
-                	$0<br />
+                    $0<br />
                     Open Invoices
                 </div>
             </div>
             <div class="col m4 s12">
-            	<div class="row graph-bar gb-two"></div>
+                <div class="row graph-bar gb-two"></div>
                 <div class="row gb-detail">
-                	$0<br />
+                    $0<br />
                     Over Due
                 </div>
             </div>
             <div class="col m4 s12">
-            	<div class="row graph-bar gb-three"></div>
+                <div class="row graph-bar gb-three"></div>
                 <div class="row gb-detail">
-                	$0<br />
+                    $0<br />
                     Paid Last 30 Days
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="row graph-box">
-    	<h4>Expenses <a href="#" class="pull-right">Create an invoice</a></h4>
-        <div class="row" style="margin-top:30px;">
-        	<div class="col m4 s12">
-                <div class="row gb-detail">
-                	$0<br />
-                    Last 30 Days
-                </div>
-            </div>
-            <div class="col m4 s12">
-                <img src="{{URL::asset('images/det.jpg')}}" alt="" class="pull-right">
-            </div>
-            <div class="col m4 s12">
-                <img src="{{URL::asset('images/piechart.png')}}" alt="" class="pull-right" width="155">
-            </div>
-        </div>
+
+    <div class="row graph-box" id="profitChart" style="height:350px;">
     </div>
-    
-    <div class="row graph-box">
-    	<h4>Profit &amp; Loss <a href="#" class="pull-right">Create an invoice</a></h4>
-        <div class="row" style="margin-top:30px;">
-        	<div class="col m6 s12">
-                <div class="row gb-detail">
-                	$0<br />
-                    Net Income
-                </div>
-            </div>
-            <div class="col m6 s12">
-                <img src="{{URL::asset('images/graph.jpg')}}" alt="" class="pull-right">
-            </div>
-        </div>
+
+
+    <div class="row graph-box" id="company" style="height:400px;">
+       
     </div>
 
 </section>	
@@ -110,4 +85,56 @@
 @endsection
 
 @section('js')
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load("visualization", "1", {packages: ["corechart","bar"]});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Profit', 'in Dollars'],
+        ['Mac', 200],
+        ['Morgen', 340],
+        ['Rosey', 490],
+        ['Kaluse', 390],
+        ['Kristain', 450],
+        ['Emma', 190],
+        ['Harry', 430],
+        ['Donald', 134],
+        ['Stephen', 50],
+        ['Julia', 102],
+    ]);
+
+    var options = {
+        title: 'Profit By Customer',
+        is3D: true,
+        backgroundColor:'#ecf0f4',
+        chartArea:{left:20,top:20,width:'100%',height:'100%'}
+    };
+
+    var chart = new google.visualization.PieChart($('#profitChart')[0]);
+    chart.draw(data, options);
+    var data = google.visualization.arrayToDataTable([
+          ['Month', 'Sales', 'Expenses', 'Profit'],
+          ['August', 1000, 400, 200],
+          ['September', 1170, 460, 250],
+          ['October', 660, 1120, 300],
+          ['November', 1030, 540, 350]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: August-November',
+          },
+          bars: 'vertical',
+          vAxis: {format: 'decimal'},
+          height: '100%',
+          colors: ['#1b9e77', '#d95f02', '#7570b3']
+        };
+
+        var chart = new google.charts.Bar($('#company')[0]);
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+}
+</script>
 @endsection

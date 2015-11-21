@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/laundry/app/Models/OutgoingCart.php</file>
-            <file>file:/D:/laundry/app/Models/Tax.php</file>
-            <file>file:/D:/laundry/app/Http/Controllers/CartController.php</file>
-            <file>file:/D:/laundry/app/Models/TaxComponent.php</file>
-            <file>file:/D:/laundry/app/Models/UserProfile.php</file>
+            <file>file:/D:/laundry/resources/views/admin/in/index.blade.php</file>
+            <file>file:/D:/laundry/app/Http/Controllers/InController.php</file>
+            <file>file:/D:/laundry/resources/views/admin/in/receipt.blade.php</file>
+            <file>file:/D:/laundry/resources/views/admin/shiping/recipt.blade.php</file>
+            <file>file:/D:/laundry/app/Models/CustomerIncomingCartItem.php</file>
+            <file>file:/D:/laundry/app/Http/routes.php</file>
+            <file>file:/D:/laundry/app/Models/IncomingCart.php</file>
+            <file>file:/D:/laundry/resources/views/admin/in/form.blade.php</file>
+            <file>file:/D:/laundry/app/Http/Controllers/CartsListController.php</file>
         </group>
     </open-files>
 </project-private>

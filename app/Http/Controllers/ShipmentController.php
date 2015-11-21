@@ -26,7 +26,7 @@ class ShipmentController extends Controller
         $active_customer=Customer::find($id);
         $customers=Customer::all();
         $departments=CustomerDepartment::find($id);
-        $carts=OutgoingCart::where('customer_id','=',$id)->get();
+        $carts=OutgoingCart::where('customer_id','=',$id)->where('status','=','Ready')->get();
         return view('admin.shiping.details',["carts"=>$carts,"customers"=>$customers,"active_customer"=>$active_customer,"departments"=>$departments]);
     }
     public function postCreate(Request $request)
@@ -39,6 +39,11 @@ class ShipmentController extends Controller
         if($request->has('carts')){
             $carts=implode(",",$request->carts);
              $manifest->outgoing_cart_id=$carts;
+             foreach($request->carts as $id){
+                 $out_going_cart=OutgoingCart::find($id);
+                 $out_going_cart->status="Out";
+                 $out_going_cart->save();
+             }
         }
         $manifest->save();
         return redirect('/admin/shiping-manifest/recipt/'.$manifest->id);

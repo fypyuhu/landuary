@@ -32,6 +32,7 @@
            <div class="row">
               <ul class="ctabs">
                 <li class="current" data-corr-div-id="#incoming-carts-div">Incoming Carts</li>
+                <li data-corr-div-id="#ready-carts-div">Ready Carts</li>
                 <li data-corr-div-id="#outgoing-carts-div">Outgoing Carts</li>
               </ul>
            </div>
@@ -69,6 +70,44 @@
                         <legend>Incoming Carts:</legend>
                         <div class="row box">
                             <div id="jqxgrid"></div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+           <div class="row tab-content first no-topmargin" id="ready-carts-div">
+                <div class="row no-topmargin" style="margin-bottom:25px;">
+                    <div class="col m6 s12">
+                        <div class="row">
+                            <label>Select Customer:</label>
+                            <select name="r_customer" id="r_customer">
+                                <option value="">Please Select</option>
+                                <option value="1">Customer A</option>
+                                <option value="2">Customer B</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col m6 s12">
+                                <label>From:</label>
+                                <div id="r_date_from" name="r_date_from" class="calendar"></div>
+                            </div>
+                            <div class="col m6 s12">
+                                <label>To:</label>
+                                <div id="r_date_to" name="r_date_to" class="calendar"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+                                <button type="submit" class="waves-effect btn">Filter</button>
+                                <button type="reset" class="waves-effect btn">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <fieldset>
+                        <legend>Ready Carts:</legend>
+                        <div class="row box">
+                            <div id="jqxgrid2"></div>
                         </div>
                     </fieldset>
                 </div>
@@ -195,6 +234,50 @@
 
         var dataAdapter = new $.jqx.dataAdapter(source);
         $("#jqxgrid1").jqxGrid(
+                {
+                    width: "100%",
+                    source: dataAdapter,
+                    pageable: true,
+                    autoheight: true,
+                    sortable: true,
+                    filterable: true,
+                    columns: [
+                        {text: 'Cart Number', width: '10%', dataField: 'outgoing_cart_id'},
+						{text: 'Ship Date', width: '10%', dataField: 'shipping_date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
+                        {text: 'Customer Number', width: '10%', dataField: 'customer_number',filtertype: 'checkedlist'},
+						{text: 'Dept', width: '10%', dataField: 'department_name',filtertype: 'checkedlist'},
+						{text: 'No. of Items', width: '10%', dataField: 'number_of_items',filtertype: 'checkedlist'},
+						{text: 'Gross Weight lb/kg', width: '10%', dataField: 'net_weight',filtertype: 'checkedlist'},
+						{text: 'Net Weight lb/kg', width: '10%', dataField: 'gross_weight',filtertype: 'checkedlist'},
+						{text: 'Status', width: '10%', dataField: 'status',filtertype: 'checkedlist'},
+						{text: 'Exchange Cart', width: '10%', dataField: 'is_exchange_cart',filtertype: 'checkedlist'},
+                        {text: 'Actions', width: '10%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
+                    ]
+                });
+                url = "{{url('admin/carts-list/show-ready')}}";
+ source =
+                {
+                    datatype: "json",
+                    datafields: [
+                        {name: 'outgoing_cart_id'},
+                        {name: 'shipping_date', type: 'date'},
+                        {name: 'customer_number'},
+						{name: 'department_name'},
+						{name: 'number_of_items'},
+						{name: 'net_weight'},
+						{name: 'gross_weight'},
+						{name: 'status'},
+						{name: 'is_exchange_cart'},
+                        {name: 'actions'}
+
+                    ],
+                    id: 'id',
+                    url: url,
+                    root: 'data'
+                };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+        $("#jqxgrid2").jqxGrid(
                 {
                     width: "100%",
                     source: dataAdapter,

@@ -51,7 +51,7 @@
                                 <label for="item_weight" class="error" id="error-item-weight"></label>
                             </div>
                             <div class="col m6 s12">
-                                <label>Transaction Type:</label>
+                                <label>Tracking Type:</label>
                                 <div class="input-field">
                                     <select name="transaction_type" id="transaction_type">
                                         <option value="In">In</option>
