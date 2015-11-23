@@ -27,18 +27,6 @@
 
     </div>
     <!-- /Breadcrumb -->
-<<<<<<< HEAD
-    <div class="row">
-        <div class="row">
-            <div class="row">
-                <ul class="ctabs">
-                    <li class="current" data-corr-div-id="#incoming-carts-div">Incoming Carts</li>
-                    <li data-corr-div-id="#ready-carts-div">Ready Carts</li>
-                    <li data-corr-div-id="#outgoing-carts-div">Outgoing Carts</li>
-                </ul>
-            </div>
-            <div class="row tab-content first no-topmargin" id="incoming-carts-div">
-=======
    <div class="row">
        <div class="row">
            <div class="row">
@@ -49,7 +37,6 @@
               </ul>
            </div>
            <div class="row tab-content first no-topmargin" id="incoming-carts-div" {{ $type == 'incoming' ? 'style=display:block;' : 'style=display:none;' }}>
->>>>>>> updates
                 <div class="row no-topmargin" style="margin-bottom:25px;">
                     <div class="col m6 s12">
                         <div class="row">
@@ -86,12 +73,9 @@
                         </div>
                     </fieldset>
                 </div>
-            </div>
-<<<<<<< HEAD
-            <div class="row tab-content no-topmargin" id="ready-carts-div">
-=======
+           </div>
+
            <div class="row tab-content no-topmargin" id="ready-carts-div" {{ $type == 'ready' ? 'style=display:block;' : 'style=display:none;' }}>
->>>>>>> updates
                 <div class="row no-topmargin" style="margin-bottom:25px;">
                     <div class="col m6 s12">
                         <div class="row">
@@ -129,11 +113,8 @@
                     </fieldset>
                 </div>
             </div>
-<<<<<<< HEAD
-            <div class="row tab-content no-topmargin" id="outgoing-carts-div">
-=======
+
            <div class="row tab-content no-topmargin" id="outgoing-carts-div" {{ $type == 'outgoing' ? 'style=display:block;' : 'style=display:none;' }}>
->>>>>>> updates
                 <div class="row no-topmargin" style="margin-bottom:25px;">
                     <div class="col m6 s12">
                         <div class="row">
