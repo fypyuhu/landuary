@@ -28,6 +28,7 @@ return array(
     'CreateCustomersTable' => $baseDir . '/database/migrations/2015_10_30_162122_create_customers_table.php',
     'CreateCustomersTaxesTable' => $baseDir . '/database/migrations/2015_10_30_162339_create_customers_taxes_table.php',
     'CreateIncomingCartsTable' => $baseDir . '/database/migrations/2015_11_12_135235_create_incoming_carts_table.php',
+    'CreateInitialValuesTable' => $baseDir . '/database/migrations/2015_11_20_160547_create_initial_values_table.php',
     'CreateItemRelationTable' => $baseDir . '/database/migrations/2015_10_21_172719_create_ItemRelation_table.php',
     'CreateItemTable' => $baseDir . '/database/migrations/2015_10_21_171522_create_Item_table.php',
     'CreateOrganizationTable' => $baseDir . '/database/migrations/2015_11_11_172655_create_organization_table.php',

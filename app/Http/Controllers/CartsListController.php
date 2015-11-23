@@ -16,9 +16,9 @@ class CartsListController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex() {
+    public function getIndex(Request $request) {
         $customers = Customer::all();
-        return view('admin.carts-list.index', ['customers' => $customers]);
+        return view('admin.carts-list.index', ['customers' => $customers, 'type' => $request->type ]);
     }
 
     public function getShowIncoming(Request $request) {
