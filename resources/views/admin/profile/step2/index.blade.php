@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row" id="taxes-div" style="border: 1px solid #d0cece; background:#f5f5f5; padding:30px; display:none;">
-        <a data-mode="ajax" href="/admin/customers/create" class="waves-effect btn create-clone-button">Add Tax</a>
+        <a data-mode="ajax" href="/admin/taxes/create" class="waves-effect btn create-clone-button">Add Tax</a>
         <div class="row no-rightmargin">
             <div class="col s12">
                 <fieldset>
