@@ -15,181 +15,206 @@
                     </ul>
                 </div>
             @endif
-            <form name="compnay_profile" id="compnay_profile" method="post" action="{{url('admin/profile/create')}}" enctype="multipart/form-data">
-            	<input type="hidden" name="user_id" value="1">
-            	{{csrf_field()}}
-                <h3>Company Profile:</h3>
-                <div class="row">
-                    <label>Legal Name:</label>
-                    <div class="input-field">
-                        <input id="legal_name" type="text" name="legal_name">
-                    </div>
-                    <label for="legal_name" class="error"></label>
-                </div>
-                <hr />
-                <h4>Address</h4>
-                <div class="row">
-                    <label>Street Address:</label>
-                    <div class="input-field">
-                        <input id="street_address" type="text" name="street_address">
-                    </div>
-                    <label for="street_address" class="error"></label>
-                </div>
-                <div class="row">
-                    <div class="col m6 s12">
-                        <label>City:</label>
+            <form name="compnay_profile" id="compnay_profile" method="post" action="/admin/profile/edit-profile/{{$user->id}}" enctype="multipart/form-data">
+                {{csrf_field()}}
+            	<fieldset style="margin-top:20px;" class="tab-content first" id="sec-company-profile">
+                    <legend>Company Profile:</legend>
+                    <div class="row">
+                        <label>Company Legal Name:</label>
                         <div class="input-field">
-                            <input id="city" type="text" name="city">
+                            <input id="legal_name" type="text" name="legal_name" value="{{$user->legal_name}}">
                         </div>
-                        <label for="city" class="error"></label>
+                        <label for="legal_name" class="error"></label>
                     </div>
-                    <div class="col m6 s12">
-                    	<label>State:</label>
+                    <hr />
+                    <h4>Address</h4>
+                    <div class="row">
+                        <label>Street Address:</label>
                         <div class="input-field">
-                            <input id="state" type="text" name="state">
+                            <input id="street_address" type="text" name="street_address" value="{{$user->street_address}}">
                         </div>
-                        <label for="state" class="error"></label>
+                        <label for="street_address" class="error"></label>
                     </div>
-                </div>
-                <div class="row">
-                	<div class="col m6 s12">
-                    	<label>Zip Code:</label>
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <label>City:</label>
+                            <div class="input-field">
+                                <input id="city" type="text" name="city" value="{{$user->city}}">
+                            </div>
+                            <label for="city" class="error"></label>
+                        </div>
+                        <div class="col m6 s12">
+                            <label>State:</label>
+                            <div class="input-field">
+                                <input id="state" type="text" name="state" value="{{$user->state}}">
+                            </div>
+                            <label for="state" class="error"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <label>Zip Code:</label>
+                            <div class="input-field">
+                                <input id="zipcode" type="text" name="zipcode" value="{{$user->zipcode}}">
+                            </div>
+                            <label for="zipcode" class="error"></label>
+                        </div>
+                        <div class="col m6 s12">
+                            <label>Country:</label>
+                            <select name="country" id="country">
+                                <option value="">Please Select</option>
+                                @foreach($countries as $country)
+                                <option value="{{ $country->country_name }}" {{$country->country_name == $user->country ? 'selected="selected"' : ''}}>{{ $country->country_name }}</option>
+                                @endforeach
+                            </select>
+                            <label for="country" class="error"></label>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <label>Phone:</label>
+                            <div class="input-field">
+                                <input id="phone" type="text" name="phone" value="{{$user->phone}}">
+                            </div>
+                            <label for="phone" class="error"></label>
+                        </div>
+                        <div class="col m6 s12">
+                            <label>Fax:</label>
+                            <div class="input-field">
+                                <input id="fax" type="text" name="fax" value="{{$user->fax}}">
+                            </div>
+                            <label for="fax" class="error"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <label>Email:</label>
+                            <div class="input-field">
+                                <input id="email" type="text" name="email" value="{{$user->email}}">
+                            </div>
+                            <label for="email" class="error"></label>
+                        </div>
+                        <div class="col m6 s12">
+                            <label>Website:</label>
+                            <div class="input-field">
+                                <input id="website" type="text" name="website" value="{{$user->website}}">
+                            </div>
+                            <label for="website" class="error"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <label>Tax ID Number:</label>
+                            <div class="input-field">
+                                <input id="tax_id_number" type="text" name="tax_id_number" value="{{$user->tax_id_number}}">
+                            </div>
+                            <label for="tax_id_number" class="error"></label>
+                        </div>
+                        <div class="col m6 s12">
+                            <label>Logo:</label>
+                            <input id="logo" type="file" name="logo" style="width: 100%;">
+                            <label for="logo" class="error"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col pull-right">
+                          <a href="javascript:void(0);" class="waves-effect btn btnNext" data-corr-link-id="#link-contact-person">Next</a>
+                          <button type="reset" class="waves-effect btn">Clear</button>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset style="margin-top:20px;" class="tab-content" id="sec-contact-person">
+                    <legend>Contact Person</legend>
+                    <div class="row">
+                        <label>Name:</label>
                         <div class="input-field">
-                            <input id="zipcode" type="text" name="zipcode">
+                            <input id="contact_name" type="text" name="contact_name" value="{{$user->contact_name}}">
                         </div>
-                        <label for="zipcode" class="error"></label>
+                        <label for="contact_name" class="error"></label>
                     </div>
-                    <div class="col m6 s12">
-                    	<label>Country:</label>
-                    	<select name="country" id="country">
-                            <option value="">Please Select</option>
-                            @foreach($countries as $country)
-                            <option value="{{ $country->country_name }}">{{ $country->country_name }}</option>
-                            @endforeach
-                        </select>
-                        <label for="country" class="error"></label>
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                	<div class="col m6 s12">
-                        <label>Phone:</label>
+                    <div class="row">
+                        <label>Designation:</label>
                         <div class="input-field">
-                            <input id="phone" type="text" name="phone">
+                            <input id="contact_designation" type="text" name="contact_designation" value="{{$user->contact_designation}}">
                         </div>
-                        <label for="phone" class="error"></label>
+                        <label for="contact_designation" class="error"></label>
                     </div>
-                    <div class="col m6 s12">
-                    	<label>Fax:</label>
+                    <div class="row">
+                        <label>Email Address:</label>
                         <div class="input-field">
-                            <input id="fax" type="text" name="fax">
+                            <input id="contact_email" type="text" name="contact_email" value="{{$user->contact_email}}">
                         </div>
-                        <label for="fax" class="error"></label>
+                        <label for="contact_email" class="error"></label>
                     </div>
-                </div>
-                <div class="row">
-                	<div class="col m6 s12">
-                        <label>Email:</label>
-                        <div class="input-field">
-                            <input id="email" type="text" name="email">
+                    
+                    <div class="row">
+                    	<div class="pull-left">
+                        	<a href="javascript:void(0);" class="waves-effect btn btnPrev" data-corr-link-id="#link-company-profile">Previous</a>
                         </div>
-                        <label for="email" class="error"></label>
-                    </div>
-                    <div class="col m6 s12">
-                    	<label>Website:</label>
-                        <div class="input-field">
-                            <input id="website" type="text" name="website">
+                        <div class="col pull-right">
+                          <a href="javascript:void(0);" class="waves-effect btn btnNext" data-corr-link-id="#link-business-model">Next</a>
+                          <button type="reset" class="waves-effect btn">Clear</button>
                         </div>
-                        <label for="website" class="error"></label>
                     </div>
-                </div>
-                <div class="row">
-                	<div class="col m6 s12">
-                        <label>Tax ID Number:</label>
-                        <div class="input-field">
-                            <input id="tax_id_number" type="text" name="tax_id_number">
+                </fieldset>
+                <fieldset style="margin-top:20px;" class="tab-content" id="sec-business-model">
+                    <legend>Business model</legend>
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <label>Linen Rental:</label>
+                            <div class="input-field">
+                                <input id="linen_rental" type="text" name="linen_rental">
+                            </div>
+                            <label for="linen_rental" class="error"></label>
                         </div>
-                        <label for="tax_id_number" class="error"></label>
-                    </div>
-                    <div class="col m6 s12">
-                    	<label>Logo:</label>
-                        <input id="logo" type="file" name="logo" style="width: 100%;">
-                        <label for="logo" class="error"></label>
-                    </div>
-                </div>
-                <hr />
-                <h3>Contact Person</h3>
-                <div class="row">
-                	<label>Name:</label>
-                    <div class="input-field">
-                        <input id="contact_name" type="text" name="contact_name">
-                    </div>
-                    <label for="contact_name" class="error"></label>
-                </div>
-                <div class="row">
-                	<label>Designation:</label>
-                    <div class="input-field">
-                        <input id="contact_designation" type="text" name="contact_designation">
-                    </div>
-                    <label for="contact_designation" class="error"></label>
-                </div>
-                <div class="row">
-                	<label>Email Address:</label>
-                    <div class="input-field">
-                        <input id="contact_email" type="text" name="contact_email">
-                    </div>
-                    <label for="contact_email" class="error"></label>
-                </div>
-                <hr />
-                <h3>Business model</h3>
-                <div class="row">
-                	<div class="col m6 s12">
-                        <label>Linen Rental:</label>
-                        <div class="input-field">
-                            <input id="linen_rental" type="text" name="linen_rental">
+                        <div class="col m6 s12">
+                            <label>Healthcare:</label>
+                            <div class="input-field">
+                                <input id="healthcare" type="text" name="healthcare">
+                            </div>
+                            <label for="healthcare" class="error"></label>
                         </div>
-                        <label for="linen_rental" class="error"></label>
                     </div>
-                	<div class="col m6 s12">
-                        <label>Healthcare:</label>
-                        <div class="input-field">
-                            <input id="healthcare" type="text" name="healthcare">
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <label>Hospitality (Hotel/Motel):</label>
+                            <div class="input-field">
+                                <input id="hospitality" type="text" name="hospitality">
+                            </div>
+                            <label for="healthcare" class="error"></label>
                         </div>
-                        <label for="healthcare" class="error"></label>
-                    </div>
-                </div>
-                <div class="row">
-                	<div class="col m6 s12">
-                        <label>Hospitality (Hotel/Motel):</label>
-                        <div class="input-field">
-                            <input id="hospitality" type="text" name="hospitality">
+                        <div class="col m6 s12">
+                            <label>Vacational Rentals:</label>
+                            <div class="input-field">
+                                <input id="vacational_rentals" type="text" name="vacational_rentals">
+                            </div>
+                            <label for="vacational_rentals" class="error"></label>
                         </div>
-                        <label for="healthcare" class="error"></label>
                     </div>
-                    <div class="col m6 s12">
-                    	<label>Vacational Rentals:</label>
-                        <div class="input-field">
-                            <input id="vacational_rentals" type="text" name="vacational_rentals">
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <label>Customer Own Goods:</label>
+                            <div class="input-field">
+                                <input id="customer_own_goods" type="text" name="customer_own_goods">
+                            </div>
+                            <label for="customer_own_goods" class="error"></label>
                         </div>
-                        <label for="vacational_rentals" class="error"></label>
+                        <div class="col m6 s12">&nbsp;</div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col m6 s12">
-                        <label>Customer Own Goods:</label>
-                        <div class="input-field">
-                            <input id="customer_own_goods" type="text" name="customer_own_goods">
+                    <div class="row">
+                    	<div class="pull-left">
+                        	<a href="javascript:void(0);" class="waves-effect btn btnPrev" data-corr-link-id="#link-contact-person">Previous</a>
                         </div>
-                        <label for="customer_own_goods" class="error"></label>
+                        <div class="col pull-right">
+                          <button type="submit" class="waves-effect btn">Save</button>
+                          <button type="reset" class="waves-effect btn">Clear</button>
+                        </div>
                     </div>
-                    <div class="col m6 s12">&nbsp;</div>
-                </div>
-                <div class="row">
-                    <div class="col pull-right">
-                      <button type="submit" class="waves-effect btn">Save</button>
-                      <button type="reset" class="waves-effect btn">Clear</button>
-                    </div>
-                </div>
+                </fieldset>
+            </fieldset>
+            </form>
             </div>
         </div>
     </section>
@@ -199,6 +224,30 @@
 @section('js')
 	<script>
     $(document).ready(function () {
+		$('.ctabsleft a.ltab').click(function(e){
+			e.preventDefault();
+		});
+		
+		$('.btnNext').click(function(e) {
+			e.preventDefault();
+			$('.tab-content').css('display', 'none');
+			$(this).parents('.tab-content').next().fadeIn('slow');
+			
+			var corrLink = $(this).data('corr-link-id');
+			$('.ltab').removeClass('isCurrent');
+			$(corrLink).addClass('isCurrent');
+		});
+		
+		$('.btnPrev').click(function(e) {
+			e.preventDefault();
+			$('.tab-content').css('display', 'none');
+			$(this).parents('.tab-content').prev().fadeIn('slow');
+			
+			var corrLink = $(this).data('corr-link-id');
+			$('.ltab').removeClass('isCurrent');
+			$(corrLink).addClass('isCurrent');
+		});
+		
 		$("#country").jqxComboBox({width: '100%', autoDropDownHeight: true});
 		$('#compnay_profile').validate({
 			rules: {
@@ -214,7 +263,6 @@
 					required: true,
 					email: true
 				},
-				website: "required",
 				tax_id_number: "required",
 				logo: {
       				extension: "jpg|jpeg|png"

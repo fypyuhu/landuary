@@ -31,11 +31,11 @@
         <div class="col m10 s12">
             <div class="row">
                 <ul class="ctabs">
-                    <li class="current" data-corr-div-id="#receiving-manifest-div">Receiving Manifests</li>
-                    <li data-corr-div-id="#shipping-manifest-div">Shipping Manifests</li>
+                    <li {{ $type == 'receiving' ? 'class=current' : '' }} data-corr-div-id="#receiving-manifest-div">Receiving Manifests</li>
+                    <li {{ $type == 'shipping' ? 'class=current' : '' }} data-corr-div-id="#shipping-manifest-div">Shipping Manifests</li>
                 </ul>
             </div>
-            <div class="row tab-content first no-topmargin" id="receiving-manifest-div">
+            <div class="row tab-content first no-topmargin" id="receiving-manifest-div" {{ $type == 'receiving' ? 'style=display:block;' : 'style=display:none;' }}>
                 <div class="row no-topmargin" style="margin-bottom:25px;">
                     <div class="col m6 s12">
                         <div class="row">
@@ -74,7 +74,7 @@
                     </fieldset>
                 </div>
             </div>
-            <div class="row tab-content no-topmargin" id="shipping-manifest-div">
+            <div class="row tab-content no-topmargin" id="shipping-manifest-div" {{ $type == 'shipping' ? 'style=display:block;' : 'style=display:none;' }}>
                 <div class="row no-topmargin" style="margin-bottom:25px;">
                     <div class="col m6 s12">
                         <div class="row">

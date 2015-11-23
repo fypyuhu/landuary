@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="row">
-        	<a href="/admin/profile/dashboard" class="waves-effect btn">Finish</a>
+        	<a href="/admin/profile/step4" class="waves-effect btn">Next Step</a>
         </div>
     </div>
 </section>
