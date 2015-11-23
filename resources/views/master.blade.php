@@ -66,13 +66,15 @@
               <div class="col s12">
                 <h4>Reports</h4>
                 <ul class="row">
-                    <li><a href="{{url('admin/manifests')}}">Shipping Manifests</a>
+                    <li><a href="{{url('admin/manifests?type=shipping')}}">Shipping Manifests</a>
                     </li>
-                    <li><a href="{{url('admin/manifests')}}">Receiving Manifests</a>
+                    <li><a href="{{url('admin/manifests?type=receiving')}}">Receiving Manifests</a>
                     </li>
-                    <li><a href="{{url('admin/carts-list')}}">In Cart</a>
+                    <li><a href="{{url('admin/carts-list?type=incoming')}}">Incoming Carts</a>
                     </li>
-                    <li><a href="{{url('admin/carts-list')}}">Out Carts</a>
+                    <li><a href="{{url('admin/carts-list?type=ready')}}">Ready Carts</a>
+                    </li>
+                    <li><a href="{{url('admin/carts-list?type=outgoing')}}">Outgoing Carts</a>
                     </li>
                 </ul>
               </div>
@@ -158,7 +160,7 @@
 -->
   <aside class="yaybar yay-shrink yay-hide-to-small yay-gestures yay-light yay-static">
     <!-- Logo -->
-    <a href="#!" class="brand-logo">
+    <a href="/admin" class="brand-logo">
       <img src="{{URL::asset('images/logo.png')}}" alt="Con">
     </a>
     <!-- /Logo -->
@@ -299,6 +301,10 @@
 		
 		$( ".dropdown-button" ).click(function() {
 		    $('#user-dropdown').slideToggle( "slow" );
+		});
+		
+		$('.content-wrap').click(function(e){
+			$('#reports-nav, #user-dropdown').slideUp( "slow" );
 		});
 		
 	});

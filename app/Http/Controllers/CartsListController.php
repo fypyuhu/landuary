@@ -15,9 +15,9 @@ class CartsListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
-        return view('admin.carts-list.index');
+        return view('admin.carts-list.index', [ 'type' => $request->type ]);
     }
 	
 	public function getShowIncoming() {

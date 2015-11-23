@@ -62,6 +62,8 @@
 @section('js')
 	<script>
     $(document).ready(function () {	
+		$('.ltab').removeClass('isCurrent');
+		$('#link-reset-password').addClass('isCurrent');
 		$('#reset_password').validate({
 			rules: {
 				current_password: "required",

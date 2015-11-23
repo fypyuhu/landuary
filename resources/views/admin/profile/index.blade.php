@@ -120,7 +120,7 @@
                     
                     <div class="row">
                         <div class="col pull-right">
-                          <a href="javascript:void(0);" class="waves-effect btn btnNext">Next</a>
+                          <a href="javascript:void(0);" class="waves-effect btn btnNext" data-corr-link-id="#link-contact-person">Next</a>
                           <button type="reset" class="waves-effect btn">Clear</button>
                         </div>
                     </div>
@@ -151,10 +151,10 @@
                     
                     <div class="row">
                     	<div class="pull-left">
-                        	<a href="javascript:void(0);" class="waves-effect btn btnPrev">Previous</a>
+                        	<a href="javascript:void(0);" class="waves-effect btn btnPrev" data-corr-link-id="#link-company-profile">Previous</a>
                         </div>
                         <div class="col pull-right">
-                          <a href="javascript:void(0);" class="waves-effect btn btnNext">Next</a>
+                          <a href="javascript:void(0);" class="waves-effect btn btnNext" data-corr-link-id="#link-business-model">Next</a>
                           <button type="reset" class="waves-effect btn">Clear</button>
                         </div>
                     </div>
@@ -205,7 +205,7 @@
                     </div>
                     <div class="row">
                     	<div class="pull-left">
-                        	<a href="javascript:void(0);" class="waves-effect btn btnPrev">Previous</a>
+                        	<a href="javascript:void(0);" class="waves-effect btn btnPrev" data-corr-link-id="#link-contact-person">Previous</a>
                         </div>
                         <div class="col pull-right">
                           <button type="submit" class="waves-effect btn">Save</button>
@@ -224,17 +224,28 @@
 @section('js')
 	<script>
     $(document).ready(function () {
+		$('.ctabsleft a.ltab').click(function(e){
+			e.preventDefault();
+		});
 		
 		$('.btnNext').click(function(e) {
 			e.preventDefault();
 			$('.tab-content').css('display', 'none');
 			$(this).parents('.tab-content').next().fadeIn('slow');
+			
+			var corrLink = $(this).data('corr-link-id');
+			$('.ltab').removeClass('isCurrent');
+			$(corrLink).addClass('isCurrent');
 		});
 		
 		$('.btnPrev').click(function(e) {
 			e.preventDefault();
 			$('.tab-content').css('display', 'none');
 			$(this).parents('.tab-content').prev().fadeIn('slow');
+			
+			var corrLink = $(this).data('corr-link-id');
+			$('.ltab').removeClass('isCurrent');
+			$(corrLink).addClass('isCurrent');
 		});
 		
 		$("#country").jqxComboBox({width: '100%', autoDropDownHeight: true});

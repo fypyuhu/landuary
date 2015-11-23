@@ -4,28 +4,28 @@
 <section class="content-wrap" id="customers" style="margin-left:0; width: 1000px; margin:0 auto; padding:0; background:#ffffff; margin-top:25px; margin-bottom:25px;">
     @include('admin.profile.steps')
     <div class="row" style="border:1px solid #d0cece; background:#f5f5f5; padding:30px;">
-        <form name="frm_starting_values" id="pageForm" method="post" action="{{url('admin/profile/initial-values')}}">
+        <form name="frm_starting_values" id="pageForm" method="post" action="/admin/profile/initial-values/{{$iv_id->id}}">
             {{csrf_field()}}
             <fieldset>
                 <legend>Starting Values:</legend>
                 <div class="row">
                 	<label>Invoice Number:</label>
                     <div class="input-field">
-                        <input id="invoice_number" type="text" name="invoice_number">
+                        <input id="invoice_number" type="text" name="invoice_number" value="{{$iv_id->invoice_number}}">
                     </div>
                     <label for="invoice_number" class="error"></label>
                 </div>
                 <div class="row">
                     <label>Standard Tare Weight:</label>
                     <div class="input-field">
-                        <input id="standard_tare_weight" type="text" name="standard_tare_weight">
+                        <input id="standard_tare_weight" type="text" name="standard_tare_weight" value="{{$iv_id->standard_tare_weight}}">
                     </div>
                     <label for="standard_tare_weight" class="error"></label>
                 </div>
                 <div class="row">
                 	<label>Cart Number:</label>
                     <div class="input-field">
-                        <input id="cart_number" type="text" name="cart_number">
+                        <input id="cart_number" type="text" name="cart_number" value="{{$iv_id->cart_number}}">
                     </div>
                     <label for="cart_number" class="error"></label>
                 </div>

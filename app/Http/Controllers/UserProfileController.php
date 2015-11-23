@@ -18,6 +18,7 @@ use App\Models\ItemRelation;
 use App\Models\InitialValue;
 use Hash;
 use DB;
+use Auth;
 
 
 class UserProfileController extends Controller
@@ -173,7 +174,9 @@ class UserProfileController extends Controller
 	
 	public function getStep4() {
 		$current = array('current', 'current', 'current', 'current');
-		return view('admin.profile.step4.index', [ 'current' => $current ]);
+		$user = Auth::user();
+		$iv_id = InitialValue::where('organization_id', '=', $user->organization_id)->get();
+		return view('admin.profile.step4.index', [ 'current' => $current, 'iv_id' => $iv_id[0] ]);
 	}
 	
 	public function getTaxesShow() {
@@ -251,16 +254,15 @@ class UserProfileController extends Controller
         echo "{\"data\":" . json_encode($data) . "}";
 	}
 	
-	public function postInitialValues(Request $request) {
+	public function postInitialValues($id, Request $request) {
 		$user = $request->user();
-		$init_val = new InitialValue;
-		$init_val->organization_id = $user->organization_id;
+		$init_val = InitialValue::find($id);
 		$init_val->invoice_number = $request->invoice_number;
 		$init_val->standard_tare_weight = $request->standard_tare_weight;
 		$init_val->cart_number = $request->cart_number;
 		$init_val->save();
 		
-		return redirect('admin/profile');
+		return redirect('admin');
 	}
 	
 	public function getView(Request $request) {
@@ -268,11 +270,11 @@ class UserProfileController extends Controller
 		$user_id = $user->id;
 		$user_profile = UserProfile::where('user_id', '=', $user_id)->get();
 		$countries = Country::all();
-		return view('admin.profile.view', [ 'user' => $user_profile[0], 'countries' => $countries ]);
+		return view('admin.profile.view', [ 'user' => $user_profile[0], 'countries' => $countries, 'showInitSetup' => true ]);
 	}
 	
 	public function getResetPassword() {
-		return view('admin.profile.resetPassword');
+		return view('admin.profile.resetPassword', [ 'isCurrent' => true ]);
 	}
 	
 	public function postResetPassword(ResetPassword $request) {

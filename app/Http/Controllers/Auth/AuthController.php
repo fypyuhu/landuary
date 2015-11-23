@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Models\UserProfile;
 use App\Models\Organization;
+use App\Models\InitialValue;
 
 class AuthController extends Controller
 {
@@ -71,6 +72,10 @@ class AuthController extends Controller
 		$org = new Organization;
 		$org->name = $request->legal_name;
 		$org->save();
+		
+		$iv = new InitialValue;
+		$iv->organization_id = $org->id;
+		$iv->save();
 		
 		$u = new User;
 		$u->first_name = $request->legal_name;
