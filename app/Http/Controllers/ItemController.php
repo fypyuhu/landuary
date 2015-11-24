@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use App\Http\Requests\EditItemRequest;
+use App\Http\Requests\AddItemRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Item;
 use App\Models\ItemRelation;
@@ -31,7 +32,7 @@ class ItemController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function postCreate(Request $request) {
+    public function postCreate(AddItemRequest $request) {
         $item = new Item;
         $item->name = $request->item_name;
         $item->item_number = $request->item_number;
@@ -85,7 +86,7 @@ class ItemController extends Controller {
         return view('admin.editItem', ['current' => Item::find($id), 'items' => Item::all(), 'parent' => ItemRelation::where('child_id', '=', $id)->first()]);
     }
 
-    public function postEdit($id, Request $request) {
+    public function postEdit($id, EditItemRequest $request) {
         $item = Item::find($id);
         $item->name = $request->item_name;
         $item->item_number = $request->item_number;

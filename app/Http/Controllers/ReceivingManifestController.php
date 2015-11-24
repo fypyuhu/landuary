@@ -11,7 +11,8 @@ use App\Models\CustomerDepartment;
 use App\Models\CustomerIncomingCartItem;
 use App\Models\IncomingCart;
 use App\Models\Item;
-
+use Auth;
+use App\Models\UserProfile;
 class ReceivingManifestController extends Controller
 {
     /**
@@ -63,10 +64,10 @@ class ReceivingManifestController extends Controller
 			$department_from = '';
 			$department_to = '';
 		}
-		
+		$user=UserProfile::where('user_id','=',Auth::user()->id)->first();
 		$items = ReceivingManifest::getCustomerIncomingCartItems($manifest->customer_id, $manifest->date_from, $manifest->date_to);
 		$department_range = array($department_from, $department_to);
-		return view('admin.receiving-manifest.receipt', [ 'manifest' => $manifest, 'customer' => $customer[0], 'departments' => $departments, 'department_range' => $department_range, 'items' => $items ]);
+		return view('admin.receiving-manifest.receipt', [ 'user'=>$user,'manifest' => $manifest, 'customer' => $customer[0], 'departments' => $departments, 'department_range' => $department_range, 'items' => $items ]);
 	}
 	
 	public function getAjaxForm(Request $request) {

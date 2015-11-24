@@ -9,6 +9,8 @@ use App\Models\CustomerDepartment;
 use App\Models\OutgoingCart;
 use App\Models\ShipManifest;
 use App\Models\CustomerOutgoingCartItem;
+use Auth;
+use App\Models\UserProfile;
 class ShipmentController extends Controller
 {
     /**
@@ -53,7 +55,8 @@ class ShipmentController extends Controller
         $manifest=ShipManifest::find($id);
         $customer=Customer::find($manifest->customer_id);
         $items=CustomerOutgoingCartItem::getCartItemsById($id);
-        return view('admin.shiping.recipt',['items'=>$items,'customer'=>$customer,'manifest'=>$manifest]);
+        $user=UserProfile::where('user_id','=',Auth::user()->id)->first();
+        return view('admin.shiping.recipt',['user'=>$user,'items'=>$items,'customer'=>$customer,'manifest'=>$manifest]);
     }
    public function show($id)
     {

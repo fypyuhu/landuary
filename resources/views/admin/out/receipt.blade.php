@@ -16,7 +16,7 @@
     <button class="waves-effect btn" onclick='$("#printable").print();'>Print</button>
     <div class="p-wrapper" style="width:384px;" id="printable">
         <div class="row">
-            <h3 class="align-center">Phonix Scale Company</h3>
+            <h3 class="align-center">{{$organization->name}}</h3>
             <h4 class="align-center">Date: {{$cart->receiving_date}}</h4>
         </div>
         <div class="row">
@@ -29,9 +29,9 @@
         </div>
         <div class="row">
             <h3 class="align-center">
-                Hilton Garden Inn<br />
-                7324 E. Indian School Rd<br />
-                Scottsdale AZ 85207
+                {{$customer->shipping_address}}<br />
+                {{$customer->shipping_city}} {{$customer->shipping_state}}<br />
+                
             </h3>
         </div>
         <div class="row"><h4 class="align-center">Cart #: {{$cart->id}}</h4></div>
@@ -60,7 +60,7 @@
                 Net Weight: {{$cart->net_weight}}
             </div>
         </div>
-        <div class="row align-center">11/09/2015 10:32:01 PM</div>
+        <div class="row align-center">{{date('d/m/Y h:i:s A',time())}}</div>
     </div>
 </section>
 @endsection

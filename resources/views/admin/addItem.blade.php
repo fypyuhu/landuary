@@ -30,7 +30,7 @@
                         <div class="row s12">
                             <label>Number:</label>
                             <div class="input-field">
-                                <input id="item_number" type="text" name="item_number">
+                                <input id="item_number" type="number" name="item_number">
                             </div>
                             <label for="item_number" class="error" id="error-item-number"></label>
                         </div>
@@ -85,10 +85,21 @@
             },
             submitHandler: function (form) {
                 var options = {
-                    success: showResponse
+                    success: showResponse,
+                    error:showError
                 };
                 function showResponse(responseText, statusText, xhr, $form) {
                     location.reload();
+                }
+                function showError(response, statusText, xhr, $form) {
+                   if(response.status==422){
+                        $.each(response.responseJSON, function (key, value) {
+                $("[name='" + key + "']").addClass('error');
+                $("[name='" + key + "']").removeClass('valid');
+                $("[name='" + key + "']").parent().siblings(".error").html(value);
+                $("[name='" + key + "']").parent().siblings(".error").show();
+            })
+                   }
                 }
                 $(form).ajaxSubmit(options);
             }
