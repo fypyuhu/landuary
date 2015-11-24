@@ -448,7 +448,7 @@
         if ($('#parent_item').jqxComboBox('getSelectedIndex') != "-1") {
             var val = $('#parent_item').val();
             var parent = 1;
-            if ($('#child_item').jqxComboBox('getSelectedIndex') != "-1") {
+            if ($('#child_item').jqxComboBox('getSelectedIndex') != "-1" && $('#child_item').jqxComboBox('getSelectedIndex') != "0") {
                 val = $('#child_item').val();
                 parent = 0;
             }
