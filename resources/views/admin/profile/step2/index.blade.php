@@ -1,6 +1,30 @@
 @extends('masterProfile')
 @section('content')
 <!-- Main Content -->
+
+<div id="clone-container" class="hidden">
+    <div class="row records_list">
+        <div class="col m4 s12">
+            <label>Component name</label>
+            <div class="input-field">
+                <input type="text" name="component_name[]" />
+            </div>
+        </div>
+        <div class="col m4 s12">
+            <label>Agency name</label>
+            <div class="input-field">
+                <input type="text" name="component_agency_name[]" />
+            </div>
+        </div>
+        <div class="col m4 s12">
+            <label>Rate</label>
+            <div class="input-field">
+                <input type="text" name="component_tax_rate[]" />
+            </div>
+        </div>
+    </div>
+</div>
+
 <section class="content-wrap" id="customers" style="margin-left:0; width: 1000px; margin:0 auto; padding:0; background:#ffffff; margin-top:25px; margin-bottom:25px;">
     @include('admin.profile.steps')
     <div class="row starter" style="border: 1px solid #d0cece; background:#f5f5f5; padding:30px;">
