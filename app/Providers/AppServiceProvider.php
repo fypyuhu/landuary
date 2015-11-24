@@ -23,9 +23,11 @@ class AppServiceProvider extends ServiceProvider
 		});
 		
 		view()->composer('*', function($view){
-			$user = Auth::user();
-            $initial_values = InitialValue::where('organization_id', '=', $user->organization_id)->first();
-            $view->with( ['initial_values' => $initial_values] );
+			if (Auth::check()) {
+				$user = Auth::user();
+				$initial_values = InitialValue::where('organization_id', '=', $user->organization_id)->first();
+				$view->with( ['initial_values' => $initial_values] );
+			}
 		});
 		
 		view()->composer('auth.register', function($view){
