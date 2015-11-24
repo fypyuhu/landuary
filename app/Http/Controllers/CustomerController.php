@@ -114,7 +114,7 @@ class CustomerController extends Controller {
     public function getGetChildren($id) {
         $sql = "select items.id,items.name from items join item_relation on items.id=item_relation.child_id where items.status=1 AND item_relation.parent_id='" . $id . "'";
         $items = DB::select(DB::raw($sql));
-        $return = "<select name='child_item' id='child_item'>";
+        $return = "<select name='child_item' id='child_item'><option value='-1'>Select Item</option>";
         foreach ($items as $item) {
             $return.="<option value='" . $item->id . "'>" . $item->name . "</option>";
         }
