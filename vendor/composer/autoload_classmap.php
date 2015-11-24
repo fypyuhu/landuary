@@ -554,4 +554,5 @@ return array(
     'UpdateCustomersIncomingCartsItemsTable' => $baseDir . '/database/migrations/2015_11_13_102420_update_customers_incoming_carts_items_table.php',
     'UpdateReceivingManifestTable' => $baseDir . '/database/migrations/2015_11_13_115226_update_receiving_manifest_table.php',
     'UpdateReceivingManifistTable' => $baseDir . '/database/migrations/2015_11_12_181958_update_receiving_manifist_table.php',
+    'UpdateUsersTable' => $baseDir . '/database/migrations/2015_11_24_173416_update_users_table.php',
 );

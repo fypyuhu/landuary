@@ -27,21 +27,14 @@
     </div>
 
     <div class="row logo-sect">
-        <div class="logo-cont pull-left">Logo</div>
+    	@if ($user_profile->logo != '')
+        <div class="logo-cont pull-left">
+            <img src="https://www.truelancer.com/blog/wp-content/uploads/2014/12/afi.png" alt="{{$user->first_name}}" width="100%" height="100%" />
+        </div>
+        @endif
         <div class="pull-left">
-            <h4>Quetzal Works</h4>
-            Thursday, November 19 2015
-        </div>
-    </div>
-
-    <div class="row trial">
-        <div class="alert-content">
-            <span class="secondary-color-sprite alert-icon"></span>
-            <span style="font-size: 16px;"><strong>Your trial ends in 1 day!</strong></span>
-        </div>
-        <div class="alert-content">
-            <span>Feel free to keep testing Laundry Tech.</span>
-            <a href="#">Subscribe Now</a>
+            <h4>{{$user->first_name}}</h4>
+            {{$date}}
         </div>
     </div>
 

@@ -131,8 +131,12 @@ class CustomerController extends Controller {
         return view('admin.customers.itemDetail', ['item' => $item, "parent" => $parent_item]);
     }
 
-    public function getShow() {
-        $customers=  Customer::all();
+    public function getShow(Request $request) {
+		$customers = Customer::all();
+		if ($request->has('search_string')) {
+			$customers = Customer::where('name', 'like', "%$request->search_string%")->orWhere('customer_number', '=', "$request->search_string")->get();
+		}
+		
         $data = array();
         foreach ($customers as $customer) {
             $row = array();

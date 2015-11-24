@@ -334,12 +334,13 @@
 
             <div class="row layout_table" id="item_record_list">
                 <div class="row heading">
-                    <div class="col s3" id="t-category">Item</div>
+                    <div class="col s2">Item</div>
                     <div class="col s2">Sub Item</div>
                     <div class="col s2 right-align">Weight</div>
                     <div class="col s3" id="t-type">Transaction Type</div>
                     <div class="col s2 center-align">Taxable</div>
                     <div class="col s2" style="display:none;" id="price-heading">Price</div>
+                    <div class="col s1">Del</div>
                 </div>
 
                 <div class="row records_list" id="records_list_no_record">
@@ -405,7 +406,18 @@
     }
     function getEditItemDetail(val,single_temp_price)
     {
-        $.ajax({
+		var item_id = val;
+		var stopProcess = false;
+	
+		$(".item-cart").each(function () {
+			if (item_id == $(this).val()) {
+				stopProcess = true;
+				return false;
+			}
+		});
+		
+		if (!stopProcess) {
+        	$.ajax({
                 url: "/admin/customers/item-detail/" + val,
                 context: document.body
             }).done(function (html) {
@@ -428,6 +440,9 @@
                 }
                 $("#"+val+"_price_field").val(single_temp_price);
             });
+		} else {
+        	alert('This item is already in the cart please select another item.');
+        }
     }
     function getItemDetail() {
         if ($('#parent_item').jqxComboBox('getSelectedIndex') != "-1") {
@@ -437,29 +452,43 @@
                 val = $('#child_item').val();
                 parent = 0;
             }
-
-            $.ajax({
-                url: "/admin/customers/item-detail/" + val,
-                context: document.body
-            }).done(function (html) {
-                $('#item_record_list').append(html);
-                $('#records_list_no_record').hide();
-                if ($("#price_by_weight").is(':checked')) {
-                    $('.price-field, #price-heading').css('display', 'none');
-                    $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
-                    $('#div-price-by-weight').fadeIn('slow');
-                }
-                else if ($("#price_by_item").is(':checked')) {
-                    $('#div-price-by-weight').css('display', 'none');
-                    $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
-                    $('.price-field, #price-heading').fadeIn('slow');
-                }
-                else if ($("#price_by_both").is(':checked')) {
-                    $('#div-price-by-weight').fadeIn('slow');
-                    $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
-                    $('.price-field, #price-heading').fadeIn('slow');
+			
+			var item_id = val;
+			var stopProcess = false;
+		
+            $(".item-cart").each(function () {
+                if (item_id == $(this).val()) {
+                    stopProcess = true;
+                    return false;
                 }
             });
+			
+			if (!stopProcess) {
+				$.ajax({
+					url: "/admin/customers/item-detail/" + val,
+					context: document.body
+				}).done(function (html) {
+					$('#item_record_list').append(html);
+					$('#records_list_no_record').hide();
+					if ($("#price_by_weight").is(':checked')) {
+						$('.price-field, #price-heading').css('display', 'none');
+						$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
+						$('#div-price-by-weight').fadeIn('slow');
+					}
+					else if ($("#price_by_item").is(':checked')) {
+						$('#div-price-by-weight').css('display', 'none');
+						$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+						$('.price-field, #price-heading').fadeIn('slow');
+					}
+					else if ($("#price_by_both").is(':checked')) {
+						$('#div-price-by-weight').fadeIn('slow');
+						$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+						$('.price-field, #price-heading').fadeIn('slow');
+					}
+				});
+			} else {
+                alert('This item is already in the cart please select another item.');
+            }
         }
     }
     function checkError(field, id) {

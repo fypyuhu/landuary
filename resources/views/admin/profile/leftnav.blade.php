@@ -24,11 +24,11 @@
                             Reset Password
                         </a>
                     </div>
-                    @if(isset($showInitSetup) && $showInitSetup)
+                    @if(isset($showDashBoard) && $showDashBoard)
                     <div>
-            			<a href="{{url('admin/profile/step1')}}" title="Password &amp; Security">
+            			<a href="{{url('admin/')}}" title="Password &amp; Security">
                             <i class="oIconLock oIconSmall oIconLight oLeftNavIconSmall"></i>
-                            Initial Setup
+                            Dashboard
                         </a>
                     </div>
                     @endif

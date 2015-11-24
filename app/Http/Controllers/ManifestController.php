@@ -16,10 +16,10 @@ class ManifestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex(Request $request)
+    public function getIndex()
     {
         $customers=Customer::all();
-		return view('admin.manifests.index', [ 'customers'=>$customers, 'type' => $request->type ]);
+		return view('admin.manifests.index', [ 'customers'=>$customers ]);
     }
 	
     public function getShowShipping(Request $request)

@@ -1,6 +1,8 @@
 <?php
 
 namespace Illuminate\Foundation\Auth;
+use Auth;
+use App\Models\InitialValue;
 
 trait RedirectsUsers
 {
@@ -12,7 +14,13 @@ trait RedirectsUsers
     public function redirectPath()
     {
         if (property_exists($this, 'redirectPath')) {
-            return $this->redirectPath;
+			$visited = Auth::user()->visited;
+			
+			if($visited > 0) {
+            	return '/admin';
+			} else {
+				return $this->redirectPath;
+			}
         }
 
         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';

@@ -65,16 +65,12 @@
           <div class="row">
               <div class="col s12">
                 <h4>Reports</h4>
-                <ul class="row">
-                    <li><a href="{{url('admin/manifests?type=shipping')}}">Shipping Manifests</a>
+                <ul class="row" style="width:100%;">
+                    <li><a href="{{url('admin/manifests')}}">Manifests</a>
                     </li>
-                    <li><a href="{{url('admin/manifests?type=receiving')}}">Receiving Manifests</a>
+                    <li><a href="{{url('admin/carts-list')}}">Carts</a>
                     </li>
-                    <li><a href="{{url('admin/carts-list?type=incoming')}}">Incoming Carts</a>
-                    </li>
-                    <li><a href="{{url('admin/carts-list?type=ready')}}">Ready Carts</a>
-                    </li>
-                    <li><a href="{{url('admin/carts-list?type=outgoing')}}">Outgoing Carts</a>
+                    <li><a href="javascript:void(0);">Invoices</a>
                     </li>
                 </ul>
               </div>
@@ -123,7 +119,7 @@
                     <ul class="col s6">
                     	<li><a href="javascript:void(0);">Company Profile</a>
                         </li>
-                        <li><a href="{{url('admin/profile')}}">Account</a>
+                        <li><a href="{{url('admin/profile/view')}}">Account</a>
                         </li>
                         <li><a href="javascript:void(0);">Users</a>
                         </li>
@@ -168,6 +164,10 @@
       <div class="nano-content">
         <ul>
           <li class="label">Menu</li>
+          <li>
+            <a href="{{url('admin')}}" class="waves-effect waves-blue fag fa-homec">Dashboard</a>
+          </li>
+          
           <li>
             <a href="{{url('admin/in')}}" class="waves-effect waves-blue fag fa-in">In</a>
           </li>

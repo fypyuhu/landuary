@@ -32,9 +32,9 @@ class UserProfileController extends Controller
     {
 		$user = $request->user();
 		$user_id = $user->id;
-		$user_profile = UserProfile::where('user_id', '=', $user_id)->get();
+		$user_profile = UserProfile::where('user_id', '=', $user_id)->first();
 		$countries = Country::all();
-        return view('admin.profile.index', ['countries'=>$countries, 'user' => $user_profile[0]]);
+        return view('admin.profile.index', ['countries'=>$countries, 'user' => $user_profile]);
     }
 
     /**
@@ -108,7 +108,7 @@ class UserProfileController extends Controller
 		$up->vacational_rentals = $request->vacational_rentals;
 		$up->customer_own_goods = $request->customer_own_goods;*/
 		$up->save();
-		return redirect('admin/profile/view');
+		return redirect('admin/profile/step1');
     }
 
     /**
@@ -262,6 +262,10 @@ class UserProfileController extends Controller
 		$init_val->cart_number = $request->cart_number;
 		$init_val->save();
 		
+		$user = User::find($user->id);
+		$user->visited = 1;
+		$user->save();
+		
 		return redirect('admin');
 	}
 	
@@ -270,7 +274,7 @@ class UserProfileController extends Controller
 		$user_id = $user->id;
 		$user_profile = UserProfile::where('user_id', '=', $user_id)->get();
 		$countries = Country::all();
-		return view('admin.profile.view', [ 'user' => $user_profile[0], 'countries' => $countries, 'showInitSetup' => true ]);
+		return view('admin.profile.view', [ 'user' => $user_profile[0], 'countries' => $countries, 'showDashBoard' => true ]);
 	}
 	
 	public function getResetPassword() {

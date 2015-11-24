@@ -12,7 +12,7 @@
                             <label for="item_name" class="error" id="error-item-name"></label>
                         </div>
                         <div class="row">
-                            <button type="submit" class="waves-effect btn">Save</button>
+                            <button type="submit" class="waves-effect btn">Yes</button>
                         </div>
                     </form>
                 </fieldset>

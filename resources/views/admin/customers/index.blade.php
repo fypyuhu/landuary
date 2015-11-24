@@ -33,6 +33,20 @@
             <fieldset>
                 <legend>Customer List:</legend>
                 <div class="row box">
+                	<form id="search_form">
+                	<div class="row" style="margin-bottom:15px;">
+                      <div class="pull-left">
+                          <label style="font-size:12px;">Search by Customer Name or Customer Number</label>
+                          <div class="input-field">
+                            <input id="search_string" type="text" name="search_string">
+                          </div>
+                          <label for="search_string" class="error"></label>
+                      </div>
+                      <div class="pull-left" style="padding-top:19px; padding-left:10px;">
+ 						  <button type="submit" class="waves-effect btn">Search</button>                  
+                      </div>
+                    </div>
+                    </form>
                     <div id="jqxgrid"></div>
                 </div>
                 <div class="row">
@@ -50,10 +64,27 @@
 @section('js')
 <script type="text/javascript">
     $(document).ready(function () {
-
-
-
-        var url = "{{url('admin/customers/show')}}";
+		$("#search_form").validate({
+            rules: {
+                search_string: "required"
+            }
+        });
+		
+		var url = '';
+		$("#search_form").submit(function(e){
+			e.preventDefault();
+			if($('#search_string').val() != '') {
+				var querystring = '?search_string='+$('#search_string').val();
+				url = "{{url('admin/customers/show')}}";
+				loadTable(url+querystring);
+			}
+		});
+		
+        url = url = "{{url('admin/customers/show')}}";
+		loadTable(url);
+    });
+	
+	function loadTable(url) {
         // prepare the data
         var source =
                 {
@@ -86,7 +117,7 @@
                         {text: 'Actions', width:'20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
-    });
+	}
 </script>
 
 @endsection

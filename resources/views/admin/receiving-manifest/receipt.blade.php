@@ -4,6 +4,7 @@
   <section class="content-wrap">
     <div class="p-wrapper">
     	<div class="row">
+        	<a href="/admin/receiving-manifest" class="waves-effect btn">Back</a>
             <button type="submit" class="waves-effect btn">Print</button>
         </div>
         <div class="row">

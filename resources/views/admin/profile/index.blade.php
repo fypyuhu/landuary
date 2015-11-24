@@ -229,13 +229,42 @@
 		});
 		
 		$('.btnNext').click(function(e) {
-			e.preventDefault();
-			$('.tab-content').css('display', 'none');
-			$(this).parents('.tab-content').next().fadeIn('slow');
+			var form = $("#compnay_profile");
+			form.validate({
+				rules: {
+					legal_name: "required",
+					street_address: "required",
+					city: "required",
+					state: "required",
+					zipcode: "required",
+					country: "required",
+					phone: "required",
+					fax: "required",
+					email: {
+						required: true,
+						email: true
+					},
+					tax_id_number: "required",
+					logo: {
+						extension: "jpg|jpeg|png"
+					},
+					contact_name: "required",
+					contact_designation: "required",
+					contact_email: {
+						required: true,
+						email: true
+					}
+				}
+			});
 			
-			var corrLink = $(this).data('corr-link-id');
-			$('.ltab').removeClass('isCurrent');
-			$(corrLink).addClass('isCurrent');
+			if (form.valid() == true) {
+				$('.tab-content').css('display', 'none');
+				$(this).parents('.tab-content').next().fadeIn('slow');
+				
+				var corrLink = $(this).data('corr-link-id');
+				$('.ltab').removeClass('isCurrent');
+				$(corrLink).addClass('isCurrent');
+			}
 		});
 		
 		$('.btnPrev').click(function(e) {
@@ -249,32 +278,6 @@
 		});
 		
 		$("#country").jqxComboBox({width: '100%', autoDropDownHeight: true});
-		$('#compnay_profile').validate({
-			rules: {
-				legal_name: "required",
-				street_address: "required",
-				city: "required",
-				state: "required",
-				zipcode: "required",
-				country: "required",
-				phone: "required",
-				fax: "required",
-				email: {
-					required: true,
-					email: true
-				},
-				tax_id_number: "required",
-				logo: {
-      				extension: "jpg|jpeg|png"
-				},
-				contact_name: "required",
-				contact_designation: "required",
-				contact_email: {
-					required: true,
-					email: true
-				}
-			}
-		});
 	});
 	</script>
 @endsection

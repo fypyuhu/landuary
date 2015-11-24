@@ -12,7 +12,7 @@
  */
 
 Route::get('/', ['middleware' => 'guest', ['except' => 'getLogout'], function () {
-return view('welcome');
+	return view('welcome');
 }]);
 Route::get('/logout', function () {
     Auth::logout();
