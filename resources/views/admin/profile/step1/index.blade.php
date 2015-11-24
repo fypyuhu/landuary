@@ -4,7 +4,7 @@
 <section class="content-wrap" id="customers" style="margin-left:0; width: 1000px; margin:0 auto; padding:0; background:#ffffff; margin-top:25px; margin-bottom:25px;">
     @include('admin.profile.steps')
     <div class="row" style="border: 1px solid #d0cece; background:#f5f5f5; padding:30px;">
-        <a data-mode="ajax" href="/admin/customers/create" class="waves-effect btn create-clone-button">Add Item</a>
+        <a data-mode="ajax" href="/admin/items/create" class="waves-effect btn create-clone-button">Add Item</a>
         <div class="row no-rightmargin">
             <div class="col s12">
                 <fieldset>

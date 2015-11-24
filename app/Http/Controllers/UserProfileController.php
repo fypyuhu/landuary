@@ -180,7 +180,7 @@ class UserProfileController extends Controller
 	}
 	
 	public function getTaxesShow() {
-		$records = Tax::take(1)->get();
+		$records = Tax::all();
         $data = array();
         foreach ($records as $record) {
             $row = array();
@@ -213,7 +213,7 @@ class UserProfileController extends Controller
 	}
 	
 	public function getItemsShow() {
-		$items = DB::select(DB::raw('SELECT * FROM `items` where id not in (select child_id from item_relation) AND items.status=1 LIMIT 1'));
+		$items = DB::select(DB::raw('SELECT * FROM `items` where id not in (select child_id from item_relation) AND items.status=1'));
         $data = array();
         foreach ($items as $item) {
             $row = array();
@@ -241,7 +241,7 @@ class UserProfileController extends Controller
 	}
 	
 	public function getCustomersShow() {
-		$records = Customer::take(1)->get();
+		$records = Customer::all();
         $data = array();
         foreach ($records as $record) {
             $row = array();
