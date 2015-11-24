@@ -48,13 +48,13 @@
                   </select>
               </div>
               <div class="input-field" id="non-tracked-cart-div" >
-                  	<input id="cart_number_textfield" type="text" value="44" readonly="readonly" name="cart_number_textfield">
+                  	<input id="cart_number_textfield" type="text" value="{{$initial_values->cart_number}}" readonly="readonly" name="cart_number_textfield">
                   </div>
                 </div>
                 <div class="col m4 s12">
                   <label>Tare Weight</label>
                   <div class="input-field">
-                    <input id="tare_weight"  value="100" type="text" name="tare_weight" readonly="readonly">
+                    <input id="tare_weight"  value="{{$initial_values->standard_tare_weight}}" type="text" name="tare_weight" readonly="readonly">
                   </div>
                 </div>
             <div class="col m4 s12">

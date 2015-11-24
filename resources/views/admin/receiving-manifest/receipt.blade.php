@@ -12,9 +12,9 @@
         </div>
         <div class="row">
             <div class="pull-left">
-                <h4>Phoenix Scale Company</h4>
-                <p style="font-size:17px;">6802N. 47th Ave.<br />Ste 9<br />Glendale AZ 85301</p>
-                <p>Phone: (800) 326-9860</p>
+                <h4>{{$user->legal_name}}</h4>
+            <p style="font-size:17px;">{{$user->street_address}}<br />{{$user->state}}<br />{{$user->city}}</p>
+            <p>Phone: {{$user->phone}}</p>
             </div>
             <div class="pull-right">
                 <p>Manifest #: {{$manifest->id}}<br />

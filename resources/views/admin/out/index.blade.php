@@ -75,12 +75,12 @@
                                     </select>
                                 </div>
                                 <div class="input-field" id="non-tracked-cart-div" s>
-                                    <input id="cart_number_textfield" type="text" name="cart_number_textfield" placeholder="Cart Number">
+                                    <input id="cart_number_textfield" type="text" value="{{$initial_values->cart_number}}" name="cart_number_textfield" placeholder="Cart Number">
                                 </div>
                             </div>
                             <div class="col m4 s12">
                                 <div class="input-field">
-                                    <input id="tare_weight" type="text" value="100" name="tare_weight" placeholder="Tare Weight" readonly="readonly">
+                                    <input id="tare_weight" type="text" value="{{$initial_values->standard_tare_weight}}" name="tare_weight" placeholder="Tare Weight" readonly="readonly">
                                 </div>
                             </div>
                             <div class="col m4 s12">

@@ -11,7 +11,10 @@ use App\Models\Item;
 use App\Models\CustomerOutgoingCartItem;
 use App\Models\Customer;
 use App\Models\CustomerDepartment;
+use App\Models\InitialValue;
+use App\Models\Organization;
 use DB;
+use Auth;
 
 class OutController extends Controller
 {
@@ -39,7 +42,7 @@ class OutController extends Controller
 					->join('customers_items', 'items.id', '=', 'customers_items.item_id')
 					->select('items.*')
 					->where('items.status', '>', 0)
-                                        ->where('items.transaction_type', '=', 'Out')
+                                        ->where('items.transaction_type', '!=', 'In')
 					->where('customers_items.customer_id', '=', $request->customer_id)
 					->get();
 		$customers = Customer::all();
@@ -83,12 +86,18 @@ class OutController extends Controller
 		$ogc->gross_weight = $request->gross_weight;
 		$ogc->net_weight = $request->net_weight;
 		$ogc->status = 'Ready';
-		if ($request->has('is_exchange_cart')) {
-			$ogc->is_exchange_cart = $request->is_exchange_cart;
-			$ogc->cart_id = $request->cart_number_dropdown;
-		} else {
-			$ogc->cart_id = $request->cart_number_textfield;
-		}
+		if($request->has('is_exchange_cart')){
+                    $ogc->cart_id=$request->cart_number_dropdown;
+                    $ogc->is_exchange_cart=1;
+                }
+                else{
+                    $user = Auth::user();
+                    $initial_values = InitialValue::where('organization_id', '=', $user->organization_id)->first();
+                    $ogc->cart_id=$initial_values->cart_number;
+                    $ogc->is_exchange_cart=0;
+                    $initial_values->cart_number=$initial_values->cart_number+1;
+                    $initial_values->save();
+                }
 		
 		$ogc->save();
 		
@@ -107,10 +116,13 @@ class OutController extends Controller
         $department=CustomerDepartment::find($cart->department_id);
         $customer=Customer::find($cart->customer_id);
         $items=CustomerOutgoingCartItem::getItems($id);
+        $user = Auth::user();
+        $organization = Organization::find($user->organization_id);
         return view('admin.out.receipt',['cart'=>$cart,
             'department'=>$department,
             'customer'=>$customer,
-            'items'=>$items]);
+            'items'=>$items,
+            'organization'=>$organization]);
     }
     /**
      * Store a newly created resource in storage.

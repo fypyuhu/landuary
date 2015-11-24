@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Auth;
 use App\Models\UserProfile;
 use App\Models\Country;
-
+use App\Models\InitialValue;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -20,6 +20,12 @@ class AppServiceProvider extends ServiceProvider
 			$user = Auth::user();
 			$user_profile = UserProfile::where('user_id', '=', $user->id)->get();
 			$view->with( ['user' => $user, 'user_profile' => $user_profile[0], 'date' => date('D, F d Y') ] );
+		});
+		
+		view()->composer('*', function($view){
+			$user = Auth::user();
+            $initial_values = InitialValue::where('organization_id', '=', $user->organization_id)->first();
+            $view->with( ['initial_values' => $initial_values] );
 		});
 		
 		view()->composer('auth.register', function($view){
