@@ -54,253 +54,255 @@
                 <li data-corr-div-id=".items-tab">Items</li>
             </ul>
         </div>
-        <section class="row tab-content no-topmargin first" id="address-tab">
-            <fieldset style="margin-bottom:0;">
-                <legend>Address</legend>
-                <h2>Shipping Address</h2>
-                <div class="row">
-                    <div class="col m12 s12">
-                        <label>Address:</label>
-                        <div class="input-field">
-                            <input id="ship_to_address" onblur="return checkError('Adress', 'ship_to_address')" type="text" name="ship_to_address">
-                        </div>
-                        <label for="ship_to_address" class="error" id="error-ship_to_address"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col m4 s12">
-                        <label>City:</label>
-                        <div class="input-field">
-                            <input id="ship_to_city" type="text" name="ship_to_city" onblur="return checkError('City', 'ship_to_city')">
-                        </div>
-                        <label for="ship_to_city" class="error" id="error-ship_to_city"></label>
-                    </div>
-                    <div class="col m4 s12">
-                        <label>State:</label>
-                        <div class="input-field">
-                            <input id="ship_to_state" type="text" name="ship_to_state" onblur="return checkError('Sate', 'ship_to_state')">
-                        </div>
-                        <label for="ship_to_state" class="error" id="error-ship_to_state"></label>
-                    </div>
-                    <div class="col m4 s12">
-                        <label>Zipcode:</label>
-                        <div class="input-field">
-                            <input id="ship_to_zipcode" type="text" name="ship_to_zipcode" onblur="return checkError('Zipcode', 'ship_to_zipcode')">
-                        </div>
-                        <label for="ship_to_zipcode" class="error" id="error-ship_to_zipcode"></label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col m6 s12">
-                        <label>Phone:</label>
-                        <div class="input-field">
-                            <input id="phone" type="text" name="phone" onblur="return checkError('Phone', 'phone')">
-                        </div>
-                        <label for="phone" class="error" id="error-phone"></label>
-                    </div>
-                    <div class="col m6 s12">
-                        <label>Fax:</label>
-                        <div class="input-field">
-                            <input id="fax" type="text" name="fax">
-                        </div>
-                        <label for="fax" class="error" id="error-fax"></label>
-                    </div>
-                </div>
-                <h2>Billing Address</h2>
-                <div class="row">
-                    <div class="col m6 s12">
-                        <input type="radio" name="billing_address" value="1" id="add_billing_address" data-corr-div-id="#billing-address-div" class="radiobutton" /><label for="add_billing_address">Add Billing Address</label>
-                    </div>
-                    <div class="col m6 s12">
-                        <input type="radio" name="billing_address" value="0" id="same_as_shipping" checked="checked" data-corr-div-id="#billing-address-div" /><label for="same_as_shipping" style="margin-right:0;">Same as Shipping Address</label>
-                    </div>
-                </div>
-                <div style="display:none;" id="billing-address-div">
+        <div class="row tab-content-group">
+            <section class="row tab-content no-topmargin first" id="address-tab">
+                <fieldset style="margin-bottom:0;">
+                    <legend>Address</legend>
+                    <h2>Shipping Address</h2>
                     <div class="row">
                         <div class="col m12 s12">
                             <label>Address:</label>
                             <div class="input-field">
-                                <input id="billing_ship_to_address" type="text" name="billing_ship_to_address" onblur="return checkError('Address', 'billing_ship_to_address')">
+                                <input id="ship_to_address" onblur="return checkError('Adress', 'ship_to_address')" type="text" name="ship_to_address">
                             </div>
-                            <label for="billing_ship_to_address" class="error" id="error-billing_ship_to_address"></label>
+                            <label for="ship_to_address" class="error" id="error-ship_to_address"></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col m4 s12">
                             <label>City:</label>
                             <div class="input-field">
-                                <input id="billing_ship_to_city" type="text" name="billing_ship_to_city" onblur="return checkError('City', 'billing_ship_to_city')">
+                                <input id="ship_to_city" type="text" name="ship_to_city" onblur="return checkError('City', 'ship_to_city')">
                             </div>
-                            <label for="billing_ship_to_city" class="error" id="error-billing_ship_to_city"></label>
+                            <label for="ship_to_city" class="error" id="error-ship_to_city"></label>
                         </div>
                         <div class="col m4 s12">
                             <label>State:</label>
                             <div class="input-field">
-                                <input id="billing_ship_to_state" type="text" name="billing_ship_to_state" onblur="return checkError('State', 'billing_ship_to_state')">
+                                <input id="ship_to_state" type="text" name="ship_to_state" onblur="return checkError('Sate', 'ship_to_state')">
                             </div>
-                            <label for="billing_ship_to_state" class="error" id="error-billing_ship_to_state"></label>
+                            <label for="ship_to_state" class="error" id="error-ship_to_state"></label>
                         </div>
                         <div class="col m4 s12">
                             <label>Zipcode:</label>
                             <div class="input-field">
-                                <input id="billing_ship_to_zipcode" type="text" name="billing_ship_to_zipcode" onblur="return checkError('Zipcode', 'billing_ship_to_zipcode')">
+                                <input id="ship_to_zipcode" type="text" name="ship_to_zipcode" onblur="return checkError('Zipcode', 'ship_to_zipcode')">
                             </div>
-                            <label for="billing_ship_to_zipcode" class="error" id="error-billing_ship_to_zipcode"></label>
+                            <label for="ship_to_zipcode" class="error" id="error-ship_to_zipcode"></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col m6 s12">
                             <label>Phone:</label>
                             <div class="input-field">
-                                <input id="billing_phone" type="text" name="billing_phone" onblur="return checkError('Phone', 'billing_phone')">
+                                <input id="phone" type="text" name="phone" onblur="return checkError('Phone', 'phone')">
                             </div>
-                            <label for="billing_phone" class="error" id="error-billing_phone"></label>
+                            <label for="phone" class="error" id="error-phone"></label>
                         </div>
                         <div class="col m6 s12">
                             <label>Fax:</label>
                             <div class="input-field">
-                                <input id="billing_fax" type="text" name="billing_fax">
+                                <input id="fax" type="text" name="fax">
                             </div>
-                            <label for="billing_fax" class="error" id="error-billing_fax"></label>
+                            <label for="fax" class="error" id="error-fax"></label>
                         </div>
                     </div>
-                </div>
-            </fieldset>
-        </section>
-        <section class="row tab-content no-topmargin" id="billing-tab">
-            <fieldset>
-                <legend>Billing</legend>
-                <div class="row">
-                    <div class="col m4 s12">
-                        <label>Bill Type:</label>
-                        <select name="bill_type" id="bill_type">
-                            <option value="In">In</option>
-                            <option value="Out" selected="selected">Out</option>
-                        </select>
-                        <label for="bill_type" class="error" id="error-bill_type"></label>
-                    </div>
-                    <div class="col m8 s12">
-                        <label>Terms:</label>
-                        <div class="input-field">
-                            <input id="terms" type="text" name="terms" onblur="return checkError('Terms', 'terms')">
+                    <h2>Billing Address</h2>
+                    <div class="row">
+                        <div class="col m6 s12">
+                            <input type="radio" name="billing_address" value="1" id="add_billing_address" data-corr-div-id="#billing-address-div" class="radiobutton" /><label for="add_billing_address">Add Billing Address</label>
                         </div>
-                        <label for="terms" class="error" id="error-terms"></label>
-                        <div>
-                            <label>Days Due:</label>
+                        <div class="col m6 s12">
+                            <input type="radio" name="billing_address" value="0" id="same_as_shipping" checked="checked" data-corr-div-id="#billing-address-div" /><label for="same_as_shipping" style="margin-right:0;">Same as Shipping Address</label>
+                        </div>
+                    </div>
+                    <div style="display:none;" id="billing-address-div">
+                        <div class="row">
+                            <div class="col m12 s12">
+                                <label>Address:</label>
+                                <div class="input-field">
+                                    <input id="billing_ship_to_address" type="text" name="billing_ship_to_address" onblur="return checkError('Address', 'billing_ship_to_address')">
+                                </div>
+                                <label for="billing_ship_to_address" class="error" id="error-billing_ship_to_address"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col m4 s12">
+                                <label>City:</label>
+                                <div class="input-field">
+                                    <input id="billing_ship_to_city" type="text" name="billing_ship_to_city" onblur="return checkError('City', 'billing_ship_to_city')">
+                                </div>
+                                <label for="billing_ship_to_city" class="error" id="error-billing_ship_to_city"></label>
+                            </div>
+                            <div class="col m4 s12">
+                                <label>State:</label>
+                                <div class="input-field">
+                                    <input id="billing_ship_to_state" type="text" name="billing_ship_to_state" onblur="return checkError('State', 'billing_ship_to_state')">
+                                </div>
+                                <label for="billing_ship_to_state" class="error" id="error-billing_ship_to_state"></label>
+                            </div>
+                            <div class="col m4 s12">
+                                <label>Zipcode:</label>
+                                <div class="input-field">
+                                    <input id="billing_ship_to_zipcode" type="text" name="billing_ship_to_zipcode" onblur="return checkError('Zipcode', 'billing_ship_to_zipcode')">
+                                </div>
+                                <label for="billing_ship_to_zipcode" class="error" id="error-billing_ship_to_zipcode"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col m6 s12">
+                                <label>Phone:</label>
+                                <div class="input-field">
+                                    <input id="billing_phone" type="text" name="billing_phone" onblur="return checkError('Phone', 'billing_phone')">
+                                </div>
+                                <label for="billing_phone" class="error" id="error-billing_phone"></label>
+                            </div>
+                            <div class="col m6 s12">
+                                <label>Fax:</label>
+                                <div class="input-field">
+                                    <input id="billing_fax" type="text" name="billing_fax">
+                                </div>
+                                <label for="billing_fax" class="error" id="error-billing_fax"></label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+            <section class="row tab-content no-topmargin" id="billing-tab">
+                <fieldset>
+                    <legend>Billing</legend>
+                    <div class="row">
+                        <div class="col m4 s12">
+                            <label>Bill Type:</label>
+                            <select name="bill_type" id="bill_type">
+                                <option value="In">In</option>
+                                <option value="Out" selected="selected">Out</option>
+                            </select>
+                            <label for="bill_type" class="error" id="error-bill_type"></label>
+                        </div>
+                        <div class="col m8 s12">
+                            <label>Terms:</label>
                             <div class="input-field">
-                                <input id="days_due" type="text" name="days_due" onblur="return checkError('Days Due', 'days_due')">
+                                <input id="terms" type="text" name="terms" onblur="return checkError('Terms', 'terms')">
                             </div>
-                            <label for="days_due" class="error" id="error-days_due"></label>
+                            <label for="terms" class="error" id="error-terms"></label>
+                            <div>
+                                <label>Days Due:</label>
+                                <div class="input-field">
+                                    <input id="days_due" type="text" name="days_due" onblur="return checkError('Days Due', 'days_due')">
+                                </div>
+                                <label for="days_due" class="error" id="error-days_due"></label>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>Tax</legend>
-                <div class="row">
-                    <div class="col s12">
-                        <input type="radio" value="1" name="chkbx_taxable" checked="checked" id="chkbx_taxable" data-set-class=".set-taxable" data-corr-div-id="#taxable-div" class="radiobutton">
-                        <label for="chkbx_taxable">Taxable</label>
-                    </div>
-                    <div class="col s12">
-                        <input type="radio" value="0" name="chkbx_taxable" id="chkbx_taxable_exampt" data-set-class=".set-taxable" data-corr-div-id="#taxable-exampt-div" class="radiobutton">
-                        <label for="chkbx_taxable_exampt">Tax Exempt</label>
-                    </div>
-                </div>
-                <div class="row set-taxable" style="display: none;" id="taxable-exampt-div">
+                </fieldset>
+                <fieldset>
+                    <legend>Tax</legend>
                     <div class="row">
-                        <label>Please upload tax exempt certificate:</label>
-                        <div>
-                            <input type="file" name="exemp_certificate" id="exemp_certificate" onchange="return taxError()"/>
+                        <div class="col s12">
+                            <input type="radio" value="1" name="chkbx_taxable" checked="checked" id="chkbx_taxable" data-set-class=".set-taxable" data-corr-div-id="#taxable-div" class="radiobutton">
+                            <label for="chkbx_taxable">Taxable</label>
+                        </div>
+                        <div class="col s12">
+                            <input type="radio" value="0" name="chkbx_taxable" id="chkbx_taxable_exampt" data-set-class=".set-taxable" data-corr-div-id="#taxable-exampt-div" class="radiobutton">
+                            <label for="chkbx_taxable_exampt">Tax Exempt</label>
                         </div>
                     </div>
-                    <div class="row">OR</div>
-                    <div class="row">
+                    <div class="row set-taxable" style="display: none;" id="taxable-exampt-div">
+                        <div class="row">
+                            <label>Please upload tax exempt certificate:</label>
+                            <div>
+                                <input type="file" name="exemp_certificate" id="exemp_certificate" onchange="return taxError()"/>
+                            </div>
+                        </div>
+                        <div class="row">OR</div>
+                        <div class="row">
+                            <div class="col s6">
+                                <label>Reseller Number:</label>
+                                <div class="input-field">
+                                    <input type="text" name="reseller_number" id="reseller_number" onblur="return taxError()"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label  class="error" id="error-examp_tax"></label>
+                    <div class="row set-taxable"  id="taxable-div">
                         <div class="col s6">
-                            <label>Reseller Number:</label>
-                            <div class="input-field">
-                                <input type="text" name="reseller_number" id="reseller_number" onblur="return taxError()"/>
-                            </div>
+                            <label>Sales Tax:</label>
+                            <select name="sales_tax_authority" id="sales_tax_authority">
+                                @foreach($taxes as $tax)
+                                <option value="{{$tax->id}}">{{$tax->tax_name}}</option>
+                                @endforeach
+                            </select>
+                            <label for="sales_tax_authority" class="error" id="error-sales_tax_authority"></label>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+            <section class="row tab-content no-topmargin items-tab">
+                <div class="row price-div-set" id="div-price-by-weight" style="margin-bottom:15px; ">
+                    <div class="col m3 s12" style="margin-top:0;">
+                        <label>Price Per lb/kg:</label>
+                        <div class="input-field">
+                            <input id="price-by-weight" type="text" name="price_by_weight">
+                        </div>
+                        <label for="price-by-weight" class="error" id="error-price-by-weight"></label>
+                    </div>
+                </div>
+    
+                <div class="row layout_table" style="margin-top:0;">
+                    <div class="row heading">
+                        <div class="col s5">Item </div>
+                        <div class="col s5">Sub Item</div>
+                        <div class="col s2 center-align">Assign</div>
+                    </div>
+                    <div class="row records_list">
+                        <div class="col s5">
+                            <select name="parent_item" id="parent_item">
+                                @foreach($parent_items as $item)
+                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <label for="bill_type" class="error" id="error-bill_type"></label>
+                        <div class="col s5" id="child_select_box_div">
+                            <select name="child_item" id="child_item">
+    
+                            </select>
+                        </div>
+                        <label for="bill_type" class="error" id="error-bill_type"></label>
+                        <div class="col s2 center-align">
+                            <button class="waves-effect btn" type="button" onclick="getItemDetail()">+</button>
                         </div>
                     </div>
                 </div>
-                <label  class="error" id="error-examp_tax"></label>
-                <div class="row set-taxable"  id="taxable-div">
-                    <div class="col s6">
-                        <label>Sales Tax:</label>
-                        <select name="sales_tax_authority" id="sales_tax_authority">
-                            @foreach($taxes as $tax)
-                            <option value="{{$tax->id}}">{{$tax->tax_name}}</option>
-                            @endforeach
-                        </select>
-                        <label for="sales_tax_authority" class="error" id="error-sales_tax_authority"></label>
+    
+                <div class="row layout_table" id="item_record_list">
+                    <div class="row heading">
+                        <div class="col s2">Item</div>
+                        <div class="col s2">Sub Item</div>
+                        <div class="col s2 right-align">Weight</div>
+                        <div class="col s3" id="t-type">Transaction Type</div>
+                        <div class="col s2 center-align">Taxable</div>
+                        <div class="col s2" style="display:none;" id="price-heading">Price</div>
+                        <div class="col s1">Del</div>
+                    </div>
+    
+                    <div class="row records_list" id="records_list_no_record">
+                        <div class="col s12 center-align"><strong>No products have been assigned to this customer yet.</strong></div>
                     </div>
                 </div>
-            </fieldset>
-        </section>
-        <section class="row tab-content no-topmargin items-tab">
-            <div class="row price-div-set" id="div-price-by-weight" style="margin-bottom:15px; ">
-                <div class="col m3 s12" style="margin-top:0;">
-                    <label>Price Per lb/kg:</label>
-                    <div class="input-field">
-                        <input id="price-by-weight" type="text" name="price_by_weight">
-                    </div>
-                    <label for="price-by-weight" class="error" id="error-price-by-weight"></label>
+            </section>
+            <section style="margin-top:15px; display:none;" class="items-tab tab-content">
+                <legend>Pricing</legend>
+                <div class="row">
+                    <strong style="margin-right: 15px;">Select billing by:</strong>
+                    <input type="radio" value="0" checked="checked" name="price_option" id="price_by_weight" class="pricing-rd-btn" /><label for="price_by_weight">Weight</label>
+                    <input type="radio" value="1" name="price_option" id="price_by_item" class="pricing-rd-btn" /><label for="price_by_item">Item</label>
+                    <input type="radio" value="2" name="price_option" id="price_by_both" class="pricing-rd-btn" /><label for="price_by_both">Both</label>
                 </div>
-            </div>
-
-            <div class="row layout_table" style="margin-top:0;">
-                <div class="row heading">
-                    <div class="col s5">Item </div>
-                    <div class="col s5">Sub Item</div>
-                    <div class="col s2 center-align">Assign</div>
-                </div>
-                <div class="row records_list">
-                    <div class="col s5">
-                        <select name="parent_item" id="parent_item">
-                            @foreach($parent_items as $item)
-                            <option value="{{$item->id}}">{{$item->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <label for="bill_type" class="error" id="error-bill_type"></label>
-                    <div class="col s5" id="child_select_box_div">
-                        <select name="child_item" id="child_item">
-
-                        </select>
-                    </div>
-                    <label for="bill_type" class="error" id="error-bill_type"></label>
-                    <div class="col s2 center-align">
-                        <button class="waves-effect btn" type="button" onclick="getItemDetail()">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row layout_table" id="item_record_list">
-                <div class="row heading">
-                    <div class="col s2">Item</div>
-                    <div class="col s2">Sub Item</div>
-                    <div class="col s2 right-align">Weight</div>
-                    <div class="col s3" id="t-type">Transaction Type</div>
-                    <div class="col s2 center-align">Taxable</div>
-                    <div class="col s2" style="display:none;" id="price-heading">Price</div>
-                    <div class="col s1">Del</div>
-                </div>
-
-                <div class="row records_list" id="records_list_no_record">
-                    <div class="col s12 center-align"><strong>No products have been assigned to this customer yet.</strong></div>
-                </div>
-            </div>
-        </section>
-        <section style="margin-top:15px; display:none;" class="items-tab tab-content">
-            <legend>Pricing</legend>
-            <div class="row">
-                <strong style="margin-right: 15px;">Select billing by:</strong>
-                <input type="radio" value="0" checked="checked" name="price_option" id="price_by_weight" class="pricing-rd-btn" /><label for="price_by_weight">Weight</label>
-                <input type="radio" value="1" name="price_option" id="price_by_item" class="pricing-rd-btn" /><label for="price_by_item">Item</label>
-                <input type="radio" value="2" name="price_option" id="price_by_both" class="pricing-rd-btn" /><label for="price_by_both">Both</label>
-            </div>
-        </section>
+            </section>
+        </div>
         <div class="row">
             <button class="waves-effect btn" style="display: none;">Save</button>
         </div>

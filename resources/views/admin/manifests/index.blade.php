@@ -35,82 +35,84 @@
                     <li data-corr-div-id="#shipping-manifest-div">Shipping Manifests</li>
                 </ul>
             </div>
-            <div class="row tab-content first no-topmargin" id="receiving-manifest-div">
-                <div class="row no-topmargin" style="margin-bottom:25px;">
-                    <div class="col m6 s12">
-                        <div class="row">
-                            <label>Select Customer:</label>
-                            <select name="r_customer" id="r_customer">
-                                <option value="-1">Please Select</option>
-                                @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="row">
-                            <div class="col m6 s12">
-                                <label>From:</label>
-                                <div id="r_date_from" name="r_date_from" ></div>
-                            </div>
-                            <div class="col m6 s12">
-                                <label>To:</label>
-                                <div id="r_date_to" name="r_date_to" class="calendar"></div>
-                            </div>
-                        </div>
-                        <div class="row">
+            <div class="row tab-content-group">
+                <div class="row tab-content first no-topmargin" id="receiving-manifest-div">
+                    <div class="row no-topmargin" style="margin-bottom:25px;">
+                        <div class="col m6 s12">
                             <div class="row">
-                                <button type="buton" class="waves-effect btn" onclick="$('#jqxgrid1').jqxGrid('updatebounddata');">Filter</button>
-                                <button type="reset" class="waves-effect btn">Clear</button>
+                                <label>Select Customer:</label>
+                                <select name="r_customer" id="r_customer">
+                                    <option value="-1">Please Select</option>
+                                    @foreach($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col m6 s12">
+                                    <label>From:</label>
+                                    <div id="r_date_from" name="r_date_from" ></div>
+                                </div>
+                                <div class="col m6 s12">
+                                    <label>To:</label>
+                                    <div id="r_date_to" name="r_date_to" class="calendar"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row">
+                                    <button type="buton" class="waves-effect btn" onclick="$('#jqxgrid1').jqxGrid('updatebounddata');">Filter</button>
+                                    <button type="reset" class="waves-effect btn">Clear</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <fieldset>
-                        <legend>Receiving Manifests:</legend>
-                        <div class="row box">
-                            <div id="jqxgrid1"></div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-            <div class="row tab-content no-topmargin" id="shipping-manifest-div">
-                <div class="row no-topmargin" style="margin-bottom:25px;">
-                    <div class="col m6 s12">
-                        <div class="row">
-                            <label>Select Customer:</label>
-                            <select name="s_customer" id="s_customer">
-                                <option value="-1">Please Select</option>
-                                @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="row">
-                            <div class="col m6 s12">
-                                <label>From:</label>
-                                <div id="s_date_from" name="s_date_from" ></div>
+                    <div class="row">
+                        <fieldset>
+                            <legend>Receiving Manifests:</legend>
+                            <div class="row box">
+                                <div id="jqxgrid1"></div>
                             </div>
-                            <div class="col m6 s12">
-                                <label>To:</label>
-                                <div id="s_date_to" name="s_date_to" class="calendar"></div>
-                            </div>
-                        </div>
-                        <div class="row">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row tab-content no-topmargin" id="shipping-manifest-div">
+                    <div class="row no-topmargin" style="margin-bottom:25px;">
+                        <div class="col m6 s12">
                             <div class="row">
-                                <button type="button" class="waves-effect btn" onclick="$('#jqxgrid').jqxGrid('updatebounddata');">Filter</button>
-                                <button type="reset" class="waves-effect btn">Clear</button>
+                                <label>Select Customer:</label>
+                                <select name="s_customer" id="s_customer">
+                                    <option value="-1">Please Select</option>
+                                    @foreach($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col m6 s12">
+                                    <label>From:</label>
+                                    <div id="s_date_from" name="s_date_from" ></div>
+                                </div>
+                                <div class="col m6 s12">
+                                    <label>To:</label>
+                                    <div id="s_date_to" name="s_date_to" class="calendar"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row">
+                                    <button type="button" class="waves-effect btn" onclick="$('#jqxgrid').jqxGrid('updatebounddata');">Filter</button>
+                                    <button type="reset" class="waves-effect btn">Clear</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <fieldset>
-                        <legend>Shipping Manifests:</legend>
-                        <div class="row box">
-                            <div id="jqxgrid"></div>
-                        </div>
-                    </fieldset>
+                    <div class="row">
+                        <fieldset>
+                            <legend>Shipping Manifests:</legend>
+                            <div class="row box">
+                                <div id="jqxgrid"></div>
+                            </div>
+                        </fieldset>
+                    </div>
                 </div>
             </div>
         </div>

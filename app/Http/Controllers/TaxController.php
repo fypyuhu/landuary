@@ -59,7 +59,7 @@ class TaxController extends Controller
     }
 
     public function getShow(Request $request) {
-        $records = DB::table('taxes')->where('is_deleted', '<=', '0')->get();
+        $records = DB::table('taxes')->where('is_deleted', '<=', '0')->orderBy('id', 'desc')->get();
 
         $data = array();
         foreach ($records as $record) {

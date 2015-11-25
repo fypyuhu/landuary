@@ -211,14 +211,25 @@
                 }
             });
         });
-
+		
         $("body").on("click", "#button-add-item", function (e) {
             e.preventDefault();
+			
+			$("#quantity").keyup(function(e){
+				if ($("#quantity").val() != "" || $("#quantity").val() > "0")
+				{
+					$('label[for="quantity"]').html('').hide();
+				} else {
+					$('label[for="quantity"]').html('Please add quantity').show();
+				}
+			});
+			
             var item_id = $('#item_id').val();
             var stopProcess = false;
+			$('label[for="quantity"]').html('').hide();
             if ($("#quantity").val() == "" || $("#quantity").val() == "0")
             {
-                alert("Please add quantity");
+                $('label[for="quantity"]').html('Please add quantity').show();
                 return;
             }
             $(".item-cart").each(function () {

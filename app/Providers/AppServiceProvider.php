@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Blade;
 use Illuminate\Support\ServiceProvider;
 use Auth;
 use App\Models\UserProfile;
@@ -34,6 +35,14 @@ class AppServiceProvider extends ServiceProvider
 			$countries = Country::all();
 			$view->with( ['countries' => $countries] );
 		});
+		
+		Blade::directive('date', function($expression) {
+            return "<?php echo with{$expression}->format('d F, Y'); ?>";
+        });
+		
+		Blade::directive('datetime', function($expression) {
+            return "<?php echo with{$expression}->format('d F, Y at H:i:s A'); ?>";
+        });
     }
 
     /**

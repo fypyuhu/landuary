@@ -218,14 +218,26 @@
         $(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
         $("body").on("click", "#button-add-item", function (e) {
             e.preventDefault();
-            if ($("#quantity").val() == "")
-            {
-                alert("Please add quantity");
-                return;
-            }
+			
+			$("#quantity").keyup(function(e){
+				if ($("#quantity").val() != "" || $("#quantity").val() > "0")
+				{
+					$('label[for="quantity"]').html('').hide();
+				} else {
+					$('label[for="quantity"]').html('Please add quantity').show();
+				}
+			});
+			
             var item_id = $('#item_id').val();
             var stopProcess = false;
 
+			$('label[for="quantity"]').html('').hide();
+            if ($("#quantity").val() == "" || $("#quantity").val() == "0")
+            {
+                $('label[for="quantity"]').html('Please add quantity').show();
+                return;
+            }
+			
             $(".item-cart").each(function () {
                 if (item_id == $(this).val()) {
                     stopProcess = true;

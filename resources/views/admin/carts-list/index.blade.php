@@ -36,122 +36,124 @@
                 <li data-corr-div-id="#outgoing-carts-div">Outgoing Carts</li>
               </ul>
            </div>
-           <div class="row tab-content first no-topmargin" id="incoming-carts-div">
-                <div class="row no-topmargin" style="margin-bottom:25px;">
-                    <div class="col m6 s12">
-                        <div class="row">
-                            <label>Select Customer:</label>
-                            <select name="i_customer" id="i_customer">
-                                <option value="-1">Please Select</option>
-                                @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="row">
-                            <div class="col m6 s12">
-                                <label>From:</label>
-                                <div id="i_date_from" name="i_date_from" class="r_calendar"></div>
-                            </div>
-                            <div class="col m6 s12">
-                                <label>To:</label>
-                                <div id="i_date_to" name="i_date_to" class="calendar"></div>
-                            </div>
-                        </div>
-                        <div class="row">
+           <div class="row tab-content-group">
+               <div class="row tab-content first no-topmargin" id="incoming-carts-div">
+                    <div class="row no-topmargin" style="margin-bottom:25px;">
+                        <div class="col m6 s12">
                             <div class="row">
-                                <button type="button" onclick="$('#jqxgrid').jqxGrid('updatebounddata');" class="waves-effect btn">Filter</button>
+                                <label>Select Customer:</label>
+                                <select name="i_customer" id="i_customer">
+                                    <option value="-1">Please Select</option>
+                                    @foreach($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col m6 s12">
+                                    <label>From:</label>
+                                    <div id="i_date_from" name="i_date_from" class="r_calendar"></div>
+                                </div>
+                                <div class="col m6 s12">
+                                    <label>To:</label>
+                                    <div id="i_date_to" name="i_date_to" class="calendar"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row">
+                                    <button type="button" onclick="$('#jqxgrid').jqxGrid('updatebounddata');" class="waves-effect btn">Filter</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <fieldset>
-                        <legend>Incoming Carts:</legend>
-                        <div class="row box">
-                            <div id="jqxgrid"></div>
+                    <div class="row">
+                        <fieldset>
+                            <legend>Incoming Carts:</legend>
+                            <div class="row box">
+                                <div id="jqxgrid"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+               </div>
+    
+               <div class="row tab-content no-topmargin" id="ready-carts-div">
+                    <div class="row no-topmargin" style="margin-bottom:25px;">
+                        <div class="col m6 s12">
+                            <div class="row">
+                                <label>Select Customer:</label>
+                                <select name="r_customer" id="r_customer">
+                                    <option value="-1">Please Select</option>
+                                    @foreach($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col m6 s12">
+                                    <label>From:</label>
+                                    <div id="r_date_from" name="r_date_from" class="r_calendar"></div>
+                                </div>
+                                <div class="col m6 s12">
+                                    <label>To:</label>
+                                    <div id="r_date_to" name="r_date_to" class="calendar"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row">
+                                    <button type="button" onclick="$('#jqxgrid2').jqxGrid('updatebounddata');" class="waves-effect btn">Filter</button>
+                                </div>
+                            </div>
                         </div>
-                    </fieldset>
+                    </div>
+                    <div class="row">
+                        <fieldset>
+                            <legend>Ready Carts:</legend>
+                            <div class="row box">
+                                <div id="jqxgrid2"></div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+    
+               <div class="row tab-content no-topmargin" id="outgoing-carts-div">
+                    <div class="row no-topmargin" style="margin-bottom:25px;">
+                        <div class="col m6 s12">
+                            <div class="row">
+                                <label>Select Customer:</label>
+                                <select name="s_customer" id="s_customer">
+                                    <option value="-1">Please Select</option>
+                                    @foreach($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col m6 s12">
+                                    <label>From:</label>
+                                    <div id="s_date_from" name="s_date_from" class="r_calendar"></div>
+                                </div>
+                                <div class="col m6 s12">
+                                    <label>To:</label>
+                                    <div id="s_date_to" name="s_date_to" class="calendar"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="row">
+                                    <button type="button" onclick="$('#jqxgrid1').jqxGrid('updatebounddata');" class="waves-effect btn">Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <fieldset>
+                            <legend>Outgoing Carts:</legend>
+                            <div class="row box">
+                                <div id="jqxgrid1"></div>
+                            </div>
+                        </fieldset>
+                    </div>
                 </div>
            </div>
-
-           <div class="row tab-content no-topmargin" id="ready-carts-div">
-                <div class="row no-topmargin" style="margin-bottom:25px;">
-                    <div class="col m6 s12">
-                        <div class="row">
-                            <label>Select Customer:</label>
-                            <select name="r_customer" id="r_customer">
-                                <option value="-1">Please Select</option>
-                                @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="row">
-                            <div class="col m6 s12">
-                                <label>From:</label>
-                                <div id="r_date_from" name="r_date_from" class="r_calendar"></div>
-                            </div>
-                            <div class="col m6 s12">
-                                <label>To:</label>
-                                <div id="r_date_to" name="r_date_to" class="calendar"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="row">
-                                <button type="button" onclick="$('#jqxgrid2').jqxGrid('updatebounddata');" class="waves-effect btn">Filter</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <fieldset>
-                        <legend>Ready Carts:</legend>
-                        <div class="row box">
-                            <div id="jqxgrid2"></div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-
-           <div class="row tab-content no-topmargin" id="outgoing-carts-div">
-                <div class="row no-topmargin" style="margin-bottom:25px;">
-                    <div class="col m6 s12">
-                        <div class="row">
-                            <label>Select Customer:</label>
-                            <select name="s_customer" id="s_customer">
-                                <option value="-1">Please Select</option>
-                                @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="row">
-                            <div class="col m6 s12">
-                                <label>From:</label>
-                                <div id="s_date_from" name="s_date_from" class="r_calendar"></div>
-                            </div>
-                            <div class="col m6 s12">
-                                <label>To:</label>
-                                <div id="s_date_to" name="s_date_to" class="calendar"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="row">
-                                <button type="button" onclick="$('#jqxgrid1').jqxGrid('updatebounddata');" class="waves-effect btn">Filter</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <fieldset>
-                        <legend>Outgoing Carts:</legend>
-                        <div class="row box">
-                            <div id="jqxgrid1"></div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
         </div>
     </div>
 

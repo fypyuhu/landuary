@@ -111,18 +111,21 @@ class OutController extends Controller
 		
 		return redirect('/admin/out/receipt/'.$ogc->id);
     }
-      public function getReceipt($id){
+	
+    public function getReceipt($id){
         $cart=OutgoingCart::find($id);
         $department=CustomerDepartment::find($cart->department_id);
         $customer=Customer::find($cart->customer_id);
         $items=CustomerOutgoingCartItem::getItems($id);
         $user = Auth::user();
+		$shipping_date = date('Y-m-d', strtotime($cart->shipping_date));
         $organization = Organization::find($user->organization_id);
         return view('admin.out.receipt',['cart'=>$cart,
             'department'=>$department,
             'customer'=>$customer,
             'items'=>$items,
-            'organization'=>$organization]);
+            'organization'=>$organization,
+			'shipping_date'=>$shipping_date]);
     }
     /**
      * Store a newly created resource in storage.

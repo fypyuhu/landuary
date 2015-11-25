@@ -21,56 +21,57 @@
                 <li class="current" data-corr-div-id="#cart-tab">Carts</li>
             </ul>
         </div>
-
-        <div class="row tab-content no-topmargin first" id="cart-tab">
-            <fieldset style="margin-top:15px;">
-                <legend>Carts</legend>
-                <div class="row">
-                    <div class="col s12">
-                        <input type="checkbox" value="1" name="use_as_exchange_cart" id="use_as_exchange_cart" class="checkbox" data-corr-div-id="#cart-status-div">
-                        <label for="use_as_exchange_cart">Use this as Exchange Cart</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <label>Cart Tare Weight:</label>
-                    <div class="input-field">
-                        <input id="tare_weight" value="{{$cart->tare_weight}}" type="text" name="tare_weight">
-                    </div>
-                    <label for="tare_weight" class="error" id="error-tare-weight"></label>
-                </div>
-                <div class="row">
-                    <label>Cart Status:</label>
-                    <div class="input-field">
-                        <select name="status" id="status">
-                            <option value="" >Please Select</option>
-                            <option value="In" selected="selected">In</option>
-                            <option value="Out">Out</option>
-                            <option value="Ready">Ready</option>
-                        </select>
-                    </div>
-                    <label for="status" class="error" id="error-status"></label>
-                </div>
-                <div id="cart-status-div" style="display: none">
+		<div class="row tab-content-group">
+            <div class="row tab-content no-topmargin first" id="cart-tab">
+                <fieldset style="margin-top:15px;">
+                    <legend>Carts</legend>
                     <div class="row">
-                        <label>Cart Current Location:</label>
-                        <div class="input-field">
-                            <input id="cart_current_location" type="text" name="cart_current_location" value="In House" readonly="readonly">
+                        <div class="col s12">
+                            <input type="checkbox" value="1" name="use_as_exchange_cart" id="use_as_exchange_cart" class="checkbox" data-corr-div-id="#cart-status-div">
+                            <label for="use_as_exchange_cart">Use this as Exchange Cart</label>
                         </div>
-                        <label for="cart_current_location" class="error" id="error-cart-current-location"></label>
                     </div>
                     <div class="row">
-                        <label>Customer Number:</label>
+                        <label>Cart Tare Weight:</label>
                         <div class="input-field">
-                            <select name="customer_number" id="customer_number">
-                                <option value="">Please Select</option>
-                                <option value="01">01</option>
-                                <option value="02">02</option>
+                            <input id="tare_weight" value="{{$cart->tare_weight}}" type="text" name="tare_weight">
+                        </div>
+                        <label for="tare_weight" class="error" id="error-tare-weight"></label>
+                    </div>
+                    <div class="row">
+                        <label>Cart Status:</label>
+                        <div class="input-field">
+                            <select name="status" id="status">
+                                <option value="" >Please Select</option>
+                                <option value="In" selected="selected">In</option>
+                                <option value="Out">Out</option>
+                                <option value="Ready">Ready</option>
                             </select>
                         </div>
-                        <label for="customer_number" class="error" id="error-customer-number"></label>
+                        <label for="status" class="error" id="error-status"></label>
                     </div>
-                </div>
-            </fieldset>
+                    <div id="cart-status-div" style="display: none">
+                        <div class="row">
+                            <label>Cart Current Location:</label>
+                            <div class="input-field">
+                                <input id="cart_current_location" type="text" name="cart_current_location" value="In House" readonly="readonly">
+                            </div>
+                            <label for="cart_current_location" class="error" id="error-cart-current-location"></label>
+                        </div>
+                        <div class="row">
+                            <label>Customer Number:</label>
+                            <div class="input-field">
+                                <select name="customer_number" id="customer_number">
+                                    <option value="">Please Select</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                </select>
+                            </div>
+                            <label for="customer_number" class="error" id="error-customer-number"></label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
         </div>
         <div class="row">
             <button class="waves-effect btn">Save</button>

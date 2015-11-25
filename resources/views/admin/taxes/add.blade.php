@@ -68,28 +68,29 @@
                     <div class="col m4 s12">
                         <label>Component name</label>
                         <div class="input-field">
-                            <input type="text" name="component_name[]" id="component_name" />
+                            <input type="text" name="component_name[]" class="component_name" id="component_name_1" />
                         </div>
-                        <label for="component_name" class="error">Example: New York City or Santa Clara County</label>
+                        <label for="component_name_1" class="error">Example: New York City or Santa Clara County</label>
                     </div>
                     <div class="col m4 s12">
                         <label>Agency name</label>
                         <div class="input-field">
-                            <input type="text" name="component_agency_name[]" id="component_agency_name" />
+                            <input type="text" name="component_agency_name[]" class="component_agency_name" id="component_agency_name_1" />
                         </div>
-                        <label for="component_agency_name" class="error">Example: Arizona Dept. of Revenue</label>
+                        <label for="component_agency_name_1" class="error">Example: Arizona Dept. of Revenue</label>
                     </div>
-                    <div class="col m4 s12">
+                    <div class="col m3 s12">
                         <label>Rate</label>
                         <div class="input-field">
-                            <input type="text" name="component_tax_rate[]" id="component_tax_rate" />
+                            <input type="text" name="component_tax_rate[]" class="component_agency_name" id="component_tax_1" />
                         </div>
-                        <label for="component_tax_rate" class="error">%</label>
+                        <label for="component_tax_1" class="error">%</label>
                     </div>
+                    <div class="col m1 s12">&nbsp;</div>
                  </div>
              </div>
              <div class="row">
-                <button class="waves-effect btn create-clone-button" data-corr-div-id="#clone-container">Add Another Component</button>
+                <button class="waves-effect btn create-clone-button-taxes" data-corr-div-id="#clone-container">Add Another Component</button>
              </div>
          </fieldset>
          <div class="row">
@@ -101,39 +102,36 @@
 </fieldset>
 <script>
      $(document).ready(function () {
-        $("#pageFormSingle").validate({
-            /*rules: {
-                item_name: "required",
-                item_number: {
-                    required: true,
-                    digits: true,
-                },
-                item_desc: "required",
-                item_weight: "required",
-                transaction_type: "required"
-            },*/
-            submitHandler: function (form) {
-                var options = {
-                    success: showResponse
-                };
-                function showResponse(responseText, statusText, xhr, $form) {
-                    location.reload();
-                }
-                $(form).ajaxSubmit(options);
-            }
-        });
+        $('#pageFormSingle').validate({
+			rules: {
+				tax_name: "required",
+				agency_name: "required",
+				tax_rate: {
+					required: true,
+					digits: true
+				}
+			},
+			submitHandler: function (form) {
+				var options = {
+					success: showResponse
+				};
+				function showResponse(responseText, statusText, xhr, $form) {
+					location.reload();
+				}
+				$(form).ajaxSubmit(options);
+			}
+		});
 		
 		$("#pageFormCombined").validate({
-            /*rules: {
-                item_name: "required",
-                item_number: {
-                    required: true,
-                    digits: true,
-                },
-                item_desc: "required",
-                item_weight: "required",
-                transaction_type: "required"
-            },*/
+            rules: {
+                tax_name: "required",
+                "component_name[]": "required",
+                "component_agency_name[]": "required",
+                "component_tax_rate[]": {
+					required: true,
+					digits: true
+				}
+            },
             submitHandler: function (form) {
                 var options = {
                     success: showResponse
@@ -144,5 +142,15 @@
                 $(form).ajaxSubmit(options);
             }
         });
+		/*$("#component_name_1").rules("add", {
+			required:true
+		});
+		$("#component_agency_name_1").rules("add", {
+			required:true
+		});
+		$("#component_tax_rate_1").rules("add", {
+			required: true,
+			digits: true
+		});*/
     });
 </script>

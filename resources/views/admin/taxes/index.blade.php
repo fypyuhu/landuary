@@ -6,20 +6,26 @@
         <div class="col m4 s12">
             <label>Component name</label>
             <div class="input-field">
-                <input type="text" name="component_name[]" />
+                <input type="text" name="component_name[]" class="component_name" />
             </div>
+            <label class="error">Example: New York City or Santa Clara County</label>
         </div>
         <div class="col m4 s12">
             <label>Agency name</label>
             <div class="input-field">
-                <input type="text" name="component_agency_name[]" />
+                <input type="text" name="component_agency_name[]" class="component_agency_name" />
             </div>
+            <label class="error">Example: Arizona Dept. of Revenue</label>
         </div>
-        <div class="col m4 s12">
+        <div class="col m3 s12">
             <label>Rate</label>
             <div class="input-field">
-                <input type="text" name="component_tax_rate[]" />
+                <input type="text" name="component_tax_rate[]" class="component_tax_rate" />
             </div>
+            <label class="error">%</label>
+        </div>
+        <div class="col m1 s12" style="padding-top:26px;">
+            <a href="javascript:void(0);" onclick="$(this).parent().parent().remove();" class="waves-effect btn">X</a>
         </div>
     </div>
 </div>
