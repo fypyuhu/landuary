@@ -54,7 +54,7 @@ class CartsListController extends Controller {
             $row["gross_weight"] = $cart->gross_weight;
             $row["status"] = $cart->status;
             $row["is_exchange_cart"] = $cart->is_exchange_cart > 0 ? 'Yes' : 'No';
-            $row["actions"] = '<a href="/admin/out/edit/' . $cart->outgoing_cart_id . '" data-mode="ajax">View/Edit</a>';
+            $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" data-mode="ajax">View</a>';
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";
@@ -74,7 +74,7 @@ class CartsListController extends Controller {
             $row["gross_weight"] = $cart->gross_weight;
             $row["status"] = $cart->status;
             $row["is_exchange_cart"] = $cart->is_exchange_cart > 0 ? 'Yes' : 'No';
-            $row["actions"] = '<a href="/admin/out/edit/' . $cart->outgoing_cart_id . '" data-mode="ajax">View/Edit</a>';
+            $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" data-mode="ajax">View</a>';
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";

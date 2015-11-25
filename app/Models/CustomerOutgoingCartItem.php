@@ -12,7 +12,7 @@ class CustomerOutgoingCartItem extends Model {
     public static function getCartItemsById($id) {
         return DB::select(DB::raw('SELECT   
                                  "100" as tare_weight,@curRow := @curRow + 1 AS row_number, 
-                                outgoing_carts.id,items.weight,items.name,
+                                outgoing_carts.id,items.weight,items.name,outgoing_carts.cart_id,
                                 items.item_number,customers_outgoing_carts_items.quantity,
                                 outgoing_carts.net_weight 
                                 FROM shipping_manifest 

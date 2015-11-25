@@ -6,7 +6,6 @@
                 <div class="row">
                     <div class="col m6 s12">
                         <select name="customer" id="customer">
-                            <option value="">Customer</option>
                             @foreach ($customers as $customer)
                             <option value="{{$customer->id}}" {{$customer->id == $current_customer->id ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
                             @endforeach
@@ -53,7 +52,7 @@
                         </div>
                     </div>
                     <div class="col m4 s12">
-                                <div id="ship_date"  name="ship_date"  class="calendar"></div>
+                        <div id="ship_date"  name="ship_date"  class="calendar"></div>
                     </div>
                 </div>
                 <div class="row">
@@ -111,6 +110,10 @@
                         <div class="row records_list no-item">
                             <h5 class="center-align">No Items have been added to this cart yet.</h5>
                         </div>
+                        <div>
+                            <input type="hidden" name="item_count" id="item_count" value="0">
+                        </div>
+                        <label for="item_count" class="error" id="error-item_count"></label>
                         <div id="add-item-list"></div>
                         <!--<div class="row records_list">
                             <div class="col s3">Item 1</div>
@@ -124,8 +127,9 @@
                     <div class="col m4 s12">
                         <label>Gross Weight</label>
                         <div class="input-field">
-                            <input id="gross_weight" type="text" onblur="calculateNetWeight()" value="100" name="gross_weight" placeholder="Gross Weight">
+                            <input id="gross_weight" type="number" step="0.01" onblur="calculateNetWeight()" value="" name="gross_weight" placeholder="Gross Weight">
                         </div>
+                        <label for="gross_weight" class="error" id="error-gross_weight"></label>
                     </div>
                     <div class="col m4 s12">
                         <label>Net Weight</label>
@@ -141,9 +145,18 @@
 
 <script>
     $(document).ready(function () {
-    $(".calendar").jqxDateTimeInput({min: new Date(), width: '100%', height: '25px', formatString: 'dd-MM-yyyy'});
-    $("#customer, #cart_number_dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true});
+            $(".calendar").jqxDateTimeInput({min: new Date(), width: '100%', height: '25px', formatString: 'dd-MM-yyyy'});
+            $("#customer, #cart_number_dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true});
             $("#department").jqxComboBox({ width: '100%', autoDropDownHeight: true, {{count($depts) > 0 ? 'disabled: false' : 'disabled: true'}} });
             $("#item_id").jqxComboBox({ width: '100%', autoDropDownHeight: true, {{count($items) > 0 ? 'disabled: false' : 'disabled: true'}} });
+            $("#pageForm").validate({
+            rules: {
+                customer_name: "required",
+                gross_weight: {
+                    required:true,
+                    min:parseFloat($('#tare_weight').val())
+                }
+            }
+            });
     });
 </script>

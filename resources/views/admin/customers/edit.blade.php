@@ -597,8 +597,19 @@
                     function showResponse(responseText, statusText, xhr, $form) {
                         location.reload();
                     }
+                    function showError(response, statusText, xhr, $form) {
+                        if (response.status == 422) {
+                            $.each(response.responseJSON, function (key, value) {
+                                $("[name='" + key + "']").addClass('error');
+                                $("[name='" + key + "']").removeClass('valid');
+                                $("[name='" + key + "']").parent().siblings(".error").html(value);
+                                $("[name='" + key + "']").parent().siblings(".error").show();
+                            })
+                        }
+                    }
                     var options = {
-                        success: showResponse
+                        success: showResponse,
+                        error: showError
                     };
 
                     $('#customer-form').ajaxSubmit(options);

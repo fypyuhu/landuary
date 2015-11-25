@@ -321,7 +321,7 @@
             $('#department_list_jqxComboBox').append($('<option>', {
                 value: $('#department').val(),
                 text: $('#department').val(),
-                selected:'selected'
+                selected: 'selected'
             }));
             $('#department').val('');
         }
@@ -344,41 +344,41 @@
                 val = $('#child_item').val();
                 parent = 0;
             }
-			
-			var item_id = val;
-			var stopProcess = false;
-		
+
+            var item_id = val;
+            var stopProcess = false;
+
             $(".item-cart").each(function () {
                 if (item_id == $(this).val()) {
                     stopProcess = true;
                     return false;
                 }
             });
-			
-			if (!stopProcess) {
-				$.ajax({
-					url: "/admin/customers/item-detail/" + val,
-					context: document.body
-				}).done(function (html) {
-					$('#item_record_list').append(html);
-					$('#records_list_no_record').hide();
-					if ($("#price_by_weight").is(':checked')) {
-						$('.price-field, #price-heading').css('display', 'none');
-						$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
-						$('#div-price-by-weight').fadeIn('slow');
-					}
-					else if ($("#price_by_item").is(':checked')) {
-						$('#div-price-by-weight').css('display', 'none');
-						$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
-						$('.price-field, #price-heading').fadeIn('slow');
-					}
-					else if ($("#price_by_both").is(':checked')) {
-						$('#div-price-by-weight').fadeIn('slow');
-						$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
-						$('.price-field, #price-heading').fadeIn('slow');
-					}
-				});
-			} else {
+
+            if (!stopProcess) {
+                $.ajax({
+                    url: "/admin/customers/item-detail/" + val,
+                    context: document.body
+                }).done(function (html) {
+                    $('#item_record_list').append(html);
+                    $('#records_list_no_record').hide();
+                    if ($("#price_by_weight").is(':checked')) {
+                        $('.price-field, #price-heading').css('display', 'none');
+                        $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
+                        $('#div-price-by-weight').fadeIn('slow');
+                    }
+                    else if ($("#price_by_item").is(':checked')) {
+                        $('#div-price-by-weight').css('display', 'none');
+                        $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+                        $('.price-field, #price-heading').fadeIn('slow');
+                    }
+                    else if ($("#price_by_both").is(':checked')) {
+                        $('#div-price-by-weight').fadeIn('slow');
+                        $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+                        $('.price-field, #price-heading').fadeIn('slow');
+                    }
+                });
+            } else {
                 alert('This item is already in the cart please select another item.');
             }
         }
@@ -489,8 +489,19 @@
                     function showResponse(responseText, statusText, xhr, $form) {
                         location.reload();
                     }
+                    function showError(response, statusText, xhr, $form) {
+                        if (response.status == 422) {
+                            $.each(response.responseJSON, function (key, value) {
+                                $("[name='" + key + "']").addClass('error');
+                                $("[name='" + key + "']").removeClass('valid');
+                                $("[name='" + key + "']").parent().siblings(".error").html(value);
+                                $("[name='" + key + "']").parent().siblings(".error").show();
+                            })
+                        }
+                    }
                     var options = {
-                        success: showResponse
+                        success: showResponse,
+                        error: showError
                     };
 
                     $('#customer-form').ajaxSubmit(options);

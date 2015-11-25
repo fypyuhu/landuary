@@ -29,7 +29,7 @@
     <!-- /Breadcrumb -->
 
     <div id="loadAjaxFrom">
-        <form method="post" action="" id="pageForm">
+        
             <div class="row no-rightmargin">
                 <div class="col s12 m5 margin-right-md">
                     <fieldset>
@@ -148,7 +148,7 @@
                             <div class="col m4 s12">
                                 <label>Gross Weight</label>
                                 <div class="input-field">
-                                    <input id="gross_weight" value="100" type="text" onblur="calculateNetWeight()" name="gross_weight" placeholder="Gross Weight">
+                                    <input id="gross_weight" value="" type="text" onblur="calculateNetWeight()" name="gross_weight" placeholder="Gross Weight">
                                 </div>
                             </div>
                             <div class="col m4 s12">
@@ -161,7 +161,6 @@
                     </fieldset>
                 </div>
             </div>
-        </form>
     </div>
 
 </section>
@@ -299,11 +298,12 @@
         }
     }
     function calculateNetWeight(){
-        gross=parseInt($('#gross_weight').val());
-        tare=grss=parseInt($('#tare_weight').val());
+        gross=parseFloat($('#gross_weight').val());
+        tare=parseFloat($('#tare_weight').val());
          $("#net_weight").val(gross-tare);
         if(gross<tare){
-            alert("Gross weight can't be less than Tare weight");
+            $("#gross_weight").parent().siblings(".error").html("Gross weight can't be less than tear weight");
+            $("#gross_weight").parent().siblings(".error").show();
             return;
         }
     }
