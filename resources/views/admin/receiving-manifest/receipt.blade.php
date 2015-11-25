@@ -54,7 +54,7 @@
                 @foreach($items as $key=>$item)
                 <tr>
                     <td>{{$key+1}}</td>
-                    <td>{{$item->incoming_cart_id}}</td>
+                    <td>{{$item->cart_id}}</td>
                     <td>{{$item->item_number}}</td>
                     <td>{{$item->description}}</td>
                     <td class="align-right">{{$item->quantity}}</td>

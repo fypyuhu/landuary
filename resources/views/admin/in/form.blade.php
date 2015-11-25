@@ -7,7 +7,6 @@
             <div class="col m6 s12">
               <label>Customer</label>
               <select name="customer" id="customer">
-                <option value="">Customer</option>
                 @foreach ($customers as $customer)
                 <option value="{{$customer->id}}" {{$customer->id == $current_customer->id ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
                 @endforeach
@@ -131,10 +130,11 @@
           </div>
           <div class="row" id="weights-div">
             <div class="col m4 s12">
-              <label>Gross Weight</label>
-              <div class="input-field">
-                <input id="gross_weight" type="text" onblur="calculateNetWeight()"value="100" name="gross_weight">
-              </div>
+                        <label>Gross Weight</label>
+                        <div class="input-field">
+                            <input id="gross_weight" type="number" step="0.01" onblur="calculateNetWeight()" value="" name="gross_weight" placeholder="Gross Weight">
+                        </div>
+                        <label for="gross_weight" class="error" id="error-gross_weight"></label>
             </div>
             <div class="col m4 s12">
               <label>Net Weight</label>
@@ -153,7 +153,15 @@
 		$("#customer, #cart_number_dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true});
 		$("#department").jqxComboBox({ width: '100%', autoDropDownHeight: true, {{count($depts) > 0 ? 'disabled: false' : 'disabled: true'}} });
 		$("#item_id").jqxComboBox({ width: '100%', autoDropDownHeight: true, {{count($items) > 0 ? 'disabled: false' : 'disabled: true'}} });
-		
 		$(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
+                $("#pageForm").validate({
+                rules: {
+                    customer_name: "required",
+                    gross_weight: {
+                        required:true,
+                        min:parseFloat($('#tare_weight').val())
+                    }
+                }
+                });
 	});
 </script>

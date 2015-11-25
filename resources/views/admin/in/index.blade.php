@@ -29,7 +29,7 @@
     <!-- /Breadcrumb -->
 
     <div id="loadAjaxFrom">
-        <form method="post" action="/admin/in/create" id="pageForm">
+        
             {{csrf_field()}}
             <div class="row no-rightmargin">
                 <div class="col s12 m5 margin-right-md">
@@ -169,7 +169,6 @@
                     </fieldset>
                 </div>
             </div>
-        </form>
     </div>
 
 </section>
@@ -317,11 +316,12 @@
         }
     }
     function calculateNetWeight() {
-        gross = parseInt($('#gross_weight').val());
-        tare = grss = parseInt($('#tare_weight').val());
-        $("#net_weight").val(gross - tare);
-        if (gross < tare) {
-            alert("Gross weight can't be less than Tare weight");
+        gross=parseFloat($('#gross_weight').val());
+        tare=parseFloat($('#tare_weight').val());
+         $("#net_weight").val(gross-tare);
+        if(gross<tare){
+            $("#gross_weight").parent().siblings(".error").html("Gross weight can't be less than tear weight");
+            $("#gross_weight").parent().siblings(".error").show();
             return;
         }
     }

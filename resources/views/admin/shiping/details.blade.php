@@ -79,9 +79,9 @@
                             <label for="carts[{{$cart->id}}]"></label>
                         </div>
                         <div class="col s2">{{$cart->cart_id}}</div>
-                        <div class="col s2">{{$cart->shipping_date}}</div>
+                        <div class="col s2">{{date('d-m-Y',strtotime($cart->shipping_date))}}</div>
                         <div class="col s3 right-align">{{$cart->net_weight}}</div>
-                        <div class="col s2 center-align"><a href="/admin/out/edit/{{$cart->cart_id}}" data-mode="ajax" class="edit-button">View</a></div>
+                        <div class="col s2 center-align"><a href="/admin/out/edit/{{$cart->id}}" data-mode="ajax" class="edit-button">View</a></div>
                     </div>
                     @endforeach
                     @else

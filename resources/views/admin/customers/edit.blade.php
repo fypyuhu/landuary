@@ -450,7 +450,7 @@
         if ($('#parent_item').jqxComboBox('getSelectedIndex') != "-1") {
             var val = $('#parent_item').val();
             var parent = 1;
-            if ($('#child_item').jqxComboBox('getSelectedIndex') != "-1") {
+            if ($('#child_item').jqxComboBox('getSelectedIndex') != "-1" && $('#child_item').jqxComboBox('getSelectedIndex') != "0") {
                 val = $('#child_item').val();
                 parent = 0;
             }
@@ -599,8 +599,19 @@
                     function showResponse(responseText, statusText, xhr, $form) {
                         location.reload();
                     }
+                    function showError(response, statusText, xhr, $form) {
+                        if (response.status == 422) {
+                            $.each(response.responseJSON, function (key, value) {
+                                $("[name='" + key + "']").addClass('error');
+                                $("[name='" + key + "']").removeClass('valid');
+                                $("[name='" + key + "']").parent().siblings(".error").html(value);
+                                $("[name='" + key + "']").parent().siblings(".error").show();
+                            })
+                        }
+                    }
                     var options = {
-                        success: showResponse
+                        success: showResponse,
+                        error: showError
                     };
 
                     $('#customer-form').ajaxSubmit(options);

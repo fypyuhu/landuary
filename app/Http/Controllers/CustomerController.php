@@ -12,6 +12,8 @@ use App\Models\CustomerDepartment;
 use App\Models\CustomerBilling;
 use App\Models\CustomerTax;
 use App\Models\CustomerItem;
+use App\Http\Requests\AddCustomer;
+use App\Http\Requests\EditCustomer;
 use DB;
 
 class CustomerController extends Controller {
@@ -26,7 +28,7 @@ class CustomerController extends Controller {
         return view('admin.customers.add', ["parent_items" => $parent_items, "taxes" => $taxes]);
     }
 
-    public function postCreate(Request $request) {
+    public function postCreate(AddCustomer $request) {
         $customer = new Customer;
         $customer->name = $request->ship_to_name;
         $customer->customer_number = $request->customer_number;
@@ -168,7 +170,7 @@ class CustomerController extends Controller {
                    "taxes" => $taxes
                 ]);
     }
-    public function postEdit($id, Request $request) {
+    public function postEdit($id, EditCustomer $request) {
         $customer = Customer::find($id);
         $customer->name = $request->ship_to_name;
         $customer->customer_number = $request->customer_number;
