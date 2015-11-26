@@ -22,16 +22,7 @@
                     <th class="align-right">Qty</th>
                     <th class="align-right">Net Weight</th>
                 </tr>
-                @foreach($items as $key=>$item)
-                <tr>
-                    <td>{{$key+1}}</td>
-                    <td>{{$item->cart_id}}</td>
-                    <td>{{$item->item_number}}</td>
-                    <td>{{$item->description}}</td>
-                    <td class="align-right">{{$item->quantity}}</td>
-                    <td class="align-right">{{$item->weight * $item->quantity}}</td>
-                </tr>
-                @endforeach
+                
             </table>
         </div>
         <hr />
