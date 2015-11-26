@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller('shiping-manifest', 'ShipmentController');
     Route::controller('manifests', 'ManifestController');
     Route::controller('carts-list', 'CartsListController');
+	Route::controller('invoices', 'InvoiceController');
     Route::get('/', function () {
         return view('admin.index');
     });

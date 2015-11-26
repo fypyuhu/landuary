@@ -70,7 +70,7 @@
                     </li>
                     <li><a href="{{url('admin/carts-list')}}">Carts</a>
                     </li>
-                    <li><a href="javascript:void(0);">Invoices</a>
+                    <li><a href="{{url('admin/invoices')}}">Invoices</a>
                     </li>
                 </ul>
               </div>
