@@ -256,6 +256,7 @@
                     {
                         $('.no-item').css('display', 'none');
                         $('#add-item-list').append(response);
+                        $("#item_count").val(1);
                     }
                 });
 
@@ -313,6 +314,7 @@
         $(r).parent().parent().remove();
         if ($(".item-cart").length < 1) {
             $('.no-item').css('display', 'block');
+            $("#item_count").val(0);
         }
     }
     function calculateNetWeight() {

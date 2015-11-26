@@ -116,12 +116,7 @@
                         </div>
                         <label for="item_count" class="error" id="error-item_count"></label>
                         <div id="add-item-list"></div>
-                        <!--<div class="row records_list">
-                            <div class="col s3">Item 1</div>
-                            <div class="col s5">Lorem Ipsum doller sit</div>
-                            <div class="col s2 right-align">4</div>
-                            <div class="col s2 right-align">4 KG</div>
-                        </div>-->
+                        
                     </div>
                 </div>
                 <div class="row" id="weights-div">
@@ -151,11 +146,23 @@
             $("#department").jqxComboBox({ width: '100%', autoDropDownHeight: true, {{count($depts) > 0 ? 'disabled: false' : 'disabled: true'}} });
             $("#item_id").jqxComboBox({ width: '100%', autoDropDownHeight: true, {{count($items) > 0 ? 'disabled: false' : 'disabled: true'}} });
             $("#pageForm").validate({
-            rules: {
-                customer_name: "required",
-                gross_weight: {
-                    required:true,
-                    min:parseFloat($('#tare_weight').val())
+                ignore: [],
+                rules: {
+                    customer_name: "required",
+                    gross_weight: {
+                        required:true,
+                        min:parseFloat($('#tare_weight').val())
+                    }
+                
+            },
+            submitHandler: function (form) {
+                if(parseFloat($("#item_count").val())<1){
+                $("#item_count").parent().siblings(".error").html("Please add at least one item");
+                $("#item_count").parent().siblings(".error").show();
+                }
+                else{
+                    $(form).validate().cancelSubmit = true;
+                    $(form).submit();
                 }
             }
             });

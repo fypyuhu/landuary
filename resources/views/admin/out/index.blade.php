@@ -213,7 +213,8 @@
 		
         $("body").on("click", "#button-add-item", function (e) {
             e.preventDefault();
-			
+			$("#item_count").parent().siblings(".error").html("");
+                        $("#item_count").parent().siblings(".error").hide();
 			$("#quantity").keyup(function(e){
 				if ($("#quantity").val() != "" || $("#quantity").val() > "0")
 				{
@@ -251,6 +252,7 @@
                         $("#quantity").val("");
                         $('.no-item').css('display', 'none');
                         $('#add-item-list').append(response);
+                        $("#item_count").val(1);
                     }
                 });
 
@@ -306,6 +308,7 @@
         $(r).parent().parent().remove();
         if ($(".item-cart").length < 1) {
             $('.no-item').css('display', 'block');
+            $("#item_count").val(0)
         }
     }
     function calculateNetWeight(){
