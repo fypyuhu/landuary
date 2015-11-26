@@ -102,6 +102,7 @@
                   <div class="input-field">
                     <input id="quantity" type="text" name="quantity">
                   </div>
+                  <label for="quantity" class="error"></label>
                 </div>
               </div>
               <div class="row">
