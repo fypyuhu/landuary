@@ -72,11 +72,9 @@ class ReceivingManifestController extends Controller
 		$user=UserProfile::where('user_id','=',Auth::user()->id)->first();
 		$items = ReceivingManifest::getCustomerIncomingCartItems($manifest->customer_id, $manifest->date_from, $manifest->date_to);
 		return view('admin.receiving-manifest.receipt', [ 'user'=>$user,'manifest' => $manifest, 
-														  'customer' => $customer, 
-														  if($request->has('department_from') || $request->has('department_to')) {
+														  'customer' => $customer,
 														  'departments' => $departments, 
-														  'department_range' => $department_range, 
-														  }
+														  'department_range' => $department_range,
 														  'items' => $items 
 														  ]);
 	}
