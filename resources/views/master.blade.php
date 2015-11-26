@@ -185,6 +185,10 @@
           </li>
           
           <li>
+            <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-rewash">Rewash</a>
+          </li>
+          
+          <li>
             <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-today">Today</a>
           </li>
         </ul>

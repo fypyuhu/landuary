@@ -770,6 +770,10 @@ aside.yaybar {
 	background-image: url(../images/receiving-ico.png) !important;
 }
 
+.fa-rewash {
+	background-image: url(../images/rewash-ico.png) !important;
+}
+
 .fa-shipping {
 	background-image: url(../images/shipping-ico.png) !important;
 }
