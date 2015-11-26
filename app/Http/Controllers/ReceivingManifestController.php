@@ -45,6 +45,11 @@ class ReceivingManifestController extends Controller
 	public function getReceipt($id, Request $request) {
 		$manifest = ReceivingManifest::find($id);
 		$customer = Customer::find($manifest->customer_id)->first();
+		
+		$departments = '';
+		$department_from = '';
+		$department_to = '';
+		
 		if($manifest->department_from != '' && $manifest->department_to != '') {
 			$departments = CustomerDepartment::whereBetween('id', [$manifest->department_from, $manifest->department_to])->get();
 			if(count($departments) > 0) {
