@@ -43,6 +43,7 @@
                     <div class="col m6 s12">
                       <label>From Customer:</label>
                       <select name="customer" id="customer">
+                        <option value="">Select Customer</option>
                         @foreach($customers as $customer)
                         <option value="{{$customer->id}}">{{$customer->name}}</option>
                         @endforeach
