@@ -316,7 +316,11 @@ nav #reports-nav ul {
 	display: none !important;
 }
 
-.ctabs {
+.tab-content-group {
+	margin-top: 0 !important;
+}
+
+.ctabs, .ctabs1 {
 	border-bottom: 1px solid #cccccc;
 	padding: 0 5px;
 	margin: 0;
@@ -324,7 +328,7 @@ nav #reports-nav ul {
 	height: 30px;
 }
 
-.ctabs li {
+.ctabs li, .ctabs1 li {
 	cursor: pointer;
 	display: inline-block;
 	margin: 0;
@@ -338,7 +342,9 @@ nav #reports-nav ul {
 }
 
 .ctabs li.current,
-.ctabs li:hover {
+.ctabs1 li.current,
+.ctabs li:hover,
+.ctabs1 li:hover {
 	background: #d32e2e;
 	color: #ffffff;
 }

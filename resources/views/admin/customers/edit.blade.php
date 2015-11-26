@@ -58,7 +58,7 @@
 
         </div>
         <div class="row">
-            <ul class="ctabs">
+            <ul class="ctabs1">
                 <li class="current" data-corr-div-id="#address-tab">Address</li>
                 <li data-corr-div-id="#billing-tab">Billing &amp; Tax</li>
                 <li data-corr-div-id=".items-tab">Items</li>
