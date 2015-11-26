@@ -11,25 +11,7 @@
             <h3 class="align-center">Receiving Manifest</h3>
         </div>
        
-        <div class="row">
-            <div class="pull-left">
-                <p><strong>Deliver To:</strong><br />
-                Customer Number: {{$customer->customer_number}}<br />
-                <strong>Department:</strong><br />
-                @if ($department_from != '')
-                From: {{$department_from}}<br /> 
-                @endif
-                
-                @if ($department_to != '')
-                To: {{$department_to}}</p>
-                @endif
-            </div>
-            <div class="pull-right">
-                <p>{{$customer->name}}<br />
-                {{$customer->shipping_address}}<br />
-                {{$customer->shipping_city}} {{$customer->shipping_state}} {{$customer->shipping_zipcode}}</p>
-            </div>
-        </div>
+        
         <div class="row">
             <table>
                 <tr>
