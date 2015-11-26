@@ -9,7 +9,7 @@
 
         <div class="row">
             <div class="col s12 m9 l10">
-                <h1>Incomming Carts</h1>
+                <h1>Incoming Carts</h1>
 
                 <ul>
                     <li>
