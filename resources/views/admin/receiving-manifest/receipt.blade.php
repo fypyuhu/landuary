@@ -10,18 +10,7 @@
         <div class="row">
             <h3 class="align-center">Receiving Manifest</h3>
         </div>
-        <div class="row">
-            <div class="pull-left">
-                <h4>{{$user->legal_name}}</h4>
-            <p style="font-size:17px;">{{$user->street_address}}<br />{{$user->state}}<br />{{$user->city}}</p>
-            <p>Phone: {{$user->phone}}</p>
-            </div>
-            <div class="pull-right">
-                <p>Manifest #: {{$manifest->id}}<br />
-                Receiving Date:<br />
-                From: {{$manifest->date_from}} - {{$manifest->date_to}}</p>
-            </div>
-        </div>
+       
         <div class="row">
             <div class="pull-left">
                 <p><strong>Deliver To:</strong><br />
