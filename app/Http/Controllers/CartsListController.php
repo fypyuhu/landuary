@@ -28,6 +28,7 @@ class CartsListController extends Controller {
             $row = array();
             $row["incoming_cart_id"] = $cart->incoming_cart_id;
             $row["receiving_date"] = $cart->receiving_date;
+			$row["customer_name"] = $cart->name;
             $row["customer_number"] = $cart->customer_number;
             $row["department_name"] = $cart->department_name;
             $row["number_of_items"] = $cart->number_of_items;
@@ -47,12 +48,12 @@ class CartsListController extends Controller {
             $row = array();
             $row["outgoing_cart_id"] = $cart->outgoing_cart_id;
             $row["shipping_date"] = $cart->shipping_date;
+			$row["customer_name"] = $cart->name;
             $row["customer_number"] = $cart->customer_number;
             $row["department_name"] = $cart->department_name;
             $row["number_of_items"] = $cart->number_of_items;
             $row["net_weight"] = $cart->net_weight;
             $row["gross_weight"] = $cart->gross_weight;
-            $row["status"] = $cart->status;
             $row["is_exchange_cart"] = $cart->is_exchange_cart > 0 ? 'Yes' : 'No';
             $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" data-mode="ajax">View</a>';
             $data[] = $row;
@@ -67,12 +68,12 @@ class CartsListController extends Controller {
             $row = array();
             $row["outgoing_cart_id"] = $cart->outgoing_cart_id;
             $row["shipping_date"] = $cart->shipping_date;
+			$row["customer_name"] = $cart->name;
             $row["customer_number"] = $cart->customer_number;
             $row["department_name"] = $cart->department_name;
             $row["number_of_items"] = $cart->number_of_items;
             $row["net_weight"] = $cart->net_weight;
             $row["gross_weight"] = $cart->gross_weight;
-            $row["status"] = $cart->status;
             $row["is_exchange_cart"] = $cart->is_exchange_cart > 0 ? 'Yes' : 'No';
             $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" data-mode="ajax">View</a>';
             $data[] = $row;

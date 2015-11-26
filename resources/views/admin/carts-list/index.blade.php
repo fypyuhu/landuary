@@ -178,6 +178,7 @@
                     datafields: [
                         {name: 'incoming_cart_id'},
                         {name: 'receiving_date', type: 'date'},
+						{name: 'customer_name'},
                         {name: 'customer_number'},
                         {name: 'department_name'},
                         {name: 'number_of_items'},
@@ -233,15 +234,16 @@
                         return obj.data;
                     },
                     columns: [
-                        {text: 'Cart Number', width: '11%', dataField: 'incoming_cart_id'},
-                        {text: 'Tran. Date', width: '12%', dataField: 'receiving_date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
-                        {text: 'Customer Number', width: '11%', dataField: 'customer_number', filtertype: 'checkedlist'},
-                        {text: 'Dept', width: '11%', dataField: 'department_name', filtertype: 'checkedlist'},
-                        {text: 'No. of Items', width: '11%', dataField: 'number_of_items', filtertype: 'checkedlist'},
-                        {text: 'Gross Weight lb/kg', width: '11%', dataField: 'net_weight', filtertype: 'checkedlist'},
-                        {text: 'Net Weight lb/kg', width: '11%', dataField: 'gross_weight', filtertype: 'checkedlist'},
-                        {text: 'Invoiced', width: '11%', dataField: 'invoiced', filtertype: 'checkedlist'},
-                        {text: 'Actions', width: '11%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
+                        {text: 'Cart Number', width: '10%', dataField: 'incoming_cart_id'},
+                        {text: 'Tran. Date', width: '10%', dataField: 'receiving_date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
+						{text: 'Customer Name', width: '10%', dataField: 'customer_name', filtertype: 'checkedlist'},
+                        {text: 'Customer Number', width: '10%', dataField: 'customer_number', filtertype: 'checkedlist'},
+                        {text: 'Dept', width: '10%', dataField: 'department_name', filtertype: 'checkedlist'},
+                        {text: 'No. of Items', width: '10%', dataField: 'number_of_items', filtertype: 'checkedlist'},
+                        {text: 'Gross Weight lb/kg', width: '10%', dataField: 'net_weight', filtertype: 'checkedlist'},
+                        {text: 'Net Weight lb/kg', width: '10%', dataField: 'gross_weight', filtertype: 'checkedlist'},
+                        {text: 'Invoiced', width: '10%', dataField: 'invoiced', filtertype: 'checkedlist'},
+                        {text: 'Actions', width: '10%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
 
@@ -254,12 +256,12 @@
                     datafields: [
                         {name: 'outgoing_cart_id'},
                         {name: 'shipping_date', type: 'date'},
+						{name: 'customer_name'},
                         {name: 'customer_number'},
                         {name: 'department_name'},
                         {name: 'number_of_items'},
                         {name: 'net_weight'},
                         {name: 'gross_weight'},
-                        {name: 'status'},
                         {name: 'is_exchange_cart'},
                         {name: 'actions'}
 
@@ -312,12 +314,12 @@
                     columns: [
                         {text: 'Cart Number', width: '10%', dataField: 'outgoing_cart_id'},
                         {text: 'Ship Date', width: '10%', dataField: 'shipping_date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
+						{text: 'Customer Name', width: '10%', dataField: 'customer_name', filtertype: 'checkedlist'},
                         {text: 'Customer Number', width: '10%', dataField: 'customer_number', filtertype: 'checkedlist'},
                         {text: 'Dept', width: '10%', dataField: 'department_name', filtertype: 'checkedlist'},
                         {text: 'No. of Items', width: '10%', dataField: 'number_of_items', filtertype: 'checkedlist'},
                         {text: 'Gross Weight lb/kg', width: '10%', dataField: 'net_weight', filtertype: 'checkedlist'},
                         {text: 'Net Weight lb/kg', width: '10%', dataField: 'gross_weight', filtertype: 'checkedlist'},
-                        {text: 'Status', width: '10%', dataField: 'status', filtertype: 'checkedlist'},
                         {text: 'Exchange Cart', width: '10%', dataField: 'is_exchange_cart', filtertype: 'checkedlist'},
                         {text: 'Actions', width: '10%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
@@ -329,12 +331,12 @@
                     datafields: [
                         {name: 'outgoing_cart_id'},
                         {name: 'shipping_date', type: 'date'},
+						{name: 'customer_name'},
                         {name: 'customer_number'},
                         {name: 'department_name'},
                         {name: 'number_of_items'},
                         {name: 'net_weight'},
                         {name: 'gross_weight'},
-                        {name: 'status'},
                         {name: 'is_exchange_cart'},
                         {name: 'actions'}
 
@@ -388,12 +390,12 @@
                     columns: [
                         {text: 'Cart Number', width: '10%', dataField: 'outgoing_cart_id'},
                         {text: 'Ship Date', width: '10%', dataField: 'shipping_date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
+						{text: 'Customer Name', width: '10%', dataField: 'customer_name', filtertype: 'checkedlist'},
                         {text: 'Customer Number', width: '10%', dataField: 'customer_number', filtertype: 'checkedlist'},
                         {text: 'Dept', width: '10%', dataField: 'department_name', filtertype: 'checkedlist'},
                         {text: 'No. of Items', width: '10%', dataField: 'number_of_items', filtertype: 'checkedlist'},
                         {text: 'Gross Weight lb/kg', width: '10%', dataField: 'net_weight', filtertype: 'checkedlist'},
                         {text: 'Net Weight lb/kg', width: '10%', dataField: 'gross_weight', filtertype: 'checkedlist'},
-                        {text: 'Status', width: '10%', dataField: 'status', filtertype: 'checkedlist'},
                         {text: 'Exchange Cart', width: '10%', dataField: 'is_exchange_cart', filtertype: 'checkedlist'},
                         {text: 'Actions', width: '10%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
