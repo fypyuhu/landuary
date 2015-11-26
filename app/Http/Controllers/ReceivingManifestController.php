@@ -44,38 +44,49 @@ class ReceivingManifestController extends Controller
 	
 	public function getReceipt($id, Request $request) {
 		$manifest = ReceivingManifest::find($id);
-		$customer = Customer::find($manifest->customer_id)->get();
-		if($manifest->department_from != '' && $manifest->department_to != '') {
-			$departments = CustomerDepartment::whereBetween('id', [$manifest->department_from, $manifest->department_to])->get();
-			$department_from = $departments[0]->department_name;
-			$department_to = $departments[count($departments)-1]->department_name;
-		}
-		else if($manifest->department_from != '' || $manifest->department_to != '') {
-			$departments = CustomerDepartment::where('id', '=', $manifest->department_from)->orWhere('id', '=', $manifest->department_to)->get();
-			if($manifest->department_from != '') {
+		$customer = Customer::find($manifest->customer_id)->first();
+		if($request->has('department_from') || $request->has('department_to')) {
+			if($manifest->department_from != '' && $manifest->department_to != '') {
+				$departments = CustomerDepartment::whereBetween('id', [$manifest->department_from, $manifest->department_to])->get();
 				$department_from = $departments[0]->department_name;
-				$department_to = '';
-			} else {
-				$department_to = $departments[0]->department_name;
-				$department_from = '';
+				$department_to = $departments[count($departments)-1]->department_name;
 			}
-		} else {
-			$departments = '';
-			$department_from = '';
-			$department_to = '';
-		}
+			else if($manifest->department_from != '' || $manifest->department_to != '') {
+				$departments = CustomerDepartment::where('id', '=', $manifest->department_from)->orWhere('id', '=', $manifest->department_to)->get();
+				if($manifest->department_from != '') {
+					$department_from = $departments[0]->department_name;
+					$department_to = '';
+				} else {
+					$department_to = $departments[0]->department_name;
+					$department_from = '';
+				}
+			} else {
+				$departments = '';
+				$department_from = '';
+				$department_to = '';
+			}
+			
+			$department_range = array($department_from, $department_to);
+		}	
+		
 		$user=UserProfile::where('user_id','=',Auth::user()->id)->first();
 		$items = ReceivingManifest::getCustomerIncomingCartItems($manifest->customer_id, $manifest->date_from, $manifest->date_to);
-		$department_range = array($department_from, $department_to);
-		return view('admin.receiving-manifest.receipt', [ 'user'=>$user,'manifest' => $manifest, 'customer' => $customer[0], 'departments' => $departments, 'department_range' => $department_range, 'items' => $items ]);
+		return view('admin.receiving-manifest.receipt', [ 'user'=>$user,'manifest' => $manifest, 
+														  'customer' => $customer, 
+														  if($request->has('department_from') || $request->has('department_to')) {
+														  'departments' => $departments, 
+														  'department_range' => $department_range, 
+														  }
+														  'items' => $items 
+														  ]);
 	}
 	
 	public function getAjaxForm(Request $request) {
 		$id = $request->customer_id;
 		$customers = Customer::all();
 		$departments = CustomerDepartment::where('customer_id', '=', $id)->get();
-		$current = Customer::where('id', '=', $id)->get();
-		return view('admin.receiving-manifest.ajaxForm', [ 'customers' => $customers, 'departments' => $departments, 'current' => $current[0] ]);
+		$current = Customer::where('id', '=', $id)->first();
+		return view('admin.receiving-manifest.ajaxForm', [ 'customers' => $customers, 'departments' => $departments, 'current' => $current ]);
 	}
 	
 	/**
