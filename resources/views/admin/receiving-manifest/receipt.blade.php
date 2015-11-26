@@ -64,13 +64,7 @@
             </table>
         </div>
         <hr />
-        <div class="row">
-            <div class="pull-right">
-                <p>Total Gross Weight: {{$items[0]->gross_weight}}<br />
-                Total Net Weight: {{$items[0]->net_weight}}<br />
-                Total Shippment Weight: {{$items[0]->gross_weight}}</p>
-            </div>
-        </div>
+        
     </div>
   </section>
   <!-- End Content -->
