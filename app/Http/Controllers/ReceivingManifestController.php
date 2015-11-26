@@ -47,17 +47,23 @@ class ReceivingManifestController extends Controller
 		$customer = Customer::find($manifest->customer_id)->first();
 		if($manifest->department_from != '' && $manifest->department_to != '') {
 			$departments = CustomerDepartment::whereBetween('id', [$manifest->department_from, $manifest->department_to])->get();
-			$department_from = $departments[0]->department_name;
-			$department_to = $departments[count($departments)-1]->department_name;
+			if($departments) {
+				$department_from = $departments[0]->department_name;
+				$department_to = $departments[count($departments)-1]->department_name;
+			}
 		}
 		else if($manifest->department_from != '' || $manifest->department_to != '') {
 			$departments = CustomerDepartment::where('id', '=', $manifest->department_from)->orWhere('id', '=', $manifest->department_to)->get();
 			if($manifest->department_from != '') {
-				$department_from = $departments[0]->department_name;
-				$department_to = '';
+				if($departments) {
+					$department_from = $departments[0]->department_name;
+					$department_to = '';
+				}
 			} else {
-				$department_to = $departments[0]->department_name;
-				$department_from = '';
+				if($departments) {
+					$department_to = $departments[0]->department_name;
+					$department_from = '';
+				}
 			}
 		} else {
 			$departments = '';
