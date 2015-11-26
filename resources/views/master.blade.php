@@ -105,12 +105,12 @@
                         </li>
                         <li><a href="{{url('admin/taxes')}}">Tax</a>
                         </li>
-                        <li><a href="javascript:void(0);">Invoice</a>
+                        <!--<li><a href="javascript:void(0);">Invoice</a>
                         </li>
                         <li><a href="{{url('admin/manifests')}}">Manifest</a>
                         </li>
                         <li><a href="javascript:void(0);">Bin Tickets</a>
-                        </li>
+                        </li>-->
                         <li style="background:none !important;">&nbsp;
                         </li>
                         <li style="background: #42a5f5 !important;"><a href="javascript:void(0);" style="color: #ffffff !important;">Adjustment</a>

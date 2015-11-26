@@ -26,7 +26,7 @@
                     </div>
                     @if(isset($showDashBoard) && $showDashBoard)
                     <div>
-            			<a href="{{url('admin/')}}" title="Password &amp; Security">
+            			<a href="{{url('admin/')}}" title="Password &amp; Security" style="background: #a00008; color: #ffffff; border-left: 5px solid #37a000;">
                             <i class="oIconLock oIconSmall oIconLight oLeftNavIconSmall"></i>
                             Dashboard
                         </a>
