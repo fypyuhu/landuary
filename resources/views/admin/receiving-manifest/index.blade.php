@@ -34,11 +34,15 @@
           <div class="col s12 m7">
               <fieldset>
                   <legend>Receiving Manifest:</legend>
+                  @if (session('status'))
+                        <div class="row alert alert-danger">
+                            {{ session('status') }}
+                        </div>
+                  @endif
                   <div class="row">
                     <div class="col m6 s12">
                       <label>From Customer:</label>
                       <select name="customer" id="customer">
-                        <option value="">Select Customer</option>
                         @foreach($customers as $customer)
                         <option value="{{$customer->id}}">{{$customer->name}}</option>
                         @endforeach

@@ -7,11 +7,11 @@
             <div class="col m6 s12">
               <label>From Customer:</label>
               <select name="customer" id="customer">
-                <option value="">Select Customer</option>
                 @foreach($customers as $customer)
                 <option value="{{$customer->id}}" {{$customer->id == $current->id ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
                 @endforeach
               </select>
+              <label for="customer" class="error"></label>
             </div>
             <div class="col m6 s12">
               <label>Customer Number:</label>

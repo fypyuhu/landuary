@@ -27,12 +27,12 @@
                 <p><strong>Deliver To:</strong><br />
                 Customer Number: {{$customer->customer_number}}<br />
                 <strong>Department:</strong><br />
-                @if ($department_range[0] != '')
-                From: {{$department_range[0]}}<br /> 
+                @if ($department_from != '')
+                From: {{$department_from}}<br /> 
                 @endif
                 
-                @if ($department_range[1] != '')
-                To: {{$department_range[1]}}</p>
+                @if ($department_to != '')
+                To: {{$department_to}}</p>
                 @endif
             </div>
             <div class="pull-right">
