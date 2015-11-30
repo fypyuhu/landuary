@@ -49,6 +49,9 @@
             </div>
         </fieldset>
         <div class="row">
+            <div class="col">
+                <label  class="error" id="error-select_cart"></label>
+            </div>
             <div class="col pull-right">
                 <button class="waves-effect btn" type="submit">Save</button>
                 <button class="waves-effect btn">Clear</button>
@@ -103,6 +106,12 @@
             else{
                 $(".all_cart_checkbox").prop( "checked", false );
             }
+            $("#error-select_cart").html("");
+            $("#error-select_cart").hide();
+        });
+        $('.all_cart_checkbox').change(function () {
+            $("#error-select_cart").html("");
+            $("#error-select_cart").hide();
         });
         $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
@@ -119,6 +128,21 @@
                 });
             }
         });
-          
+        $("#pageForm").validate({
+                ignore: [],
+                rules: {
+                    customer: "required"
+            },
+            submitHandler: function (form) {
+                if($(".all_cart_checkbox").length<1 || $('.all_cart_checkbox:checked').length<1){
+                $("#error-select_cart").html("Please select at least one cart");
+                $("#error-select_cart").show();
+                }
+                else{
+                    $(form).validate().cancelSubmit = true;
+                    $(form).submit();
+                }
+            }
+            });  
     });
 </script>
