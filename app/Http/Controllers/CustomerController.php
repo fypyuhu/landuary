@@ -47,7 +47,7 @@ class CustomerController extends Controller {
             $customer->billing_fax = $request->billing_fax;
         }
         $customer->save();
-        if ($request->has('use_department')) {
+        if ($request->has('use_department') && is_array($request->department_list) ) {
             foreach ($request->department_list as $list) {
                 $customer_department = new CustomerDepartment;
                 $customer_department->customer_id = $customer->id;
