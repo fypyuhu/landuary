@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-
+use Auth;
 class EditCustomer extends Request
 {
     /**
@@ -25,7 +25,7 @@ class EditCustomer extends Request
     {
         $id = $this->route('one');
         return [
-            'customer_number' => 'required|integer|unique:customers,customer_number,'. $id,
+            'customer_number' => 'required|integer|unique:customers,customer_number,'. $id.',id,organization_id,'.Auth::user()->organization_id,
         ];
     }
 }

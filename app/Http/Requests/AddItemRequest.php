@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-
+use Auth;
 class AddItemRequest extends Request
 {
     /**
@@ -25,7 +25,7 @@ class AddItemRequest extends Request
     {
         return [
             'item_name' => 'required',
-            'item_number' => 'required|integer|unique:items,item_number',
+            'item_number' => 'required|integer|unique:items,item_number,NULL,id,organization_id,'.Auth::user()->organization_id,
             'item_desc' => 'required',
             'item_weight' => 'required|numeric',
         ];

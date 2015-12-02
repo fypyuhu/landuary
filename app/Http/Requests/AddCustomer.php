@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-
+use Auth;
 class AddCustomer extends Request
 {
     /**
@@ -24,7 +24,7 @@ class AddCustomer extends Request
     public function rules()
     {
         return [
-            'customer_number' => 'required|integer|unique:customers,customer_number',
+            'customer_number' => 'required|integer|unique:customers,customer_number,NULL,id,organization_id,'.Auth::user()->organization_id,
         ];
     }
 }
