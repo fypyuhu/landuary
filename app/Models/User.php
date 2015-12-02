@@ -39,7 +39,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = ['password', 'remember_token'];
 
     public function save(array $options = array()) {
-        $this->organization_id = Auth::user()->organization_id;
+      //  $this->organization_id = Auth::user()->organization_id;
         parent::save($options); // Calls Default Save
     }
 
