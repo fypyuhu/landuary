@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Auth;
 class Customer extends Model
 {
     protected $table="customers";
@@ -15,8 +16,12 @@ class Customer extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
-    public function scopeOrganization($query) {
-        return $query->where('organization', 1);
+    
+    public function save(array $options = array()) {
+        $this->organization_id=Auth::user()->organization_id;
+        parent::save($options); // Calls Default Save
     }
-
+    public function scopeOrganization($query) {
+        return $query->where('organization_id', Auth::user()->organization_id);
+    }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-
+use Auth;
 class OutgoingCart extends Model {
 
     protected $table = "outgoing_carts";
@@ -15,7 +15,7 @@ class OutgoingCart extends Model {
         if ($request->name != "-1") {
             $sql.=" AND c.id='" . $request->name . "' ";
         }
-        $sql.=" AND  ic.status='Out' AND ic.id = cici.outgoing_cart_id and ic.customer_id = c.id GROUP BY cici.outgoing_cart_id ORDER BY ic.id";
+        $sql.=" AND ic.organization_id = '".Auth::user()->organization_id."'  AND  ic.status='Out' AND ic.id = cici.outgoing_cart_id and ic.customer_id = c.id GROUP BY cici.outgoing_cart_id ORDER BY ic.id";
         return DB::select(DB::raw($sql));
     }
 
@@ -25,12 +25,15 @@ class OutgoingCart extends Model {
         if ($request->name != "-1") {
             $sql.=" AND c.id='" . $request->name . "' ";
         }
-        $sql.=" AND  ic.status='Ready' AND ic.id = cici.outgoing_cart_id and ic.customer_id = c.id GROUP BY cici.outgoing_cart_id ORDER BY ic.id";
+        $sql.=" AND ic.organization_id = '".Auth::user()->organization_id."'  AND  ic.status='Ready' AND ic.id = cici.outgoing_cart_id and ic.customer_id = c.id GROUP BY cici.outgoing_cart_id ORDER BY ic.id";
         return DB::select(DB::raw($sql));
     }
 
-    public function scopeOrganization($query) {
-        return $query->where('organization', 1);
+     public function save(array $options = array()) {
+        $this->organization_id = Auth::user()->organization_id;
+        parent::save($options); // Calls Default Save
     }
-
+    public function scopeOrganization($query) {
+        return $query->where('organization_id', Auth::user()->organization_id);
+    }
 }

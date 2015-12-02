@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Customer;
@@ -25,8 +24,7 @@ class CartController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function getCreate() {
-
-        $customers = Customer::all();
+        $customers = Customer::organization()->get();
         return view('admin.carts.add', [ 'customers' => $customers, 'get_max_number' => $this->generateAutoNumber()]);
     }
 
@@ -50,8 +48,7 @@ class CartController extends Controller {
     }
 
     public function getShow(Request $request) {
-        $carts = Cart::where('is_deleted', '=', '1')->get();
-
+        $carts = Cart::organization()->where('is_deleted', '=', '1')->get();
         $data = array();
         foreach ($carts as $cart) {
             $row = array();

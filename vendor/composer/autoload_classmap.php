@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'AddCustomePriceToCustomerItems' => $baseDir . '/database/migrations/2015_11_16_165342_add_custome_price_to_customer_items.php',
     'AddIsDeletedToCart' => $baseDir . '/database/migrations/2015_10_27_161844_add_isDeleted_toCart.php',
+    'AddOrganizationIdToRemainingTables' => $baseDir . '/database/migrations/2015_12_02_154020_add_organization_id_to_remaining_tables.php',
+    'AddOrganizationIdToTables' => $baseDir . '/database/migrations/2015_11_30_161859_add_organization_id_to_tables.php',
     'AddOrganozationToUsersTable' => $baseDir . '/database/migrations/2015_11_13_162516_add_organozation_to_users_table.php',
     'AddPriceToCustomerItems' => $baseDir . '/database/migrations/2015_11_04_155806_add_price_to_customer_items.php',
     'AddSoftDeleteToCustomers' => $baseDir . '/database/migrations/2015_11_04_165319_add_soft_delete_to_customers.php',

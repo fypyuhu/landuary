@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Item;
 use App\Models\ItemRelation;
 use DB;
-
+use Auth;
 class ItemController extends Controller {
 
     /**
@@ -24,7 +24,7 @@ class ItemController extends Controller {
 
     public function getCreate() {
 
-        return view('admin.addItem', ['items' => Item::all()]);
+        return view('admin.addItem', ['items' => Item::organization()->get()]);
     }
 
     /**
@@ -53,7 +53,7 @@ class ItemController extends Controller {
 		if ($request->has('search_string'))
 			$search_filter = " and name like '%$request->search_string%' or item_number = '$request->search_string'";
 			
-        $items = DB::select(DB::raw("SELECT * FROM `items` where id not in (select child_id from item_relation) AND items.status=1 $search_filter"));
+        $items = DB::select(DB::raw("SELECT * FROM `items` where id not in (select child_id from item_relation) AND items.status=1 $search_filter and items.organization_id = ".Auth::user()->organization_id));
         $data = array();
         foreach ($items as $item) {
             $row = array();
@@ -64,7 +64,7 @@ class ItemController extends Controller {
             $row["transaction_type"] = $item->transaction_type;
             $row["actions"] = '<a href="/admin/items/edit/' . $item->id . '" data-mode="ajax" >Edit</a> / <a href="/admin/items/delete/' . $item->id . '" data-mode="ajax">Delete</a>';
             $data[] = $row;
-            $sql = "select items.* from items join item_relation on items.id=item_relation.child_id where items.status=1 AND item_relation.parent_id='" . $item->id . "'";
+            $sql = "select items.* from items join item_relation on items.id=item_relation.child_id where items.status=1 AND item_relation.parent_id='" . $item->id . "' and items.organization_id = ".Auth::user()->organization_id;
             $sub_items = DB::select(DB::raw($sql));
             foreach ($sub_items as $sub_item) {
                 $sub_row = array();
@@ -87,7 +87,7 @@ class ItemController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function getEdit($id) {
-        return view('admin.editItem', ['current' => Item::find($id), 'items' => Item::all(), 'parent' => ItemRelation::where('child_id', '=', $id)->first()]);
+        return view('admin.editItem', ['current' => Item::find($id), 'items' => Item::organization()->get(), 'parent' => ItemRelation::organization()->where('child_id', '=', $id)->first()]);
     }
 
     public function postEdit($id, EditItemRequest $request) {

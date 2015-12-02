@@ -20,15 +20,15 @@ class ShipmentController extends Controller
      */
     public function getIndex()
     {
-        $customers=Customer::all();
+        $customers=Customer::organization()->get();
         return view('admin.shiping.index',["customers"=>$customers]);
     }
 
     public function getDetails($id){
         $active_customer=Customer::find($id);
-        $customers=Customer::all();
+        $customers=Customer::organization()->get();
         $departments=CustomerDepartment::find($id);
-        $carts=OutgoingCart::where('customer_id','=',$id)->where('status','=','Ready')->get();
+        $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->get();
         return view('admin.shiping.details',["carts"=>$carts,"customers"=>$customers,"active_customer"=>$active_customer,"departments"=>$departments]);
     }
     public function postCreate(Request $request)
@@ -57,43 +57,5 @@ class ShipmentController extends Controller
         $items=CustomerOutgoingCartItem::getCartItemsById($id);
         $user=UserProfile::where('user_id','=',Auth::user()->id)->first();
         return view('admin.shiping.recipt',['user'=>$user,'items'=>$items,'customer'=>$customer,'manifest'=>$manifest]);
-    }
-   public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
