@@ -29,7 +29,8 @@ class CartsListController extends Controller {
             $row["net_weight"] = $cart->net_weight;
             $row["gross_weight"] = $cart->gross_weight;
             $row["invoiced"] = 'No';
-            $row["actions"] = '<a href="/admin/in/receipt/' . $cart->id . '" >View</a>';
+            $row["actions"] = '<a href="/admin/in/receipt/' . $cart->id . '" >View</a>
+                               | <a href="/admin/in/edit/' . $cart->id . '" >Edit</a>';
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";
@@ -49,7 +50,8 @@ class CartsListController extends Controller {
             $row["net_weight"] = $cart->net_weight;
             $row["gross_weight"] = $cart->gross_weight;
             $row["is_exchange_cart"] = $cart->is_exchange_cart > 0 ? 'Yes' : 'No';
-            $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" data-mode="ajax">View</a>';
+            $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" >View</a> 
+                               | <a href="/admin/out/edit/' . $cart->id . '" >Edit</a>';
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";
@@ -69,7 +71,8 @@ class CartsListController extends Controller {
             $row["net_weight"] = $cart->net_weight;
             $row["gross_weight"] = $cart->gross_weight;
             $row["is_exchange_cart"] = $cart->is_exchange_cart > 0 ? 'Yes' : 'No';
-            $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" data-mode="ajax">View</a>';
+            $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" >View</a>
+                               | <a href="/admin/out/edit/' . $cart->id . '" >Edit</a>';
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";

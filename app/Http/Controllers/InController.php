@@ -127,12 +127,41 @@ class InController extends Controller {
             'organization' => $organization]);
     }
 
-    public function getEdit($id) {
-        return view('admin.in.edit');
+    public function getEdit($id){
+        $ogc = IncomingCart::find($id);
+        $customer=Customer::find($ogc->customer_id);
+        $selected_items = CustomerIncomingCartItem::getItems($id);
+        $department=CustomerDepartment::find($ogc->department_id);
+        $cart= Cart::find($ogc->cart_id);
+        $items = DB::table('items')
+					->join('customers_items', 'items.id', '=', 'customers_items.item_id')
+					->select('items.*')
+					->where('items.status', '>', 0)
+                                        ->where('items.transaction_type', '!=', 'Out')
+					->where('customers_items.customer_id', '=', $ogc->customer_id)
+                                        ->where('items.organization_id', '=',Auth::user()->organization_id)
+					->get();
+        return view('admin.in.edit',['ogc'=>$ogc,'selected_items'=>$selected_items,
+                'customer'=>$customer,
+                'department'=>$department,
+                'cart'=>$cart,
+                'items'=>$items
+                ]);
     }
-
-    public function postEdit($id) {
-        //
+    public function postEdit($id, Request $request){
+        $ogc = IncomingCart::find($id);
+        $ogc->gross_weight = $request->gross_weight;
+        $ogc->net_weight = $request->net_weight;
+        $ogc->save();
+        $ogc_items=CustomerIncomingCartItem::where('incoming_cart_id','=',$id)->delete();
+        foreach($request->item_cart as $key=>$value) {
+			$ogc_item = new CustomerIncomingCartItem;
+			$ogc_item->incoming_cart_id = $ogc->id;
+			$ogc_item->item_id = $value;
+			$ogc_item->quantity = $request->item_quantity[$key];
+			$ogc_item->save();
+		}
+        return redirect($request->return_url);        
     }
 
 }

@@ -130,7 +130,7 @@
                     <div class="col m4 s12">
                         <label>Net Weight</label>
                         <div class="input-field">
-                            <input id="net_weight" type="text" name="net_weight" placeholder="Net Weight">
+                            <input id="net_weight" type="text" name="net_weight" readonly="readonly" placeholder="Net Weight">
                         </div>
                     </div>
                 </div>
