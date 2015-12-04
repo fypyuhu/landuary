@@ -15,12 +15,11 @@
                 <div class="col m6 s12">
                     <label>Department:</label>
                     <select name="department" id="department">
-                        <option value="0" selected>Select Department</option>
-                        @if($departments)
+                        <option value="-1" selected>Select Department</option>
                         @foreach($departments as $department)
-                        <option value="{{$department->id}}" >{{$departments->department_name}}</option>
+                            <option value="{{$department->id}}" @if($department->id==$department_id) selected="selected" @endif >{{$department->department_name}}</option>
                         @endforeach
-                        @endif
+                        
                     </select>
                 </div>
             </div>
@@ -121,6 +120,18 @@
                 $(".loading").css("display", "block");
                 $.ajax({
                     url: "/admin/shiping-manifest/details/" + $(this).val(),
+                    context: document.body
+                }).done(function (html) {
+                    $("#shipmant").html(html);
+                    $(".loading").css("display", "none");
+                });
+            }
+        });
+        $('#department').on('change', function () {
+            if ($("#department").jqxComboBox('getSelectedIndex') != "-1" && $("#department").val() != "-1") {
+                $(".loading").css("display", "block");
+                $.ajax({
+                    url: "/admin/shiping-manifest/details/"+$("#customer").val()+"/" + $(this).val(),
                     context: document.body
                 }).done(function (html) {
                     $("#shipmant").html(html);

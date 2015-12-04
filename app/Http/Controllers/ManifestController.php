@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ReceivingManifest;
 use App\Models\ShipManifest;
 use App\Models\Customer;
-
+use App\Models\CustomerDepartment;
 class ManifestController extends Controller {
 
     public function getIndex() {
@@ -26,8 +26,18 @@ class ManifestController extends Controller {
             $row = array();
             $row["id"] = $manifest->id;
             $row["name"] = $manifest->customer->name;
+            $department=CustomerDepartment::find($manifest->department_id);
+            if($department){
+                $row["department"] =$department->department_name;
+            }
+            else{
+                $row["department"] ='';
+            }
             $row["date"] = $manifest->shipping_date;
             $row["actions"] = '<a href="/admin/shiping-manifest/recipt/' . $manifest->id . '">View</a>';
+            if($manifest->shipping_date==date("Y-m-d",time())){
+                $row["actions"].= ' | <a href="/admin/shiping-manifest/edit/' . $manifest->id . '">Edit</a>';
+            }
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";
@@ -44,6 +54,13 @@ class ManifestController extends Controller {
             $row = array();
             $row["id"] = $manifest->id;
             $row["name"] = $manifest->customer->name;
+            $department=CustomerDepartment::find($manifest->department_id);
+            if($department){
+                $row["department"] =$department->department_name;
+            }
+            else{
+                $row["department"] ='';
+            }
             $row["date"] = date('d F, Y', strtotime($manifest->created_at));
             $row["actions"] = '<a href="/admin/receiving-manifest/receipt/' . $manifest->id . '">View</a>';
             $data[] = $row;

@@ -14,7 +14,7 @@
 @section('content')
 <section class="content-wrap">
 	<div class="row">
-    	<a href="/admin/shiping-manifest" class="waves-effect btn">Back</a>
+    	<a href="{{URL::previous()}}" class="waves-effect btn">Back</a>
     	<button class="waves-effect btn" onclick='$("#printable").print();'>Print</button>
     </div>
     <div class="p-wrapper" id="printable">

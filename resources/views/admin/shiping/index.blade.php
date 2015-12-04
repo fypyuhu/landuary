@@ -111,6 +111,7 @@
 @section('js')
 <script type="text/javascript">
     $(document).ready(function () {
+         $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true,disabled:true});
         $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'dd-MM-yyyy'});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
          $('#customer').on('change', function () {
