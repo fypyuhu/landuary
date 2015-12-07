@@ -79,13 +79,20 @@
                     <div class="row no-topmargin" style="margin-bottom:25px;">
                         <div class="col m6 s12">
                             <div class="row">
-                                <label>Select Customer:</label>
-                                <select name="s_customer" id="s_customer">
-                                    <option value="-1">Please Select</option>
-                                    @foreach($customers as $customer)
-                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
-                                    @endforeach
-                                </select>
+                                <div class="col m6 s12">
+                                    <label>Select Customer:</label>
+                                    <select name="s_customer" id="s_customer">
+                                        @foreach($customers as $customer)
+                                        <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col m6 s12" id="s_department_div">
+                                    <label>Select Department:</label>
+                                    <select name="s_department" id="s_department">
+                                        <option value='-1'>Select Department</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col m6 s12">
@@ -117,7 +124,6 @@
             </div>
         </div>
     </div>
-
 </section>
 
 <!-- /Main Content -->
@@ -126,11 +132,34 @@
 @section('js')
 <script type="text/javascript">
     $(document).ready(function (e) {
+         if ($('#s_customer').jqxComboBox('getSelectedIndex') != "-1") {
+            $.ajax({
+                url: "/admin/customers/get-departments/" + $("#s_customer").val(),
+                context: document.body
+            }).done(function (html) {
+                $('#s_department_div').html(html);
+                $("#s_department").jqxComboBox({width: '100%', autoDropDownHeight: true});
+            });
+        }
+        $("body").on("change", "#s_customer", function (e) {
+            $('.loading').css('display', 'block');
+            $.ajax({
+                url: "/admin/customers/get-departments/" + $("#s_customer").val(),
+                type: 'GET',
+                success: function (html)
+                {
+                    $('#s_department').jqxComboBox('destroy');
+                    $('#s_department_div').html(html);
+                    $("#s_department").jqxComboBox({width: '100%', autoDropDownHeight: true});
+                    $('.loading').css('display', 'none');
+                }
+            });
+        });
         var oneWeekAgo = new Date();
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
         $('#s_date_from, #r_date_from').jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
         $("#r_customer, #s_customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
-        $("#r_date_to,  #s_date_to").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+        $("#r_date_to,  #s_date_to").jqxDateTimeInput({width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
 
         var source =
                 {
@@ -167,6 +196,7 @@
             formatData: function (data) {
                 $.extend(data, {
                     name: $('#s_customer').val(),
+                    department: $('#s_department').val(),
                     start_date: $("#s_date_from").val(),
                     end_date: $("#s_date_to").val()
                 });
@@ -193,7 +223,7 @@
                         {text: 'Customer Name', width: '20%', dataField: 'name', filtertype: 'checkedlist'},
                         {text: 'Department', width: '20%', dataField: 'department'},
                         {text: 'Shipping Date', width: '20%', dataField: 'date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
-                        {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
+                        {text: 'Actions', width: '10%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
         url = "{{url('admin/manifests/show-receiving')}}";
@@ -262,5 +292,6 @@
                     ]
                 });
     });
+
 </script>
 @endsection

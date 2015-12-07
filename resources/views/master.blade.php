@@ -183,7 +183,9 @@
           <li>
             <a href="{{url('admin/receiving-manifest')}}" class="waves-effect waves-blue fag fa-receiving">Receiving Manifest</a>
           </li>
-          
+          <li>
+            <a href="{{url('admin/invoices/create')}}" class="waves-effect waves-blue fag fa-shipping">Create Invoice</a>
+          </li>
           <li>
             <a href="{{url('admin/rewash')}}" class="waves-effect waves-blue fag fa-rewash">Rewash</a>
           </li>

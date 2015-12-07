@@ -2,13 +2,17 @@
 @section('content')
   <!-- Main Content -->
   <section class="content-wrap">
+      <div class="row">
+    	<a href="{{URL::previous()}}" class="waves-effect btn">Back</a>
+    	<button class="waves-effect btn" onclick='$("#printable").print();'>Print</button>
+    </div>
     <div class="p-wrapper">
     <div class="row">
-    	<div class="pull-left">
-        	<h4>Phoenix Scale Company</h4>
-            <p style="font-size:17px;">6802N. 47th Ave.<br />Ste 9<br />Glendale AZ 85301</p>
-            <p>Phone: (800) 326-9860</p>
-        </div>
+    	 <div class="pull-left">
+                <h4>{{$user->legal_name}}</h4>
+                <p style="font-size:17px;">{{$user->street_address}}<br />{{$user->city}} {{$user->state}}</p>
+                <p>Phone: {{$user->phone}}</p>
+            </div>
         <div class="pull-right">
             <p>Invoice #: 200<br />
             Date: 11/06/2015</p>

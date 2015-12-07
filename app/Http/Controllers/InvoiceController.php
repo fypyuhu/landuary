@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Auth;
+use App\Models\UserProfile;
+use App\Models\Invoice;
+use App\Models\InitialValue;
+use App\Models\Customer;
 class InvoiceController extends Controller
 {
     /**
@@ -20,7 +23,8 @@ class InvoiceController extends Controller
 	
 	public function getInvoice()
     {
-        return view('admin.invoices.invoice');
+        $user=UserProfile::where('user_id','=',Auth::user()->id)->first();
+        return view('admin.invoices.invoice',["user"=>$user]);
     }
 
     /**
@@ -28,9 +32,20 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getCreate(){
+        $customers=Customer::organization()->get();
+        return view('admin.invoices.create',["customers"=>$customers]);
+    }
+    public function postCreate(Request $request)
     {
-        //
+        $invoice=new Invoice;
+        $initial_values = InitialValue::where('organization_id', '=', $user->organization_id)->first();
+        $invoice->invoice_number=$initial_values->invoice_number;
+        $invoice->manifest_ids=$request->manifest_list;
+        
+        $user=UserProfile::where('user_id','=',Auth::user()->id)->first();
+        
+        return view('admin.invoices.invoice',["user"=>$user]);
     }
 
     /**

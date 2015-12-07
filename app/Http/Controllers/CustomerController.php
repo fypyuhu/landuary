@@ -122,6 +122,14 @@ class CustomerController extends Controller {
         }
         return $return . "</select>";
     }
+    public function getGetDepartments($id) {
+        $return = " <label>Select Department:</label><select name='s_department' id='s_department'><option value='-1'>Select Department</option>";
+        $departments=CustomerDepartment::where('customer_id','=',$id)->get();
+        foreach ($departments as $department) {
+            $return.="<option value='" . $department->id . "'>" . $department->department_name . "</option>";
+        }
+        return $return . "</select>";
+    }
 
     public function getItemDetail($id) {
         $item = Item::find($id);
