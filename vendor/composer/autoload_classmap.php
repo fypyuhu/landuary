@@ -35,6 +35,7 @@ return array(
     'CreateOutgoingCartsTable' => $baseDir . '/database/migrations/2015_11_03_122010_create_outgoing_carts_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateReceivingManifestTable' => $baseDir . '/database/migrations/2015_11_12_155138_create_receiving_manifest_table.php',
+    'CreateRewashTable' => $baseDir . '/database/migrations/2015_12_07_083920_create_rewash_table.php',
     'CreateShipingManifest' => $baseDir . '/database/migrations/2015_11_10_172443_Create_shiping_manifest.php',
     'CreateTaxesComponentsTable' => $baseDir . '/database/migrations/2015_10_28_142400_create_taxes_components_table.php',
     'CreateTaxesTable' => $baseDir . '/database/migrations/2015_10_28_142140_create_taxes_table.php',
