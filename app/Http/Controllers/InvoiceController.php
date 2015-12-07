@@ -17,6 +17,11 @@ class InvoiceController extends Controller
     {
         return view('admin.invoices.index');
     }
+	
+	public function getInvoice()
+    {
+        return view('admin.invoices.invoice');
+    }
 
     /**
      * Show the form for creating a new resource.
