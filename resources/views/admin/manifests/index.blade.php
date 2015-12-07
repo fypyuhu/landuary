@@ -138,6 +138,7 @@
                     datafields: [
                         {name: 'id'},
                         {name: 'name'},
+                        {name: 'department'},
                         {name: 'date', type: 'date'},
                         {name: 'actions'}
 
@@ -189,8 +190,9 @@
                     },
                     columns: [
                         {text: 'Manifest Number', width: '20%', dataField: 'id'},
-                        {text: 'Customer Name', width: '35%', dataField: 'name', filtertype: 'checkedlist'},
-                        {text: 'Shipping Date', width: '25%', dataField: 'date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
+                        {text: 'Customer Name', width: '20%', dataField: 'name', filtertype: 'checkedlist'},
+                        {text: 'Department', width: '20%', dataField: 'department'},
+                        {text: 'Shipping Date', width: '20%', dataField: 'date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
                         {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
@@ -201,6 +203,7 @@
                     datafields: [
                         {name: 'id'},
                         {name: 'name'},
+                        {name: 'department'},
                         {name: 'date', type: 'date'},
                         {name: 'actions'}
 
@@ -251,9 +254,10 @@
                         return obj.data;
                     },
                     columns: [
-                        {text: 'Manifest Number', width: '10%', dataField: 'id'},
-                        {text: 'Customer Name', width: '45%', dataField: 'name', filtertype: 'checkedlist'},
-                        {text: 'Created On', width: '25%', dataField: 'date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
+                        {text: 'Manifest Number', width: '20%', dataField: 'id'},
+                        {text: 'Customer Name', width: '20%', dataField: 'name', filtertype: 'checkedlist'},
+                        {text: 'Department', width: '20%', dataField: 'department'},
+                        {text: 'Created On', width: '20%', dataField: 'date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
                         {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });

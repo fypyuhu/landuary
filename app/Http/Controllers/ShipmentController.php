@@ -20,16 +20,21 @@ class ShipmentController extends Controller
      */
     public function getIndex()
     {
-        $customers=Customer::all();
+        $customers=Customer::organization()->get();
         return view('admin.shiping.index',["customers"=>$customers]);
     }
 
-    public function getDetails($id){
+    public function getDetails($id,$department_id=-1){
         $active_customer=Customer::find($id);
-        $customers=Customer::all();
-        $departments=CustomerDepartment::find($id);
-        $carts=OutgoingCart::where('customer_id','=',$id)->where('status','=','Ready')->get();
-        return view('admin.shiping.details',["carts"=>$carts,"customers"=>$customers,"active_customer"=>$active_customer,"departments"=>$departments]);
+        $customers=Customer::organization()->get();
+        $departments=CustomerDepartment::where('customer_id','=',$id)->get();
+        if($department_id==-1){
+            $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->get();
+        }
+        else{
+            $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->where('department_id','=',$department_id)->get();    
+        }
+        return view('admin.shiping.details',["carts"=>$carts,"customers"=>$customers,"active_customer"=>$active_customer,"departments"=>$departments,"department_id"=>$department_id]);
     }
     public function postCreate(Request $request)
     {
@@ -58,42 +63,42 @@ class ShipmentController extends Controller
         $user=UserProfile::where('user_id','=',Auth::user()->id)->first();
         return view('admin.shiping.recipt',['user'=>$user,'items'=>$items,'customer'=>$customer,'manifest'=>$manifest]);
     }
-   public function show($id)
-    {
-        //
+    public function getEdit($id){
+        $manifest=ShipManifest::find($id);
+        if($manifest->shipping_date!=date("Y-m-d",time())){
+            return back();
+        }
+        $customer=Customer::find($manifest->customer_id);
+        $department=CustomerDepartment::find($manifest->department_id);
+        if($manifest->department_id==-1){
+            $carts=OutgoingCart::organization()->where('customer_id','=',$manifest->customer_id)->where('status','=','Ready')->get();
+        }
+        else{
+            $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->where('department_id','=',$department_id)->get();    
+        }
+        $selected_carts=OutgoingCart::find(explode(",",$manifest->outgoing_cart_id));
+        return view('admin.shiping.edit',['customer'=>$customer,'manifest'=>$manifest,
+                    'department'=>$department,
+                    'carts'=>$carts,
+                    'selected_carts'=>$selected_carts
+            ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function postEdit($id, Request $request){
+        $manifest=ShipManifest::find($id);
+        $ogc=explode(",",$manifest->outgoing_cart_id);
+        $carts=implode(",",$request->carts);
+        $manifest->outgoing_cart_id=$carts;
+        foreach($ogc as $id){
+                 $out_going_cart=OutgoingCart::find($id);
+                 $out_going_cart->status="Ready";
+                 $out_going_cart->save();
+             }
+        foreach($request->carts as $id){
+                 $out_going_cart=OutgoingCart::find($id);
+                 $out_going_cart->status="Out";
+                 $out_going_cart->save();
+             }
+        $manifest->save();
+        return redirect('/admin/shiping-manifest/recipt/'.$manifest->id);
     }
 }

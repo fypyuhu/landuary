@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\OutgoingCart;
 use App\Models\Cart;
@@ -18,16 +17,11 @@ use Auth;
 
 class OutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function getIndex()
     {
-		$carts = Cart::all();
-		$customers = Customer::all();
-		$depts = CustomerDepartment::all();
+		$carts = Cart::organization()->get();
+		$customers = Customer::organization()->get();
+		$depts = CustomerDepartment::organization()->get();
         return view('admin.out.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts]);
     }
 	
@@ -37,45 +31,40 @@ class OutController extends Controller
     }
 	
 	public function getAjaxForm(Request $request) {
-		$carts = Cart::where('customer_number','=',$request->customer_id)->get();
+		$carts = Cart::organization()->where('customer_number','=',$request->customer_id)->get();
 		$items = DB::table('items')
 					->join('customers_items', 'items.id', '=', 'customers_items.item_id')
 					->select('items.*')
 					->where('items.status', '>', 0)
                                         ->where('items.transaction_type', '!=', 'In')
 					->where('customers_items.customer_id', '=', $request->customer_id)
+                                        ->where('items.organization_id', '=',Auth::user()->organization_id)
 					->get();
-		$customers = Customer::all();
-		$depts = CustomerDepartment::where('customer_id', '=', $request->customer_id)->get();
-		$current_customer = Customer::where('id', '=', $request->customer_id)->get();
-		
+		$customers = Customer::organization()->get();
+		$depts = CustomerDepartment::organization()->where('customer_id', '=', $request->customer_id)->get();
+		$current_customer = Customer::organization()->where('id', '=', $request->customer_id)->get();
 		return view('admin.out.form', ['depts' => $depts, 'carts' => $carts, 'items' => $items, 'customers' => $customers, 'current_customer' => $current_customer[0]]);
 	}
 	
 	public function getAddItem(Request $request) {
-	    $item = Item::where('id', '=', $request->item_id)->get();
+	    $item = Item::organization()->where('id', '=', $request->item_id)->get();
 		$quantity = $request->quantity;
 		return view('admin.out.addItem', ['item' => $item[0], 'quantity' => $quantity]);
 	}
 	
 	public function getCartInfo(Request $request) {
-		$carts = Cart::all();
-	    $cart = Cart::where('id', '=', $request->cart_id)->get();
+		$carts = Cart::organization()->get();
+	    $cart = Cart::organization()->where('id', '=', $request->cart_id)->get();
 		return view('admin.out.getCart', ['current_cart' => $cart[0], 'carts' => $carts]);
 	}
 	
 	public function getWeights(Request $request) {
-		$item = Item::where('id', '=', $request->item_id)->get();
+		$item = Item::organization()->where('id', '=', $request->item_id)->get();
 		$gross_weight = $request->gross_weight + ($item[0]->weight * $request->num_items);
 		$net_weight = $request->net_weight + ($item[0]->weight * $request->num_items);
 		return view('admin.out.weight', ['gross_weight' => $gross_weight, 'net_weight' => $net_weight]);
 	}
 	
-    /**
-     * Show the form for creating a new resource.
-     * 
-     * @return \Illuminate\Http\Response 
-     */
     public function postCreate(Request $request)
     {
         $ogc = new OutgoingCart;
@@ -98,9 +87,7 @@ class OutController extends Controller
                     $initial_values->cart_number=$initial_values->cart_number+1;
                     $initial_values->save();
                 }
-		
 		$ogc->save();
-		
 		foreach($request->item_cart as $key=>$value) {
 			$ogc_item = new CustomerOutgoingCartItem;
 			$ogc_item->outgoing_cart_id = $ogc->id;
@@ -108,7 +95,6 @@ class OutController extends Controller
 			$ogc_item->quantity = $request->item_quantity[$key];
 			$ogc_item->save();
 		}
-		
 		return redirect('/admin/out/receipt/'.$ogc->id);
     }
 	
@@ -127,58 +113,40 @@ class OutController extends Controller
             'organization'=>$organization,
 			'shipping_date'=>$shipping_date]);
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function getEdit($id){
+        $ogc = OutgoingCart::find($id);
+        $customer=Customer::find($ogc->customer_id);
+        $selected_items = CustomerOutgoingCartItem::getItems($id);
+        $department=CustomerDepartment::find($ogc->department_id);
+        $cart= Cart::find($ogc->cart_id);
+        $items = DB::table('items')
+					->join('customers_items', 'items.id', '=', 'customers_items.item_id')
+					->select('items.*')
+					->where('items.status', '>', 0)
+                                        ->where('items.transaction_type', '!=', 'In')
+					->where('customers_items.customer_id', '=', $ogc->customer_id)
+                                        ->where('items.organization_id', '=',Auth::user()->organization_id)
+					->get();
+        return view('admin.out.edit',['ogc'=>$ogc,'selected_items'=>$selected_items,
+                'customer'=>$customer,
+                'department'=>$department,
+                'cart'=>$cart,
+                'items'=>$items
+                ]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getEdit($id) {
-		return view('admin.out.edit');
-	}
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function postEdit($id, Request $request){
+        $ogc = OutgoingCart::find($id);
+        $ogc->gross_weight = $request->gross_weight;
+        $ogc->net_weight = $request->net_weight;
+        $ogc->save();
+        $ogc_items=CustomerOutgoingCartItem::where('outgoing_cart_id','=',$id)->delete();
+        foreach($request->item_cart as $key=>$value) {
+			$ogc_item = new CustomerOutgoingCartItem;
+			$ogc_item->outgoing_cart_id = $ogc->id;
+			$ogc_item->item_id = $value;
+			$ogc_item->quantity = $request->item_quantity[$key];
+			$ogc_item->save();
+		}
+        return redirect($request->return_url);        
     }
 }

@@ -15,7 +15,7 @@ use App\Models\CustomerItem;
 use App\Http\Requests\AddCustomer;
 use App\Http\Requests\EditCustomer;
 use DB;
-
+use Auth;
 class CustomerController extends Controller {
 
     public function getIndex() {
@@ -23,8 +23,8 @@ class CustomerController extends Controller {
     }
 
     public function getCreate() {
-        $parent_items = DB::select(DB::raw('SELECT items.id,items.name FROM `items` where id not in (select child_id from item_relation) AND items.status=1'));
-        $taxes = Tax::all();
+        $parent_items = DB::select(DB::raw('SELECT items.id,items.name FROM `items` where id not in (select child_id from item_relation) AND items.status=1 AND items.organization_id= '.Auth::user()->organization_id));
+        $taxes = Tax::organization()->get();
         return view('admin.customers.add', ["parent_items" => $parent_items, "taxes" => $taxes]);
     }
 
@@ -47,7 +47,7 @@ class CustomerController extends Controller {
             $customer->billing_fax = $request->billing_fax;
         }
         $customer->save();
-        if ($request->has('use_department')) {
+        if ($request->has('use_department') && is_array($request->department_list) ) {
             foreach ($request->department_list as $list) {
                 $customer_department = new CustomerDepartment;
                 $customer_department->customer_id = $customer->id;
@@ -114,7 +114,7 @@ class CustomerController extends Controller {
     }
 
     public function getGetChildren($id) {
-        $sql = "select items.id,items.name from items join item_relation on items.id=item_relation.child_id where items.status=1 AND item_relation.parent_id='" . $id . "'";
+        $sql = "select items.id,items.name from items join item_relation on items.id=item_relation.child_id where items.status=1 AND item_relation.parent_id='" . $id . "' AND items.organization_id= ".Auth::user()->organization_id;
         $items = DB::select(DB::raw($sql));
         $return = "<select name='child_item' id='child_item'><option value='-1'>Select Item</option>";
         foreach ($items as $item) {
@@ -125,7 +125,7 @@ class CustomerController extends Controller {
 
     public function getItemDetail($id) {
         $item = Item::find($id);
-        $sql = "select items.* from items join item_relation on items.id=item_relation.parent_id where items.status=1 AND item_relation.child_id='" . $id . "'";
+        $sql = "select items.* from items join item_relation on items.id=item_relation.parent_id where items.status=1 AND item_relation.child_id='" . $id . "' AND items.organization_id= ".Auth::user()->organization_id;
         $parent_item = DB::select(DB::raw($sql));
         if ($parent_item) {
             $parent_item = $parent_item[0];
@@ -134,9 +134,9 @@ class CustomerController extends Controller {
     }
 
     public function getShow(Request $request) {
-		$customers = Customer::all();
+		$customers = Customer::organization()->get();
 		if ($request->has('search_string')) {
-			$customers = Customer::where('name', 'like', "%$request->search_string%")->orWhere('customer_number', '=', "$request->search_string")->get();
+			$customers = Customer::organization()->where('name', 'like', "%$request->search_string%")->orWhere('customer_number', '=', "$request->search_string")->get();
 		}
 		
         $data = array();
@@ -153,12 +153,12 @@ class CustomerController extends Controller {
 
     public function getEdit($id) {
         $customer=Customer::find($id);
-        $customer_departments =CustomerDepartment::where('customer_id','=',$id)->get();
-        $customer_billing = CustomerBilling::where('customer_id','=',$id)->first();
-        $customer_tax = CustomerTax::where('customer_id','=',$id)->first();
-        $customer_items = CustomerItem::where('customer_id','=',$id)->get();
-        $parent_items = DB::select(DB::raw('SELECT items.id,items.name FROM `items` where id not in (select child_id from item_relation) AND items.status=1'));
-        $taxes = Tax::all();
+        $customer_departments =CustomerDepartment::organization()->where('customer_id','=',$id)->get();
+        $customer_billing = CustomerBilling::organization()->where('customer_id','=',$id)->first();
+        $customer_tax = CustomerTax::organization()->where('customer_id','=',$id)->first();
+        $customer_items = CustomerItem::organization()->where('customer_id','=',$id)->get();
+        $parent_items = DB::select(DB::raw('SELECT items.id,items.name FROM `items` where id not in (select child_id from item_relation) AND items.status=1  AND items.organization_id= '.Auth::user()->organization_id));
+        $taxes = Tax::organization()->get();
         return view('admin.customers.edit', 
                 [
                    "customer" => $customer,

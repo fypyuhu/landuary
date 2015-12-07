@@ -15,11 +15,6 @@ use Auth;
 use App\Models\UserProfile;
 class ReceivingManifestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function getIndex()
     {
 		$customers = ReceivingManifest::getCustomerByIncomingCart();
@@ -51,14 +46,14 @@ class ReceivingManifestController extends Controller
 		$department_to = '';
 		
 		if($manifest->department_from != '' && $manifest->department_to != '') {
-			$departments = CustomerDepartment::whereBetween('id', [$manifest->department_from, $manifest->department_to])->get();
+			$departments = CustomerDepartment::organization()->whereBetween('id', [$manifest->department_from, $manifest->department_to])->get();
 			if(count($departments) > 0) {
 				$department_from = $departments[0]->department_name;
 				$department_to = $departments[count($departments)-1]->department_name;
 			}
 		}
 		else if($manifest->department_from != '' || $manifest->department_to != '') {
-			$departments = CustomerDepartment::where('id', '=', $manifest->department_from)->orWhere('id', '=', $manifest->department_to)->get();
+			$departments = CustomerDepartment::organization()->where('id', '=', $manifest->department_from)->orWhere('id', '=', $manifest->department_to)->get();
 			if($manifest->department_from != '') {
 				if(count($departments) > 0) {
 					$department_from = $departments[0]->department_name;
@@ -84,64 +79,10 @@ class ReceivingManifestController extends Controller
 	
 	public function getAjaxForm(Request $request) {
 		$id = $request->customer_id;
-		$customers = Customer::all();
-		$departments = CustomerDepartment::where('customer_id', '=', $id)->get();
-		$current = Customer::where('id', '=', $id)->first();
+		$customers = Customer::organization()->get();
+		$departments = CustomerDepartment::organization()->where('customer_id', '=', $id)->get();
+		$current = Customer::organization()->where('id', '=', $id)->first();
 		return view('admin.receiving-manifest.ajaxForm', [ 'customers' => $customers, 'departments' => $departments, 'current' => $current ]);
 	}
 	
-	/**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-	public function store(Request $request)
-    {
-        //	
-	}
-	
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

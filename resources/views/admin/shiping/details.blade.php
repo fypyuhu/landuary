@@ -15,12 +15,11 @@
                 <div class="col m6 s12">
                     <label>Department:</label>
                     <select name="department" id="department">
-                        <option value="0" selected>Select Department</option>
-                        @if($departments)
+                        <option value="-1" selected>Select Department</option>
                         @foreach($departments as $department)
-                        <option value="{{$department->id}}" >{{$departments->department_name}}</option>
+                            <option value="{{$department->id}}" @if($department->id==$department_id) selected="selected" @endif >{{$department->department_name}}</option>
                         @endforeach
-                        @endif
+                        
                     </select>
                 </div>
             </div>
@@ -49,6 +48,9 @@
             </div>
         </fieldset>
         <div class="row">
+            <div class="col">
+                <label  class="error" id="error-select_cart"></label>
+            </div>
             <div class="col pull-right">
                 <button class="waves-effect btn" type="submit">Save</button>
                 <button class="waves-effect btn">Clear</button>
@@ -81,7 +83,7 @@
                         <div class="col s2">{{$cart->cart_id}}</div>
                         <div class="col s2">{{date('d-m-Y',strtotime($cart->shipping_date))}}</div>
                         <div class="col s3 right-align">{{$cart->net_weight}}</div>
-                        <div class="col s2 center-align"><a href="/admin/out/edit/{{$cart->id}}" data-mode="ajax" class="edit-button">View</a></div>
+                        <div class="col s2 center-align"><a href="/admin/out/receipt/{{$cart->id}}"   class="edit-button">View</a> | <a href="/admin/out/edit/{{$cart->id}}"  class="edit-button">Edit</a></div>
                     </div>
                     @endforeach
                     @else
@@ -103,6 +105,12 @@
             else{
                 $(".all_cart_checkbox").prop( "checked", false );
             }
+            $("#error-select_cart").html("");
+            $("#error-select_cart").hide();
+        });
+        $('.all_cart_checkbox').change(function () {
+            $("#error-select_cart").html("");
+            $("#error-select_cart").hide();
         });
         $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
@@ -119,6 +127,33 @@
                 });
             }
         });
-          
+        $('#department').on('change', function () {
+            if ($("#department").jqxComboBox('getSelectedIndex') != "-1" && $("#department").val() != "-1") {
+                $(".loading").css("display", "block");
+                $.ajax({
+                    url: "/admin/shiping-manifest/details/"+$("#customer").val()+"/" + $(this).val(),
+                    context: document.body
+                }).done(function (html) {
+                    $("#shipmant").html(html);
+                    $(".loading").css("display", "none");
+                });
+            }
+        });
+        $("#pageForm").validate({
+                ignore: [],
+                rules: {
+                    customer: "required"
+            },
+            submitHandler: function (form) {
+                if($(".all_cart_checkbox").length<1 || $('.all_cart_checkbox:checked').length<1){
+                $("#error-select_cart").html("Please select at least one cart");
+                $("#error-select_cart").show();
+                }
+                else{
+                    $(form).validate().cancelSubmit = true;
+                    $(form).submit();
+                }
+            }
+            });  
     });
 </script>

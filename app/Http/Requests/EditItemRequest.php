@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-
+use Auth;
 class EditItemRequest extends Request
 {
     /**
@@ -26,7 +26,7 @@ class EditItemRequest extends Request
         $id = $this->route('one');
         return [
             'item_name' => 'required',
-            'item_number' => 'required|integer|unique:items,item_number,'. $id,
+            'item_number' => 'required|integer|unique:items,item_number,'. $id.',id,organization_id,'.Auth::user()->organization_id,
             'item_desc' => 'required',
             'item_weight' => 'required|numeric',
         ];
