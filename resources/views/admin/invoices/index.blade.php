@@ -32,60 +32,84 @@
     	<div class="col s12">
           <fieldset>
               <legend>Select Cart(s):</legend>
+              <div class="row">
+                  <div class="col m6 s12">
+                      <div class="row">
+                        <div class="col m6 s12">
+                            <label>Select Customer:</label>
+                            <select name="r_customer" id="r_customer" class="dropdown">
+                                <option value="-1">Please Select</option>
+                            </select>
+                        </div>
+                        <div class="col m6 s12">
+                            <label>Select Department:</label>
+                            <select name="r_department" id="r_department" class="dropdown">
+                                <option value="-1">Please Select</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                      	<div class="col m6 s12">
+                        	<label>Status:</label>
+                            <select name="r_department" id="r_department" class="dropdown">
+                                <option value="-1">Please Select</option>
+                                <option value="Paid">Paid</option>
+                                <option value="Unpaid">Unpaid</option>
+                            </select>
+                        </div>
+                        <div class="col m6 s12">&nbsp;</div>
+                      </div>
+                      <div class="row">
+                        <div class="col m6 s12">
+                            <label>Date Generated:</label>
+                            <div name="date_generated" id="date_generated" class="datepicker"></div>
+                        </div>
+                        <div class="col m6 s12">
+                            <label>Due Date:</label>
+                            <div name="due_date" id="due_date" class="datepicker"></div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
               <div class="row box">
                   <div class="row layout_table no-topmargin">
                     <div class="row heading">
-                        <div class="col s1 center-align chkbx">
-                            <input type="checkbox" name="use_departments" id="use_departments">
-                            <label for="use_departments"></label>
-                        </div>
-                        <div class="col s1">Date Generated</div>
+                        <div class="col s2">Date Generated</div>
                         <div class="col s2">Customer</div>
                         <div class="col s2">Department</div>
                         <div class="col s1 right-align">Amount</div>
-                        <div class="col s2">Paid/Unpaid</div>
-                        <div class="col s1">Status</div>
-                        <div class="col s1">Due Date</div>
+                        <div class="col s2">Status</div>
+                        <div class="col s2">Due Date</div>
                         <div class="col s1 center-align">Actions</div>
                     </div>
                     <div class="row records_list">
-                        <div class="col s1 center-align chkbx">
-                            <input type="checkbox" name="use_departments" id="use_departments">
-                            <label for="use_departments"></label>
-                        </div>
-                        <div class="col s1">10-02-2015</div>
+                        <div class="col s2">10-02-2015</div>
                         <div class="col s2">Hadden Scott<br />#: 1235456</div>
                         <div class="col s2">Cardialogy<br />#: 1231456</div>
                         <div class="col s1 right-align">$500</div>
                         <div class="col s2">
-                        	<select class="invoice_status">
+                        	<select class="dropdown">
                             	<option>Select</option>
                                 <option value="Paid">Paid</option>
                                 <option value="Unpaid">Unpaid</option>
                             </select>
                         </div>
-                        <div class="col s1">Over Due</div>
-                        <div class="col s1">10-02-2015</div>
+                        <div class="col s2">10-02-2015</div>
                         <div class="col s1 center-align"><a href="/admin/invoices/invoice" class="edit-button">View</a></div>
                     </div>
                     <div class="row records_list">
-                        <div class="col s1 center-align chkbx">
-                            <input type="checkbox" name="use_departments" id="use_departments">
-                            <label for="use_departments"></label>
-                        </div>
-                        <div class="col s1">10-02-2015</div>
+                        <div class="col s2">10-02-2015</div>
                         <div class="col s2">Hadden Scott<br />#: 1235456</div>
                         <div class="col s2">Cardialogy<br />#: 1231456</div>
                         <div class="col s1 right-align">$500</div>
                         <div class="col s2">
-                        	<select class="invoice_status">
+                        	<select class="dropdown">
                             	<option>Select</option>
                                 <option value="Paid">Paid</option>
                                 <option value="Unpaid">Unpaid</option>
                             </select>
                         </div>
-                        <div class="col s1">Over Due</div>
-                        <div class="col s1">10-02-2015</div>
+                        <div class="col s2">10-02-2015</div>
                         <div class="col s1 center-align"><a href="/admin/invoices/invoice" class="edit-button">View</a></div>
                     </div>
                   </div>
@@ -102,7 +126,8 @@
 
 <script>
     $(document).ready(function () {
-        $(".invoice_status").jqxComboBox({width: '100%', autoDropDownHeight: true});
+        $(".dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true});
+		$(".datepicker").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
 	});
 </script>
 @endsection
