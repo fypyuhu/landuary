@@ -64,11 +64,11 @@
 @section('js')
 <script type="text/javascript">
     $(document).ready(function () {
-		$("#search_form").validate({
+		/*$("#search_form").validate({
             rules: {
                 search_string: "required"
             }
-        });
+        });*/
 		
 		var url = "{{url('admin/customers/show')}}";
 		$("#search_form").submit(function(e){
@@ -76,6 +76,8 @@
 			if($('#search_string').val() != '') {
 				var querystring = '?search_string='+$('#search_string').val();
 				loadTable(url+querystring);
+			} else {
+				loadTable(url);
 			}
 		});
 		loadTable(url);
