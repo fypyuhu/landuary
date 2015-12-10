@@ -165,7 +165,6 @@
 						required: true,
 						email: true
 					},
-					website: "required",
 					contact_name: "required",
 					contact_designation: "required",
 					contact_email: {
