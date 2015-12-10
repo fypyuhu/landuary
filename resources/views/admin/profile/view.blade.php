@@ -549,7 +549,7 @@
 		});
 		
 		$( "body" ).on( "mouseover", '.content-wrap', function(e) {
-			$("#country").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
+			$("#country").jqxComboBox({enableSelection: true, autoComplete: true, width: '100%', autoDropDownHeight: true});
 			
 			$('.editButton').click(function(e) {
 				$(this).parents('.oTable').find('.info-div').hide();

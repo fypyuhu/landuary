@@ -277,7 +277,7 @@
 			$(corrLink).addClass('isCurrent');
 		});
 		
-		$("#country").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
+		$("#country").jqxComboBox({enableSelection: true, autoComplete: true, width: '100%', autoDropDownHeight: true});
 	});
 	</script>
 @endsection
