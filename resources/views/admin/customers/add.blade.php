@@ -505,7 +505,7 @@
                         success: showResponse,
                         error: showError
                     };
-
+					$('.loading').show();
                     $('#customer-form').ajaxSubmit(options);
                 }
             }
