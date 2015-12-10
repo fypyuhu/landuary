@@ -17,9 +17,9 @@ trait RedirectsUsers
 			$visited = Auth::user()->visited;
 			
 			echo $this->redirectPath;
-			DD($visited);
+			DD(intval($visited));
 			
-			if($visited > 0) {
+			if($visited > 0 || $visited != "0") {
 				echo "a"; dd();
             	return '/admin';
 			} else {
