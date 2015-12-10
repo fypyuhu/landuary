@@ -29,7 +29,7 @@
     <div class="row logo-sect">
     	@if ($user_profile->logo != '')
         <div class="logo-cont pull-left">
-            <img src="https://www.truelancer.com/blog/wp-content/uploads/2014/12/afi.png" alt="{{$user->first_name}}" width="100%" height="100%" />
+            <img src="{{URL::asset('uploads/profile')}}/{{$user_profile->logo}}" alt="{{$user->first_name}}" width="100%" height="100%" />
         </div>
         @endif
         <div class="pull-left">
