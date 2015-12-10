@@ -20,8 +20,10 @@ trait RedirectsUsers
 			DD($visited);
 			
 			if($visited > 0) {
+				echo "a"; dd();
             	return '/admin';
 			} else {
+				echo "b"; dd();
 				return $this->redirectPath;
 			}
         }
