@@ -178,6 +178,10 @@
           </li>
           
           <li>
+            <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-rewash">Create Invoice</a>
+          </li>
+          
+          <li>
             <a href="{{url('admin/rewash')}}" class="waves-effect waves-blue fag fa-rewash">Rewash</a>
           </li>
           

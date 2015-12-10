@@ -114,9 +114,9 @@
 
 <script>
     $(document).ready(function () {
-    	$("#customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
-        $("#department").jqxComboBox({ width: '100%', autoDropDownHeight: true, {{count($depts) > 0 ? 'disabled: false' : 'disabled: true'}} });
-        $("#item_id").jqxComboBox({ width: '100%', autoDropDownHeight: true, {{count($items) > 0 ? 'disabled: false' : 'disabled: true'}} });
+    	$("#customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
+        $("#department").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true, {{count($depts) > 0 ? 'disabled: false' : 'disabled: true'}} });
+        $("#item_id").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true, {{count($items) > 0 ? 'disabled: false' : 'disabled: true'}} });
 		$(".datepicker").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
 		
         $("#pageForm").validate({

@@ -167,7 +167,7 @@
     $(document).ready(function (e) {
         var oneWeekAgo = new Date();
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-        $("#r_customer, #i_customer, #s_customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
+        $("#r_customer, #i_customer, #s_customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
         $(".r_calendar").jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
         var url = "{{url('admin/carts-list/show-incoming')}}";

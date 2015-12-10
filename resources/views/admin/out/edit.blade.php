@@ -179,7 +179,7 @@
 <script>
     $(document).ready(function () {
         $("#customer, #cart_number_dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true,disabled: true});
-        $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true});
+        $("#item_id").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $(".calendar").jqxDateTimeInput({value:new Date("{{$ogc->shipping_date->format('Y-m-d')}}"), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy', disabled: true});
         $("body").on("change", "#customer", function (e) {

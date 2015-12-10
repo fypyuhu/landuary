@@ -171,7 +171,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
-        $("#customer, #cart_number_dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true});
+        $("#customer, #cart_number_dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});

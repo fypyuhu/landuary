@@ -126,7 +126,7 @@
 
 <script>
     $(document).ready(function () {
-        $(".dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true});
+        $(".dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
 		$(".datepicker").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
 	});
 </script>

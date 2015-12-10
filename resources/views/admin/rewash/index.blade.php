@@ -133,7 +133,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
-        $("#customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
+        $("#customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
 		$(".datepicker").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});

@@ -526,11 +526,11 @@
                 $(corr_div_id).slideDown('slow');
             }
         });
-        $("#bill_type").jqxComboBox({width: '150', autoComplete: true, autoDropDownHeight: true});
-        $("#sales_tax_authority").jqxComboBox({width: '400', autoComplete: true, autoDropDownHeight: true});
-        $("#department_list").jqxComboBox({width: '280', autoComplete: true, multiSelect: true, autoDropDownHeight: true, checkboxes: true});
-        $("#parent_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true});
-        $("#child_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true});
+        $("#bill_type").jqxComboBox({autoComplete: true, width: '150', autoComplete: true, autoDropDownHeight: true});
+        $("#sales_tax_authority").jqxComboBox({autoComplete: true, width: '400', autoComplete: true, autoDropDownHeight: true});
+        $("#department_list").jqxComboBox({autoComplete: true, width: '280', autoComplete: true, multiSelect: true, autoDropDownHeight: true, checkboxes: true});
+        $("#parent_item").jqxComboBox({autoComplete: true, width: '250', autoComplete: true, autoDropDownHeight: true});
+        $("#child_item").jqxComboBox({autoComplete: true, width: '250', autoComplete: true, autoDropDownHeight: true});
         $('#bill_type').on('change', function () {
             if ($(this).jqxComboBox('getSelectedIndex') == "-1") {
                 $("#error-bill_type").html('Bill Type is required');
@@ -549,10 +549,10 @@
                     $('#child_select_box_div').html('');
                     $('#child_select_box_div').html(html);
                     if ($('#child_item').has('option').length > 0) {
-                        $("#child_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true});
+                        $("#child_item").jqxComboBox({autoComplete: true, width: '250', autoComplete: true, autoDropDownHeight: true});
                     }
                     else {
-                        $("#child_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true, disabled: true});
+                        $("#child_item").jqxComboBox({autoComplete: true, width: '250', autoComplete: true, autoDropDownHeight: true, disabled: true});
                     }
 
                 });
