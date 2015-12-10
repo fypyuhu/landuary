@@ -110,10 +110,6 @@
                         </li>
                         <li><a href="javascript:void(0);">Bin Tickets</a>
                         </li>-->
-                        <li style="background:none !important;">&nbsp;
-                        </li>
-                        <li style="background: #42a5f5 !important;"><a href="javascript:void(0);" style="color: #ffffff !important;">Adjustment</a>
-                        </li>
                     </ul>
                     <ul class="col s6">
                     	<li><a href="javascript:void(0);">Company Profile</a>
@@ -121,8 +117,6 @@
                         <li><a href="{{url('admin/profile/view')}}">Account</a>
                         </li>
                         <li><a href="javascript:void(0);">Users</a>
-                        </li>
-                        <li><a href="javascript:void(0);">Privacy</a>
                         </li>
                         <li style="background:none !important;">&nbsp;
                         </li>
@@ -189,6 +183,14 @@
           
           <li>
             <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-today">Today</a>
+          </li>
+          
+          <li class="mainmenu">
+            <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-adjustment">Adjustment</a>
+            <ul class="submenu">
+            	<li><a href="javascript:void(0);" class="waves-effect waves-blue">&gt; Manifests</a></li>
+                <li><a href="javascript:void(0);" class="waves-effect waves-blue">&gt; Carts</a></li>
+            </ul>
           </li>
         </ul>
 
@@ -308,6 +310,14 @@
 		
 		$('.content-wrap').click(function(e){
 			$('#reports-nav, #user-dropdown').slideUp( "slow" );
+		});
+		
+		$('.mainmenu').mouseover(function(e){
+			$('.submenu').show();	
+		});
+		
+		$('.mainmenu').mouseleave(function(e){
+			$('.submenu').hide();	
 		});
 		
 	});

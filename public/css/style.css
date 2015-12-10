@@ -757,7 +757,7 @@ aside.yaybar {
 .fag {
 	background-size: 20px !important;
 	background-repeat: no-repeat !important;
-	background-position: 14px 14px !important;
+	background-position: 14px 12px !important;
 }
 
 .fa-homec {
@@ -786,6 +786,10 @@ aside.yaybar {
 
 .fa-today {
 	background-image: url(../images/cal-ico.png) !important;
+}
+
+.fa-adjustment {
+	background-image: url(../images/fa-adjustment.png) !important;
 }
 
 .navbar-top {
@@ -829,4 +833,21 @@ aside.yaybar {
 	border-radius: 50%;
 	padding: 0 10px;
 	display: inline-block;
+}
+
+.yaybar .nano-content>ul li>ul,
+.yaybar .nano-content>ul li>ul li,
+.yaybar .nano-content>ul li>ul li a {
+	background: #193048 !important;
+}
+
+.yaybar .nano-content>ul li>ul:hover,
+.yaybar .nano-content>ul li>ul li:hover,
+.yaybar .nano-content>ul li>ul li a:hover {
+	background: #97c8d9 !important;
+}
+
+.yaybar .nano-content>ul li>ul li a {
+	padding-top: 7px;
+	padding-bottom: 7px;
 }
