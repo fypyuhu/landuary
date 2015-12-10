@@ -337,6 +337,7 @@
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   @section('js')
   @show
+  <script type="text/javascript" src="{{URL::asset('js/custom.js')}}"></script>
 </body>
 
 </html>
