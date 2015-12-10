@@ -181,10 +181,6 @@
             <a href="{{url('admin/rewash')}}" class="waves-effect waves-blue fag fa-rewash">Rewash</a>
           </li>
           
-          <li>
-            <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-today">Today</a>
-          </li>
-          
           <li class="mainmenu">
             <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-adjustment">Adjustment</a>
             <ul class="submenu">
@@ -192,6 +188,11 @@
                 <li><a href="javascript:void(0);" class="waves-effect waves-blue">&gt; Carts</a></li>
             </ul>
           </li>
+          
+          <li>
+            <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-today">Today</a>
+          </li>
+          
         </ul>
 
       </div>
