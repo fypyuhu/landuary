@@ -16,6 +16,9 @@ trait RedirectsUsers
         if (property_exists($this, 'redirectPath')) {
 			$visited = Auth::user()->visited;
 			
+			echo $this->redirectPath;
+			DD($visited);
+			
 			if($visited > 0) {
             	return '/admin';
 			} else {
