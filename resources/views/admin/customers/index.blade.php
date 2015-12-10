@@ -70,17 +70,14 @@
             }
         });
 		
-		var url = '';
+		var url = "{{url('admin/customers/show')}}";
 		$("#search_form").submit(function(e){
 			e.preventDefault();
 			if($('#search_string').val() != '') {
 				var querystring = '?search_string='+$('#search_string').val();
-				url = "{{url('admin/customers/show')}}";
 				loadTable(url+querystring);
 			}
 		});
-		
-        url = url = "{{url('admin/customers/show')}}";
 		loadTable(url);
     });
 	

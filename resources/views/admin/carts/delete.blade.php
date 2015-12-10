@@ -17,6 +17,7 @@
         $("#pageForm").validate({
 
             submitHandler: function (form) {
+				$('.loading').show();
                 var options = {
                     success: showResponse
                 };

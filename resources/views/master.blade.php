@@ -44,7 +44,6 @@
   <!--[if lt IE 9]>
     <script src="assets/html5shiv/html5shiv.min.js"></script>
   <![endif]-->
-
 </head>
 
 <body>
@@ -320,6 +319,7 @@
   </script>
   
   <script src="{{URL::asset('js/print/jQuery.print.js')}}"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   @section('js')
   @show
 </body>

@@ -1,5 +1,7 @@
-<fieldset >
+<div class="field-set">
+<fieldset>
                     <legend>Add Item:</legend>
+                    <div class="row alert alert-success" style="display:none;"></div>
                     <form method="POST" action="{{url('admin/items/create')}}" id="pageForm">
                         {{csrf_field()}}
                         <div class="row s12">
@@ -84,12 +86,23 @@
                 transaction_type: "required"
             },
             submitHandler: function (form) {
+				$('.loading').show();
                 var options = {
                     success: showResponse,
                     error:showError
                 };
                 function showResponse(responseText, statusText, xhr, $form) {
-                    location.reload();
+                    //location.reload();
+					$('.field-set').load('/admin/items/add-item-form',function(){
+						$('.loading').hide();
+						$('.alert-success').html('Item has been saved successfully.').show();
+					});
+					//resetting form
+					/*$('#pageForm').find('input').val('');
+					$('#pageForm').find('input[type="checkbox"]').prop('checked', false);
+					$('#parent-item-div').hide();
+					$("#transaction_type").jqxComboBox({width: '200', autoDropDownHeight: true});
+        			$("#parent_item").jqxComboBox({width: '400', autoDropDownHeight: true});*/
                 }
                 function showError(response, statusText, xhr, $form) {
                    if(response.status==422){
@@ -100,9 +113,11 @@
                 $("[name='" + key + "']").parent().siblings(".error").show();
             })
                    }
+				   $('.loading').hide();
                 }
                 $(form).ajaxSubmit(options);
             }
         });
     });
 </script>
+</div>

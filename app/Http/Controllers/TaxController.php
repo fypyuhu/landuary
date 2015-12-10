@@ -18,6 +18,10 @@ class TaxController extends Controller {
     public function getCreate() {
         return view('admin.taxes.add');
     }
+	
+	public function getAjaxAddForm() {
+		return view('admin.taxes.ajaxAddForm');
+	}
 
     public function postCreate(Request $request) {
         //DD($request);

@@ -1,27 +1,27 @@
-
 <fieldset>
-                    <legend>Edit Item:</legend>
-                    <form method="POST" action="/admin/items/edit/{{$current->id}}" id="pageForm">
+                    <legend>Add Item:</legend>
+                    <div class="row alert alert-success" style="display:none;"></div>
+                    <form method="POST" action="{{url('admin/items/create')}}" id="pageForm">
                         {{csrf_field()}}
                         <div class="row s12">
                             <label>Name:</label>
                             <div class="input-field">
-                                <input id="item_name" type="text" value="{{$current->name}}"name="item_name">
+                                <input id="item_name" type="text" name="item_name">
                             </div>
                             <label for="item_name" class="error" id="error-item-name"></label>
                         </div>
 
                         <div class="row">
-                            <input type="checkbox" @if($parent!=null) checked @endif name="show_parent_item_div" id="show_parent_item_div" data-corr-div-id="#edit-parent-item-div" class="checkbox">
+                            <input type="checkbox" name="show_parent_item_div" id="show_parent_item_div" data-corr-div-id="#parent-item-div" class="checkbox">
                             <label for="show_parent_item_div">This is a sub item.</label>
                         </div>
 
-                        <div class="row" @if($parent==null) style='display: none;' @endif id="edit-parent-item-div">
+                        <div class="row" style="display: none;" id="parent-item-div">
                             <label>Please select the parent item of this product:</label>
                             <div class="input-field">
-                                <select name="parent_item" id="edit_parent_item">
+                                <select name="parent_item" id="parent_item">
                                     @foreach($items as $item)
-                                    <option value="{{$item->id}}" @if($parent!=null && $parent->parent_id==$item->id) selected="selected" @endif >{{$item->name}}</option>
+                                    <option value="{{$item->id}}" >{{$item->name}}</option>
                                     @endforeach  
                                 </select>
                             </div>
@@ -31,7 +31,7 @@
                         <div class="row s12">
                             <label>Number:</label>
                             <div class="input-field">
-                                <input id="item_number" value="{{$current->item_number}}" type="text" name="item_number">
+                                <input id="item_number" type="number" name="item_number">
                             </div>
                             <label for="item_number" class="error" id="error-item-number"></label>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="row">
                             <label>Description:</label>
                             <div class="input-field">
-                                <input id="item_desc" value="{{$current->description}}"type="text" name="item_desc">
+                                <input id="item_desc" type="text" name="item_desc">
                             </div>
                             <label for="item_desc" class="error" id="error-item-desc"></label>
                         </div>
@@ -47,17 +47,17 @@
                             <div class="col m6 s12">
                                 <label>Weight:</label>
                                 <div class="input-field">
-                                    <input value="{{$current->weight}}" id="item_weight" type="text" name="item_weight">
+                                    <input id="item_weight" type="text" name="item_weight">
                                 </div>
                                 <label for="item_weight" class="error" id="error-item-weight"></label>
                             </div>
                             <div class="col m6 s12">
                                 <label>Tracking Type:</label>
                                 <div class="input-field">
-                                    <select name="transaction_type" id="edit_transaction_type">
-                                        <option value="In" @if($current->transaction_type=="In") selected="selected" @endif>In</option>
-                                        <option value="Out" @if($current->transaction_type=="Out") selected="selected" @endif>Out</option>
-                                        <option value="Both" @if($current->transaction_type=="Both") selected="selected" @endif>Both</option>
+                                    <select name="transaction_type" id="transaction_type">
+                                        <option value="In">In</option>
+                                        <option value="Out">Out</option>
+                                        <option value="Both">Both</option>
                                     </select>
                                 </div>
                                 <label for="transaction_type" class="error" id="error-transaction-type"></label>
@@ -69,12 +69,10 @@
                         </div>
                     </form>
                 </fieldset>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $("#edit_transaction_type").jqxComboBox({width: '200', autoDropDownHeight: true});
-        $("#edit_parent_item").jqxComboBox({width: '400', autoDropDownHeight: true});
+<script>
+     $(document).ready(function () {
+     	$("#transaction_type").jqxComboBox({width: '200', autoDropDownHeight: true});
+        $("#parent_item").jqxComboBox({width: '400', autoDropDownHeight: true});
         $("#pageForm").validate({
             rules: {
                 item_name: "required",
@@ -90,10 +88,20 @@
 				$('.loading').show();
                 var options = {
                     success: showResponse,
-                     error:showError
+                    error:showError
                 };
                 function showResponse(responseText, statusText, xhr, $form) {
-                    location.reload();
+                    //location.reload();
+					$('.field-set').load('/admin/items/add-item-form',function(){
+						$('.loading').hide();
+						$('.alert-success').html('Item has been saved successfully.').show();
+					});
+					//resetting form
+					/*$('#pageForm').find('input').val('');
+					$('#pageForm').find('input[type="checkbox"]').prop('checked', false);
+					$('#parent-item-div').hide();
+					$("#transaction_type").jqxComboBox({width: '200', autoDropDownHeight: true});
+        			$("#parent_item").jqxComboBox({width: '400', autoDropDownHeight: true});*/
                 }
                 function showError(response, statusText, xhr, $form) {
                    if(response.status==422){
@@ -110,4 +118,4 @@
             }
         });
     });
-</script>    
+</script>

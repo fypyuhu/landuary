@@ -180,7 +180,7 @@
             if(cus_id==""){
                 return;
             }
-            $('.loading').css('display', 'block');
+            $('.loading').show();
             var url = "{{url('admin/out/ajax-form')}}";
             $.ajax({
                 url: url,
@@ -189,14 +189,14 @@
                 success: function (response)
                 {
                     $('#loadAjaxFrom').html(response);
-                    $('.loading').css('display', 'none');
+                    $('.loading').hide();
                 }
             });
         });
 
         $("body").on("change", "#cart_number_dropdown", function (e) {
             var cart_id = $('#cart_number_dropdown').val();
-            $('.loading').css('display', 'block');
+            $('.loading').show();
             var url = "{{url('admin/out/cart-info')}}";
             $.ajax({
                 url: url,
@@ -206,7 +206,7 @@
                 {
                     $('#cartAjaxResponse').html(response);
                     $('#gross_weight').val($('#tare_weight').val());
-                    $('.loading').css('display', 'none');
+                    $('.loading').hide();
                 }
             });
         });
@@ -240,7 +240,7 @@
             });
 
             if (!stopProcess) {
-                $('.loading').css('display', 'block');
+                $('.loading').show();
                 var quantity = $('#quantity').val();
                 var url = "{{url('admin/out/add-item')}}";
                 $.ajax({
@@ -267,7 +267,7 @@
                     success: function (response)
                     {
                         //$('#weights-div').html(response);
-                        $('.loading').css('display', 'none');
+                        $('.loading').hide();
                     }
                 });
             } else {
@@ -292,13 +292,13 @@
          customer_name: "required"
          },
          submitHandler: function (form) {
-         $('.loading').css('display', 'block');
+         $('.loading').show();
          var options = {
          success: showResponse
          };
          function showResponse(responseText, statusText, xhr, $form) {
          $('#itemAjaxResponse').html(responseText);
-         $('.loading').css('display', 'none');
+         $('.loading').hide();
          }
          $(form).ajaxSubmit(options);
          }

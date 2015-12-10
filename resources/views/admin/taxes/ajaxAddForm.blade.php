@@ -1,5 +1,6 @@
-<fieldset>
+<fieldset >
     <legend>Sales Tax Rates and Agencies:</legend>
+      <div class="row alert alert-success" style="display:none;"></div>
       <div class="row">
          <div class="col s12">
             <input type="radio" name="tax_type_rd" value="single" id="tax_rate_single" data-set-class=".taxes" data-corr-div-id="#tax-rate-single-div" class="radiobutton" /><label for="tax_rate_single">Single tax rate</label>
@@ -26,7 +27,7 @@
             <div class="col m4 s12">
                 <label>Agency name</label>
                 <div class="input-field">
-                    <input type="text" name="agency_name" id="agency_name" value="test" />
+                    <input type="text" name="agency_name" id="agency_name" />
                 </div>
                 <label for="agency_name" class="error">Example: Arizona Dept. of Revenue</label>
             </div>
@@ -68,23 +69,23 @@
                     <div class="col m4 s12">
                         <label>Component name</label>
                         <div class="input-field">
-                            <input type="text" name="component_name[]" id="component_name_1" />
+                            <input type="text" name="component_name[]" class="component_name" id="component_name_1" />
                         </div>
                         <label for="component_name_1" class="error">Example: New York City or Santa Clara County</label>
                     </div>
                     <div class="col m4 s12">
                         <label>Agency name</label>
                         <div class="input-field">
-                            <input type="text" name="component_agency_name[]" id="component_agency_name_1" />
+                            <input type="text" name="component_agency_name[]" class="component_agency_name" id="component_agency_name_1" />
                         </div>
                         <label for="component_agency_name_1" class="error">Example: Arizona Dept. of Revenue</label>
                     </div>
                     <div class="col m3 s12">
                         <label>Rate</label>
                         <div class="input-field">
-                            <input type="text" name="component_tax_rate[]" id="component_tax_rate_1" />
+                            <input type="text" name="component_tax_rate[]" class="component_agency_name" id="component_tax_1" />
                         </div>
-                        <label for="component_tax_rate_1" class="error">%</label>
+                        <label for="component_tax_1" class="error">%</label>
                     </div>
                     <div class="col m1 s12">&nbsp;</div>
                  </div>

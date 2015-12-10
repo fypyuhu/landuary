@@ -169,6 +169,7 @@
             }
     },
             submitHandler: function (form) {
+				$('.loading').show();
                 if (parseFloat($("#item_count").val()) < 1){
                 $("#item_count").parent().siblings(".error").html("Please add at least one item");
                         $("#item_count").parent().siblings(".error").show();

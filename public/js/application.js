@@ -6,7 +6,10 @@ $(document).ready(function () {
 			height: 'auto',
 			autoSize: false,
 			href: url,
-			type: 'ajax'
+			type: 'ajax',
+			afterClose : function() {
+		  		parent.location.reload(true);
+		  	}
 		});
 	  e.preventDefault();
 	});

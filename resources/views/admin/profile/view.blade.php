@@ -588,13 +588,13 @@
 					}
 				},
 				submitHandler: function (form) {
-					$('.loading').css('display', 'block');
+					$('.loading').show();
 					var options = {
 						success: showResponse
 					};
 					function showResponse(responseText, statusText, xhr, $form) {
 						$('#loadAjaxFrom').html(responseText);
-						$('.loading').css('display', 'none');
+						$('.loading').hide();
 					}
 					$(form).ajaxSubmit(options);
 				}

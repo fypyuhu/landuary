@@ -73,17 +73,14 @@
             }
         });
 		
-		var url = '';
+		var url = "{{url('admin/items/show')}}";
 		$("#search_form").submit(function(e){
 			e.preventDefault();
 			if($('#search_string').val() != '') {
 				var querystring = '?search_string='+$('#search_string').val();
-				url = "{{url('admin/items/show')}}";
 				loadTable(url+querystring);
 			}
 		});
-		
-        url = "{{url('admin/items/show')}}";
 		loadTable(url);
     });
 	

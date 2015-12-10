@@ -78,7 +78,6 @@
 @endsection
 
 @section('js')
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 google.load("visualization", "1", {packages: ["corechart","bar"]});
 google.setOnLoadCallback(drawChart);

@@ -93,6 +93,7 @@
                 customer_number: {required: "#use_as_exchange_cart:checked"}
             },
             submitHandler: function (form) {
+				$('.loading').show();
                 var options = {
                     success: showResponse
                 };

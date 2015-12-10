@@ -26,6 +26,10 @@ class ItemController extends Controller {
 
         return view('admin.addItem', ['items' => Item::organization()->get()]);
     }
+	
+	public function getAddItemForm() {
+		return view('admin.addItemForm', ['items' => Item::organization()->get()]);
+	}
 
     /**
      * Show the form for creating a new resource.
