@@ -851,3 +851,13 @@ aside.yaybar {
 	padding-top: 7px;
 	padding-bottom: 7px;
 }
+
+.custom-list-style {
+	padding: 0 20px;
+	font-size: 14px;
+}
+
+.custom-list-style li {
+	list-style: disc;
+	list-style-position: outside;
+}

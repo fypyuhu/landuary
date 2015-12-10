@@ -4,8 +4,15 @@
 <section class="content-wrap" id="customers" style="margin-left:0; width: 1000px; margin:0 auto; padding:0; background:#ffffff; margin-top:25px; margin-bottom:25px;">
     @include('admin.profile.steps')
     <div class="row starter" style="border: 1px solid #d0cece; background:#f5f5f5; padding:30px;">
-    	<h4>Lorem ipusm dolle sit</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    	<h4>Customers List</h4>
+        <ul class="custom-list-style pull-left">
+            <li>lorem ipsum</li>
+            <li>lorem ipsum</li>
+            <li>lorem ipsum</li>
+        </ul>
+        <div class="pull-right" style="margin-top:-30px;">
+        	<img src="{{URL::asset('images/customer.jpg')}}" alt="" width="300" />
+        </div>
         <!--<div class="row">
         	<button onclick="$(this).parents('.starter').css('display', 'none'); $('#taxes-div').fadeIn('slow');" class="waves-effect btn">Next</button>
         </div>-->
