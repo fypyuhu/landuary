@@ -44,7 +44,6 @@
   <!--[if lt IE 9]>
     <script src="assets/html5shiv/html5shiv.min.js"></script>
   <![endif]-->
-
 </head>
 
 <body>
@@ -115,10 +114,6 @@
                         </li>
                         <li><a href="javascript:void(0);">Bin Tickets</a>
                         </li>-->
-                        <li style="background:none !important;">&nbsp;
-                        </li>
-                        <li style="background: #42a5f5 !important;"><a href="javascript:void(0);" style="color: #ffffff !important;">Adjustment</a>
-                        </li>
                     </ul>
                     <ul class="col s6">
                     	<li><a href="javascript:void(0);">Company Profile</a>
@@ -126,8 +121,6 @@
                         <li><a href="{{url('admin/profile/view')}}">Account</a>
                         </li>
                         <li><a href="javascript:void(0);">Users</a>
-                        </li>
-                        <li><a href="javascript:void(0);">Privacy</a>
                         </li>
                         <li style="background:none !important;">&nbsp;
                         </li>
@@ -191,12 +184,25 @@
             <a href="{{url('admin/invoices/create')}}" class="waves-effect waves-blue fag fa-shipping">Create Invoice</a>
           </li>
           <li>
+            <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-rewash">Create Invoice</a>
+          </li>
+          
+          <li>
             <a href="{{url('admin/rewash')}}" class="waves-effect waves-blue fag fa-rewash">Rewash</a>
+          </li>
+          
+          <li class="mainmenu">
+            <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-adjustment">Adjustment</a>
+            <ul class="submenu">
+            	<li><a href="javascript:void(0);" class="waves-effect waves-blue">&gt; Manifests</a></li>
+                <li><a href="javascript:void(0);" class="waves-effect waves-blue">&gt; Carts</a></li>
+            </ul>
           </li>
           
           <li>
             <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-today">Today</a>
           </li>
+          
         </ul>
 
       </div>
@@ -317,6 +323,14 @@
 			$('#reports-nav, #user-dropdown').slideUp( "slow" );
 		});
 		
+		$('.mainmenu').mouseover(function(e){
+			$('.submenu').show();	
+		});
+		
+		$('.mainmenu').mouseleave(function(e){
+			$('.submenu').hide();	
+		});
+		
 	});
 	
 	function toggle(hide, show) {
@@ -326,8 +340,10 @@
   </script>
   
   <script src="{{URL::asset('js/print/jQuery.print.js')}}"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   @section('js')
   @show
+  <script type="text/javascript" src="{{URL::asset('js/custom.js')}}"></script>
 </body>
 
 </html>

@@ -112,6 +112,7 @@
 				}
 			},
 			submitHandler: function (form) {
+				$('.loading').show();
 				var options = {
 					success: showResponse
 				};
@@ -133,6 +134,7 @@
 				}
             },
             submitHandler: function (form) {
+				$('.loading').show();
                 var options = {
                     success: showResponse
                 };

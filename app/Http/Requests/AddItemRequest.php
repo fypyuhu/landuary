@@ -24,7 +24,7 @@ class AddItemRequest extends Request
     public function rules()
     {
         return [
-            'item_name' => 'required',
+            'item_name' => 'required|unique:items,name,NULL,id,organization_id,'.Auth::user()->organization_id,
             'item_number' => 'required|integer|unique:items,item_number,NULL,id,organization_id,'.Auth::user()->organization_id,
             'item_desc' => 'required',
             'item_weight' => 'required|numeric',

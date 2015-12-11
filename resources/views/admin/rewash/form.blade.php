@@ -1,4 +1,5 @@
-<form method="post" action="/admin/in/create" id="pageForm">
+<form method="post" action="/admin/rewash/create" id="pageForm">
+	{{csrf_field()}}
     <div class="row no-rightmargin">
         <div class="col s12 m5 margin-right-md">
             <fieldset>
@@ -31,6 +32,13 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="row">
+                    <div class="col s12">
+                        <label>Rewash Date</label>
+                        <div id="rewash_date" name="rewash_date" class="datepicker"></div>
+                    </div>
+                </div>
             </fieldset>
 
             <div class="row">
@@ -45,7 +53,6 @@
             <fieldset>
                 <legend>Items List:</legend>
                 <div class="row box">
-                    {{csrf_field()}}
                     <div class="row no-topmargin">
                         <div class="col m8 s12">
                             <label>Item Number</label>
@@ -72,7 +79,7 @@
                             <div class="col s3">Item Number</div>
                             <div class="col s3">Item Description</div>
                             <div class="col s2 right-align">Quantity</div>
-                            <div class="col s2 right-align">Weight</div>
+                            <div class="col s2 right-align">Weight kg/lb</div>
                             <div class="col s2 right-align">Action</div>
                         </div>
                         <div class="row records_list no-item">
@@ -94,16 +101,9 @@
                 </div>
                 <div class="row" id="weights-div">
                     <div class="col m4 s12">
-                        <label>Gross Weight</label>
+                        <label>Total Weight</label>
                         <div class="input-field">
-                            <input id="gross_weight" type="number" step="0.01" onblur="calculateNetWeight()" value="" name="gross_weight" placeholder="Gross Weight">
-                        </div>
-                        <label for="gross_weight" class="error" id="error-gross_weight"></label>
-                    </div>
-                    <div class="col m4 s12">
-                        <label>Net Weight</label>
-                        <div class="input-field">
-                            <input id="net_weight" type="text" value="0" name="net_weight">
+                            <input id="total_weight" type="text" name="total_weight">
                         </div>
                     </div>
                 </div>
@@ -114,21 +114,19 @@
 
 <script>
     $(document).ready(function () {
-    	$("#customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
-        $("#department").jqxComboBox({ width: '100%', autoDropDownHeight: true, {{count($depts) > 0 ? 'disabled: false' : 'disabled: true'}} });
-        $("#item_id").jqxComboBox({ width: '100%', autoDropDownHeight: true, {{count($items) > 0 ? 'disabled: false' : 'disabled: true'}} });
-        $(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
+    	$("#customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
+        $("#department").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true, {{count($depts) > 0 ? 'disabled: false' : 'disabled: true'}} });
+        $("#item_id").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true, {{count($items) > 0 ? 'disabled: false' : 'disabled: true'}} });
+		$(".datepicker").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+		
         $("#pageForm").validate({
     		rules: {
-    			customer_name: "required",
-            	gross_weight: {
-            		required:true,
-                    min:parseFloat($('#tare_weight').val())
-            	}
+    			customer_name: "required"
     		},
             submitHandler: function (form) {
+				$('.loading').show();
                 if (parseFloat($("#item_count").val()) < 1){
-                	$("#item_count").parent().siblings(".error").html("Please add at least one item");
+                	$("#item_count").parent().siblings(".error").html("Please add atleast one item");
                     $("#item_count").parent().siblings(".error").show();
                 } else {
                     $(form).validate().cancelSubmit = true;

@@ -151,6 +151,7 @@
                     customer: "required"
             },
             submitHandler: function (form) {
+				$('.loading').show();
                 if($(".all_cart_checkbox").length<1 || $('.all_cart_checkbox:checked').length<1){
                 $("#error-select_cart").html("Please select at least one cart");
                 $("#error-select_cart").show();

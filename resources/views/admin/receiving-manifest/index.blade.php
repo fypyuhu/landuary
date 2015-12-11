@@ -106,12 +106,12 @@
 @section('js')
 <script>
 	$(document).ready(function () {
-		$("#customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
+		$("#customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
 		$("#department_from, #department_to").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
 		$(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
 		
 		$("body").on('change', '#customer', function(e){
-			$('.loading').css('display', 'block');
+			$('.loading').show();
 			var cus_id = $(this).val();
 			var url = "{{url('admin/receiving-manifest/ajax-form')}}";
 			$.ajax({
@@ -121,7 +121,7 @@
 				success: function(response)
 				{
 					$('#loadAjaxFrom').html(response);
-					$('.loading').css('display', 'none');
+					$('.loading').hide();
 				}
 			});
 		});

@@ -1,5 +1,7 @@
+<div class="field-set">
 <fieldset >
     <legend>Sales Tax Rates and Agencies:</legend>
+      <div class="row alert alert-success" style="display:none;"></div>
       <div class="row">
          <div class="col s12">
             <input type="radio" name="tax_type_rd" value="single" id="tax_rate_single" data-set-class=".taxes" data-corr-div-id="#tax-rate-single-div" class="radiobutton" /><label for="tax_rate_single">Single tax rate</label>
@@ -112,11 +114,16 @@
 				}
 			},
 			submitHandler: function (form) {
+				$('.loading').show();
 				var options = {
 					success: showResponse
 				};
 				function showResponse(responseText, statusText, xhr, $form) {
-					location.reload();
+					//location.reload();
+					$('.field-set').load('/admin/items/ajax-add-form',function(){
+						$('.loading').hide();
+						$('.alert-success').html('Tax has been saved successfully.').show();
+					});
 				}
 				$(form).ajaxSubmit(options);
 			}
@@ -133,11 +140,16 @@
 				}
             },
             submitHandler: function (form) {
+				$('.loading').show();
                 var options = {
                     success: showResponse
                 };
                 function showResponse(responseText, statusText, xhr, $form) {
-                    location.reload();
+                    //location.reload();
+					$('.field-set').load('/admin/items/ajax-add-form',function(){
+						$('.loading').hide();
+						$('.alert-success').html('Tax has been saved successfully.').show();
+					});
                 }
                 $(form).ajaxSubmit(options);
             }
@@ -154,3 +166,4 @@
 		});*/
     });
 </script>
+</div>

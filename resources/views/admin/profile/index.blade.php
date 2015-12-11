@@ -239,7 +239,6 @@
 					zipcode: "required",
 					country: "required",
 					phone: "required",
-					fax: "required",
 					email: {
 						required: true,
 						email: true
@@ -277,7 +276,7 @@
 			$(corrLink).addClass('isCurrent');
 		});
 		
-		$("#country").jqxComboBox({width: '100%', autoDropDownHeight: true});
+		$("#country").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
 	});
 	</script>
 @endsection

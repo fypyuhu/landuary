@@ -40,6 +40,6 @@
 
 <script>
     $(document).ready(function () {
-		$("#cart_number_dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true});
+		$("#cart_number_dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
 	});
 </script>

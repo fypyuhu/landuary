@@ -3,6 +3,20 @@
 <!-- Main Content -->
 <section class="content-wrap" id="customers" style="margin-left:0; width: 1000px; margin:0 auto; padding:0; background:#ffffff; margin-top:25px; margin-bottom:25px;">
     @include('admin.profile.steps')
+    <div class="row starter" style="border: 1px solid #d0cece; background:#f5f5f5; padding:30px;">
+    	<h4>Items Master List</h4>
+        <ul class="custom-list-style pull-left">
+            <li>Add the list of all your items to the item master list.</li>
+            <li>Add item weights.</li>
+            <li>Add item tracking type and item number.</li>
+        </ul>
+        <div class="pull-right" style="margin-top:-30px;">
+        	<img src="{{URL::asset('images/items.jpg')}}" alt="" width="300" />
+        </div>
+        <!--<div class="row">
+        	<button onclick="$(this).parents('.starter').css('display', 'none'); $('#taxes-div').fadeIn('slow');" class="waves-effect btn">Next</button>
+        </div>-->
+    </div>
     <div class="row" style="border: 1px solid #d0cece; background:#f5f5f5; padding:30px;">
         <a data-mode="ajax" href="/admin/items/create" class="waves-effect btn create-clone-button">Add Item</a>
         <div class="row no-rightmargin">
@@ -74,7 +88,7 @@
                         {text: 'Name', width:'30%',dataField: 'name', sortable: false,cellsrenderer: rowRenderer},
                         {text: 'Number', width:'15%' ,dataField: 'item_number', sortable: false,cellsrenderer: rowRenderer},
                         {text: 'Weight lb/kg', width:'15%', dataField: 'weight', sortable: false,cellsrenderer: rowRenderer},
-                        {text: 'Transaction Type', width:'20%', dataField: 'transaction_type', sortable: false,cellsrenderer: rowRenderer},
+                        {text: 'Tracking Type', width:'20%', dataField: 'transaction_type', sortable: false,cellsrenderer: rowRenderer},
                         {text: 'Actions', width:'20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });

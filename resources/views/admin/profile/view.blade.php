@@ -549,7 +549,7 @@
 		});
 		
 		$( "body" ).on( "mouseover", '.content-wrap', function(e) {
-			$("#country").jqxComboBox({width: '100%', autoDropDownHeight: true});
+			$("#country").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
 			
 			$('.editButton').click(function(e) {
 				$(this).parents('.oTable').find('.info-div').hide();
@@ -588,13 +588,13 @@
 					}
 				},
 				submitHandler: function (form) {
-					$('.loading').css('display', 'block');
+					$('.loading').show();
 					var options = {
 						success: showResponse
 					};
 					function showResponse(responseText, statusText, xhr, $form) {
 						$('#loadAjaxFrom').html(responseText);
-						$('.loading').css('display', 'none');
+						$('.loading').hide();
 					}
 					$(form).ajaxSubmit(options);
 				}

@@ -69,7 +69,7 @@
 
 <script>
 $(document).ready(function () {
-	$("#customer").jqxComboBox({width: '100%', autoDropDownHeight: true});
+	$("#customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
 	$("#department_from, #department_to").jqxComboBox({width: '100%', autoDropDownHeight: true, {{count($departments) > 0 ? 'disabled: false' : 'disabled: true'}} });
 	$(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
 	

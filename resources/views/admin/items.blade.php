@@ -67,23 +67,22 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-		$("#search_form").validate({
+		/*$("#search_form").validate({
             rules: {
                 search_string: "required"
             }
-        });
+        });*/
 		
-		var url = '';
+		var url = "{{url('admin/items/show')}}";
 		$("#search_form").submit(function(e){
 			e.preventDefault();
 			if($('#search_string').val() != '') {
 				var querystring = '?search_string='+$('#search_string').val();
-				url = "{{url('admin/items/show')}}";
 				loadTable(url+querystring);
+			} else {
+				loadTable(url);
 			}
 		});
-		
-        url = "{{url('admin/items/show')}}";
 		loadTable(url);
     });
 	

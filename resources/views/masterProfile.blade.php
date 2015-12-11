@@ -181,6 +181,7 @@
   <script src="{{URL::asset('js/print/jQuery.print.js')}}"></script>
   @section('js')
   @show
+  <script type="text/javascript" src="{{URL::asset('js/custom.js')}}"></script>
 </body>
 
 </html>

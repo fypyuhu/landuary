@@ -81,8 +81,8 @@
 </fieldset>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#status").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
-        $("#customer_number").jqxComboBox({width: '400', autoDropDownHeight: true});
+        $("#status").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true, disabled: true});
+        $("#customer_number").jqxComboBox({autoComplete: true, width: '400', autoDropDownHeight: true});
 
         $("#pageForm").validate({
             rules: {
@@ -93,6 +93,7 @@
                 customer_number: {required: "#use_as_exchange_cart:checked"}
             },
             submitHandler: function (form) {
+				$('.loading').show();
                 var options = {
                     success: showResponse
                 };

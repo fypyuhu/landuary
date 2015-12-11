@@ -179,7 +179,7 @@
 <script>
     $(document).ready(function () {
         $("#customer, #cart_number_dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true,disabled: true});
-        $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true});
+        $("#item_id").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $(".calendar").jqxDateTimeInput({value:new Date("{{$ogc->receiving_date->format('Y-m-d')}}"), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy', disabled: true});
         $("body").on("change", "#customer", function (e) {
@@ -187,7 +187,7 @@
             if (cus_id == "") {
                 return;
             }
-            $('.loading').css('display', 'block');
+            $('.loading').show();
             var url = "{{url('admin/out/ajax-form')}}";
             $.ajax({
                 url: url,
@@ -196,14 +196,14 @@
                 success: function (response)
                 {
                     $('#loadAjaxFrom').html(response);
-                    $('.loading').css('display', 'none');
+                    $('.loading').hide();
                 }
             });
         });
 
         $("body").on("change", "#cart_number_dropdown", function (e) {
             var cart_id = $('#cart_number_dropdown').val();
-            $('.loading').css('display', 'block');
+            $('.loading').show();
             var url = "{{url('admin/out/cart-info')}}";
             $.ajax({
                 url: url,
@@ -213,7 +213,7 @@
                 {
                     $('#cartAjaxResponse').html(response);
                     $('#gross_weight').val($('#tare_weight').val());
-                    $('.loading').css('display', 'none');
+                    $('.loading').hide();
                 }
             });
         });
@@ -247,7 +247,7 @@
             });
 
             if (!stopProcess) {
-                $('.loading').css('display', 'block');
+                $('.loading').show();
                 var quantity = $('#quantity').val();
                 var url = "{{url('admin/out/add-item')}}";
                 $.ajax({
@@ -274,7 +274,7 @@
                     success: function (response)
                     {
                         //$('#weights-div').html(response);
-                        $('.loading').css('display', 'none');
+                        $('.loading').hide();
                     }
                 });
             } else {
@@ -305,6 +305,7 @@
                 
             },
             submitHandler: function (form) {
+				$('.loading').show();
                 if(parseFloat($("#item_count").val())<1){
                 $("#item_count").parent().siblings(".error").html("Please add at least one item");
                 $("#item_count").parent().siblings(".error").show();

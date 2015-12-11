@@ -73,8 +73,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#edit_transaction_type").jqxComboBox({width: '200', autoDropDownHeight: true});
-        $("#edit_parent_item").jqxComboBox({width: '400', autoDropDownHeight: true});
+        $("#edit_transaction_type").jqxComboBox({autoComplete: true, width: '200', autoDropDownHeight: true});
+        $("#edit_parent_item").jqxComboBox({autoComplete: true, width: '400', autoDropDownHeight: true});
         $("#pageForm").validate({
             rules: {
                 item_name: "required",
@@ -87,6 +87,7 @@
                 transaction_type: "required"
             },
             submitHandler: function (form) {
+				$('.loading').show();
                 var options = {
                     success: showResponse,
                      error:showError
@@ -103,6 +104,7 @@
                 $("[name='" + key + "']").parent().siblings(".error").show();
             })
                    }
+				   $('.loading').hide();
                 }
                 $(form).ajaxSubmit(options);
             }

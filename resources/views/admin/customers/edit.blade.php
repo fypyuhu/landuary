@@ -608,12 +608,13 @@
                                 $("[name='" + key + "']").parent().siblings(".error").show();
                             })
                         }
+						$('.loading').hide();
                     }
                     var options = {
                         success: showResponse,
                         error: showError
                     };
-
+					$('.loading').show();
                     $('#customer-form').ajaxSubmit(options);
                 }
             }

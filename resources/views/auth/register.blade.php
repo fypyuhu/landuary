@@ -151,7 +151,7 @@
 @section('js')
 	<script type="text/javascript">
     	$(document).ready(function(e){
-			$("#country").jqxComboBox({width: '100%', autoDropDownHeight: true});
+			$("#country").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
 			$('#pageForm').validate({
 				rules: {
 					legal_name: "required",
@@ -165,7 +165,6 @@
 						required: true,
 						email: true
 					},
-					website: "required",
 					contact_name: "required",
 					contact_designation: "required",
 					contact_email: {

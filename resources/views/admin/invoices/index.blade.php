@@ -95,7 +95,7 @@
         var oneWeekAgo = new Date();
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
         $('#from_date').jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
-        $(".dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true});
+        $(".dropdown").jqxComboBox({autoComplete: true,width: '100%', autoDropDownHeight: true});
         $(".datepicker").jqxDateTimeInput({width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
         if ($('#customer').jqxComboBox('getSelectedIndex') != "-1") {
             $.ajax({
@@ -224,5 +224,6 @@
         });
 
     });
+
 </script>
 @endsection

@@ -14,6 +14,7 @@ return array(
     'AddPriceToCustomerItems' => $baseDir . '/database/migrations/2015_11_04_155806_add_price_to_customer_items.php',
     'AddSoftDeleteToCustomers' => $baseDir . '/database/migrations/2015_11_04_165319_add_soft_delete_to_customers.php',
     'AddStatusToInvoice' => $baseDir . '/database/migrations/2015_12_09_165325_add_status_to_invoice.php',
+    'AddSoftDeleteToRewashTable' => $baseDir . '/database/migrations/2015_12_08_172314_add_soft_delete_to_rewash_table.php',
     'AddTaxableToCustomerTaxes' => $baseDir . '/database/migrations/2015_11_04_151615_add_taxable_to_customer_taxes.php',
     'Change2OutgoingcartsTable' => $baseDir . '/database/migrations/2015_11_05_165452_change2_outgoingcarts_table.php',
     'Change3OutgoingcartsTable' => $baseDir . '/database/migrations/2015_11_05_170048_change3_outgoingcarts_table.php',
@@ -39,6 +40,7 @@ return array(
     'CreateOutgoingCartsTable' => $baseDir . '/database/migrations/2015_11_03_122010_create_outgoing_carts_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateReceivingManifestTable' => $baseDir . '/database/migrations/2015_11_12_155138_create_receiving_manifest_table.php',
+    'CreateRewashItemsTable' => $baseDir . '/database/migrations/2015_12_08_145500_create_rewash_items_table.php',
     'CreateRewashTable' => $baseDir . '/database/migrations/2015_12_07_083920_create_rewash_table.php',
     'CreateShipingManifest' => $baseDir . '/database/migrations/2015_11_10_172443_Create_shiping_manifest.php',
     'CreateTaxesComponentsTable' => $baseDir . '/database/migrations/2015_10_28_142400_create_taxes_components_table.php',
@@ -559,5 +561,6 @@ return array(
     'UpdateCustomersIncomingCartsItemsTable' => $baseDir . '/database/migrations/2015_11_13_102420_update_customers_incoming_carts_items_table.php',
     'UpdateReceivingManifestTable' => $baseDir . '/database/migrations/2015_11_13_115226_update_receiving_manifest_table.php',
     'UpdateReceivingManifistTable' => $baseDir . '/database/migrations/2015_11_12_181958_update_receiving_manifist_table.php',
+    'UpdateRewashTable' => $baseDir . '/database/migrations/2015_12_08_152153_update_rewash_table.php',
     'UpdateUsersTable' => $baseDir . '/database/migrations/2015_11_24_173416_update_users_table.php',
 );

@@ -111,7 +111,7 @@
                                     <span>Remember me</span>
                                 </label>
                                 <span class="separator">·</span>
-                                <a class="forgot" href="/account/begin_password_reset">Forgot password?</a>
+                                <a class="forgot" href="/password/email">Forgot password?</a>
                             </div>
                         </form>
                     </div>

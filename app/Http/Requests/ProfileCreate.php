@@ -31,7 +31,6 @@ class ProfileCreate extends Request
 			'zipcode' => 'required',
 			'country' => 'required',
 			'phone' => 'required',
-			'fax' => 'required',
 			'email' => 'required|email',
 			'contact_name' => 'required',
 			'contact_designation' => 'required',
