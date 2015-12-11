@@ -72,6 +72,10 @@
                     </li>
                     <li><a href="{{url('admin/invoices')}}">Invoices</a>
                     </li>
+                    <li><a href="{{url('admin/taxes/list')}}">Tax</a>
+                    </li>
+                    <li><a href="{{url('admin/invoices/income')}}">Income</a>
+                    </li>
                 </ul>
               </div>
           </div>

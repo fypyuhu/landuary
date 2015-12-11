@@ -81,6 +81,7 @@
                                 </div>
                                 <div class="col s2">Manifest Number</div>
                                 <div class="col s2">Number of Carts</div>
+                                <div class="col s2">Department</div>
                                 <div class="col s2 center-align">Shipment Date</div>
                                 <div class="col s2 center-align">Actions</div>
                             </div>

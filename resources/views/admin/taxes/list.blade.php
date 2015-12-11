@@ -9,14 +9,14 @@
 
         <div class="row">
             <div class="col s12 m9 l10">
-                <h1>Invoices</h1>
+                <h1>Customer Tax</h1>
 
                 <ul>
                     <li>
                         <a href="#"><i class="fa fa-home"></i> Home</a>  <i class="fa fa-angle-right"></i>
                     </li>
 
-                    <li><a href='dashboard.html'>Invoices</a>
+                    <li><a href='dashboard.html'>Customer Tax</a>
                     </li>
                 </ul>
             </div>
@@ -31,7 +31,7 @@
     <div class="row no-rightmargin" id="adjustment">
         <div class="col s12">
             <fieldset>
-                <legend>Invoice(s):</legend>
+                <legend>Customer Tax(s):</legend>
                 <div class="row">
                     <div class="col m6 s12">
                         <div class="row">
@@ -43,30 +43,14 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col m6 s12" id="department_div" >
-                                <label>Select Department:</label>
-                                <select name="s_department" id="s_department" class="dropdown">
-                                    <option value="-1">Please Select</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col m6 s12">
-                                <label>Status:</label>
-                                <select name="status" id="status" class="dropdown">
-                                    <option value="Unpaid">Unpaid</option>
-                                    <option value="Paid">Paid</option>
-                                </select>
-                            </div>
-                            <div class="col m6 s12">&nbsp;</div>
-                        </div>
-                        <div class="row">
-                            <div class="col m6 s12">
-                                <label>Date Generated From:</label>
+                                <label>Date Paid From:</label>
                                 <div name="from_date" id="from_date"></div>
                             </div>
                             <div class="col m6 s12">
-                                <label>Due Generated To:</label>
+                                <label>Due Paid To:</label>
                                 <div name="to_date" id="to_date" class="datepicker"></div>
                             </div>
                         </div>
@@ -97,47 +81,19 @@
         $('#from_date').jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
         $(".dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true});
         $(".datepicker").jqxDateTimeInput({width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
-        if ($('#customer').jqxComboBox('getSelectedIndex') != "-1") {
-            $.ajax({
-                url: "/admin/customers/get-departments/" + $("#customer").val(),
-                context: document.body
-            }).done(function (html) {
-                $('#s_department').jqxComboBox('destroy');
-                $('#department_div').html(html);
-                $("#s_department").jqxComboBox({width: '100%', autoDropDownHeight: true, checkboxes: true});
-            });
-        }
-        $("body").on("change", "#customer", function (e) {
-            if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val() != "-1") {
-                $('.loading').css('display', 'block');
-                $.ajax({
-                    url: "/admin/customers/get-departments/" + $("#customer").val(),
-                    type: 'GET',
-                    success: function (html)
-                    {
-                        $('#s_department').jqxComboBox('destroy');
-                        $('#department_div').html(html);
-                        $("#s_department").jqxComboBox({width: '100%', autoDropDownHeight: true, checkboxes: true});
-                        $('.loading').css('display', 'none');
-                    }
-                });
-            }
-        });
         var source =
                 {
                     datatype: "json",
                     datafields: [
-                        {name: 'created_date', type: 'date'},
+                        {name: 'invoice_number'},
                         {name: 'customer'},
-                        {name: 'department'},
-                        {name: 'amount'},
-                        {name: 'status'},
-                        {name: 'due_date', type: 'date'},
+                        {name: 'total_tax'},
+                        {name: 'updated_at', type: 'date'},
                         {name: 'actions'}
 
                     ],
                     cache: false,
-                    url: '/admin/invoices/show',
+                    url: '/admin/taxes/show-list',
                     filter: function ()
                     {
                         // update the grid and send a request to the server.
@@ -158,20 +114,8 @@
                 alert(error);
             },
             formatData: function (data) {
-                var items = $("#s_department").jqxComboBox('getCheckedItems');
-                var checkedItems = "";
-                if (items) {
-                    $.each(items, function (index) {
-                        checkedItems += this.value + ",";
-                    });
-                }
-                if (checkedItems !== "") {
-                    checkedItems = checkedItems.substring(0, checkedItems.length - 1);
-                }
                 $.extend(data, {
                     name: $('#customer').val(),
-                    department: checkedItems,
-                    status: $('#status').val(),
                     from_date: $("#from_date").val(),
                     to_date: $("#to_date").val()
                 });
@@ -187,41 +131,25 @@
                     sortable: false,
                     autoheight: true,
                     pageable: true,
+                    showstatusbar: true,
+                    statusbarheight: 20,
                     virtualmode: true,
                     selectionmode: "none",
                     showfiltermenuitems: false,
+                    showaggregates: true,
                     rendergridrows: function (obj)
                     {
                         return obj.data;
                     },
                     columns: [
-                        {text: 'Date Generated', width: '10%', dataField: 'created_date', cellsformat: 'dd MMMM, yyyy'},
+                        {text: 'Invoice Number', width: '20%', dataField: 'invoice_number'},
                         {text: 'Customer', width: '20%', dataField: 'customer'},
-                        {text: 'Department', width: '30%', dataField: 'department'},
-                        {text: 'Amount', width: '10%', dataField: 'amount'},
-                        {text: 'Paid', width: '10%', dataField: 'status', cellsalign: 'center'},
-                        {text: 'Due Date', width: '10%', dataField: 'due_date', cellsformat: 'dd MMMM, yyyy'},
-                        {text: 'Actions', width: '10%', cellsalign: 'center', dataField: 'actions'}
+                        {text: 'Total Tax', width: '20%', dataField: 'total_tax',aggregates: ['sum']},
+                        {text: 'Paid date', width: '20%', dataField: 'updated_at', cellsformat: 'dd MMMM, yyyy'},
+                        {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions'}
                     ]
                 });
-        $("body").on("change", ".invoice_status_checkbox", function (e) {    
-            var status = "";
-            if ($(this).is(":checked")) {
-                status = "Paid";
-            }
-            else {
-                status = "Unpaid";
-            }
-            $('.loading').css('display', 'block');
-            $.ajax({
-                url: "/admin/invoices/change-status/" + $(this).val()+"/"+status,
-                type: 'GET',
-                success: function (html)
-                {
-                    $('.loading').css('display', 'none');
-                }
-            });
-        });
+        
 
     });
 </script>

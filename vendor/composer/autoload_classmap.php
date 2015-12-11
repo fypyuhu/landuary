@@ -7,13 +7,13 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddCustomePriceToCustomerItems' => $baseDir . '/database/migrations/2015_11_16_165342_add_custome_price_to_customer_items.php',
-    'AddInvoiveNumberToInvoiceTable' => $baseDir . '/database/migrations/2015_12_07_182110_add_invoive_number_to_invoice_table.php',
     'AddIsDeletedToCart' => $baseDir . '/database/migrations/2015_10_27_161844_add_isDeleted_toCart.php',
     'AddOrganizationIdToRemainingTables' => $baseDir . '/database/migrations/2015_12_02_154020_add_organization_id_to_remaining_tables.php',
     'AddOrganizationIdToTables' => $baseDir . '/database/migrations/2015_11_30_161859_add_organization_id_to_tables.php',
     'AddOrganozationToUsersTable' => $baseDir . '/database/migrations/2015_11_13_162516_add_organozation_to_users_table.php',
     'AddPriceToCustomerItems' => $baseDir . '/database/migrations/2015_11_04_155806_add_price_to_customer_items.php',
     'AddSoftDeleteToCustomers' => $baseDir . '/database/migrations/2015_11_04_165319_add_soft_delete_to_customers.php',
+    'AddStatusToInvoice' => $baseDir . '/database/migrations/2015_12_09_165325_add_status_to_invoice.php',
     'AddTaxableToCustomerTaxes' => $baseDir . '/database/migrations/2015_11_04_151615_add_taxable_to_customer_taxes.php',
     'Change2OutgoingcartsTable' => $baseDir . '/database/migrations/2015_11_05_165452_change2_outgoingcarts_table.php',
     'Change3OutgoingcartsTable' => $baseDir . '/database/migrations/2015_11_05_170048_change3_outgoingcarts_table.php',
@@ -32,7 +32,7 @@ return array(
     'CreateCustomersTaxesTable' => $baseDir . '/database/migrations/2015_10_30_162339_create_customers_taxes_table.php',
     'CreateIncomingCartsTable' => $baseDir . '/database/migrations/2015_11_12_135235_create_incoming_carts_table.php',
     'CreateInitialValuesTable' => $baseDir . '/database/migrations/2015_11_20_160547_create_initial_values_table.php',
-    'CreateInvoiceTable' => $baseDir . '/database/migrations/2015_12_07_171858_create_invoice_table.php',
+    'CreateInvoiceTable' => $baseDir . '/database/migrations/2015_12_07_184638_create_invoice_table.php',
     'CreateItemRelationTable' => $baseDir . '/database/migrations/2015_10_21_172719_create_ItemRelation_table.php',
     'CreateItemTable' => $baseDir . '/database/migrations/2015_10_21_171522_create_Item_table.php',
     'CreateOrganizationTable' => $baseDir . '/database/migrations/2015_11_11_172655_create_organization_table.php',
