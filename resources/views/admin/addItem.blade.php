@@ -92,11 +92,10 @@
                     error:showError
                 };
                 function showResponse(responseText, statusText, xhr, $form) {
-					alert(responseText);
                     //location.reload();
 					$('.field-set').load('/admin/items/add-item-form',function(){
 						$('.loading').hide();
-						$('.alert-success').html('Item has been saved successfully.').show();
+						$('.alert-success').html('Item has been saved successfully. Please add next item or close window.').show();
 					});
 					//resetting form
 					/*$('#pageForm').find('input').val('');

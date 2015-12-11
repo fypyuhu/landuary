@@ -71,6 +71,9 @@
                 </fieldset>
 <script>
      $(document).ready(function () {
+	 	$('fieldset').click(function(){
+			$('.alert-success').hide();
+		});
      	$("#transaction_type").jqxComboBox({autoComplete: true, width: '200', autoDropDownHeight: true});
         $("#parent_item").jqxComboBox({autoComplete: true, width: '400', autoDropDownHeight: true});
         $("#pageForm").validate({
@@ -94,7 +97,7 @@
                     //location.reload();
 					$('.field-set').load('/admin/items/add-item-form',function(){
 						$('.loading').hide();
-						$('.alert-success').html('Item has been saved successfully.').show();
+						$('.alert-success').html('Item has been saved successfully. Please add next item or close window.').show();
 					});
 					//resetting form
 					/*$('#pageForm').find('input').val('');
