@@ -239,7 +239,6 @@
 					zipcode: "required",
 					country: "required",
 					phone: "required",
-					fax: "required",
 					email: {
 						required: true,
 						email: true

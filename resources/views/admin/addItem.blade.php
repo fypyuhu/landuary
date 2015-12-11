@@ -92,6 +92,7 @@
                     error:showError
                 };
                 function showResponse(responseText, statusText, xhr, $form) {
+					alert(responseText);
                     //location.reload();
 					$('.field-set').load('/admin/items/add-item-form',function(){
 						$('.loading').hide();

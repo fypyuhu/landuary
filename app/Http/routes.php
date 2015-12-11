@@ -30,6 +30,10 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+/*Route::get('/admin/items', ['middleware' => 'profile.completed', function () {
+    //return back();
+}]);*/
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller('items', 'ItemController');
     Route::controller('carts', 'CartController');

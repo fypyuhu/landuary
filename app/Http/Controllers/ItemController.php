@@ -91,7 +91,7 @@ class ItemController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function getEdit($id) {
-        return view('admin.editItem', ['current' => Item::find($id), 'items' => Item::organization()->get(), 'parent' => ItemRelation::organization()->where('child_id', '=', $id)->first()]);
+        return view('admin.editItem', ['current' => Item::find($id), 'items' => Item::organization()->get(), 'parent' => ItemRelation::/*organization()->*/where('child_id', '=', $id)->first()]);
     }
 
     public function postEdit($id, EditItemRequest $request) {
