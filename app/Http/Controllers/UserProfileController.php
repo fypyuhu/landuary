@@ -16,6 +16,7 @@ use App\Models\TaxComponent;
 use App\Models\Item;
 use App\Models\ItemRelation;
 use App\Models\InitialValue;
+use App\Models\Organization;
 use Hash;
 use DB;
 use Auth;
@@ -104,6 +105,14 @@ class UserProfileController extends Controller {
           $up->vacational_rentals = $request->vacational_rentals;
           $up->customer_own_goods = $request->customer_own_goods; */
         $up->save();
+		
+		if($this->skippedAt() <= 0) {
+			$org_id = Auth::user()->organization_id;
+			$org = Organization::find($org_id);
+			$org->profile_skipped_at_step = 1;
+			$org->save();
+		}
+		
         return redirect('admin/profile/step1');
     }
 
@@ -151,23 +160,57 @@ class UserProfileController extends Controller {
         $countries = Country::all();
         return view('admin.profile.ajaxForm', [ 'user' => $user_profile[0], 'countries' => $countries]);
     }
+	
+	private function skippedAt() {
+		$org_id = Auth::user()->organization_id;
+		$org = Organization::where('id', '=', $org_id)->first();
+		return intval($org->profile_skipped_at_step);
+	}
 
     public function getStep1() {
+		if($this->skippedAt() < 1) {
+			$org_id = Auth::user()->organization_id;
+			$org = Organization::find($org_id);
+			$org->profile_skipped_at_step = 1;
+			$org->save();
+		}
+	
         $current = array('current', '', '', '');
         return view('admin.profile.step1.index', [ 'current' => $current]);
     }
 
     public function getStep2() {
+		if($this->skippedAt() < 2) {
+			$org_id = Auth::user()->organization_id;
+			$org = Organization::find($org_id);
+			$org->profile_skipped_at_step = 2;
+			$org->save();
+		}
+		
         $current = array('current', 'current', '', '');
         return view('admin.profile.step2.index', [ 'current' => $current]);
     }
 
     public function getStep3() {
+		if($this->skippedAt() < 3) {
+			$org_id = Auth::user()->organization_id;
+			$org = Organization::find($org_id);
+			$org->profile_skipped_at_step = 3;
+			$org->save();
+		}
+		
         $current = array('current', 'current', 'current', '');
         return view('admin.profile.step3.index', [ 'current' => $current]);
     }
 
     public function getStep4() {
+		if($this->skippedAt() < 4) {
+			$org_id = Auth::user()->organization_id;
+			$org = Organization::find($org_id);
+			$org->profile_skipped_at_step = 4;
+			$org->save();
+		}
+		
         $current = array('current', 'current', 'current', 'current');
         $user = Auth::user();
         $iv_id = InitialValue::where('organization_id', '=', $user->organization_id)->get();
@@ -250,6 +293,13 @@ class UserProfileController extends Controller {
     }
 
     public function postInitialValues($id, Request $request) {
+		if($this->skippedAt() < 5) {
+			$org_id = Auth::user()->organization_id;
+			$org = Organization::find($org_id);
+			$org->profile_skipped_at_step = 5;
+			$org->save();
+		}
+		
         $user = $request->user();
         $init_val = InitialValue::find($id);
         $init_val->invoice_number = $request->invoice_number;

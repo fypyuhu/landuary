@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\AddTax;
+use App\Http\Requests\EditTax;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Tax;
@@ -23,7 +24,7 @@ class TaxController extends Controller {
 		return view('admin.taxes.ajaxAddForm');
 	}
 
-    public function postCreate(Request $request) {
+    public function postCreate(AddTax $request) {
         //DD($request);
         $tax = new Tax;
         $tax->tax_name = $request->tax_name;
@@ -90,7 +91,7 @@ class TaxController extends Controller {
         return view('admin.taxes.edit', ['current' => Tax::find($id)]);
     }
 
-    public function postEdit($id, Request $request) {
+    public function postEdit($id, EditTax $request) {
         $records = DB::table('taxes')->where('organization_id', '=', Auth::user()->organization_id)->where('is_deleted', '<=', '0')->get();
 
         $data = array();

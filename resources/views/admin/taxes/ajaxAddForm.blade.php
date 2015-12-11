@@ -103,6 +103,9 @@
 </fieldset>
 <script>
      $(document).ready(function () {
+	 	$('fieldset').click(function(){
+			$('.alert-success').hide();
+		});
         $('#pageFormSingle').validate({
 			rules: {
 				tax_name: "required",
@@ -115,10 +118,26 @@
 			submitHandler: function (form) {
 				$('.loading').show();
 				var options = {
-					success: showResponse
+					success: showResponse,
+					error:showError
 				};
 				function showResponse(responseText, statusText, xhr, $form) {
-					location.reload();
+					//location.reload();
+					$('.field-set').load('/admin/taxes/ajax-add-form',function(){
+						$('.loading').hide();
+						$('.alert-success').html('Tax has been saved successfully. Please add another tax or close window.').show();
+					});
+				}
+				function showError(response, statusText, xhr, $form) {
+                    if(response.status==422){
+                        $.each(response.responseJSON, function (key, value) {
+							$("[name='" + key + "']").addClass('error');
+							$("[name='" + key + "']").removeClass('valid');
+							$("[name='" + key + "']").parent().siblings(".error").html(value);
+							$("[name='" + key + "']").parent().siblings(".error").show();
+						})
+					}
+					$('.loading').hide();
 				}
 				$(form).ajaxSubmit(options);
 			}
@@ -137,11 +156,27 @@
             submitHandler: function (form) {
 				$('.loading').show();
                 var options = {
-                    success: showResponse
+                    success: showResponse,
+					error:showError
                 };
                 function showResponse(responseText, statusText, xhr, $form) {
-                    location.reload();
+                    //location.reload();
+					$('.field-set').load('/admin/taxes/ajax-add-form',function(){
+						$('.loading').hide();
+						$('.alert-success').html('Tax has been saved successfully. Please add another tax or close window.').show();
+					});
                 }
+				function showError(response, statusText, xhr, $form) {
+                    if(response.status==422){
+                        $.each(response.responseJSON, function (key, value) {
+							$("[name='" + key + "']").addClass('error');
+							$("[name='" + key + "']").removeClass('valid');
+							$("[name='" + key + "']").parent().siblings(".error").html(value);
+							$("[name='" + key + "']").parent().siblings(".error").show();
+						})
+					}
+					$('.loading').hide();
+				}
                 $(form).ajaxSubmit(options);
             }
         });

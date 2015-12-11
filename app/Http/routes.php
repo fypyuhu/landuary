@@ -30,18 +30,13 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-/*Route::get('/admin/items', ['middleware' => 'profile.completed', function () {
-    //return back();
-}]);*/
-
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'profile.completed'], function () {
     Route::controller('items', 'ItemController');
     Route::controller('carts', 'CartController');
     Route::controller('customers', 'CustomerController');
     Route::controller('taxes', 'TaxController');
     Route::controller('out', 'OutController');
     Route::controller('in', 'InController');
-    Route::controller('profile', 'UserProfileController');
     Route::controller('receiving-manifest', 'ReceivingManifestController');
     Route::controller('shiping-manifest', 'ShipmentController');
     Route::controller('manifests', 'ManifestController');
@@ -53,3 +48,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     });
 });
 
+Route::group(['middleware' => 'auth', 'middleware' => 'verify.steps.completed'], function () {
+	Route::controller('admin/profile', 'UserProfileController');
+});
