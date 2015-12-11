@@ -71,6 +71,10 @@
                     </li>
                     <li><a href="{{url('admin/invoices')}}">Invoices</a>
                     </li>
+                    <li><a href="{{url('admin/taxes/list')}}">Tax</a>
+                    </li>
+                    <li><a href="{{url('admin/invoices/income')}}">Income</a>
+                    </li>
                 </ul>
               </div>
           </div>
@@ -176,7 +180,9 @@
           <li>
             <a href="{{url('admin/receiving-manifest')}}" class="waves-effect waves-blue fag fa-receiving">Receiving Manifest</a>
           </li>
-          
+          <li>
+            <a href="{{url('admin/invoices/create')}}" class="waves-effect waves-blue fag fa-shipping">Create Invoice</a>
+          </li>
           <li>
             <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-rewash">Create Invoice</a>
           </li>

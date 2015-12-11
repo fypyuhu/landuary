@@ -9,7 +9,9 @@ use App\Models\Tax;
 use App\Models\TaxComponent;
 use DB;
 use Auth;
-
+use App\Models\Invoice;
+use App\Models\Customer;
+use App\Models\CustomerTax;
 class TaxController extends Controller {
 
     public function getIndex() {
@@ -135,6 +137,40 @@ class TaxController extends Controller {
         $tax = Tax::find($id);
         $tax->is_deleted = 1;
         $tax->save();
+    }
+
+    public function getList() {
+        $customers = Customer::organization()->get();
+        return view('admin.taxes.list', ["customers" => $customers]);
+    }
+
+    public function getShowList(Request $request) {
+        $invoices = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', 'Paid')->whereBetween('updated_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d", strtotime($request->to_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+        $data = array();
+        foreach ($invoices as $invoice) {
+            $row = array();
+            $row["invoice_number"] = $invoice->invoice_number;
+            $row["customer"] = $invoice->customer->name;
+            $row["total_tax"] = $invoice->total_tax;
+            $row["updated_at"] = $invoice->updated_at->format('d m Y');
+            $row["actions"] = '<a href="/admin/taxes/detail/' . $invoice->id . '" data-mode="ajax">Tax Detail</a>';
+            ;
+            $data[] = $row;
+        }
+        echo "{\"data\":" . json_encode($data) . "}";
+    }
+
+    public function getDetail($id) {
+        $invoice = Invoice::find($id);
+        $customer_tax=CustomerTax::where('customer_id','=',$invoice->customer_id)->first();
+        $tax=Tax::find($customer_tax->tax_id);
+        $tax_componenets = TaxComponent::where('tax_id', '=', $tax->id)->get();
+        $tax_data = Tax::getTaxRateById($tax->id);
+        return view('admin.taxes.detail', ["invoice" => $invoice,
+            "tax" => $tax,
+            "tax_componenets" => $tax_componenets,
+            "tax_data" => $tax_data[0]
+        ]);
     }
 
 }

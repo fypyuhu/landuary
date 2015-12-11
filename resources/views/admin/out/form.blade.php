@@ -13,7 +13,7 @@
                     </div>
                     <div class="col m6 s12">
                         <select name="department" id="department">
-                            <option value="">Dept</option>
+                            <option value="-1">Dept</option>
                             @foreach ($depts as $dept)
                             <option value="{{$dept->id}}">{{$dept->department_name}}</option>
                             @endforeach

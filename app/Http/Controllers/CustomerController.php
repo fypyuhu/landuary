@@ -82,7 +82,6 @@ class CustomerController extends Controller {
                 $customer_item = new CustomerItem;
                 $customer_item->customer_id = $customer->id;
                 $customer_item->item_id = $customer_item_id;
-                $customer_item->billing_by = $request->price_option;
                 $customer_item->custom_price =$request->price_by_weight;
                 if ($request->has('chkbx_taxable_item')) {
                     $taxable = $request->chkbx_taxable_item;
@@ -95,17 +94,21 @@ class CustomerController extends Controller {
                 if ($request->price_option == "0") {
                     $item = Item::find($customer_item_id);
                     $customer_item->price = $item->weight * $request->price_by_weight;
+                    $customer_item->billing_by = 0;
                 }
                 else if($request->price_option == "1") {
                     $customer_item->price =$request->price_field[$customer_item_id];
+                    $customer_item->billing_by = 1;
                 }
                 else{
                     if($request->price_field[$customer_item_id]!=""){
                         $customer_item->price =$request->price_field[$customer_item_id];
+                        $customer_item->billing_by = 1;
                     }
                     else{
                         $item = Item::find($customer_item_id);
                         $customer_item->price = $item->weight * $request->price_by_weight;
+                        $customer_item->billing_by = 0;
                     }
                 }
                 $customer_item->save();
@@ -119,6 +122,14 @@ class CustomerController extends Controller {
         $return = "<select name='child_item' id='child_item'><option value='-1'>Select Item</option>";
         foreach ($items as $item) {
             $return.="<option value='" . $item->id . "'>" . $item->name . "</option>";
+        }
+        return $return . "</select>";
+    }
+    public function getGetDepartments($id) {
+        $return = " <label>Select Department:</label><select name='s_department' id='s_department'><option value='-1'>Select Department</option>";
+        $departments=CustomerDepartment::where('customer_id','=',$id)->get();
+        foreach ($departments as $department) {
+            $return.="<option value='" . $department->id . "'>" . $department->department_name . "</option>";
         }
         return $return . "</select>";
     }
@@ -226,7 +237,6 @@ class CustomerController extends Controller {
                 $customer_item = new CustomerItem;
                 $customer_item->customer_id = $customer->id;
                 $customer_item->item_id = $customer_item_id;
-                $customer_item->billing_by = $request->price_option;
                 $customer_item->custom_price =$request->price_by_weight;
                 if ($request->has('chkbx_taxable_item')) {
                     $taxable = $request->chkbx_taxable_item;
@@ -239,17 +249,21 @@ class CustomerController extends Controller {
                 if ($request->price_option == "0") {
                     $item = Item::find($customer_item_id);
                     $customer_item->price = $item->weight * $request->price_by_weight;
+                    $customer_item->billing_by = 0;
                 }
                 else if($request->price_option == "1") {
                     $customer_item->price =$request->price_field[$customer_item_id];
+                    $customer_item->billing_by = 1;
                 }
                 else{
                     if($request->price_field[$customer_item_id]!=""){
                         $customer_item->price =$request->price_field[$customer_item_id];
+                        $customer_item->billing_by = 1;
                     }
                     else{
                         $item = Item::find($customer_item_id);
                         $customer_item->price = $item->weight * $request->price_by_weight;
+                        $customer_item->billing_by = 0;
                     }
                 }
                 $customer_item->save();
