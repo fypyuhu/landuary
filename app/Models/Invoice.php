@@ -30,4 +30,11 @@ class Invoice extends Model
     public function customer() {
         return $this->belongsTo('App\Models\Customer', 'customer_id');
     }
+    public static function profitByCutomer(){
+        $sql="select customers.name, sum(total_price) as total_price from customers "
+           . "left join invoices on invoices.customer_id=customers.id "
+           . "where customers.organization_id='".Auth::user()->organization_id."' "
+           . "group by customers.id ";
+        return  DB::select(DB::raw($sql));
+    }
 }

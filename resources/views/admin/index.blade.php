@@ -9,12 +9,12 @@
         </div>
         <div class="row" style="margin-top:20px; margin-bottom:20px;">
             <div class="col m3 s12 video-box one">
-                <div class="label">10 Carts</div>
+                <div class="label">{{$income->readyCart}} Cart(s)</div>
                 <div class="text">Ready to ship</div>
             </div>
             <div class="col m1 s12">&nbsp;</div>
             <div class="col m3 s12 video-box two">
-                <div class="label">5 Invoices</div>
+                <div class="label">{{$income->dueInvoice}} Invoice(s)</div>
                 <div class="text">Due this week</div>
             </div>
             <div class="col m1 s12">&nbsp;</div>
@@ -39,26 +39,26 @@
     </div>
 
     <div class="row graph-box">
-        <h4>Income <a href="#" class="pull-right">Create an invoice</a></h4>
+        <h4>Income <a href="/admin/invoices/create" class="pull-right">Create an invoice</a></h4>
         <div class="row" style="margin-top:30px;">
             <div class="col m4 s12">
                 <div class="row graph-bar gb-one"></div>
                 <div class="row gb-detail">
-                    $0<br />
+                    ${{$income->unPaid}}<br />
                     Open Invoices
                 </div>
             </div>
             <div class="col m4 s12">
                 <div class="row graph-bar gb-two"></div>
                 <div class="row gb-detail">
-                    $0<br />
+                    ${{$income->overDue}}<br />
                     Over Due
                 </div>
             </div>
             <div class="col m4 s12">
                 <div class="row graph-bar gb-three"></div>
                 <div class="row gb-detail">
-                    $0<br />
+                    ${{$income->paid}}<br />
                     Paid Last 30 Days
                 </div>
             </div>
@@ -84,20 +84,13 @@ google.setOnLoadCallback(drawChart);
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
         ['Profit', 'in Dollars'],
-        ['Mac', 200],
-        ['Morgen', 340],
-        ['Rosey', 490],
-        ['Kaluse', 390],
-        ['Kristain', 450],
-        ['Emma', 190],
-        ['Harry', 430],
-        ['Donald', 134],
-        ['Stephen', 50],
-        ['Julia', 102],
+        @foreach($income->profit as $customer)
+        ['{{$customer->name}}', {{$customer->total_price or 0}}],
+        @endforeach
     ]);
 
     var options = {
-        title: 'Profit By Customer',
+        title: 'Revenue By Customer',
         is3D: true,
         backgroundColor:'#ecf0f4',
         chartArea:{left:20,top:20,width:'100%',height:'100%'}

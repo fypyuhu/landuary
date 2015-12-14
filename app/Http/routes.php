@@ -43,9 +43,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller('carts-list', 'CartsListController');
 	Route::controller('invoices', 'InvoiceController');
 	Route::controller('rewash', 'RewashController');
-    Route::get('/', function () {
-        return view('admin.index');
-    });
+        Route::controller('/', 'HomeController');
+    
 });
 
 Route::group(['middleware' => 'auth', 'middleware' => 'verify.steps.completed'], function () {
