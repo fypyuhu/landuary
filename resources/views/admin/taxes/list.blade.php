@@ -88,7 +88,6 @@
                         {name: 'invoice_number'},
                         {name: 'customer'},
                         {name: 'total_tax'},
-                        {name: 'updated_at', type: 'date'},
                         {name: 'actions'}
 
                     ],
@@ -142,11 +141,10 @@
                         return obj.data;
                     },
                     columns: [
-                        {text: 'Invoice Number', width: '20%', dataField: 'invoice_number'},
-                        {text: 'Customer', width: '20%', dataField: 'customer'},
-                        {text: 'Total Tax', width: '20%', dataField: 'total_tax',aggregates: ['sum']},
-                        {text: 'Paid date', width: '20%', dataField: 'updated_at', cellsformat: 'dd MMMM, yyyy'},
-                        {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions'}
+                        {text: 'Invoice Number', width: '25%', dataField: 'invoice_number'},
+                        {text: 'Customer', width: '25%', dataField: 'customer'},
+                        {text: 'Total Tax', width: '25%', dataField: 'total_tax',aggregates: ['sum']},
+                        {text: 'Actions', width: '25%', cellsalign: 'center', dataField: 'actions'}
                     ]
                 });
         

@@ -175,7 +175,7 @@ class InvoiceController extends Controller
        return view('admin.invoices.income', ["customers" => $customers]);
    }
    public function getShowList(Request $request) {
-        $invoices = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', 'Paid')->whereBetween('updated_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d", strtotime($request->to_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+        $invoices = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d", strtotime($request->to_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
         $data = array();
         foreach ($invoices as $invoice) {
             $row = array();
