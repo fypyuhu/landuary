@@ -17,7 +17,7 @@ class ProfileCompleteMiddleware
     {
 		$visited = Auth::user()->visited;	
 		if(intval($visited) <= 0) {
-			return redirect()->back();
+			//return redirect()->back();
 		}
 		
         return $next($request);
