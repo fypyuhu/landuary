@@ -292,6 +292,7 @@
                         <div class="col s12 center-align"><strong>No products have been assigned to this customer yet.</strong></div>
                     </div>
                 </div>
+                <label class="error" id="item_count_error" style="display:none;"></label>
             </section>
             <section style="margin-top:15px; display:none;" class="items-tab tab-content">
                 <legend>Pricing</legend>
@@ -317,6 +318,7 @@
 </fieldset>
 
 <script>
+    var item_count_customer=0;
     function addDepartment() {
         if ($('#department').val() != "") {
             $("#department_list").jqxComboBox('addItem', {label: $('#department').val(), checked: true});
@@ -363,6 +365,8 @@
                     context: document.body
                 }).done(function (html) {
                     $('#item_record_list').append(html);
+                    item_count_customer++;
+                    $("#item_count_error").hide();
                     $('#records_list_no_record').hide();
                     if ($("#price_by_weight").is(':checked')) {
                         $('.price-field, #price-heading').css('display', 'none');
@@ -394,6 +398,16 @@
         else {
             $("#error-" + id).html("");
             $("#" + id).removeClass('error');
+            return true;
+        }
+    }
+    function checkItemCount(){
+        if(item_count_customer<1){
+            $("#item_count_error").html("Please add at least one item.");
+            $("#item_count_error").show();
+            return false;
+        }
+        else{
             return true;
         }
     }
@@ -487,7 +501,7 @@
                 return;
             }
             else if (activeTab === "items") {
-                if (checkError('Customer Name', 'ship_to_name') && checkError('Customer Number', 'customer_number')) {
+                if (checkItemCount() && checkError('Customer Name', 'ship_to_name') && checkError('Customer Number', 'customer_number')) {
                     function showResponse(responseText, statusText, xhr, $form) {
                         location.reload();
                     }

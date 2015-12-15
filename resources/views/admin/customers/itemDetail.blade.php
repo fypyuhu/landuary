@@ -11,5 +11,5 @@
     <div class="col s2 price-field" style="display:none;"  >
         <div class="input-field"><input type="text" id="{{$item->id}}_price_field" name="price_field[{{$item->id}}]"/></div>
     </div>
-    <div class="col s1"><button class="waves-effect btn" onclick="$(this).parent().parent().remove();">X</button></div>
+    <div class="col s1"><button class="waves-effect btn" onclick="$(this).parent().parent().remove();item_count_customer--;">X</button></div>
 </div>
