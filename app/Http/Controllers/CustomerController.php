@@ -24,7 +24,7 @@ class CustomerController extends Controller {
 
     public function getCreate() {
         $parent_items = DB::select(DB::raw('SELECT items.id,items.name FROM `items` where id not in (select child_id from item_relation) AND items.status=1 AND items.organization_id= '.Auth::user()->organization_id));
-        $taxes = Tax::organization()->get();
+        $taxes = Tax::organization()->status()->get();
         return view('admin.customers.add', ["parent_items" => $parent_items, "taxes" => $taxes]);
     }
 
@@ -169,7 +169,7 @@ class CustomerController extends Controller {
         $customer_tax = CustomerTax::organization()->where('customer_id','=',$id)->first();
         $customer_items = CustomerItem::organization()->where('customer_id','=',$id)->get();
         $parent_items = DB::select(DB::raw('SELECT items.id,items.name FROM `items` where id not in (select child_id from item_relation) AND items.status=1  AND items.organization_id= '.Auth::user()->organization_id));
-        $taxes = Tax::organization()->get();
+        $taxes = Tax::organization()->status()->get();
         return view('admin.customers.edit', 
                 [
                    "customer" => $customer,
