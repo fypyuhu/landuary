@@ -11,6 +11,9 @@ class Tax extends Model
     public function scopeOrganization($query) {
         return $query->where('organization_id', Auth::user()->organization_id);
     }
+    public function scopeStatus($query) {
+        return $query->where('is_deleted', 0);
+    }
     public function save(array $options = array()) {
         $this->organization_id=Auth::user()->organization_id;
         parent::save($options); // Calls Default Save
