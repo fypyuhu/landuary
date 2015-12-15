@@ -96,7 +96,7 @@
 	$(document).ready(function () {
 		$("#customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
 		$("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
-		$(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
+		$(".calendar").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
 		
 		$("body").on('change', '#customer', function(e){
 			$('.loading').show();

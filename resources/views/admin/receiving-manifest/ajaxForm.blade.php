@@ -56,7 +56,7 @@
 $(document).ready(function () {
 	$("#customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
 	$("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, {{count($departments) > 0 ? 'disabled: false' : 'disabled: true'}} });
-	$(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
+	$(".calendar").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
 	
 	$('#pageForm').validate({
 		rules: {

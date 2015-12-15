@@ -89,7 +89,7 @@ class ReceivingManifestController extends Controller
 			$department = $items[0]->department_name;
 			
 		if(!$items)
-			return back()->with('status', 'No Items found within the selected date.');
+			return back()->with('status', 'No Carts/Items found within the selected date.');
 		return view('admin.receiving-manifest.receipt', [ 'user'=>$user, 'manifest' => $manifest, 'customer' => $customer, 'department' => $department, 'items' => $items ]);
 	}
 	
