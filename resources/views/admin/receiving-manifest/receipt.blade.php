@@ -25,8 +25,8 @@
             <div class="pull-left">
                 <p><strong>Deliver To:</strong><br />
                 Customer Number: {{$customer->customer_number}}<br />
-                <strong>Department:</strong><br />
                 @if ($department != '')
+                <strong>Department:</strong><br />
                 {{$department}}<br /> 
                 @endif
             </div>

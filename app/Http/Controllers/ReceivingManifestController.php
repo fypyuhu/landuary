@@ -34,19 +34,6 @@ class ReceivingManifestController extends Controller
 		$rm->date_to = date('Y-m-d', strtotime($request->date_to));
 		$rm->save();
 		
-		$items = ReceivingManifest::getCustomerIncomingCartItems($rm->customer_id, $rm->date_from, $rm->date_to, $rm->department_id);
-		$carts = array();
-		foreach($items as $item) {
-			$carts[] = $item->incoming_cart_id;
-		}
-		
-		$carts = array_unique($carts);
-		foreach($carts as $cart) {
-			$cart = IncomingCart::find($cart);
-			$cart->invoiced = 1;
-			$cart->save();
-		}
-		
 		return redirect('/admin/receiving-manifest/receipt/'.$rm->id);
 	}
 	
@@ -85,6 +72,19 @@ class ReceivingManifestController extends Controller
 		}*/
 		$user=UserProfile::where('user_id','=',Auth::user()->id)->first();
 		$items = ReceivingManifest::getCustomerIncomingCartItems($manifest->customer_id, $manifest->date_from, $manifest->date_to, $manifest->department_id);
+		
+		$carts = array();
+		foreach($items as $item) {
+			$carts[] = $item->incoming_cart_id;
+		}
+		
+		$carts = array_unique($carts);
+		foreach($carts as $cart) {
+			$cart = IncomingCart::find($cart);
+			$cart->invoiced = 1;
+			$cart->save();
+		}
+		
 		if($items)
 			$department = $items[0]->department_name;
 			
