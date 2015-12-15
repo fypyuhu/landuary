@@ -29,11 +29,24 @@ class ReceivingManifestController extends Controller
 	public function postCreate(Request $request) {
 		$rm = new ReceivingManifest;
 		$rm->customer_id = $request->customer;
-		$rm->department_from = $request->department_from;
-		$rm->department_to = $request->department_to;
+		$rm->department_id = $request->department;
 		$rm->date_from = date('Y-m-d', strtotime($request->date_from));
 		$rm->date_to = date('Y-m-d', strtotime($request->date_to));
 		$rm->save();
+		
+		$items = ReceivingManifest::getCustomerIncomingCartItems($rm->customer_id, $rm->date_from, $rm->date_to, $rm->department_id);
+		$carts = array();
+		foreach($items as $item) {
+			$carts[] = $item->incoming_cart_id;
+		}
+		
+		$carts = array_unique($carts);
+		foreach($carts as $cart) {
+			$cart = IncomingCart::find($cart);
+			$cart->invoiced = 1;
+			$cart->save();
+		}
+		
 		return redirect('/admin/receiving-manifest/receipt/'.$rm->id);
 	}
 	
@@ -41,7 +54,7 @@ class ReceivingManifestController extends Controller
 		$manifest = ReceivingManifest::find($id);
 		$customer = Customer::find($manifest->customer_id)->first();
 		
-		$departments = '';
+		/*$departments = '';
 		$department_from = '';
 		$department_to = '';
 		
@@ -69,12 +82,15 @@ class ReceivingManifestController extends Controller
 			$departments = '';
 			$department_from = '';
 			$department_to = '';
-		}
+		}*/
 		$user=UserProfile::where('user_id','=',Auth::user()->id)->first();
-		$items = ReceivingManifest::getCustomerIncomingCartItems($manifest->customer_id, $manifest->date_from, $manifest->date_to);
+		$items = ReceivingManifest::getCustomerIncomingCartItems($manifest->customer_id, $manifest->date_from, $manifest->date_to, $manifest->department_id);
+		if($items)
+			$department = $items[0]->department_name;
+			
 		if(!$items)
 			return back()->with('status', 'No Items found within the selected date.');
-		return view('admin.receiving-manifest.receipt', [ 'user'=>$user,'manifest' => $manifest, 'customer' => $customer, 'department_from' => $department_from, 'department_to' => $department_to, 'items' => $items ]);
+		return view('admin.receiving-manifest.receipt', [ 'user'=>$user, 'manifest' => $manifest, 'customer' => $customer, 'department' => $department, 'items' => $items ]);
 	}
 	
 	public function getAjaxForm(Request $request) {

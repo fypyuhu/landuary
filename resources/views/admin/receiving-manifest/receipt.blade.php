@@ -26,12 +26,8 @@
                 <p><strong>Deliver To:</strong><br />
                 Customer Number: {{$customer->customer_number}}<br />
                 <strong>Department:</strong><br />
-                @if ($department_from != '')
-                From: {{$department_from}}<br /> 
-                @endif
-                
-                @if ($department_to != '')
-                To: {{$department_to}}</p>
+                @if ($department != '')
+                {{$department}}<br /> 
                 @endif
             </div>
             <div class="pull-right">
