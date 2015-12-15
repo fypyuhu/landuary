@@ -212,6 +212,7 @@
         });
 		
         $("body").on("click", "#button-add-item", function (e) {
+            
             e.preventDefault();
 			$("#item_count").parent().siblings(".error").html("");
                         $("#item_count").parent().siblings(".error").hide();
@@ -226,6 +227,10 @@
 			
             var item_id = $('#item_id').val();
             var stopProcess = false;
+            if(!$("#item_id").jqxComboBox('getSelectedItem')){
+                var stopProcess = true;
+                return;
+            }
 			$('label[for="quantity"]').html('').hide();
             if ($("#quantity").val() == "" || $("#quantity").val() == "0")
             {
