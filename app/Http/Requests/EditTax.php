@@ -22,10 +22,10 @@ class EditTax extends Request
      * @return array
      */
     public function rules()
-    {
-		$id = $this->route('one');
+    {   
+        $id = $this->route('one');
         return [
-            'item_name' => 'required|unique:taxes,tax_name,'.$id.',id,organization_id,'.Auth::user()->organization_id,
+            'tax_name' => 'required|unique:taxes,tax_name,'.$id.',id,organization_id,'.Auth::user()->organization_id,
         ];
     }
 }

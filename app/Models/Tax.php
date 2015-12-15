@@ -21,4 +21,8 @@ class Tax extends Model
                 . "where taxes.id='".$tax_id."'";
         return  DB::select(DB::raw($sql));
     }
+    public function components()
+    {
+        return $this->hasMany('App\Models\TaxComponent','tax_id');
+    }
 }

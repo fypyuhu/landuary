@@ -30,7 +30,7 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'profile.completed'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller('items', 'ItemController');
     Route::controller('carts', 'CartController');
     Route::controller('customers', 'CustomerController');
@@ -43,9 +43,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'prof
     Route::controller('carts-list', 'CartsListController');
 	Route::controller('invoices', 'InvoiceController');
 	Route::controller('rewash', 'RewashController');
-    Route::get('/', function () {
-        return view('admin.index');
-    });
+        Route::controller('/', 'HomeController');
+    
 });
 
 Route::group(['middleware' => 'auth', 'middleware' => 'verify.steps.completed'], function () {

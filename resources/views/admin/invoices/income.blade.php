@@ -87,8 +87,7 @@
                     datafields: [
                         {name: 'invoice_number'},
                         {name: 'customer'},
-                        {name: 'total_price'},
-                        {name: 'updated_at', type: 'date'}
+                        {name: 'total_price'}
 
                     ],
                     cache: false,
@@ -141,10 +140,9 @@
                         return obj.data;
                     },
                     columns: [
-                        {text: 'Invoice Number', width: '25%', dataField: 'invoice_number'},
-                        {text: 'Customer', width: '25%', dataField: 'customer'},
-                        {text: 'Total Tax', width: '25%', dataField: 'total_price',aggregates: ['sum']},
-                        {text: 'Paid date', width: '25%', dataField: 'updated_at', cellsformat: 'dd MMMM, yyyy'}
+                        {text: 'Invoice Number', width: '30%', dataField: 'invoice_number'},
+                        {text: 'Customer', width: '40%', dataField: 'customer'},
+                        {text: 'Total Tax', width: '30%', dataField: 'total_price',aggregates: ['sum']}
                     ]
                 });
         
