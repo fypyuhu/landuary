@@ -27,14 +27,35 @@ class ReceivingManifestController extends Controller
      * @return \Illuminate\Http\Response
      */
 	public function postCreate(Request $request) {
-		$rm = new ReceivingManifest;
-		$rm->customer_id = $request->customer;
-		$rm->department_id = $request->department;
-		$rm->date_from = date('Y-m-d', strtotime($request->date_from));
-		$rm->date_to = date('Y-m-d', strtotime($request->date_to));
-		$rm->save();
+		$ic = IncomingCart::where('invoiced', '=', 0)->where(function ($query) use ($request) {
+																if($request->customer != "-1") {
+																	$query->where('customer_id', '=', $request->customer);
+																}
+																if($request->department != "-1") {
+																	$query->where('department_id', '=', $request->department);
+																}
+														})->whereBetween('receiving_date', [date('Y-m-d', strtotime($request->date_from)), date('Y-m-d', strtotime($request->date_to))])->get();
+			  
+			  
 		
-		return redirect('/admin/receiving-manifest/receipt/'.$rm->id);
+		$ic_ids = array();
+		foreach($ic as $ic_id) {
+			$ic_ids[] = $ic_id->id;
+		}	
+			
+		if(count($ic_ids) > 0) {	
+			$rm = new ReceivingManifest;
+			$rm->customer_id = $request->customer;
+			$rm->department_id = $request->department;
+			$rm->incoming_cart_ids = implode(',',$ic_ids);
+			$rm->date_from = date('Y-m-d', strtotime($request->date_from));
+			$rm->date_to = date('Y-m-d', strtotime($request->date_to));
+			$rm->save();
+			
+			return redirect('/admin/receiving-manifest/receipt/'.$rm->id);
+		} else {
+			return back()->with('status', 'No Carts/Items found within the selected date.');
+		}
 	}
 	
 	public function getReceipt($id, Request $request) {
@@ -94,9 +115,6 @@ class ReceivingManifestController extends Controller
 		
 		if($items)
 			$department = $items[0]->department_name;
-			
-		if(!$items)
-			return back()->with('status', 'No Carts/Items found within the selected date.');
 			
 		return view('admin.receiving-manifest.receipt', [ 'user'=>$user, 'manifest' => $manifest, 'customer' => $customer, 'department' => $department, 'items' => $items, 'total_gross_weight' => array_sum($gross_weight), 'total_net_weight' => array_sum($net_weight), 'organization' => $organization ]);
 	}

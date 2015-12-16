@@ -43,7 +43,7 @@
                     <div class="col m4 s12">
                       <label>From Customer:</label>
                       <select name="customer" id="customer">
-                        <option value="">Select Customer</option>
+                        <option value="-1">Select Customer</option>
                         @foreach($customers as $customer)
                         <option value="{{$customer->id}}">{{$customer->name}}</option>
                         @endforeach
@@ -59,7 +59,7 @@
                     <div class="col m4 s12">
                       <label>Department:</label>
                       <select name="department" id="department">
-                        <option value="">Select Department</option>
+                        <option value="-1">Select Department</option>
                       </select>
                     </div>
                   </div>
