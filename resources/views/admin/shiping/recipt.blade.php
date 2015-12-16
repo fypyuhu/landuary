@@ -49,7 +49,7 @@
                     <th class="align-right">Qty</th>
                     <th class="align-right">Net Weight</th>
                 </tr>
-                @foreach($items as $item)
+                @foreach($items as $key=>$item)
                 <tr>
                     <td>{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->cart_id}}</td>
                     <td>{{$item->item_number}}</td>
