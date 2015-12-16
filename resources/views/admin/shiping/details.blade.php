@@ -128,7 +128,7 @@
             }
         });
         $('#department').on('change', function () {
-            if ($("#department").jqxComboBox('getSelectedIndex') != "-1" && $("#department").val() != "-1") {
+            if ($("#department").jqxComboBox('getSelectedIndex') != "-1") {
                 $(".loading").css("display", "block");
                 $.ajax({
                     url: "/admin/shiping-manifest/details/"+$("#customer").val()+"/" + $(this).val(),
