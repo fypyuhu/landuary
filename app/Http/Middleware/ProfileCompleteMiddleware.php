@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Middleware;
-use Auth;
-use Illuminate\Contracts\Auth\Guard;
+
 use Closure;
+use Illuminate\Contracts\Auth\Guard;
 use Request;
+use Auth;
 
 class ProfileCompleteMiddleware
 {
@@ -35,8 +36,14 @@ class ProfileCompleteMiddleware
      */
     public function handle($request, Closure $next)
     {
-		if ($this->auth->check()) {
-			$visited = Auth::user()->visited;	
+        if ($this->auth->guest()) {
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                return redirect()->guest('/');
+            }
+        } else if ($this->auth->check()) {
+			$visited = Auth::user()->visited;
 			$url = Request::url();
 			if(intval($visited) <= 0) {
 				if(strpos($url, 'step') !== false) {
@@ -46,7 +53,7 @@ class ProfileCompleteMiddleware
 					return redirect('/admin/profile');
 			}
 		}
-		
+
         return $next($request);
     }
 }

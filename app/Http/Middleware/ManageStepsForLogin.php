@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Contracts\Auth\Guard;
 use App\Models\Organization;
 use Auth;
-use Illuminate\Contracts\Auth\Guard;
 use Request;
-use Closure;
 
 class ManageStepsForLogin
 {
@@ -36,7 +37,13 @@ class ManageStepsForLogin
      */
     public function handle($request, Closure $next)
     {
-		if ($this->auth->check()) {
+		if ($this->auth->guest()) {
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                return redirect()->guest('/');
+            }
+        } else if ($this->auth->check()) {
 			$org_id = Auth::user()->organization_id;
 			$org = Organization::where('id', '=', $org_id)->first();
 			$url = Request::url();
