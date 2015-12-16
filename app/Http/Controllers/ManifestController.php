@@ -25,7 +25,7 @@ class ManifestController extends Controller {
         foreach ($ship_manifests as $manifest) {
             $row = array();
             $row["id"] = $manifest->id;
-            $row["name"] = $manifest->customer->name;
+            $row["name"] = $request->name != "-1" ? $manifest->customer->name : '';
             $department=CustomerDepartment::find($manifest->department_id);
             if($department){
                 $row["department"] =$department->department_name;
@@ -53,7 +53,7 @@ class ManifestController extends Controller {
         foreach ($receiving_manifests as $manifest) {
             $row = array();
             $row["id"] = $manifest->id;
-            $row["name"] = $manifest->customer->name;
+            $row["name"] = $request->name != "-1" ? $manifest->customer->name : '';
             $department=CustomerDepartment::find($manifest->department_id);
             if($department){
                 $row["department"] =$department->department_name;
