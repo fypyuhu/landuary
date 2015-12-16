@@ -55,8 +55,8 @@ class ItemController extends Controller {
     public function getShow(Request $request) {
 		$search_filter = '';
 		if ($request->has('search_string'))
-			$search_filter = " and name like '%$request->search_string%' or item_number = '$request->search_string'";
-			
+			$search_filter = " and (name like '%$request->search_string%' or item_number = '$request->search_string')";
+
         $items = DB::select(DB::raw("SELECT * FROM `items` where id not in (select child_id from item_relation) AND items.status=1 $search_filter and items.organization_id = ".Auth::user()->organization_id));
         $data = array();
         foreach ($items as $item) {

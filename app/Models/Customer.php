@@ -8,7 +8,7 @@ use Auth;
 class Customer extends Model
 {
     protected $table="customers";
-        use SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that should be mutated to dates.
