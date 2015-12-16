@@ -41,7 +41,6 @@
         <div class="row">
             <table>
                 <tr>
-                    <th>Sr.</th>
                     <th>Cart #</th>
                     <th>Item #</th>
                     <th>Description</th>
@@ -50,7 +49,6 @@
                 </tr>
                 @foreach($items as $key=>$item)
                 <tr>
-                    <td>{{$key+1}}</td>
                     <td>{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->cart_id}}</td>
                     <td>{{$item->item_number}}</td>
                     <td>{{$item->description}}</td>

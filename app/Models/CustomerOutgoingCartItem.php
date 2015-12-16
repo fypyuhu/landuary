@@ -14,7 +14,7 @@ class CustomerOutgoingCartItem extends Model {
                                  "100" as tare_weight,@curRow := @curRow + 1 AS row_number, 
                                 outgoing_carts.id,items.weight,items.name,outgoing_carts.cart_id,
                                 items.item_number,customers_outgoing_carts_items.quantity,
-                                outgoing_carts.net_weight 
+                                outgoing_carts.net_weight, outgoing_carts.gross_weight 
                                 FROM shipping_manifest 
         join (SELECT @curRow := 0) r 
         join outgoing_carts on FIND_IN_SET( outgoing_carts.id,shipping_manifest.outgoing_cart_id) 

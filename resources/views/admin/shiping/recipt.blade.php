@@ -43,24 +43,20 @@
         <div class="row">
         	<table>
                 <tr>
-                    <th>Num</th>
                     <th>Cart #</th>
                     <th>Item #</th>
                     <th>Name</th>
                     <th class="align-right">Qty</th>
                     <th class="align-right">Net Weight</th>
                 </tr>
-                <?php $netWeight=0;?>
                 @foreach($items as $item)
                 <tr>
-                    <td>{{$item->row_number}}</td>
-                    <td>{{$item->cart_id}}</td>
+                    <td>{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->cart_id}}</td>
                     <td>{{$item->item_number}}</td>
                     <td>{{$item->name}}</td>
                     <td class="align-right">{{$item->quantity}}</td>
-                    <td class="align-right">{{($item->quantity*$item->weight)}}</td>
+                    <td class="align-right">{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->net_weight}}</td>
                 </tr>
-                 <?php $netWeight+=($item->quantity*$item->weight);?>
                 @endforeach
                 
             </table>
@@ -68,9 +64,8 @@
         <hr />
         <div class="row">
             <div class="pull-right">
-                <p>Total Gross Weight:{{($netWeight+$items[0]->tare_weight)}}<br />
-                Total Net Weight: {{$netWeight}}<br />
-                Total Shippment Weight: {{($netWeight+$items[0]->tare_weight)}}</p>
+                <p>Total Gross Weight: {{$total_gross_weight}}<br />
+                Total Net Weight: {{$total_net_weight}}</p>
             </div>
         </div>
     </div>

@@ -60,8 +60,21 @@ class ShipmentController extends Controller
         $manifest=ShipManifest::find($id);
         $customer=Customer::find($manifest->customer_id);
         $items=CustomerOutgoingCartItem::getCartItemsById($id);
+		
+		$carts = array();
+		$gross_weight = array();
+		$net_weight = array();
+		
+		foreach($items as $key => $item) {
+			if(!in_array($item->cart_id, $carts)) {
+				$carts[] = $item->cart_id;
+				$gross_weight[] = $item->gross_weight;
+				$net_weight[] = $item->net_weight;
+			}
+		}
+		
         $user=UserProfile::where('user_id','=',Auth::user()->id)->first();
-        return view('admin.shiping.recipt',['user'=>$user,'items'=>$items,'customer'=>$customer,'manifest'=>$manifest]);
+        return view('admin.shiping.recipt',['user'=>$user,'items'=>$items,'customer'=>$customer,'manifest'=>$manifest, 'total_gross_weight' => array_sum($gross_weight), 'total_net_weight' => array_sum($net_weight)]);
     }
     public function getEdit($id){
         $manifest=ShipManifest::find($id);
