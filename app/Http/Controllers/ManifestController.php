@@ -68,7 +68,7 @@ class ManifestController extends Controller {
                 $row["department"] ='';
             }
             $row["date"] = date('d F, Y', strtotime($manifest->created_at));
-            $row["actions"] = '<a href="/admin/receiving-manifest/receipt/' . $manifest->id . '">View</a>';
+            $row["actions"] = '<a href="/admin/receiving-manifest/view-receipt/' . $manifest->id . '">View</a>';
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";
