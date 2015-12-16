@@ -45,7 +45,8 @@ class ManifestController extends Controller {
 
     public function getShowReceiving(Request $request) {
         if ($request->name != "-1") {
-            $receiving_manifests = ReceivingManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+            //$receiving_manifests = ReceivingManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+			$receiving_manifests = ReceivingManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->get();
         } else {
             $receiving_manifests = ReceivingManifest::with('customer')->organization()->whereBetween('created_at', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
         }
