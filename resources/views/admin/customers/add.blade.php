@@ -45,7 +45,7 @@
                 </select>
 
             </div>  
-
+            <label class="error" id="department_error" style="display:none;"></label>
         </div>
         <div class="row">
             <ul class="ctabs1">
@@ -244,7 +244,7 @@
                     <div class="col m3 s12" style="margin-top:0;">
                         <label>Price Per lb/kg:</label>
                         <div class="input-field">
-                            <input id="price-by-weight" type="text" name="price_by_weight">
+                            <input id="price-by-weight" type="text" onblur="return weightCheck()" name="price_by_weight">
                         </div>
                         <label for="price-by-weight" class="error" id="error-price-by-weight"></label>
                     </div>
@@ -328,7 +328,24 @@
                 selected: 'selected'
             }));
             $('#department').val('');
+            $("#department_error").hide();
         }
+    }
+    function weightCheck(){
+        if(($("#price_by_weight").is(":checked") || $("#price_by_both").is(":checked")) && (isNaN(parseFloat($("#price-by-weight").val())) ||  $("#price-by-weight").val()=="")){
+            $("#error-price-by-weight").html("Please add a valid amount");
+            return false;
+        }
+        $("#error-price-by-weight").html("");
+        return true;
+    }
+    function departmentCheck(){
+        if($("#use_department").is(":checked") && $("#department_list").jqxComboBox('getCheckedItems').length<1){
+            $("#department_error").html("Please add at least on department");
+            $("#department_error").show();
+            return false;
+        }
+        return true;
     }
     function taxError()
     {
@@ -501,7 +518,7 @@
                 return;
             }
             else if (activeTab === "items") {
-                if (checkItemCount() && checkError('Customer Name', 'ship_to_name') && checkError('Customer Number', 'customer_number')) {
+                if (weightCheck() && departmentCheck() && checkItemCount() && checkError('Customer Name', 'ship_to_name') && checkError('Customer Number', 'customer_number')) {
                     function showResponse(responseText, statusText, xhr, $form) {
                         location.reload();
                     }
