@@ -140,7 +140,7 @@
                     });
                     if (checkedItems!== "") {
                         checkedItems=checkedItems.substring(0, checkedItems.length-1);
-                        $('#department').jqxComboBox('destroy'); 
+                    }    $('#department').jqxComboBox('destroy'); 
                         $(".loading").css("display", "block");
                         $.ajax({
                             url: "/admin/invoices/details/" + $("#customer").val() + "/" +checkedItems,
@@ -149,7 +149,7 @@
                             $("#shipmant").html(html);
                             $(".loading").css("display", "none");
                         });
-                    }
+                    
                 }
             }
         });
