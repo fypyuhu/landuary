@@ -27,7 +27,16 @@ class ReceivingManifestController extends Controller
      * @return \Illuminate\Http\Response
      */
 	public function postCreate(Request $request) {
-		$ic = IncomingCart::where('invoiced', '=', 0)->where('customer_id', '=', $request->customer)->where('department_id', '=', $request->department)->whereBetween('receiving_date', [date('Y-m-d', strtotime($request->date_from)), date('Y-m-d', strtotime($request->date_to))])->get();
+		$ic = IncomingCart::where('invoiced', '=', 0)->where(function ($query) use ($request) {
+																if($request->customer != "-1") {
+																	$query->where('customer_id', '=', $request->customer);
+																}
+																if($request->department != "-1") {
+																	$query->where('department_id', '=', $request->department);
+																}
+														})->whereBetween('receiving_date', [date('Y-m-d', strtotime($request->date_from)), date('Y-m-d', strtotime($request->date_to))])->get();
+			  
+			  
 		
 		$ic_ids = array();
 		foreach($ic as $ic_id) {
