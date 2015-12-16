@@ -75,6 +75,8 @@
                     </li>
                     <li><a href="{{url('admin/invoices/income')}}">Income</a>
                     </li>
+                    <li><a href="{{url('admin/reconciliation')}}">Reconciliation</a>
+                    </li>
                 </ul>
               </div>
           </div>

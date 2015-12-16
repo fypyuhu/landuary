@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\OutgoingCart;
 use stdClass;
+use App\Models\Customer;
 class HomeController extends Controller
 {
     /**
@@ -35,20 +36,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getReconciliation()
     {
-        //
+        $customers=Customer::organization()->get();
+        return view("admin.invoices.reconciliation",["customers"=>$customers]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function getWeightData(Request $request)
     {
-        //
+        echo"";
     }
 
     /**
