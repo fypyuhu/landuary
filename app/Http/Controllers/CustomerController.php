@@ -147,7 +147,10 @@ class CustomerController extends Controller {
     public function getShow(Request $request) {
 		$customers = Customer::organization()->get();
 		if ($request->has('search_string')) {
-			$customers = Customer::organization()->where('name', 'like', "%$request->search_string%")->orWhere('customer_number', '=', "$request->search_string")->get();
+			$customers = Customer::organization()->where(function ($query) use ($request) {
+                $query->where('name', 'like', "%$request->search_string%")
+                      ->orWhere('customer_number', '=', $request->search_string);
+            })->get();
 		}
 		
         $data = array();
