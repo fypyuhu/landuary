@@ -15,6 +15,7 @@ use App\Models\CustomerTax;
 use App\Models\Tax;
 use App\Models\CustomerBilling;
 use App\Models\TaxComponent;
+use App\Models\OutgoingCart;
 class InvoiceController extends Controller
 {
     /**
@@ -103,6 +104,12 @@ class InvoiceController extends Controller
             $manifest=ShipManifest::find($manifest_id);
             $manifest->invoiced=1;
             $manifest->save();
+            $out_going_carts=expolde(",",$manifest->outgoing_cart_id);
+            foreach($out_going_carts as $out_going_cart_id){
+                $out_going_cart=OutgoingCart::find($out_going_cart_id);
+                $out_going_cart->invoiced=1;
+                $out_going_cart->save();
+            }
         }
         return redirect('/admin/invoices/receipt/' . $invoice->id);
     }

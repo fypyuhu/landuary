@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddCustomePriceToCustomerItems' => $baseDir . '/database/migrations/2015_11_16_165342_add_custome_price_to_customer_items.php',
+    'AddInvoicedToOutGoingCartTable' => $baseDir . '/database/migrations/2015_12_16_155821_add_invoiced_to_out_going_cart_table.php',
     'AddIsDeletedToCart' => $baseDir . '/database/migrations/2015_10_27_161844_add_isDeleted_toCart.php',
     'AddOrganizationIdToRemainingTables' => $baseDir . '/database/migrations/2015_12_02_154020_add_organization_id_to_remaining_tables.php',
     'AddOrganizationIdToTables' => $baseDir . '/database/migrations/2015_11_30_161859_add_organization_id_to_tables.php',
@@ -565,4 +566,6 @@ return array(
     'UpdateReceivingManifistTable' => $baseDir . '/database/migrations/2015_11_12_181958_update_receiving_manifist_table.php',
     'UpdateRewashTable' => $baseDir . '/database/migrations/2015_12_08_152153_update_rewash_table.php',
     'UpdateUsersTable' => $baseDir . '/database/migrations/2015_11_24_173416_update_users_table.php',
+    'UpdateUsersTableSecond' => $baseDir . '/database/migrations/2015_12_11_124555_update_users_table_second.php',
+    'UpdateUsersTableThird' => $baseDir . '/database/migrations/2015_12_11_131407_update_users_table_third.php',
 );

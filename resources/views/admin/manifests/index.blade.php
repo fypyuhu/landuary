@@ -170,6 +170,7 @@
                         {name: 'name'},
                         {name: 'department'},
                         {name: 'date', type: 'date'},
+                        {name: 'invoiced'},
                         {name: 'actions'}
 
                     ],
@@ -224,7 +225,8 @@
                         {text: 'Customer Name', width: '20%', dataField: 'name', filtertype: 'checkedlist'},
                         {text: 'Department', width: '20%', dataField: 'department'},
                         {text: 'Shipping Date', width: '20%', dataField: 'date', filtertype: 'date', cellsformat: 'dd MMMM, yyyy'},
-                        {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
+                        {text: 'Invoiced', width: '10%', dataField: 'invoiced'},
+                        {text: 'Actions', width: '10%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
         url = "{{url('admin/manifests/show-receiving')}}";
