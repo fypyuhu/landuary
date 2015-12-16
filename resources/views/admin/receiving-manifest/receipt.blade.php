@@ -11,9 +11,10 @@
         </div>
         <div class="row">
             <div class="pull-left">
-                <h4>Phoenix Scale Company</h4>
-                <p style="font-size:17px;">6802N. 47th Ave.<br />Ste 9<br />Glendale AZ 85301</p>
-                <p>Phone: (800) 326-9860</p>
+                <h4>{{$organization->legal_name}}</h4>
+                <p>{{$organization->street_address}}<br />{{$organization->city}} {{$organization->state}} {{$organization->zipcode}}<br />{{$organization->country}}<br />
+                Phone: {{$organization->phone}}
+                </p>
             </div>
             <div class="pull-right">
                 <p>Manifest #: {{$manifest->id}}<br />
@@ -21,20 +22,20 @@
                 From: {{$manifest->date_from}} - {{$manifest->date_to}}</p>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">
             <div class="pull-left">
-                <p><strong>Deliver To:</strong><br />
-                Customer Number: {{$customer->customer_number}}<br />
-                @if ($department != '')
+                <h4>Received From:</h4>
+                {{$customer->name}}<br />
+                {{$customer->shipping_address}}<br />
+                {{$customer->shipping_city}} {{$customer->shipping_state}} {{$customer->shipping_zipcode}}<br /><br />
+                <strong>Customer Number:</strong> {{$customer->customer_number}}
+            </div>
+            @if ($department != '')
+            <div class="pull-right">
                 <strong>Department:</strong><br />
                 {{$department}}<br /> 
-                @endif
             </div>
-            <div class="pull-right">
-                <p>{{$customer->name}}<br />
-                {{$customer->shipping_address}}<br />
-                {{$customer->shipping_city}} {{$customer->shipping_state}} {{$customer->shipping_zipcode}}</p>
-            </div>
+            @endif
         </div>
         <div class="row">
             <table>
@@ -49,11 +50,11 @@
                 @foreach($items as $key=>$item)
                 <tr>
                     <td>{{$key+1}}</td>
-                    <td>{{$item->incoming_cart_id}}</td>
+                    <td>{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->cart_id}}</td>
                     <td>{{$item->item_number}}</td>
                     <td>{{$item->description}}</td>
                     <td class="align-right">{{$item->quantity}}</td>
-                    <td class="align-right">{{$item->weight * $item->quantity}}</td>
+                    <td class="align-right">{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->net_weight}}</td>
                 </tr>
                 @endforeach
             </table>
@@ -61,9 +62,8 @@
         <hr />
         <div class="row">
             <div class="pull-right">
-                <p>Total Gross Weight: {{$items[0]->gross_weight}}<br />
-                Total Net Weight: {{$items[0]->net_weight}}<br />
-                Total Shippment Weight: {{$items[0]->gross_weight}}</p>
+                <p>Total Gross Weight: {{$total_gross_weight}}<br />
+                Total Net Weight: {{$total_net_weight}}</p>
             </div>
         </div>
     </div>

@@ -24,24 +24,20 @@
         <div class="row">
             <div class="pull-left">
                 <h4>{{$user->legal_name}}</h4>
-                <p style="font-size:17px;">{{$user->street_address}}<br />{{$user->city}} {{$user->state}}</p>
-                <p>Phone: {{$user->phone}}</p>
+                <p>{{$user->street_address}}<br />{{$user->city}} {{$user->state}} {{$user->zipcode}}<br />Phone: {{$user->phone}}</p>
             </div>
             <div class="pull-right">
                 <p>Manifest #: {{$manifest->id}}<br />
                 Ship Date: {{$manifest->shipping_date}}</p>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">
             <div class="pull-left">
-                <p>Deliver To: {{$customer->name}}<br />
-                Customer Number: {{$customer->customer_number}}<br />
-                Department: NA</p>
-            </div>
-            <div class="pull-right">
-                <p>{{$customer->shipping_address}} {{$customer->shipping_city}}<br />
-                {{$customer->shipping_state}} {{$customer->shipping_zipcode}}<br />
-                {{$customer->shipping_country}}</p>
+                <h4>Deliver To:</h4>
+                {{$customer->name}}<br />
+                {{$customer->shipping_address}}<br />
+                {{$customer->shipping_city}} {{$customer->shipping_state}} {{$customer->shipping_zipcode}}<br /><br />
+                <strong>Customer Number:</strong> {{$customer->customer_number}}
             </div>
         </div>
         <div class="row">

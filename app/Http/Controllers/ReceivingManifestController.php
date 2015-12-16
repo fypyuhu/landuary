@@ -40,6 +40,7 @@ class ReceivingManifestController extends Controller
 	public function getReceipt($id, Request $request) {
 		$manifest = ReceivingManifest::find($id);
 		$customer = Customer::find($manifest->customer_id)->first();
+		$organization = UserProfile::where('user_id', '=', Auth::user()->id)->first();
 		
 		/*$departments = '';
 		$department_from = '';
@@ -74,11 +75,17 @@ class ReceivingManifestController extends Controller
 		$items = ReceivingManifest::getCustomerIncomingCartItems($manifest->customer_id, $manifest->date_from, $manifest->date_to, $manifest->department_id);
 		
 		$carts = array();
-		foreach($items as $item) {
-			$carts[] = $item->incoming_cart_id;
+		$gross_weight = array();
+		$net_weight = array();
+		
+		foreach($items as $key => $item) {
+			if(!in_array($item->incoming_cart_id, $carts)) {
+				$carts[] = $item->incoming_cart_id;
+				$gross_weight[] = $item->gross_weight;
+				$net_weight[] = $item->net_weight;
+			}
 		}
 		
-		$carts = array_unique($carts);
 		foreach($carts as $cart) {
 			$cart = IncomingCart::find($cart);
 			$cart->invoiced = 1;
@@ -90,7 +97,7 @@ class ReceivingManifestController extends Controller
 			
 		if(!$items)
 			return back()->with('status', 'No Carts/Items found within the selected date.');
-		return view('admin.receiving-manifest.receipt', [ 'user'=>$user, 'manifest' => $manifest, 'customer' => $customer, 'department' => $department, 'items' => $items ]);
+		return view('admin.receiving-manifest.receipt', [ 'user'=>$user, 'manifest' => $manifest, 'customer' => $customer, 'department' => $department, 'items' => $items, 'total_gross_weight' => array_sum($gross_weight), 'total_net_weight' => array_sum($net_weight), 'organization' => $organization ]);
 	}
 	
 	public function getAjaxForm(Request $request) {
