@@ -72,7 +72,7 @@ class ReceivingManifestController extends Controller
 			$department_to = '';
 		}*/
 		$user=UserProfile::where('user_id','=',Auth::user()->id)->first();
-		$items = ReceivingManifest::getCustomerIncomingCartItems($manifest->customer_id, $manifest->date_from, $manifest->date_to, $manifest->department_id);
+		$items = ReceivingManifest::getCustomerIncomingCartItems($manifest->customer_id, $manifest->date_from, $manifest->date_to, $manifest->department_id, false);
 		
 		$carts = array();
 		$gross_weight = array();

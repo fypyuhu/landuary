@@ -19,10 +19,11 @@ class ReceivingManifest extends Model {
                 })->get();
     }
 
-    public static function getCustomerIncomingCartItems($customer_id, $date1, $date2, $department_id) {
+    public static function getCustomerIncomingCartItems($customer_id, $date1, $date2, $department_id, $view = true) {
 		$department_where = $department_id > 0 ? "and cd.id = $department_id" : '';
 		//DD("SELECT * FROM incoming_carts ic LEFT JOIN customers_departments cd ON ic.department_id = cd.id, customers_incoming_carts_items cici, items i WHERE ic.organization_id='".Auth::user()->organization_id."' AND ic.id = cici.incoming_cart_id and cici.item_id = i.id and ic.status='In' and (ic.receiving_date between '$date1' and '$date2') and ic.customer_id = $customer_id and ic.invoiced <= 0 $department_where ORDER BY ic.id");
-        return DB::select(DB::raw("SELECT * FROM incoming_carts ic LEFT JOIN customers_departments cd ON ic.department_id = cd.id, customers_incoming_carts_items cici, items i WHERE ic.organization_id='".Auth::user()->organization_id."' AND ic.id = cici.incoming_cart_id and cici.item_id = i.id and ic.status='In' and (ic.receiving_date between '$date1' and '$date2') and ic.customer_id = $customer_id and ic.invoiced <= 0 $department_where ORDER BY ic.id"));
+		$where_invoiced = $view ? '' : "and ic.invoiced <= 0";
+        return DB::select(DB::raw("SELECT * FROM incoming_carts ic LEFT JOIN customers_departments cd ON ic.department_id = cd.id, customers_incoming_carts_items cici, items i WHERE ic.organization_id='".Auth::user()->organization_id."' AND ic.id = cici.incoming_cart_id and cici.item_id = i.id and ic.status='In' and (ic.receiving_date between '$date1' and '$date2') and ic.customer_id = $customer_id $where_invoiced $department_where ORDER BY ic.id"));
     }
 
     public function customer() {
