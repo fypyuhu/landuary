@@ -34,6 +34,12 @@ class ManifestController extends Controller {
                 $row["department"] ='';
             }
             $row["date"] = $manifest->shipping_date;
+            if($manifest->invoiced==1){
+                $row["invoiced"] = "Yes";  
+            }
+            else{
+                $row["invoiced"] = "No";  
+            }
             $row["actions"] = '<a href="/admin/shiping-manifest/recipt/' . $manifest->id . '">View</a>';
             if($manifest->shipping_date==date("Y-m-d",time())){
                 $row["actions"].= ' | <a href="/admin/shiping-manifest/edit/' . $manifest->id . '">Edit</a>';
