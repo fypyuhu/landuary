@@ -25,7 +25,7 @@
             </div>
             <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">
                 <div class="pull-left">
-                    <h4>Received From:</h4>
+                    <h4>Ship To:</h4>
                     {{$customer->name}}<br />
                     {{$customer->shipping_address}}<br />
                     {{$customer->shipping_city}} {{$customer->shipping_state}} {{$customer->shipping_zipcode}}<br /><br />

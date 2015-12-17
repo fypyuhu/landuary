@@ -142,10 +142,10 @@ class InvoiceController extends Controller
    }
    public function getShow(Request $request){
        if($request->department!=""){
-            $invoices=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d", strtotime($request->to_date))])->whereRaw("FIND_IN_SET('".$request->department."',department_ids)")->skip($request->recordstartindex)->take($request->pagesize)->get();
+            $invoices=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->whereRaw("FIND_IN_SET('".$request->department."',department_ids)")->skip($request->recordstartindex)->take($request->pagesize)->get();
        }
        else{
-           $invoices=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d", strtotime($request->to_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+           $invoices=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
        }
        $data = array();
        foreach($invoices as $invoice){
@@ -182,7 +182,7 @@ class InvoiceController extends Controller
        return view('admin.invoices.income', ["customers" => $customers]);
    }
    public function getShowList(Request $request) {
-        $invoices = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d", strtotime($request->to_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+        $invoices = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
         $data = array();
         foreach ($invoices as $invoice) {
             $row = array();

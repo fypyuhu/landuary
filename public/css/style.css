@@ -157,6 +157,10 @@ legend {
 	margin-bottom: 0;
 }
 
+.input-field textarea {
+	padding: 4px 15px;
+}
+
 .row .col {
 	padding-bottom: 0;
 }
