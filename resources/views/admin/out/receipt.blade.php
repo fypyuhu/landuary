@@ -31,7 +31,7 @@
                     {{$customer->shipping_city}} {{$customer->shipping_state}} {{$customer->shipping_zipcode}}<br /><br />
                     <strong>Customer Number:</strong> {{$customer->customer_number}}
                 </div>
-                @if ($department->department_name != '')
+                @if ($department != null)
                 <div class="pull-right">
                     <strong>Department:</strong><br />
                     {{$department->department_name}}<br /> 
@@ -73,7 +73,7 @@
                 </table>
             </div>
         	<hr />
-            <div class="row">
+            <div class="row" style="background:#fdfdfd; padding:15px;">
                 <div class="pull-right align-right" style="font-weight: bold;">
                     Gross Weight: {{$cart->gross_weight}}<br />
                     Tare Weight: {{$initial_values->standard_tare_weight}}<br />
