@@ -251,7 +251,7 @@ class UserProfileController extends Controller {
     }
 
     public function getItemsShow() {
-        $items = DB::select(DB::raw('SELECT * FROM `items` where id not in (select child_id from item_relation) AND items.organization_id="' . Auth::user()->organization_id . '" AND items.status=1'));
+        $items = DB::select(DB::raw('SELECT * FROM `items` where id not in (select child_id from item_relation) AND items.organization_id="' . Auth::user()->organization_id . '" AND items.deleted_at IS NULL'));
         $data = array();
         foreach ($items as $item) {
             $row = array();
@@ -262,7 +262,7 @@ class UserProfileController extends Controller {
             $row["transaction_type"] = $item->transaction_type;
             $row["actions"] = '<a href="/admin/items/edit/' . $item->id . '" data-mode="ajax" >Edit</a> / <a href="/admin/items/delete/' . $item->id . '" data-mode="ajax">Delete</a>';
             $data[] = $row;
-            $sql = "select items.* from items join item_relation on items.id=item_relation.child_id where items.organization_id='" . Auth::user()->organization_id . "' AND items.status=1 AND item_relation.parent_id='" . $item->id . "'";
+            $sql = "select items.* from items join item_relation on items.id=item_relation.child_id where items.organization_id='" . Auth::user()->organization_id . "' AND items.deleted_at IS NULL AND item_relation.parent_id='" . $item->id . "'";
             $sub_items = DB::select(DB::raw($sql));
             foreach ($sub_items as $sub_item) {
                 $sub_row = array();
