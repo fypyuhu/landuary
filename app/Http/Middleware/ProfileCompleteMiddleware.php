@@ -45,8 +45,12 @@ class ProfileCompleteMiddleware
             }
         } else if ($this->auth->check()) {
 			$visited = Auth::user()->visited;
-			if(intval($visited) <= 0)
-				return redirect(URL::previous());
+			if(intval($visited) <= 0) {
+				if(null !== URL::previous())
+					return redirect(URL::previous());
+				else 
+					return redirect('admin/profile');
+			}
 		}
 
         return $next($request);
