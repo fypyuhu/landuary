@@ -34,7 +34,6 @@ class InController extends Controller {
         $items = DB::table('items')
                 ->join('customers_items', 'items.id', '=', 'customers_items.item_id')
                 ->select('items.*')
-                //->where('items.deleted_at', 'is', NULL)
                 ->where('items.transaction_type', '!=', 'Out')
                 ->where('customers_items.customer_id', '=', $request->customer_id)
                 ->where('items.organization_id', '=', Auth::user()->organization_id)
@@ -136,10 +135,9 @@ class InController extends Controller {
         $items = DB::table('items')
 					->join('customers_items', 'items.id', '=', 'customers_items.item_id')
 					->select('items.*')
-					//->where('items.deleted_at', 'is', NULL)
-                                        ->where('items.transaction_type', '!=', 'Out')
+					->where('items.transaction_type', '!=', 'Out')
 					->where('customers_items.customer_id', '=', $ogc->customer_id)
-                                        ->where('items.organization_id', '=',Auth::user()->organization_id)
+                    ->where('items.organization_id', '=',Auth::user()->organization_id)
 					->get();
         return view('admin.in.edit',['ogc'=>$ogc,'selected_items'=>$selected_items,
                 'customer'=>$customer,

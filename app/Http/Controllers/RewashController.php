@@ -29,8 +29,7 @@ class RewashController extends Controller
 		$items = DB::table('items')
 					->join('customers_items', 'items.id', '=', 'customers_items.item_id')
 					->select('items.*')
-					//->where('items.deleted_at', 'is', NULL)
-                                        ->where('items.transaction_type', '!=', 'Out')
+                    ->where('items.transaction_type', '!=', 'Out')
 					->where('customers_items.customer_id', '=', $request->customer_id)
 					->get();
 		$customers = Customer::all();
