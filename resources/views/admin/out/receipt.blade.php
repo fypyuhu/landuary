@@ -54,7 +54,7 @@
                 </h3>
             </div>-->
             
-        	<div class="row"><h4 class="align-center">Cart #: {{$ogc->cart_id}}</h4></div>
+        	<div class="row"><h4 class="align-center">Cart #: {{$cart->cart_id}}</h4></div>
             <div class="row">
                 <table>
                     <tr>
