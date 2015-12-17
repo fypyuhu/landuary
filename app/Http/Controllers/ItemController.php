@@ -54,10 +54,14 @@ class ItemController extends Controller {
 
     public function getShow(Request $request) {
 		$search_filter = '';
-		if ($request->has('search_string'))
-			$search_filter = " and (name like '%$request->search_string%' or item_number = '$request->search_string')";
-
-        $items = DB::select(DB::raw("SELECT * FROM `items` where id not in (select child_id from item_relation) AND items.status=1 $search_filter and items.organization_id = ".Auth::user()->organization_id));
+		$not_in = 'id not in (select child_id from item_relation) AND ';
+		
+		if ($request->has('search_string')) {
+			$search_filter = " (name like '%$request->search_string%' or item_number = '$request->search_string') AND ";
+			$not_in = '';
+		}
+			
+        $items = DB::select(DB::raw("SELECT * FROM `items` WHERE $not_in $search_filter items.deleted_at IS NULL AND items.organization_id = ".Auth::user()->organization_id));
         $data = array();
         foreach ($items as $item) {
             $row = array();
@@ -67,19 +71,22 @@ class ItemController extends Controller {
             $row["weight"] = $item->weight;
             $row["transaction_type"] = $item->transaction_type;
             $row["actions"] = '<a href="/admin/items/edit/' . $item->id . '" data-mode="ajax" >Edit</a> / <a href="/admin/items/delete/' . $item->id . '" data-mode="ajax">Delete</a>';
-            $data[] = $row;
-            $sql = "select items.* from items join item_relation on items.id=item_relation.child_id where items.status=1 AND item_relation.parent_id='" . $item->id . "' and items.organization_id = ".Auth::user()->organization_id;
-            $sub_items = DB::select(DB::raw($sql));
-            foreach ($sub_items as $sub_item) {
-                $sub_row = array();
-                $sub_row["name"] = $sub_item->name;
-                $sub_row["item_number"] = $sub_item->item_number;
-                $sub_row["status"] = '0';
-                $sub_row["weight"] = $sub_item->weight;
-                $sub_row["transaction_type"] = $sub_item->transaction_type;
-                $sub_row["actions"] = '<a href="/admin/items/edit/' . $sub_item->id . '" data-mode="ajax" >Edit</a> / <a href="/admin/items/delete/' . $sub_item->id . '" data-mode="ajax">Delete</a>';
-                $data[] = $sub_row;
-            }
+			
+			$data[] = $row;
+			if (!$request->has('search_string')) {
+				$sql = "select items.* from items join item_relation on items.id=item_relation.child_id WHERE items.deleted_at IS NULL AND item_relation.parent_id='" . $item->id . "' and items.organization_id = ".Auth::user()->organization_id;
+				$sub_items = DB::select(DB::raw($sql));
+				foreach ($sub_items as $sub_item) {
+					$sub_row = array();
+					$sub_row["name"] = $sub_item->name;
+					$sub_row["item_number"] = $sub_item->item_number;
+					$sub_row["status"] = '0';
+					$sub_row["weight"] = $sub_item->weight;
+					$sub_row["transaction_type"] = $sub_item->transaction_type;
+					$sub_row["actions"] = '<a href="/admin/items/edit/' . $sub_item->id . '" data-mode="ajax" >Edit</a> / <a href="/admin/items/delete/' . $sub_item->id . '" data-mode="ajax">Delete</a>';
+					$data[] = $sub_row;
+				}
+			}
         }
         echo "{\"data\":" . json_encode($data) . "}";
     }
@@ -129,12 +136,15 @@ class ItemController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function postDelete($id, Request $request) {
-        $item = Item::find($id);
+        /*$item = Item::find($id);
         $item->status = 0;
         $item->save();
         if ($request->has('parent')) {
             DB::statement("Update `items` Set items.status='0' where id in (select child_id from item_relation where parent_id='" . $id . "')");
-        }
+        }*/
+		
+		$item = Item::find($id);
+        $item->delete();
     }
 
 }
