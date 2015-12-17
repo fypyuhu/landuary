@@ -23,7 +23,7 @@ class CustomerController extends Controller {
     }
 
     public function getCreate() {
-        $parent_items = DB::select(DB::raw('SELECT items.id,items.name FROM `items` where id not in (select child_id from item_relation) AND items.status=1 AND items.organization_id= '.Auth::user()->organization_id));
+        $parent_items = DB::select(DB::raw('SELECT items.id,items.name FROM `items` where id not in (select child_id from item_relation) AND items.deleted_at IS NULL AND items.organization_id= '.Auth::user()->organization_id));
         $taxes = Tax::organization()->status()->get();
         return view('admin.customers.add', ["parent_items" => $parent_items, "taxes" => $taxes]);
     }
@@ -117,7 +117,7 @@ class CustomerController extends Controller {
     }
 
     public function getGetChildren($id) {
-        $sql = "select items.id,items.name from items join item_relation on items.id=item_relation.child_id where items.status=1 AND item_relation.parent_id='" . $id . "' AND items.organization_id= ".Auth::user()->organization_id;
+        $sql = "select items.id,items.name from items join item_relation on items.id=item_relation.child_id where items.deleted_at IS NULL AND item_relation.parent_id='" . $id . "' AND items.organization_id= ".Auth::user()->organization_id;
         $items = DB::select(DB::raw($sql));
         $return = "<select name='child_item' id='child_item'><option value='-1'>Select Item</option>";
         foreach ($items as $item) {
@@ -136,7 +136,7 @@ class CustomerController extends Controller {
 
     public function getItemDetail($id) {
         $item = Item::find($id);
-        $sql = "select items.* from items join item_relation on items.id=item_relation.parent_id where items.status=1 AND item_relation.child_id='" . $id . "' AND items.organization_id= ".Auth::user()->organization_id;
+        $sql = "select items.* from items join item_relation on items.id=item_relation.parent_id where items.deleted_at IS NULL AND item_relation.child_id='" . $id . "' AND items.organization_id= ".Auth::user()->organization_id;
         $parent_item = DB::select(DB::raw($sql));
         if ($parent_item) {
             $parent_item = $parent_item[0];
@@ -171,7 +171,7 @@ class CustomerController extends Controller {
         $customer_billing = CustomerBilling::organization()->where('customer_id','=',$id)->first();
         $customer_tax = CustomerTax::organization()->where('customer_id','=',$id)->first();
         $customer_items = CustomerItem::organization()->where('customer_id','=',$id)->get();
-        $parent_items = DB::select(DB::raw('SELECT items.id,items.name FROM `items` where id not in (select child_id from item_relation) AND items.status=1  AND items.organization_id= '.Auth::user()->organization_id));
+        $parent_items = DB::select(DB::raw('SELECT items.id,items.name FROM `items` where id not in (select child_id from item_relation) AND items.deleted_at IS NULL AND items.organization_id= '.Auth::user()->organization_id));
         $taxes = Tax::organization()->status()->get();
         return view('admin.customers.edit', 
                 [

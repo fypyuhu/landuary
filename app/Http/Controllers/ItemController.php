@@ -23,12 +23,19 @@ class ItemController extends Controller {
     }
 
     public function getCreate() {
-
-        return view('admin.addItem', ['items' => Item::organization()->get()]);
+		$items = Item::whereNotIn('id', function ($query) {
+					   $query->select('child_id')
+					       ->from('item_relation');
+					   })->organization()->get();
+        return view('admin.addItem', ['items' => $items]);
     }
 	
 	public function getAddItemForm() {
-		return view('admin.addItemForm', ['items' => Item::organization()->get()]);
+		$items = Item::whereNotIn('id', function ($query) {
+					   $query->select('child_id')
+					       ->from('item_relation');
+					   })->organization()->get();
+		return view('admin.addItemForm', ['items' => $items]);
 	}
 
     /**
@@ -98,7 +105,11 @@ class ItemController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function getEdit($id) {
-        return view('admin.editItem', ['current' => Item::find($id), 'items' => Item::organization()->get(), 'parent' => ItemRelation::where('child_id', '=', $id)->first()]);
+		$items = Item::whereNotIn('id', function ($query) {
+					   $query->select('child_id')
+					       ->from('item_relation');
+					   })->organization()->get();
+        return view('admin.editItem', ['current' => Item::find($id), 'items' => $items, 'parent' => ItemRelation::where('child_id', '=', $id)->first()]);
     }
 
     public function postEdit($id, EditItemRequest $request) {
