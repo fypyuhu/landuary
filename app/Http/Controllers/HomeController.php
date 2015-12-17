@@ -44,7 +44,35 @@ class HomeController extends Controller
 
     public function getWeightData(Request $request)
     {
-        echo"";
+        $result=Invoice::getReconciliationData($request);
+        $json = '{
+		  "cols": [
+				{"id":"","label":"Rewash Date","pattern":"","type":"string"},
+				{"id":"","label":"In","pattern":"","type":"number"},
+                                {"id":"","label":"Out","pattern":"","type":"number"},
+			  ],
+		  "rows": [';
+		  		foreach($result as $key=>$value) {
+                                    $date=Date("d-m-Y",time());
+                                    $in_weight=0;
+                                    $out_weight=0;
+                                    if($value->in_date){
+                                        $date=$value->in_date;
+                                    }else{
+                                        $date=$value->out_date;
+                                    }
+                                    if($value->in_weight){
+                                        $in_weight=$value->in_weight;
+                                    }
+                                    if($value->out_weight){
+                                        $out_weight=$value->out_weight;
+                                    }
+					$json .= '{"c":[{"v":"'.date('d-m-Y',strtotime($date)).'","f":null},{"v":'.$in_weight.',"f":null},{"v":'.$out_weight.',"f":null}]}';
+					if(count($result) > 1 && $key < count($result)-1)
+						$json .= ',';
+				}
+			  $json .= ']}';
+        return $json;
     }
 
     /**

@@ -56,12 +56,12 @@
                         </div>
                         <div class="row">
                             <div class="row">
-                                <button type="button" class="waves-effect btn" onclick="">Filter</button>
+                                <button type="button" class="waves-effect btn" onclick="drawChart()">Filter</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row box">
+                <div class="row">
                     <div id="chart"></div>
                 </div>
             </fieldset>
@@ -81,57 +81,34 @@
         $('#from_date').jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
         $(".dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $(".datepicker").jqxDateTimeInput({width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
-
-        $("body").on("change", "#customer", function (e) {
-            if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val() != "-1") {
-                $('.loading').css('display', 'block');
-                $.ajax({
-                    url: "/admin/customers/get-departments/" + $("#customer").val(),
-                    type: 'GET',
-                    success: function (html)
-                    {
-                        $('#s_department').jqxComboBox('destroy');
-                        $('#department_div').html(html);
-                        $("#s_department").jqxComboBox({width: '100%', autoDropDownHeight: true, checkboxes: true});
-                        $('.loading').css('display', 'none');
-                    }
-                });
-            }
-        });
-        
-
     });
     google.load("visualization", "1.1", {packages: ["bar"]});
     google.setOnLoadCallback(drawChart);
     function drawChart() {
+        $('.loading').show();
         post_data=new Object();
         post_data.customer=$("#customer").val();
         post_data.start_date=$("#from_date").val();
-        post_data.send_date=$("#to_date").val();
+        post_data.end_date=$("#to_date").val();
         var jsonData = $.ajax({
           url: "/admin/weight-data",
           dataType: "json",
-          data:post_data;
+          data:post_data,
           async: false
           }).responseText;
-        var data = google.visualization.arrayToDataTable([
-            ['Date', 'In', 'Out'],
-            ['2014', 1000, 400],
-            ['2015', 1170, 460],
-            ['2016', 660, 1120],
-            ['2017', 1030, 540]
-        ]);
+        var data = new google.visualization.DataTable(jsonData);
 
         var options = {
             chart: {
-                title: 'Weight Reconciliation',
-                subtitle: 'In, Out: '+$('#from_date').val()+' to '+$('#to_date').val(),
+                title:$("#customer").val()+ ' Weight Reconciliation',
+                subtitle: 'From '+$('#from_date').val()+' to '+$('#to_date').val(),
             }
         };
 
         var chart = new google.charts.Bar($('#chart')[0]);
 
         chart.draw(data, options);
+        $('.loading').hide();
     }
 </script>
 @endsection

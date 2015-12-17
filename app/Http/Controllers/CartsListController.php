@@ -49,8 +49,10 @@ class CartsListController extends Controller {
             $row["gross_weight"] = $cart->gross_weight;
             $row["is_exchange_cart"] = $cart->is_exchange_cart > 0 ? 'Yes' : 'No';
             $row["invoiced"] = $cart->invoiced > 0 ? 'Yes' : 'No';
-            $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" >View</a> 
-                               | <a href="/admin/out/edit/' . $cart->id . '" >Edit</a>';
+            $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" >View</a>';
+            if($cart->invoiced<1){
+                $row["actions"].='| <a href="/admin/out/edit/' . $cart->id . '" >Edit</a>';
+            }
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";
