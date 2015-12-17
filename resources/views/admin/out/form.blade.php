@@ -5,6 +5,7 @@
                 <legend>Customer Information:</legend>
                 <div class="row">
                     <div class="col m6 s12">
+                    	<label>Customer</label>
                         <select name="customer" id="customer">
                             @foreach ($customers as $customer)
                             <option value="{{$customer->id}}" {{$customer->id == $current_customer->id ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
@@ -12,6 +13,7 @@
                         </select>
                     </div>
                     <div class="col m6 s12">
+                    	<label>Department</label>
                         <select name="department" id="department">
                             <option value="-1">Dept</option>
                             @foreach ($depts as $dept)
@@ -23,8 +25,9 @@
 
                 <div class="row">
                     <div class="col s12">
+                    	<label>Customer Number</label>
                         <div class="input-field">
-                            <input id="name" type="text" name="name" value="{{$current_customer->customer_number}}" placeholder="Name" readonly="readonly">
+                            <input id="name" type="text" name="name" value="{{$current_customer->customer_number}}" readonly="readonly">
                         </div>
                     </div>
                 </div>
@@ -34,6 +37,7 @@
                 <legend>Cart Information</legend>
                 <div class="row">
                     <div class="col m4 s12">
+                    	<label>Cart Number</label>
                         <div class="input-field" id="exchange-cart-div" style="display: none;">
                             <select name="cart_number_dropdown" id="cart_number_dropdown">
                                 <option value="">Cart Number</option>
@@ -43,15 +47,17 @@
                             </select>
                         </div>
                         <div class="input-field" id="non-tracked-cart-div" >
-                            <input id="cart_number_textfield" readonly="readonly" type="text" value="{{$initial_values->cart_number}}" name="cart_number_textfield" placeholder="Cart Number">
+                            <input id="cart_number_textfield" readonly="readonly" type="text" value="{{$initial_values->cart_number}}" name="cart_number_textfield">
                         </div>
                     </div>
                     <div class="col m4 s12">
+                    	<label>Tare Weight</label>
                         <div class="input-field">
-                            <input id="tare_weight" type="text" value="{{$initial_values->standard_tare_weight}}" name="tare_weight" placeholder="Tare Weight">
+                            <input id="tare_weight" type="text" value="{{$initial_values->standard_tare_weight}}" name="tare_weight" readonly="readonly">
                         </div>
                     </div>
                     <div class="col m4 s12">
+                    	<label>Shipping Date</label>
                         <div id="ship_date"  name="ship_date"  class="calendar"></div>
                     </div>
                 </div>
@@ -84,6 +90,7 @@
                     {{csrf_field()}}
                     <div class="row no-topmargin">
                         <div class="col m8 s12">
+                        	<label>Item Name</label>
                             <select name="item_id" id="item_id">
                                 @foreach ($items as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
@@ -91,8 +98,9 @@
                             </select>
                         </div>
                         <div class="col m4 s12">
+                        	<label>Quantity</label>
                             <div class="input-field">
-                                <input id="quantity" type="text" name="quantity" placeholder="Quantity">
+                                <input id="quantity" type="text" name="quantity">
                             </div>
                             <label for="quantity" class="error"></label>
                         </div>
@@ -123,14 +131,14 @@
                     <div class="col m4 s12">
                         <label>Gross Weight</label>
                         <div class="input-field">
-                            <input id="gross_weight" type="number" step="0.01" onblur="calculateNetWeight()" value="" name="gross_weight" placeholder="Gross Weight">
+                            <input id="gross_weight" type="number" step="0.01" onblur="calculateNetWeight()" value="" name="gross_weight">
                         </div>
                         <label for="gross_weight" class="error" id="error-gross_weight"></label>
                     </div>
                     <div class="col m4 s12">
                         <label>Net Weight</label>
                         <div class="input-field">
-                            <input id="net_weight" type="text" name="net_weight" readonly="readonly" placeholder="Net Weight">
+                            <input id="net_weight" type="text" name="net_weight" readonly="readonly">
                         </div>
                     </div>
                 </div>

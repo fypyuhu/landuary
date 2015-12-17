@@ -12,6 +12,7 @@ use App\Models\Customer;
 use App\Models\CustomerDepartment;
 use App\Models\InitialValue;
 use App\Models\Organization;
+use App\Models\UserProfile;
 use DB;
 use Auth;
 
@@ -101,12 +102,14 @@ class OutController extends Controller {
         $user = Auth::user();
         $shipping_date = date('Y-m-d', strtotime($cart->shipping_date));
         $organization = Organization::find($user->organization_id);
+		$profile = UserProfile::where('user_id', '=', $user->id)->first();
         return view('admin.out.receipt', ['cart' => $cart,
             'department' => $department,
             'customer' => $customer,
             'items' => $items,
             'organization' => $organization,
-            'shipping_date' => $shipping_date]);
+            'shipping_date' => $shipping_date,
+			'profile' => $profile]);
     }
 
     public function getEdit($id) {

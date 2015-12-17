@@ -13,6 +13,7 @@ use App\Models\Customer;
 use App\Models\CustomerDepartment;
 use App\Models\InitialValue;
 use App\Models\Organization;
+use App\Models\UserProfile;
 use DB;
 use Auth;
 
@@ -119,11 +120,13 @@ class InController extends Controller {
         $items = CustomerIncomingCartItem::getItems($id);
         $user = Auth::user();
         $organization = Organization::find($user->organization_id);
+		$profile = UserProfile::where('user_id', '=', $user->id)->first();
         return view('admin.in.receipt', ['cart' => $cart,
             'department' => $department,
             'customer' => $customer,
             'items' => $items,
-            'organization' => $organization]);
+            'organization' => $organization,
+			'profile' => $profile]);
     }
 
     public function getEdit($id){
