@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div id="chart"></div>
+                    <div id="chart" style=" height: 500px;"></div>
                 </div>
             </fieldset>
         </div>
@@ -100,7 +100,7 @@
 
         var options = {
             chart: {
-                title:$("#customer").val()+ ' Weight Reconciliation',
+                title:$("#customer").jqxComboBox('getSelectedItem').label+ ' Weight Reconciliation',
                 subtitle: 'From '+$('#from_date').val()+' to '+$('#to_date').val(),
             }
         };
