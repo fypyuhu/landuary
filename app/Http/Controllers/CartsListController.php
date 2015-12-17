@@ -19,7 +19,7 @@ class CartsListController extends Controller {
         $data = array();
         foreach ($incoming_carts as $cart) {
             $row = array();
-            $row["incoming_cart_id"] = $cart->incoming_cart_id;
+            $row["incoming_cart_id"] = $cart->cart_id;
             $row["receiving_date"] = $cart->receiving_date;
             $row["customer_name"] = $cart->name;
             $row["customer_number"] = $cart->customer_number;

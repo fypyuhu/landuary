@@ -23,7 +23,22 @@
                 <h3 class="align-center">{{$organization->name}}</h3>
                 <h4 class="align-center">Date: {{$cart->receiving_date}}</h4>
             </div>
-            <div class="row">
+            <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">
+                <div class="pull-left">
+                    <h4>Received From:</h4>
+                    {{$customer->name}}<br />
+                    {{$customer->shipping_address}}<br />
+                    {{$customer->shipping_city}} {{$customer->shipping_state}} {{$customer->shipping_zipcode}}<br /><br />
+                    <strong>Customer Number:</strong> {{$customer->customer_number}}
+                </div>
+                @if ($department->department_name != '')
+                <div class="pull-right">
+                    <strong>Department:</strong><br />
+                    {{$department->department_name}}<br /> 
+                </div>
+                @endif
+            </div>
+            <!--<div class="row">
                 <div class="pull-left">
                     <h4>Customer #: {{$customer->customer_number}}</h4>
                 </div>
@@ -37,7 +52,7 @@
                    {{$customer->shipping_city}} {{$customer->shipping_state}}<br />
                     
                 </h3>
-            </div>
+            </div>-->
             <div class="row"><h4 class="align-center">Cart #: {{$cart->cart_id}}</h4></div>
             <div class="row">
                 <table>
