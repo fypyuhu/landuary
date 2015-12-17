@@ -36,6 +36,7 @@
                         <legend>Customer Information:</legend>
                         <div class="row">
                             <div class="col m6 s12">
+                            	<label>Customer</label>
                                 <select name="customer" id="customer">
                                     <option value="">Customer</option>
                                     @foreach ($customers as $customer)
@@ -44,6 +45,7 @@
                                 </select>
                             </div>
                             <div class="col m6 s12">
+                            	<label>Department</label>
                                 <select name="department" id="department">
                                     <option value="">Dept</option>
                                     @foreach ($depts as $dept)
@@ -55,8 +57,9 @@
 
                         <div class="row">
                             <div class="col s12">
+                            	<label>Customer Number</label>
                                 <div class="input-field">
-                                    <input id="customer_name" type="text" name="customer_name" placeholder="Number" readonly="readonly">
+                                    <input id="customer_name" type="text" name="customer_name" readonly="readonly">
                                 </div>
                             </div>
                         </div>
@@ -66,6 +69,7 @@
                         <legend>Cart Information</legend>
                         <div class="row">
                             <div class="col m4 s12">
+                            	<label>Cart Number</label>
                                 <div class="input-field" id="exchange-cart-div" style="display:none;">
                                     <select name="cart_number_dropdown" id="cart_number_dropdown">
                                         <option value="">Cart Number</option>
@@ -74,17 +78,19 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="input-field" id="non-tracked-cart-div" s>
-                                    <input id="cart_number_textfield" type="text" value="{{$initial_values->cart_number}}" name="cart_number_textfield" placeholder="Cart Number">
+                                <div class="input-field" id="non-tracked-cart-div">
+                                    <input id="cart_number_textfield" type="text" value="{{$initial_values->cart_number}}" readonly="readonly" name="cart_number_textfield">
                                 </div>
                             </div>
                             <div class="col m4 s12">
+                            	<label>Tare Weight</label>
                                 <div class="input-field">
-                                    <input id="tare_weight" type="text" value="{{$initial_values->standard_tare_weight}}" name="tare_weight" placeholder="Tare Weight" readonly="readonly">
+                                    <input id="tare_weight" type="text" value="{{$initial_values->standard_tare_weight}}" name="tare_weight" readonly="readonly">
                                 </div>
                             </div>
                             <div class="col m4 s12">
-                                <div id="ship_date"  name="ship_date"  class="calendar"></div>
+                            	<label>Shipping Date</label>
+                                <div id="ship_date" name="ship_date" class="calendar"></div>
                             </div>
                         </div>
                         <div class="row">
@@ -95,7 +101,7 @@
                             <div class="col m4 s12 pull-right" style="display:none;">
                                 <label for="status">Status</label>
                                 <div class="input-field">
-                                    <input type="text" name="status" id="status" placeholder="Cart Status" readonly="readonly" value="Ready">
+                                    <input type="text" name="status" id="status" readonly="readonly" value="Ready">
                                 </div>
                             </div>
                         </div>
@@ -116,12 +122,14 @@
                             {{csrf_field()}}
                             <div class="row no-topmargin">
                                 <div class="col m8 s12">
+                                	<label>Item Name</label>
                                     <select name="item_id" id="item_id">
-                                        <option value="">Item Number</option>
+                                        <option value="">Item Name</option>
                                     </select>
                                     <label for="item_id" class="error"></label>
                                 </div>
                                 <div class="col m4 s12">
+                                	<label>Quantity</label>
                                     <div class="input-field">
                                         <input id="quantity" type="text" name="quantity" placeholder="Quantity">
                                     </div>
@@ -148,13 +156,13 @@
                             <div class="col m4 s12">
                                 <label>Gross Weight</label>
                                 <div class="input-field">
-                                    <input id="gross_weight" value="" type="text" onblur="calculateNetWeight()" name="gross_weight" placeholder="Gross Weight">
+                                    <input id="gross_weight" value="" type="text" onblur="calculateNetWeight()" name="gross_weight">
                                 </div>
                             </div>
                             <div class="col m4 s12">
                                 <label>Net Weight</label>
                                 <div class="input-field">
-                                    <input id="net_weight" type="text" name="net_weight" placeholder="Net Weight">
+                                    <input id="net_weight" type="text" name="net_weight">
                                 </div>
                             </div>
                         </div>

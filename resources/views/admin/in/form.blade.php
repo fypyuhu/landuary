@@ -90,7 +90,7 @@
                     {{csrf_field()}}
                     <div class="row no-topmargin">
                         <div class="col m8 s12">
-                            <label>Item Number</label>
+                            <label>Item Name</label>
                             <select name="item_id" id="item_id">
                                 @foreach ($items as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
@@ -138,7 +138,7 @@
                     <div class="col m4 s12">
                         <label>Gross Weight</label>
                         <div class="input-field">
-                            <input id="gross_weight" type="number" step="0.01" onblur="calculateNetWeight()" value="" name="gross_weight" placeholder="Gross Weight">
+                            <input id="gross_weight" type="number" step="0.01" onblur="calculateNetWeight()" value="" name="gross_weight">
                         </div>
                         <label for="gross_weight" class="error" id="error-gross_weight"></label>
                     </div>

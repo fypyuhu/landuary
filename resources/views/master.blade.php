@@ -60,11 +60,12 @@
     <div class="nav-wrapper">
       
       <div class="toggle-btn"></div>
-      <div id="reports-nav">
+      <div id="reports-nav" class="dropdown-content">
           <div class="row">
               <div class="col s12">
                 <h4>Reports</h4>
-                <ul class="row" style="width:100%;">
+                <ul class="col s6">
+                	<li style="display:none;"></li>
                     <li><a href="{{url('admin/manifests')}}">Manifests</a>
                     </li>
                     <li><a href="{{url('admin/carts-list')}}">Carts</a>
@@ -72,6 +73,11 @@
                     <li><a href="{{url('admin/invoices')}}">Invoices</a>
                     </li>
                     <li><a href="{{url('admin/taxes/list')}}">Tax</a>
+                    </li>
+                </ul>
+                <ul class="col s6">
+                	<li style="display:none;"></li>
+                    <li><a href="{{url('admin/rewash/list')}}">Rewash</a>
                     </li>
                     <li><a href="{{url('admin/invoices/income')}}">Income</a>
                     </li>
@@ -98,7 +104,7 @@
           	<!--<h1>Lorem ipsum</h1>-->
               <div class="row">
                   <div class="col s12">
-                  	<h4>Premier Laundry and Linen Supply LLC</h4>
+                  	<h4>{{$user_profile->legal_name}}</h4>
                   	<ul class="col s6">
                     	<li><a href="javascript:void(0);">Settings</a>
                         </li>

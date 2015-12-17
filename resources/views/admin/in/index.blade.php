@@ -100,7 +100,7 @@
                                 <label for="is_exchange_cart">Exchange Cart</label>
                             </div>
                             <div class="col m4 s12 pull-right" style="display: none;">
-                                <label>Status</label>
+                                <label for="status">Status</label>
                                 <div class="input-field">
                                     <input type="hidden" name="status" id="status" readonly="readonly" value="In">
                                 </div>
@@ -122,9 +122,9 @@
                         <div class="row box">
                             <div class="row no-topmargin">
                                 <div class="col m8 s12">
-                                    <label>Item Number</label>
+                                    <label>Item Name</label>
                                     <select name="item_id" id="item_id">
-                                        <option value="">Item Number</option>
+                                        <option value="">Item Name</option>
                                     </select>
                                     <label for="item_id" class="error"></label>
                                 </div>

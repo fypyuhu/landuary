@@ -73,8 +73,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#edit_transaction_type").jqxComboBox({autoComplete: true, width: '200', autoDropDownHeight: true});
-        $("#edit_parent_item").jqxComboBox({autoComplete: true, width: '400', autoDropDownHeight: true});
+        $("#edit_transaction_type").jqxComboBox({autoComplete: true, width: '200', autoDropDownHeight: false});
+        $("#edit_parent_item").jqxComboBox({autoComplete: true, width: '400', autoDropDownHeight: false});
         $("#pageForm").validate({
             rules: {
                 item_name: "required",

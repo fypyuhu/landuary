@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Request;
 use Auth;
+use URL;
 
 class ProfileCompleteMiddleware
 {
@@ -44,13 +45,12 @@ class ProfileCompleteMiddleware
             }
         } else if ($this->auth->check()) {
 			$visited = Auth::user()->visited;
-			$url = Request::url();
 			if(intval($visited) <= 0) {
-				if(strpos($url, 'step') !== false) {
-					$current_step = intval(substr($url, -1));
-					return redirect('/admin/profile/step'.$current_step);
-				} else if(strpos($url, 'step') === false && strpos($url, 'profile') !== false)
-					return redirect('/admin/profile');
+				/*if(null !== URL::previous())
+					return redirect(URL::previous());
+				else 
+					return redirect('admin/profile');*/
+				return redirect('admin/profile');
 			}
 		}
 
