@@ -72,8 +72,8 @@
                 </table>
             </div>
             <hr />
-            <div class="row" style="background:#fdfdfd; padding:15px;">
-                <div class="pull-right align-right" style="font-weight: bold;">
+            <div class="row">
+                <div class="pull-right align-right" style="font-weight: bold; background:#fdfdfd; padding:15px;">
                     Gross Weight: {{$cart->gross_weight}}<br />
                     Tare Weight: {{$initial_values->standard_tare_weight}}<br />
                     Net Weight: {{$cart->net_weight}}
