@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddBillingByGenericInCustomerItems' => $baseDir . '/database/migrations/2015_12_18_155027_add_billing_by_generic_in_customer_items.php',
     'AddCustomePriceToCustomerItems' => $baseDir . '/database/migrations/2015_11_16_165342_add_custome_price_to_customer_items.php',
     'AddInvoicedToOutGoingCartTable' => $baseDir . '/database/migrations/2015_12_16_155821_add_invoiced_to_out_going_cart_table.php',
     'AddIsDeletedToCart' => $baseDir . '/database/migrations/2015_10_27_161844_add_isDeleted_toCart.php',

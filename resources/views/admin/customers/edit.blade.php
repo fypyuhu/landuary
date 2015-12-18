@@ -291,7 +291,7 @@
             </section>
             <section class="row tab-content no-topmargin items-tab">
                 <div class="row price-div-set" id="div-price-by-weight" 
-                     @if($customer_items[0]->billing_by=="1")
+                     @if($customer_items[0]->billing_by_generic=="1")
                         style="margin-bottom:15px;display:none; "
                      @else
                      style="margin-bottom:15px; "
@@ -355,17 +355,17 @@
                 <div class="row">
                     <strong style="margin-right: 15px;">Select billing by:</strong>
                     <input type="radio" value="0"  name="price_option" id="price_by_weight" 
-                    @if($customer_items[0]->billing_by=="0")
+                    @if($customer_items[0]->billing_by_generic=="0")
                        checked="checked" 
                     @endif       
                      class="pricing-rd-btn" /><label for="price_by_weight">Weight</label>
                     <input type="radio" value="1" name="price_option" id="price_by_item" 
-                     @if($customer_items[0]->billing_by=="1")
+                     @if($customer_items[0]->billing_by_generic=="1")
                        checked="checked" 
                     @endif             
                      class="pricing-rd-btn" /><label for="price_by_item">Item</label>
                     <input type="radio" value="2" name="price_option" id="price_by_both" 
-                     @if($customer_items[0]->billing_by=="2")
+                     @if($customer_items[0]->billing_by_generic=="2")
                        checked="checked" 
                      @endif            
                      class="pricing-rd-btn" /><label for="price_by_both">Both</label>
@@ -660,7 +660,11 @@
     }
     $(document).ready(function () {
         @foreach($customer_items as $customer_item)
+            @if($customer_item->billing_by==1)
             getEditItemDetail({{$customer_item->item_id}},{{$customer_item->price}});
+            @else
+            getEditItemDetail({{$customer_item->item_id}},'');
+            @endif
         @endforeach
         $('#add_billing_address').click(function (e) {
             var corr_div_id = $(this).data('corr-div-id');
