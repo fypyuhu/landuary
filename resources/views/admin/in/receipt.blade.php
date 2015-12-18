@@ -21,7 +21,7 @@
         <div class="p-wrapper" style="width:384px;" id="printable">
         	<div class="row">
                 <h3 class="align-center">{{$organization->name}}</h3>
-                <h4 class="align-center">Date: {{$cart->receiving_date}}</h4>
+                <h4 class="align-center">Date: @date($cart->receiving_date)</h4>
             </div>
             <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">
                 <div class="pull-left">

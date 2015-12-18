@@ -34,7 +34,7 @@
         @endif
         <div class="pull-left">
             <h4>{{$user->first_name}}</h4>
-            {{$date}}
+            @date($date)
         </div>
     </div>
 

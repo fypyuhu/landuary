@@ -28,7 +28,7 @@
             </div>
             <div class="pull-right">
                 <p>Manifest #: {{$manifest->id}}<br />
-                Ship Date: {{$manifest->shipping_date}}</p>
+                Ship Date: @date($manifest->shipping_date)</p>
             </div>
         </div>
         <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">

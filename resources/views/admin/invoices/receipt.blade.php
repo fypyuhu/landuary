@@ -15,8 +15,8 @@
             </div>
         <div class="pull-right">
             <p>Invoice #: {{$invoice->invoice_number}}<br />
-            Creation Date: {{$invoice->created_at}}<br />
-            Due Date: {{$invoice->due_date}}</p>
+            Creation Date: @date($invoice->created_at)<br />
+            Due Date: @date($invoice->due_date)</p>
         </div>
     </div>
     <div class="row">
@@ -33,7 +33,7 @@
     <div class="row">
     	<table>
         	<tr>
-        	<th>Ship Date #</th>
+        		<th>Ship Date</th>
                 <th>Manifest #</th>
                 <th>Cart #</th>
                 <th>Item #</th>
@@ -41,8 +41,8 @@
                 <th>Quantity</th>
             </tr
             @foreach($invoice_data as $data)
-            <tr>
-                <td>{{$data->shipping_date}}</td>
+            ><tr>
+                <td>@date($data->shipping_date)</td>
                 <td>{{$data->id}}</td>
                 <td>{{$data->cart_id}}</td>
                 <td>{{$data->item_id}}</td>
