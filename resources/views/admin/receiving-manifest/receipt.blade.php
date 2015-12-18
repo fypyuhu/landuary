@@ -60,7 +60,7 @@
         </div>
         <hr />
         <div class="row">
-            <div class="pull-right">
+            <div class="pull-right align-right" style="font-weight: bold; background:#fdfdfd; padding:15px;">
                 <p>Total Gross Weight: {{$total_gross_weight}}<br />
                 Total Net Weight: {{$total_net_weight}}</p>
             </div>
