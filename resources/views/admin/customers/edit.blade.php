@@ -55,7 +55,7 @@
                 </select>
 
             </div>  
-
+             <label class="error" id="department_error" style="display:none;"></label>
         </div>
         <div class="row">
             <ul class="ctabs1">
@@ -300,7 +300,7 @@
                     <div class="col m3 s12" style="margin-top:0;">
                         <label>Price Per lb/kg:</label>
                         <div class="input-field">
-                            <input id="price-by-weight" value="{{$customer_items[0]->custom_price}}" type="text" name="price_by_weight">
+                            <input id="price-by-weight" value="{{$customer_items[0]->custom_price}}" onblur="return weightCheck()" type="text" name="price_by_weight">
                         </div>
                         <label for="price-by-weight" class="error" id="error-price-by-weight"></label>
                     </div>
@@ -348,6 +348,7 @@
                         <div class="col s12 center-align"><strong>No products have been assigned to this customer yet.</strong></div>
                     </div>
                 </div>
+                <label class="error" id="item_count_error" style="display:none;"></label>
             </section>
             <section style="margin-top:15px; display:none;" class="items-tab tab-content">
                 <legend>Pricing</legend>
@@ -385,6 +386,7 @@
 </fieldset>
 
 <script>
+    var item_count_customer=0;
     function addDepartment() {
         if ($('#department').val() != "") {
             $("#department_list").jqxComboBox('addItem', {label: $('#department').val(), checked: true});
@@ -396,6 +398,22 @@
             $('#department').val('');
         }
     }
+      function weightCheck(){
+        if(($("#price_by_weight").is(":checked") || $("#price_by_both").is(":checked")) && (isNaN(parseFloat($("#price-by-weight").val())) ||  $("#price-by-weight").val()=="")){
+            $("#error-price-by-weight").html("Please add a valid amount");
+            return false;
+        }
+        $("#error-price-by-weight").html("");
+        return true;
+    }
+    function departmentCheck(){
+        if($("#use_department").is(":checked") && $("#department_list").jqxComboBox('getCheckedItems').length<1){
+            $("#department_error").html("Please add at least on department");
+            $("#department_error").show();
+            return false;
+        }
+        return true;
+    }
     function taxError()
     {
         if ($("#reseller_number").val() == "" && ($("#exemp_certificate").val() == "")) {
@@ -404,6 +422,16 @@
         }
         else {
             $("#error-examp_tax").html('');
+        }
+    }
+    function checkItemCount(){
+        if(item_count_customer<1){
+            $("#item_count_error").html("Please add at least one item.");
+            $("#item_count_error").show();
+            return false;
+        }
+        else{
+            return true;
         }
     }
     function getEditItemDetail(val,single_temp_price)
@@ -424,6 +452,8 @@
                 context: document.body
             }).done(function (html) {
                 $('#item_record_list').append(html);
+                item_count_customer++;
+                $("#item_count_error").hide();
                 $('#records_list_no_record').hide();
                 if ($("#price_by_weight").is(':checked')) {
                     $('.price-field, #price-heading').css('display', 'none');
@@ -472,6 +502,8 @@
 				}).done(function (html) {
 					$('#item_record_list').append(html);
 					$('#records_list_no_record').hide();
+                                        item_count_customer++;
+                                        $("#item_count_error").hide();
 					if ($("#price_by_weight").is(':checked')) {
 						$('.price-field, #price-heading').css('display', 'none');
 						$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
@@ -595,7 +627,7 @@
                 return;
             }
             else if (activeTab === "items") {
-                if (checkError('Customer Name', 'ship_to_name') && checkError('Customer Number', 'customer_number')) {
+                if (weightCheck() && departmentCheck() && checkItemCount() && checkError('Customer Name', 'ship_to_name') && checkError('Customer Number', 'customer_number')) {
                     function showResponse(responseText, statusText, xhr, $form) {
                         location.reload();
                     }
