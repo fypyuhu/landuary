@@ -20,7 +20,7 @@
             <div class="pull-right">
                 <p>Manifest #: {{$manifest->id}}<br />
                 Receiving Date:<br />
-                From: {{$manifest->date_from}} - {{$manifest->date_to}}</p>
+                From: @date($manifest->date_from) - @date($manifest->date_to)</p>
             </div>
         </div>
         <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">
@@ -60,7 +60,7 @@
         </div>
         <hr />
         <div class="row">
-            <div class="pull-right">
+            <div class="pull-right align-right" style="font-weight: bold; background:#fdfdfd; padding:15px;">
                 <p>Total Gross Weight: {{$total_gross_weight}}<br />
                 Total Net Weight: {{$total_net_weight}}</p>
             </div>

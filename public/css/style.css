@@ -865,3 +865,15 @@ aside.yaybar {
 	list-style: disc;
 	list-style-position: outside;
 }
+
+.layout_table .records_list,
+.layout_table .heading {
+	position: relative;
+}
+
+.layout_table .records_list .col,
+.layout_table .heading .col {
+	min-height: 100% !important;
+    position: relative;
+    overflow-y: hidden;
+}

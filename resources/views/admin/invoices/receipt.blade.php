@@ -15,11 +15,11 @@
             </div>
         <div class="pull-right">
             <p>Invoice #: {{$invoice->invoice_number}}<br />
-            Creation Date: {{$invoice->created_at}}<br />
-            Due Date: {{$invoice->due_date}}</p>
+            Creation Date: @date($invoice->created_at)<br />
+            Due Date: @date($invoice->due_date)</p>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">
     	<div class="pull-left">
             <p>Ship To: {{$customer->name}}<br />
                 Customer Number: {{$customer->customer_number}}</p>
@@ -33,16 +33,16 @@
     <div class="row">
     	<table>
         	<tr>
-        	<th>Ship Date #</th>
+        		<th>Ship Date</th>
                 <th>Manifest #</th>
                 <th>Cart #</th>
                 <th>Item #</th>
                 <th>Item Name</th>
                 <th>Quantity</th>
-            </tr
+            </tr>
             @foreach($invoice_data as $data)
             <tr>
-                <td>{{$data->shipping_date}}</td>
+                <td>@date($data->shipping_date)</td>
                 <td>{{$data->id}}</td>
                 <td>{{$data->cart_id}}</td>
                 <td>{{$data->item_id}}</td>
@@ -54,7 +54,7 @@
     </div>
     <hr />
     <div class="row">
-        <div class="pull-right">
+        <div class="pull-right align-right" style="font-weight: bold; background:#fdfdfd; padding:15px;">
             <p>Sub Total: ${{$invoice->price}}<br />
             {{$tax->tax_name}} Tax: ${{$invoice->total_tax}}<br />
             @foreach($tax_componenets as $component)
