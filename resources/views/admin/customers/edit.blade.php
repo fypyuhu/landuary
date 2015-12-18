@@ -1,4 +1,4 @@
-<fieldset id="add-record" style="width: 705px;">
+<fieldset id="add-record" style="width: 850px;">
     <legend>Add Customer:</legend>
     <form action="/admin/customers/edit/{{$customer->id}}" Method="POST" id="customer-form">
         {{csrf_field()}}
@@ -337,7 +337,7 @@
                     <div class="row heading">
                         <div class="col s2">Item</div>
                         <div class="col s2">Sub Item</div>
-                        <div class="col s2 right-align">Weight</div>
+                        <div class="col s2 right-align" id="t-weight">Weight</div>
                         <div class="col s3" id="t-type">Transaction Type</div>
                         <div class="col s2 center-align">Taxable</div>
                         <div class="col s2" style="display:none;" id="price-heading">Price</div>
@@ -427,17 +427,20 @@
                 $('#records_list_no_record').hide();
                 if ($("#price_by_weight").is(':checked')) {
                     $('.price-field, #price-heading').css('display', 'none');
-                    $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
+                    $('#t-type, .t-type-rec').removeClass('s2').addClass('s3');
+					$('#t-weight, .t-weight-rec').removeClass('s1').addClass('s2');
                     $('#div-price-by-weight').fadeIn('slow');
                 }
                 else if ($("#price_by_item").is(':checked')) {
                     $('#div-price-by-weight').css('display', 'none');
-                    $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+                    $('#t-type, .t-type-rec').removeClass('s3').addClass('s2');
+					$('#t-weight, .t-weight-rec').removeClass('s2').addClass('s1');
                     $('.price-field, #price-heading').fadeIn('slow');
                 }
                 else if ($("#price_by_both").is(':checked')) {
                     $('#div-price-by-weight').fadeIn('slow');
-                    $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+                    $('#t-type, .t-type-rec').removeClass('s3').addClass('s2');
+					$('#t-weight, .t-weight-rec').removeClass('s2').addClass('s1');
                     $('.price-field, #price-heading').fadeIn('slow');
                 }
                 $("#"+val+"_price_field").val(single_temp_price);
@@ -474,17 +477,20 @@
 					$('#records_list_no_record').hide();
 					if ($("#price_by_weight").is(':checked')) {
 						$('.price-field, #price-heading').css('display', 'none');
-						$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
+						$('#t-type, .t-type-rec').removeClass('s2').addClass('s3');
+						$('#t-weight, .t-weight-rec').removeClass('s1').addClass('s2');
 						$('#div-price-by-weight').fadeIn('slow');
 					}
 					else if ($("#price_by_item").is(':checked')) {
 						$('#div-price-by-weight').css('display', 'none');
-						$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+						$('#t-type, .t-type-rec').removeClass('s3').addClass('s2');
+						$('#t-weight, .t-weight-rec').removeClass('s2').addClass('s1');
 						$('.price-field, #price-heading').fadeIn('slow');
 					}
 					else if ($("#price_by_both").is(':checked')) {
 						$('#div-price-by-weight').fadeIn('slow');
-						$('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+						$('#t-type, .t-type-rec').removeClass('s3').addClass('s2');
+						$('#t-weight, .t-weight-rec').removeClass('s2').addClass('s1');
 						$('.price-field, #price-heading').fadeIn('slow');
 					}
 				});
@@ -708,19 +714,22 @@
         });
         $('#price_by_weight').click(function (e) {
             $('.price-field, #price-heading').css('display', 'none');
-            $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s2').addClass('s3');
+			$('#t-type, .t-type-rec').removeClass('s2').addClass('s3');
+			$('#t-weight, .t-weight-rec').removeClass('s1').addClass('s2');
             $('#div-price-by-weight').fadeIn('slow');
         });
 
         $('#price_by_item').click(function (e) {
             $('#div-price-by-weight').css('display', 'none');
-            $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+            $('#t-type, .t-type-rec').removeClass('s3').addClass('s2');
+			$('#t-weight, .t-weight-rec').removeClass('s2').addClass('s1');
             $('.price-field, #price-heading').fadeIn('slow');
         });
 
         $('#price_by_both').click(function (e) {
             $('#div-price-by-weight').fadeIn('slow');
-            $('#t-type, #t-category, #t-category-rec, #t-type-rec').removeClass('s3').addClass('s2');
+            $('#t-type, .t-type-rec').removeClass('s3').addClass('s2');
+			$('#t-weight, .t-weight-rec').removeClass('s2').addClass('s1');
             $('.price-field, #price-heading').fadeIn('slow');
         });
     });

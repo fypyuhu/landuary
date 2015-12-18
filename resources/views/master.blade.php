@@ -342,6 +342,12 @@
 				if(height > 0)
 					$(this).css('height', (height+1) + 'px');
 			});
+			
+			/*$( ".layout_table .heading" ).each(function( index ) {
+				var height2 = $( this ).height();
+				if(height2 > 0)
+					$(this).css('height', (height2+1) + 'px');
+			});*/
 		});
 		
 	});
