@@ -58,8 +58,9 @@ class OutController extends Controller {
     public function getWeights(Request $request) {
         $item = Item::organization()->where('id', '=', $request->item_id)->get();
         $gross_weight = $request->gross_weight + ($item[0]->weight * $request->num_items);
-        $net_weight = $request->net_weight + ($item[0]->weight * $request->num_items);
-        return view('admin.out.weight', ['gross_weight' => $gross_weight, 'net_weight' => $net_weight]);
+        return $gross_weight;
+        // = $request->net_weight + ($item[0]->weight * $request->num_items);
+        //return view('admin.out.weight', ['gross_weight' => $gross_weight, 'net_weight' => $net_weight]);
     }
 
     public function postCreate(Request $request) {
