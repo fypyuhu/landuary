@@ -87,11 +87,11 @@
                                     <input type="checkbox" name="use_departments" id="use_departments">
                                     <label for="use_departments"></label>
                                 </div>
-                                <div class="col s1">Cart Number</div>
+                                <div class="col s2">Cart Number</div>
                                 <div class="col s2">Department</div>
-                                <div class="col s1">No. of Items</div>
+                                <div class="col s1">Items</div>
                                 <div class="col s2 center-align">Date Created</div>
-                                <div class="col s3 right-align">Net Weight lb/kg</div>
+                                <div class="col s2 right-align">Net Weight lb/kg</div>
                                 <div class="col s2 center-align">Actions</div>
                             </div>
                             <div class="row records_list">
