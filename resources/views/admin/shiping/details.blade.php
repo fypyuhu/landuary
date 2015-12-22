@@ -1,6 +1,6 @@
 <form action="/admin/shiping-manifest/create" Method="POST" id="pageForm">
     {{csrf_field()}}
-    <div class="col s12 m5">
+    <div class="col s12 m4">
         <fieldset>
             <legend>Shipping Manifest:</legend>
             <div class="row">
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <div class="col s12 m7">
+    <div class="col s12 m8">
         <fieldset>
             <legend>Select Cart(s):</legend>
             <div class="row box">
