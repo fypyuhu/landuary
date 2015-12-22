@@ -82,7 +82,7 @@
                             <label for="carts[{{$cart->id}}]"></label>
                         </div>
                         <div class="col s2">{{$cart->cart_id}}</div>
-                        <div class="col s2">{{$current_department->department_name != '' ? $current_department->department_name : 'NA'}}</div>
+                        <div class="col s2">{{$current_department && $current_department->department_name != '' ? $current_department->department_name : 'NA'}}</div>
                         <div class="col s2">{{date('d-m-Y',strtotime($cart->shipping_date))}}</div>
                         <div class="col s3 right-align">{{$cart->net_weight}}</div>
                         <div class="col s2 center-align"><a href="/admin/out/receipt/{{$cart->id}}"   class="edit-button">View</a> | <a href="/admin/out/edit/{{$cart->id}}"  class="edit-button">Edit</a></div>

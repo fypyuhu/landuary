@@ -28,7 +28,10 @@ class ShipmentController extends Controller
         $active_customer=Customer::find($id);
         $customers=Customer::organization()->get();
         $departments=CustomerDepartment::where('customer_id','=',$id)->get();
-		$current_department=CustomerDepartment::where('customer_id','=',$id)->where('id','=',$department_id)->first();
+		$current_department = '';
+		if($department_id > 0)
+			$current_department=CustomerDepartment::where('customer_id','=',$id)->where('id','=',$department_id)->first();
+			
         if($department_id==-1){
             $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->get();
         }
