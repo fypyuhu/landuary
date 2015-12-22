@@ -60,7 +60,8 @@
         <div class="nav-wrapper" align="center">
     
           <!-- Logo -->
-          <a href="/admin" class="brand-logo" style="position:relative;">
+          <!--<a href="/admin" class="brand-logo" style="position:relative;">-->
+          <a href="javascript:void(0);" class="brand-logo" style="position:relative;">
             <img src="{{URL::asset('images/logo.png')}}" alt="Con">
           </a>
           <!-- /Logo -->
