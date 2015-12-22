@@ -426,6 +426,7 @@
     }
     function checkItemCount(){
         if(item_count_customer<1){
+			$('.loading').hide();
             $("#item_count_error").html("Please add at least one item.");
             $("#item_count_error").show();
             return false;
