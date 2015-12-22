@@ -178,6 +178,8 @@
 
 @section('js')
 <script>
+    var my_groos_weight=0;
+    var my_net_weight=0;
     $(document).ready(function () {
         $("#customer, #cart_number_dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
@@ -269,9 +271,9 @@
                     }
                 });
 
-                var gross_weight_field_value = $('#gross_weight').val();
-                var net_weight_field_value = $('#net_weight').val();
-                var num_items = $('.item-cart').length;
+                var gross_weight_field_value = my_groos_weight;
+                var net_weight_field_value = my_net_weight;
+                var num_items = $('#quantity').val();
                 var url = "{{url('admin/out/weights')}}";
                 $.ajax({
                     url: url,
@@ -279,6 +281,7 @@
                     data: {num_items: num_items, item_id: item_id, gross_weight: gross_weight_field_value, net_weight: net_weight_field_value},
                     success: function (response)
                     {
+                        my_groos_weight+=parseFloat(response);
                         //$('#weights-div').html(response);
                         $('.loading').hide();
                     }
@@ -327,7 +330,15 @@
     function calculateNetWeight(){
         gross=parseFloat($('#gross_weight').val());
         tare=parseFloat($('#tare_weight').val());
-         $("#net_weight").val(gross-tare);
+        var net_weight=gross-tare;
+        var daviation= my_groos_weight*0.1;
+        if(net_weight>my_groos_weight+daviation){
+            alert("Your net weight is 10% higher than the item weights saved in the system");
+        }
+        else if(net_weight<my_groos_weight-daviation){
+            alert("Your net weight is 10% less than the item weights saved in the system");
+        }
+         $("#net_weight").val(net_weight);
         if(gross<tare){
             $("#gross_weight").parent().siblings(".error").html("Gross weight can't be less than tear weight");
             $("#gross_weight").parent().siblings(".error").show();

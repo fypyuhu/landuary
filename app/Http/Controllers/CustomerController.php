@@ -83,6 +83,7 @@ class CustomerController extends Controller {
                 $customer_item->customer_id = $customer->id;
                 $customer_item->item_id = $customer_item_id;
                 $customer_item->custom_price =$request->price_by_weight;
+                $customer_item->billing_by_generic =$request->price_option;
                 if ($request->has('chkbx_taxable_item')) {
                     $taxable = $request->chkbx_taxable_item;
                     if (isset($taxable[$customer_item_id])) {
@@ -241,6 +242,7 @@ class CustomerController extends Controller {
                 $customer_item->customer_id = $customer->id;
                 $customer_item->item_id = $customer_item_id;
                 $customer_item->custom_price =$request->price_by_weight;
+                $customer_item->billing_by_generic =$request->price_option;
                 if ($request->has('chkbx_taxable_item')) {
                     $taxable = $request->chkbx_taxable_item;
                     if (isset($taxable[$customer_item_id])) {
