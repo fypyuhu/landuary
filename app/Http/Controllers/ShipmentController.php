@@ -28,9 +28,6 @@ class ShipmentController extends Controller
         $active_customer=Customer::find($id);
         $customers=Customer::organization()->get();
         $departments=CustomerDepartment::where('customer_id','=',$id)->get();
-		$current_department = '';
-		if($department_id > 0)
-			$current_department=CustomerDepartment::where('customer_id','=',$id)->where('id','=',$department_id)->first();
 			
         if($department_id==-1){
             $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->get();
@@ -38,7 +35,8 @@ class ShipmentController extends Controller
         else{
             $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->where('department_id','=',$department_id)->get();    
         }
-        return view('admin.shiping.details',["carts"=>$carts,"customers"=>$customers,"active_customer"=>$active_customer,"departments"=>$departments,"department_id"=>$department_id,"current_department" => $current_department]);
+		
+        return view('admin.shiping.details',["carts"=>$carts,"customers"=>$customers,"active_customer"=>$active_customer,"departments"=>$departments,"department_id"=>$department_id]);
     }
     public function postCreate(Request $request)
     {
