@@ -20,7 +20,7 @@
     <div class="row">
         <div class="p-wrapper" style="width:384px;" id="printable">
         	<div class="row">
-                <h3 class="align-center">@date($organization->name)</h3>
+                <h3 class="align-center">{{$organization->name}}</h3>
                 <h4 class="align-center">Date: @date($shipping_date)</h4>
             </div>
             <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">

@@ -65,24 +65,27 @@
               <div class="col s12">
                 <h4>Reports</h4>
                 <ul class="col s6">
-                	<li style="display:none;"></li>
+                	<li><a href="javascript:void(0);">General</a>
+                    </li>
                     <li><a href="{{url('admin/manifests')}}">Manifests</a>
                     </li>
                     <li><a href="{{url('admin/carts-list')}}">Carts</a>
+                    </li>
+                    <li><a href="{{url('admin/rewash/list')}}">Rewash</a>
+                    </li>
+                    <li><a href="{{url('admin/reconciliation')}}">Reconciliation</a>
+                    </li>
+                </ul>
+                <ul class="col s6">
+                	<li><a href="javascript:void(0);">Accounting</a>
                     </li>
                     <li><a href="{{url('admin/invoices')}}">Invoices</a>
                     </li>
                     <li><a href="{{url('admin/taxes/list')}}">Tax</a>
                     </li>
-                </ul>
-                <ul class="col s6">
-                	<li style="display:none;"></li>
-                    <li><a href="{{url('admin/rewash/list')}}">Rewash</a>
-                    </li>
                     <li><a href="{{url('admin/invoices/income')}}">Income</a>
                     </li>
-                    <li><a href="{{url('admin/reconciliation')}}">Reconciliation</a>
-                    </li>
+                    
                 </ul>
               </div>
           </div>
@@ -204,9 +207,9 @@
             </ul>
           </li>
           
-          <li>
+          <!--<li>
             <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-today">Today</a>
-          </li>
+          </li>-->
           
         </ul>
 
@@ -318,10 +321,12 @@
 		
 		$( ".toggle-btn" ).click(function() {
 		    $('#reports-nav').slideToggle( "slow" );
+			$('#user-dropdown').slideUp( "slow" );
 		});
 		
 		$( ".dropdown-button" ).click(function() {
 		    $('#user-dropdown').slideToggle( "slow" );
+			$('#reports-nav').slideUp( "slow" );
 		});
 		
 		$('.content-wrap').click(function(e){
