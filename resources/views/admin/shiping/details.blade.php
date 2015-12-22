@@ -69,6 +69,7 @@
                             <label for="all_carts"></label>
                         </div>
                         <div class="col s2">Cart Number</div>
+                        <div class="col s2">Department</div>
                         <div class="col s2 center-align">Date Created</div>
                         <div class="col s3 right-align">Net Weight lb/kg</div>
                         <div class="col s2 center-align">Actions</div>
@@ -81,6 +82,7 @@
                             <label for="carts[{{$cart->id}}]"></label>
                         </div>
                         <div class="col s2">{{$cart->cart_id}}</div>
+                        <div class="col s2">{{$department ? $department->department_name : 'NA'}}</div>
                         <div class="col s2">{{date('d-m-Y',strtotime($cart->shipping_date))}}</div>
                         <div class="col s3 right-align">{{$cart->net_weight}}</div>
                         <div class="col s2 center-align"><a href="/admin/out/receipt/{{$cart->id}}"   class="edit-button">View</a> | <a href="/admin/out/edit/{{$cart->id}}"  class="edit-button">Edit</a></div>
