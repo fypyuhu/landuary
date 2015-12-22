@@ -1,6 +1,6 @@
 <form action="/admin/shiping-manifest/create" Method="POST" id="pageForm">
     {{csrf_field()}}
-    <div class="col s12 m4">
+    <div class="col s12 m5">
         <fieldset>
             <legend>Shipping Manifest:</legend>
             <div class="row">
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <div class="col s12 m8">
+    <div class="col s12 m7">
         <fieldset>
             <legend>Select Cart(s):</legend>
             <div class="row box">
@@ -69,7 +69,6 @@
                             <label for="all_carts"></label>
                         </div>
                         <div class="col s2">Cart Number</div>
-                        <div class="col s2">Department</div>
                         <div class="col s2 center-align">Date Created</div>
                         <div class="col s3 right-align">Net Weight lb/kg</div>
                         <div class="col s2 center-align">Actions</div>
@@ -82,11 +81,6 @@
                             <label for="carts[{{$cart->id}}]"></label>
                         </div>
                         <div class="col s2">{{$cart->cart_id}}</div>
-                        <div class="col s2">
-                        @foreach($departments as $department)
-                        	{{$department->id==$cart->department_id ? $department->department_name : 'NA'}}</div>
-                        @endforeach
-                        </div>
                         <div class="col s2">{{date('d-m-Y',strtotime($cart->shipping_date))}}</div>
                         <div class="col s3 right-align">{{$cart->net_weight}}</div>
                         <div class="col s2 center-align"><a href="/admin/out/receipt/{{$cart->id}}"   class="edit-button">View</a> | <a href="/admin/out/edit/{{$cart->id}}"  class="edit-button">Edit</a></div>
