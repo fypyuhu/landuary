@@ -87,7 +87,7 @@ class ShipmentController extends Controller
             $carts=OutgoingCart::organization()->where('customer_id','=',$manifest->customer_id)->where('status','=','Ready')->get();
         }
         else{
-            $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->where('department_id','=',$department_id)->get();    
+            $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->where('department_id','=',$manifest->department_id)->get();    
         }
         $selected_carts=OutgoingCart::find(explode(",",$manifest->outgoing_cart_id));
         return view('admin.shiping.edit',['customer'=>$customer,'manifest'=>$manifest,
