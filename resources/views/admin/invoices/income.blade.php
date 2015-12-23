@@ -142,7 +142,7 @@
                     columns: [
                         {text: 'Invoice Number', width: '30%', dataField: 'invoice_number'},
                         {text: 'Customer', width: '40%', dataField: 'customer'},
-                        {text: 'Total Tax', width: '30%', dataField: 'total_price',aggregates: ['sum']}
+                        {text: 'Income', width: '30%', dataField: 'total_price',aggregates: ['sum']}
                     ]
                 });
         
