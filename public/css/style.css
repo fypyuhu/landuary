@@ -877,3 +877,7 @@ aside.yaybar {
     position: relative;
     overflow-y: hidden;
 }
+
+.jqx-action-button {
+	right: 0 !important;
+}
