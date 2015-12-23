@@ -61,9 +61,15 @@
     
           <!-- Logo -->
           <!--<a href="/admin" class="brand-logo" style="position:relative;">-->
+          @if (Auth::check())
           <a href="javascript:void(0);" class="brand-logo" style="position:relative;">
             <img src="{{URL::asset('images/logo.png')}}" alt="Con">
           </a>
+          @else
+          <a href="/" class="brand-logo" style="position:relative;">
+            <img src="{{URL::asset('images/logo.png')}}" alt="Con">
+          </a>
+          @endif
           <!-- /Logo -->
           
         </div>
