@@ -34,7 +34,9 @@ Route::group(['middleware' => 'auth', 'middleware' => 'verify.steps.completed'],
 	Route::controller('admin/profile', 'UserProfileController');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'profile.completed'], function () {
+Route::get('admin', ['middleware' => 'auth', 'middleware' => 'profile.completed']);
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller('items', 'ItemController');
     Route::controller('carts', 'CartController');
     Route::controller('customers', 'CustomerController');
