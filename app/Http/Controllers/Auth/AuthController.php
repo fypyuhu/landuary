@@ -46,7 +46,7 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    /*protected function validator(array $data)
     {
         return Validator::make($data, [
 			'legal_name' => 'required|max:255',
@@ -56,9 +56,7 @@ class AuthController extends Controller
 			'zipcode' => 'required',
 			'country' => 'required',
 			'phone' => 'required',
-			'fax' => '',
 			'email' => 'required|email|max:255|unique:users',
-			'website' => '',
 			'contact_name' => 'required',
 			'contact_designation' => 'required',
 			'contact_email' => 'required|email|max:255',
@@ -66,7 +64,7 @@ class AuthController extends Controller
             //'email' => 'required|email|max:255|unique:users',
             //'password' => 'required|confirmed|min:6',
         ]);
-    }
+    }*/
 	
 	public function postRegister(Register $request) {
 		$org = new Organization;
