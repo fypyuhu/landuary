@@ -3,5 +3,7 @@ $(document).ready(function () {
 		$(this).select();
 	});
 	
-	$('.jqx-action-button').prop('style').removeProperty('left');
+	$('.jqx-action-button').each(function( index ) {
+		$(this).prop('style').removeProperty('left');
+	});
 });
