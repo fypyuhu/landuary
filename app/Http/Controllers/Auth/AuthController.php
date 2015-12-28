@@ -108,7 +108,7 @@ class AuthController extends Controller
 		$headers .= "From: Laundrytek Systems <info@laundrytek.com>" . "\r\n";
 		mail($to,$subject,$message,$headers);
 		
-		$to = 'ubaidkhan.se@gmail.com';
+		$to = 'beyond21st@gmail.com';
 		$subject = "Registration Notification";
 		$message = "Dear Admin,<br /><br />A new user has been registered with LaundryTek with following information:<br /><br />
 		<strong>Legal Name:</strong> ".$request->legal_name."<br />
