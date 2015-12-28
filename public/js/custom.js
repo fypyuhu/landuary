@@ -3,9 +3,9 @@ $(document).ready(function () {
 		$(this).select();
 	});
 	
-	if($('.jqx-action-button').length > 0) {
+	alert($('.jqx-action-button').length);
+	
 		$('.jqx-action-button').each(function( index ) {
 			$(this).prop('style').removeProperty('left');
 		});
-	}
 });
