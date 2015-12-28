@@ -98,6 +98,34 @@ class AuthController extends Controller
 		$up->contact_email = $request->contact_email;
 		$up->save();
 		
+		$to = $request->email;
+		$subject = "Registration Notification";
+		$message = "Dear ".$request->legal_name."<br /><br />Congratulations! You have successfully registered with LaundryTek. A sales representative will shortly be intouch with you to complete your software setup. We look forward to work with you<br /><br />Thanks<br />Team LaundryTek Admin";
+		
+		$headers = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+		mail($to,$subject,$message,$headers);
+		
+		$to = 'ubaidkhan.se@gmail.com';
+		$subject = "Registration Notification";
+		$message = "Dear Admin,<br /><br />A new user has been registered with LaundryTek with following information:<br /><br />
+		<strong>Legal Name:</strong> ".$request->legal_name."
+		<strong>Street Address:</strong> ".$request->street_address."<br />
+		<strong>City:</strong> ".$request->city."<br />
+		<strong>State:</strong> ".$request->state."<br />
+		<strong>Zipcode:</strong> ".$request->zipcode."<br />
+		<strong>Country:</strong> ".$request->country."<br />
+		<strong>Phone:</strong> ".$request->phone."<br />
+		<strong>Fax:</strong> ".$request->fax."<br />
+		<strong>Email:</strong> ".$request->email."<br />
+		<strong>Website:</strong> ".$request->website."<br />
+		<strong>Contact Name:</strong> ".$request->contact_name."<br />
+		<strong>Contact Designation:</strong> ".$request->contact_designation."<br />
+		<strong>Contact Email:</strong> ".$request->contact_email."<br />
+		<br /><br />Thanks<br />Team LaundryTek Admin";
+		
+		mail('ubaidkhan.se@gmail.com',$subject,$message,$headers);
+		
 		return response()->view('registerSuccess', $request->all());
 		//return redirect('/registerSuccess');
 	}
