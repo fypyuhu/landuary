@@ -50,7 +50,7 @@ class ManageStepsForLogin
 			if(strpos($url, 'step') === false && strpos($url, 'initial-values') === false) {
 				$skipped_at = intval($org->profile_skipped_at_step);
 				$current_step = intval(substr($url, -1));
-				if( $skipped_at > 0 && $skipped_at < 5 && $skipped_at > $current_step) {
+				if( $skipped_at > 0 && $skipped_at < 5 ) {
 					return redirect('/admin/profile/step'.$org->profile_skipped_at_step);
 				}
 			}
