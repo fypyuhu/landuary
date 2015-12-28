@@ -125,7 +125,7 @@ class AuthController extends Controller
 		<strong>Contact Email:</strong> ".$request->contact_email."<br />
 		<br /><br />Thanks<br />Team LaundryTek Admin";
 		
-		mail('ubaidkhan.se@gmail.com',$subject,$message,$headers);
+		mail($to,$subject,$message,$headers);
 		
 		return response()->view('registerSuccess', $request->all());
 		//return redirect('/registerSuccess');
