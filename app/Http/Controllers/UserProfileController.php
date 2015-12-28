@@ -66,11 +66,8 @@ class UserProfileController extends Controller {
         $up->contact_name = $request->contact_name;
         $up->contact_designation = $request->contact_designation;
         $up->contact_email = $request->contact_email;
-        /* $up->linen_rental = $request->linen_rental;
-          $up->healthcare = $request->healthcare;
-          $up->hospitality = $request->hospitality;
-          $up->vacational_rentals = $request->vacational_rentals;
-          $up->customer_own_goods = $request->customer_own_goods; */
+		$up->we_serve = implode(', ', $request->we_serve);
+		$up->we_do = implode(', ', $request->we_do);
         $up->save();
         return redirect()->route('admin/profile/view');
     }
@@ -99,11 +96,8 @@ class UserProfileController extends Controller {
         $up->contact_name = $request->contact_name;
         $up->contact_designation = $request->contact_designation;
         $up->contact_email = $request->contact_email;
-        /* $up->linen_rental = $request->linen_rental;
-          $up->healthcare = $request->healthcare;
-          $up->hospitality = $request->hospitality;
-          $up->vacational_rentals = $request->vacational_rentals;
-          $up->customer_own_goods = $request->customer_own_goods; */
+        $up->we_serve = implode(', ', $request->we_serve);
+		$up->we_do = implode(', ', $request->we_do);
         $up->save();
 		
 		if($this->skippedAt() <= 0) {
@@ -146,11 +140,8 @@ class UserProfileController extends Controller {
         $up->contact_name = $request->contact_name;
         $up->contact_designation = $request->contact_designation;
         $up->contact_email = $request->contact_email;
-        /* $up->linen_rental = $request->linen_rental;
-          $up->healthcare = $request->healthcare;
-          $up->hospitality = $request->hospitality;
-          $up->vacational_rentals = $request->vacational_rentals;
-          $up->customer_own_goods = $request->customer_own_goods; */
+        $up->we_serve = implode(', ', $request->we_serve);
+		$up->we_do = implode(', ', $request->we_do);
         $up->save();
         return $this->getAjaxForm($request->user_id);
     }
