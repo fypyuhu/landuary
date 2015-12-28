@@ -100,11 +100,12 @@ class AuthController extends Controller
 		
 		$to = $request->email;
 		$subject = "Registration Notification";
-		$message = "Dear ".$request->legal_name."<br /><br />Congratulations! You have successfully registered with LaundryTek. A sales representative will shortly be intouch with you to complete your software setup. We look forward to work with you<br /><br />Thanks<br />Team LaundryTek Admin";
+		$message = "Dear ".$request->legal_name."<br /><br />Congratulations! You have successfully registered with LaundryTek Systems. A sales representative will shortly be in touch with you to complete your software setup. We look forward to working with you.<br /><br />Thanks,<br />Team LaundryTek Systems Admin";
 		
 		$headers = "MIME-Version: 1.0" . "\r\n";
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-		$headers .= "From: LaundryTek <info@laundrytek.com>" . "\r\n";
+		$headers .= "To: ".$request->legal_name." <".$to.">" . "\r\n";
+		$headers .= "From: Laundrytek Systems <info@laundrytek.com>" . "\r\n";
 		mail($to,$subject,$message,$headers);
 		
 		$to = 'ubaidkhan.se@gmail.com';
@@ -123,8 +124,9 @@ class AuthController extends Controller
 		<strong>Contact Name:</strong> ".$request->contact_name."<br />
 		<strong>Contact Designation:</strong> ".$request->contact_designation."<br />
 		<strong>Contact Email:</strong> ".$request->contact_email."<br />
-		<br /><br />Thanks<br />Team LaundryTek Admin";
+		<br /><br />Thanks,<br />Team LaundryTek Systems Admin";
 		
+		$headers .= "To: Laundrytek Systems <".$to.">" . "\r\n";
 		mail($to,$subject,$message,$headers);
 		
 		return response()->view('registerSuccess', $request->all());
