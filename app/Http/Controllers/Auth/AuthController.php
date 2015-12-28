@@ -104,6 +104,7 @@ class AuthController extends Controller
 		
 		$headers = "MIME-Version: 1.0" . "\r\n";
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+		$headers .= "From: LaundryTek <info@laundrytek.com>" . "\r\n";
 		mail($to,$subject,$message,$headers);
 		
 		$to = 'ubaidkhan.se@gmail.com';
