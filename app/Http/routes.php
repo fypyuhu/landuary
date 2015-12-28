@@ -14,6 +14,8 @@
 Route::get('/', ['middleware' => 'guest', ['except' => 'getLogout'], function () {
 	return view('welcome');
 }]);
+Route::get('setUserPassword', 'SetUserPasswordController@getIndex');
+Route::post('setUserPassword/edit', 'SetUserPasswordController@postEdit');
 Route::get('/logout', function () {
     Auth::logout();
     return view('welcome');
