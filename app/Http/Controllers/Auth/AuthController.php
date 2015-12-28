@@ -111,7 +111,7 @@ class AuthController extends Controller
 		$to = 'ubaidkhan.se@gmail.com';
 		$subject = "Registration Notification";
 		$message = "Dear Admin,<br /><br />A new user has been registered with LaundryTek with following information:<br /><br />
-		<strong>Legal Name:</strong> ".$request->legal_name."
+		<strong>Legal Name:</strong> ".$request->legal_name."<br />
 		<strong>Street Address:</strong> ".$request->street_address."<br />
 		<strong>City:</strong> ".$request->city."<br />
 		<strong>State:</strong> ".$request->state."<br />
