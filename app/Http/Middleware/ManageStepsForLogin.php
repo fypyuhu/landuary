@@ -51,7 +51,7 @@ class ManageStepsForLogin
 				$skipped_at = intval($org->profile_skipped_at_step);
 				$current_step = intval(substr($url, -1));
 				if( $skipped_at > 0 && $skipped_at < 5 && $skipped_at > $current_step) {
-					return redirect('admin/profile/step'.$org->profile_skipped_at_step);
+					return redirect('/admin/profile/step'.$org->profile_skipped_at_step);
 				}
 			}
 		}
