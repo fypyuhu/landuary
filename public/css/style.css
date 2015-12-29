@@ -890,6 +890,7 @@ aside.yaybar {
 .receipt .highlighted {
 	background:#d8dee3; 
 	padding:10px;
+	text-align: center;
 }
 
 .receipt table th {
