@@ -27,7 +27,17 @@
 
     </div>
     <!-- /Breadcrumb -->
-
+	
+    @if (isset($cart_id))
+        <div class="row">
+            <div class="col m5 s12">
+                <div class="alert alert-success">
+                    Outgoing cart has been created successfully.
+                </div>
+            </div>
+        </div>
+    @endif
+    
     <div id="loadAjaxFrom">
         
             <div class="row no-rightmargin">
@@ -40,7 +50,7 @@
                                 <select name="customer" id="customer">
                                     <option value="">Customer</option>
                                     @foreach ($customers as $customer)
-                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                    <option value="{{$customer->id}}" {{isset($current_customer) && $customer->id == $current_customer ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -181,6 +191,11 @@
     var my_groos_weight=0;
     var my_net_weight=0;
     $(document).ready(function () {
+		@if (isset($cart_id))
+			window.open("/admin/in/receipt/{{$cart_id}}", '_blank');
+			//window.location.href("/admin/in/receipt/{{$cart_id}}", '_blank');
+		@endif
+		
         $("#customer, #cart_number_dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});

@@ -91,7 +91,12 @@ class OutController extends Controller {
             $ogc_item->quantity = $request->item_quantity[$key];
             $ogc_item->save();
         }
-        return redirect('/admin/out/receipt/' . $ogc->id);
+        //return redirect('/admin/out/receipt/' . $ogc->id);
+		
+		$carts = Cart::organization()->get();
+        $customers = Customer::organization()->get();
+        $depts = CustomerDepartment::organization()->get();
+        return view('admin.out.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'cart_id' => $ogc->id, 'current_customer' => $request->customer]);
     }
 
     public function getReceipt($id) {

@@ -108,7 +108,7 @@ class InController extends Controller {
 		$carts = Cart::organization()->get();
         $customers = Customer::organization()->get();
         $depts = CustomerDepartment::organization()->get();
-		return view('admin.in.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'cart_id'=>$ogc->id, 'current_customer' => $request->customer]);
+		return view('admin.in.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'cart_id' => $ogc->id, 'current_customer' => $request->customer]);
     }
 
     /**
