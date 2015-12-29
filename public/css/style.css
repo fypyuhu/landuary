@@ -881,3 +881,25 @@ aside.yaybar {
 .jqx-action-button {
 	right: 0 !important;
 }
+
+.receipt #printable {
+	border: 1px solid #cccccc;
+	padding: 5px;
+}
+
+.receipt .highlighted {
+	background:#d8dee3; 
+	padding:15px 25px 25px;
+}
+
+.receipt table th {
+	padding: 5px;
+	border-radius: 0;
+}
+
+.receipt-heading {
+	background:#193048; 
+	color:#ffffff; 
+	padding:5px; 
+	border-radius:0;
+}

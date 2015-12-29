@@ -12,18 +12,18 @@
 </style>
 @endsection
 @section('content')
-<section class="content-wrap">
+<section class="content-wrap" style="background: #ffffff;">
 	<div class="row">
     	<a href="{{URL::previous()}}" class="waves-effect btn">Back</a>
     	<button class="waves-effect btn" onclick='$("#printable").print();'>Print</button>
     </div>
-    <div class="row">
+    <div class="row receipt">
         <div class="p-wrapper" style="width:384px;" id="printable">
         	<div class="row">
                 <h3 class="align-center">{{$organization->name}}</h3>
                 <h4 class="align-center">Date: @date($shipping_date)</h4>
             </div>
-            <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">
+            <div class="row highlighted">
                 <div class="pull-left">
                     <h4>Ship To:</h4>
                     {{$customer->name}}<br />
@@ -57,7 +57,7 @@
         	<div class="row"><h4 class="align-center">Cart #: {{$cart->cart_id}}</h4></div>
             <div class="row">
                 <table>
-                    <tr>
+                    <tr class="receipt-heading">
                         <th>Item</th>
                         <th>Name</th>
                         <th class="align-right">Qty</th>
@@ -74,7 +74,7 @@
             </div>
         	<hr />
             <div class="row">
-                <div class="pull-right align-right" style="font-weight: bold; background:#fdfdfd; padding:15px;">
+                <div class="pull-right align-right" style="font-weight: bold; padding:15px;">
                     Gross Weight: {{$cart->gross_weight}}<br />
                     Tare Weight: {{$initial_values->standard_tare_weight}}<br />
                     Net Weight: {{$cart->net_weight}}

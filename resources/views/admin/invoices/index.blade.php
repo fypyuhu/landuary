@@ -72,7 +72,7 @@
                         </div>
                         <div class="row">
                             <div class="row">
-                                <button type="button" class="waves-effect btn" onclick="$('#jqxgrid').jqxGrid('updatebounddata');">Filter</button>
+                                <button type="button" class="waves-effect btn" onclick="$('#jqxgrid').jqxGrid('updatebounddata');">Search</button>
                             </div>
                         </div>
                     </div>
@@ -94,9 +94,9 @@
     $(document).ready(function () {
         var oneWeekAgo = new Date();
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-        $('#from_date').jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+        $('#from_date').jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
         $(".dropdown").jqxComboBox({autoComplete: true,width: '100%', autoDropDownHeight: true});
-        $(".datepicker").jqxDateTimeInput({width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+        $(".datepicker").jqxDateTimeInput({width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
         if ($('#customer').jqxComboBox('getSelectedIndex') != "-1") {
             $.ajax({
                 url: "/admin/customers/get-departments/" + $("#customer").val(),

@@ -136,7 +136,7 @@
         $("#customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
-		$(".datepicker").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+		$(".datepicker").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
         $("body").on("change", "#customer", function (e) {
             $('.loading').show();
             var cus_id = $(this).val();

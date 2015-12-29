@@ -1,12 +1,13 @@
 @extends('master')
 @section('content')
   <!-- Main Content -->
-  <section class="content-wrap">
+  <section class="content-wrap" style="background: #ffffff;">
       <div class="row">
     	<a href="{{URL::previous()}}" class="waves-effect btn">Back</a>
     	<button class="waves-effect btn" onclick='$("#printable").print();'>Print</button>
     </div>
-    <div class="p-wrapper">
+    <div class="row receipt">
+    <div class="p-wrapper" id="printable">
     <div class="row">
     	 <div class="pull-left">
                 <h4>{{$user->legal_name}}</h4>
@@ -19,7 +20,7 @@
             Due Date: @date($invoice->due_date)</p>
         </div>
     </div>
-    <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">
+    <div class="row highlighted">
     	<div class="pull-left">
             <p>Ship To: {{$customer->name}}<br />
                 Customer Number: {{$customer->customer_number}}</p>
@@ -32,7 +33,7 @@
     </div>
     <div class="row">
     	<table>
-        	<tr>
+        	<tr class="receipt-heading">
         		<th>Ship Date</th>
                 <th>Manifest #</th>
                 <th>Cart #</th>
@@ -54,9 +55,9 @@
     </div>
     <hr />
     <div class="row">
-        <div class="pull-right align-right" style="font-weight: bold; background:#fdfdfd; padding:15px;">
+        <div class="pull-right align-right" style="font-weight: bold; padding:15px;">
             <p>Sub Total: ${{$invoice->price}}<br />
-            {{$tax->tax_name}} Tax: ${{$invoice->total_tax}}<br />
+            {{$tax->tax_name}} Tax: ${{$invoice->total_tax}}<br /></p>
             @foreach($tax_componenets as $component)
             <p>{{$component->component_name}} Tax: ${{($invoice->total_tax)/(($tax_data->accumulative_rate)/100)*(($component->tax_rate)/100)}}</p>
             @endforeach
@@ -65,6 +66,7 @@
         </div>
     </div>
 </div>
+	</div>
   </section>
   <!-- End Content -->
 @endsection

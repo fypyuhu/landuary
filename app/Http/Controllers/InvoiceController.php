@@ -125,7 +125,11 @@ class InvoiceController extends Controller
        $invoice=Invoice::find($id);
        $customer=Customer::find($invoice->customer_id);
        $invoice_data=Invoice::getInvoicePriceByManifestIds($invoice->manifest_ids,$invoice->customer_id);
-       $departments=CustomerDepartment::whereRaw("FIND_IN_SET(id,'".$invoice->department_ids."')")->get();
+	   if(strpos($invoice->department_ids, '-1') === false) {
+       		$departments=CustomerDepartment::whereRaw("FIND_IN_SET(id,'".$invoice->department_ids."')")->get();
+	   } else {
+	   		$departments=CustomerDepartment::all();
+	   }
        $customer_tax=CustomerTax::where('customer_id','=',$invoice->customer_id)->first();
        $tax=Tax::find($customer_tax->tax_id);
        $tax_componenets=TaxComponent::where('tax_id','=',$tax->id)->get();

@@ -19,8 +19,8 @@
             </div>
             <div class="col m1 s12">&nbsp;</div>
             <div class="col m3 s12 video-box three">
-                <div class="label">Lorem Ipsum</div>
-                <div class="text">Doller sit amet contexture</div>
+                <div class="label">Profit</div>
+                <div class="text">$2350</div>
             </div>
             <div class="col m1 s12">&nbsp;</div>
         </div>

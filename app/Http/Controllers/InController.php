@@ -103,7 +103,12 @@ class InController extends Controller {
             $ogc_item->save();
         }
 
-        return redirect('/admin/in/receipt/' . $ogc->id);
+        //return redirect('/admin/in/receipt/' . $ogc->id);
+		//return redirect('/admin/in')->with('status', 'Incoming cart has been created successfully.');
+		$carts = Cart::organization()->get();
+        $customers = Customer::organization()->get();
+        $depts = CustomerDepartment::organization()->get();
+		return view('admin.in.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'cart_id'=>$ogc->id, 'current_customer' => $request->customer]);
     }
 
     /**

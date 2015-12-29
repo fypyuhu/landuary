@@ -114,7 +114,7 @@
         });
         $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
-        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'dd-MM-yyyy'});
+        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'MMMM dd, yyyy'});
         $('#customer').on('change', function () {
             if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val() != "-1") {
                 $(".loading").css("display", "block");

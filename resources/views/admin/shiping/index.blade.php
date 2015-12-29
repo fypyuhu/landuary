@@ -112,7 +112,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
          $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true,disabled:true});
-        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'dd-MM-yyyy'});
+        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'MMMM dd, yyyy'});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
          $('#customer').on('change', function () {
             if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val()!="-1") {

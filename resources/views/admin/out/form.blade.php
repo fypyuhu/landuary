@@ -149,7 +149,7 @@
 
 <script>
     $(document).ready(function () {
-            $(".calendar").jqxDateTimeInput({min: new Date(), width: '100%', height: '25px', formatString: 'dd-MM-yyyy'});
+            $(".calendar").jqxDateTimeInput({min: new Date(), width: '100%', height: '25px', formatString: 'MMMM dd, yyyy'});
             $("#customer, #cart_number_dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
             $("#department").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true, {{count($depts) > 0 ? 'disabled: false' : 'disabled: true'}} });
             $("#item_id").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true, {{count($items) > 0 ? 'disabled: false' : 'disabled: true'}} });

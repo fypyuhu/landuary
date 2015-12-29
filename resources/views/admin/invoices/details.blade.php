@@ -15,7 +15,7 @@
                 <div class="col m6 s12">
                     <label>Department:</label>
                     <select name="department[]" id="department" multiple>
-                        <option value="-1" @if(in_array("-1",$department_ids))selected @endif >Without Department</option>
+                        <option value="-1" selected>All Departments</option>
                         @foreach($departments as $department)
                         <option  value="{{$department->id}}" @if(in_array($department->id,$department_ids)) selected @endif >{{$department->department_name}}</option>
                         @endforeach
@@ -116,7 +116,7 @@
         });
         $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true, checkboxes: true});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
-        $("#ship_date").jqxDateTimeInput({value: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy', disabled: true});
+        $("#ship_date").jqxDateTimeInput({value: new Date(), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy', disabled: true});
         $('#customer').on('change', function () {
             if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val() != "-1") {
                 $(".loading").css("display", "block");

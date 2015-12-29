@@ -143,7 +143,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true, disabled: true});
-        $("#ship_date").jqxDateTimeInput({value:new Date("{{$manifest->shipping_date}}"), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy', disabled: true});
+        $("#ship_date").jqxDateTimeInput({value:new Date("{{$manifest->shipping_date}}"), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy', disabled: true});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true, disabled: true});
         $("#pageForm").validate({
                 ignore: [],
