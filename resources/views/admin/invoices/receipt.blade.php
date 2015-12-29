@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="row highlighted">
-    	<div class="pull-left">
+    	<div class="row">
             <p>Ship To: {{$customer->name}}<br />
                 Customer Number: {{$customer->customer_number}}</p>
         </div>

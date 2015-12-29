@@ -24,7 +24,7 @@
                 <h4 class="align-center">Date: @date($shipping_date)</h4>
             </div>
             <div class="row highlighted">
-                <div class="pull-left">
+                <div class="row">
                     <h4>Ship To:</h4>
                     {{$customer->name}}<br />
                     {{$customer->shipping_address}}<br />

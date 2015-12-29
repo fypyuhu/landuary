@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="row highlighted">
-                <div class="pull-left">
+                <div class="row">
                     <h4>Deliver To:</h4>
                     {{$customer->name}}<br />
                     {{$customer->shipping_address}}<br />
