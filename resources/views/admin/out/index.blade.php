@@ -192,7 +192,7 @@
     var my_net_weight=0;
     $(document).ready(function () {
 		@if (isset($cart_id))
-			window.open("/admin/in/receipt/{{$cart_id}}", '_blank');
+			window.open("/admin/out/receipt/{{$cart_id}}", '_blank');
 			//window.location.href("/admin/in/receipt/{{$cart_id}}", '_blank');
 		@endif
 		
