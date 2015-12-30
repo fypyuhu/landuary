@@ -49,7 +49,7 @@
                                     </select>
                                 </div>
                                 <div class="col m6 s12" id="s_department_div">
-                                    <label>Select Department:</label>
+                                    <label>Select Department: <img src="{{URL::asset('images/ajax-loader-sm.gif')}}" alt="" class="loading-sm" /></label>
                                     <select name="s_department" id="s_department">
                                         <option value='-1'>Select Department</option>
                                     </select>
@@ -142,7 +142,7 @@
             });
         }
         $("body").on("change", "#s_customer", function (e) {
-            $('.loading').css('display', 'block');
+            $('.loading-sm').show();
             $.ajax({
                 url: "/admin/customers/get-departments/" + $("#s_customer").val(),
                 type: 'GET',
@@ -151,7 +151,7 @@
                     $('#s_department').jqxComboBox('destroy');
                     $('#s_department_div').html(html);
                     $("#s_department").jqxComboBox({width: '100%', autoDropDownHeight: true});
-                    $('.loading').css('display', 'none');
+                    $('.loading-sm').hide();
                 }
             });
         });

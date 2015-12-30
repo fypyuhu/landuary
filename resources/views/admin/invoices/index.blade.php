@@ -109,7 +109,7 @@
         }
         $("body").on("change", "#customer", function (e) {
             if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val() != "-1") {
-                $('.loading').css('display', 'block');
+                $('.loading-sm').show();
                 $.ajax({
                     url: "/admin/customers/get-departments/" + $("#customer").val(),
                     type: 'GET',
@@ -118,7 +118,7 @@
                         $('#s_department').jqxComboBox('destroy');
                         $('#department_div').html(html);
                         $("#s_department").jqxComboBox({width: '100%', autoDropDownHeight: true, checkboxes: true});
-                        $('.loading').css('display', 'none');
+                        $('.loading-sm').hide();
                     }
                 });
             }

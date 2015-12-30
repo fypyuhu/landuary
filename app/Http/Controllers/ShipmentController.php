@@ -21,7 +21,14 @@ class ShipmentController extends Controller
     public function getIndex()
     {
         $customers=Customer::organization()->get();
-        return view('admin.shiping.index',["customers"=>$customers]);
+		$rec_id = '';
+		$current_customer = '';
+		if (session('status')) {
+			$last_rec = ShipManifest::orderBy('id', 'desc')->first();
+			$rec_id = $last_rec->id;
+			$current_customer = $last_rec->customer_id;
+		}
+        return view('admin.shiping.index',["customers"=>$customers, 'rec_id' => $rec_id, 'current_customer' => $current_customer]);
     }
 
     public function getDetails($id,$department_id=-1){
@@ -53,7 +60,8 @@ class ShipmentController extends Controller
              }
         }
         $manifest->save();
-        return redirect('/admin/shiping-manifest/recipt/'.$manifest->id);
+        //return redirect('/admin/shiping-manifest/recipt/'.$manifest->id);
+		return redirect('/admin/shiping-manifest')->with('status', 'Shipping manifest has been created successfully.');
     }
 
     public function getRecipt($id){

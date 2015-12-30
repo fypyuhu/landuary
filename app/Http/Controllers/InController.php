@@ -22,14 +22,14 @@ class InController extends Controller {
         $carts = Cart::organization()->get();
         $customers = Customer::organization()->get();
         $depts = CustomerDepartment::organization()->get();
-		$cart_id = '';
+		$rec_id = '';
 		$current_customer = '';
 		if (session('status')) {
-			$ogc = IncomingCart::orderBy('id', 'desc')->first();
-			$cart_id = $ogc->id;
-			$current_customer = $ogc->customer_id;
+			$last_rec = IncomingCart::orderBy('id', 'desc')->first();
+			$rec_id = $last_rec->id;
+			$current_customer = $last_rec->customer_id;
 		}
-        return view('admin.in.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'cart_id' => $cart_id, 'current_customer' => $current_customer]);
+        return view('admin.in.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'rec_id' => $rec_id, 'current_customer' => $current_customer]);
     }
 
     public function getCarts() {

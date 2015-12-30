@@ -22,7 +22,15 @@ class RewashController extends Controller
     public function getIndex()
     {
 		$customers = Customer::organization()->get();
-        return view('admin.rewash.index', ['customers' => $customers]);
+		
+		$rec_id = '';
+		$current_customer = '';
+		if (session('status')) {
+			$last_rec = Rewash::orderBy('id', 'desc')->first();
+			$rec_id = $last_rec->id;
+			$current_customer = $last_rec->customer_id;
+		}
+        return view('admin.rewash.index', ['customers' => $customers, 'rec_id' => $rec_id, 'current_customer' => $current_customer]);
     }
 	
 	public function getAjaxForm(Request $request) {
@@ -62,7 +70,8 @@ class RewashController extends Controller
             $rewash_item->save();
         }
 		
-		return redirect('/admin/rewash/list');
+		//return redirect('/admin/rewash/list');
+		return redirect('/admin/rewash')->with('status', 'Rewash cart has been created successfully.');
 	}
 	
 	public function getListShow(Request $request) {
@@ -70,7 +79,7 @@ class RewashController extends Controller
         $data = array();
 		foreach ($rewash_list as $rec) {
 			$row = array();
-			$row["rewash_date"] = $rec->rewash_date;
+			$row["rewash_date"] = date('d F, Y', strtotime($rec->rewash_date));
 			$row["customer_name"] = $rec->name;
 			$row["customer_number"] = $rec->customer_number;
 			$row["department_name"] = $rec->department_name;

@@ -127,7 +127,8 @@ class CustomerController extends Controller {
         return $return . "</select>";
     }
     public function getGetDepartments($id) {
-        $return = " <label>Select Department:</label><select name='s_department' id='s_department'><option value='-1'>Select Department</option>";
+		$image_path = asset('images/ajax-loader-sm.gif');
+        $return = " <label>Select Department: <img src=\"$image_path\" alt=\"\" class=\"loading-sm\" /></label><select name='s_department' id='s_department'><option value='-1'>Select Department</option>";
         $departments=CustomerDepartment::where('customer_id','=',$id)->get();
         foreach ($departments as $department) {
             $return.="<option value='" . $department->id . "'>" . $department->department_name . "</option>";

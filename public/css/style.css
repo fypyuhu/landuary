@@ -980,3 +980,14 @@ aside.yaybar {
 .alert-danger .alert-link {
   color: #843534;
 }
+
+#s_department_div,
+#department_div {
+	position: relative;
+}
+
+.loading-sm {
+	display: none;
+	position: absolute;
+	right: 0;
+}
