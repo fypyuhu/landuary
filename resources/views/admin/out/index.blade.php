@@ -168,8 +168,8 @@
                                 <label>Gross Weight</label>
                                 <div class="input-field">
                                 	<?php 
-									$myfile = fopen("etc\weight.txt", "r") or die("Unable to open file!");
-									$value = fread($myfile,filesize("etc\weight.txt"));
+									$myfile = fopen('etc/weight.txt', "r") or die("Unable to open file!");
+									$value = fread($myfile,filesize('etc/weight.txt'));
 									fclose($myfile);
 									?>
                                     <input id="gross_weight" value="<?php echo $value; ?>" type="text" onblur="calculateNetWeight()" name="gross_weight">
