@@ -341,18 +341,22 @@
 			$('.submenu').hide();	
 		});
 		
-		$( "body" ).on( "click", "fieldset", function(e) {
-			$( ".layout_table .records_list" ).each(function( index ) {
-				var height = $( this ).height();
-				if(height > 0)
-					$(this).css('height', (height+1) + 'px');
-			});
-			
-			/*$( ".layout_table .heading" ).each(function( index ) {
-				var height2 = $( this ).height();
-				if(height2 > 0)
-					$(this).css('height', (height2+1) + 'px');
-			});*/
+		var i = 0;
+		$( "body" ).on( "mousemove", document, function(e) {
+			if(i <= 0){
+				$( ".layout_table .records_list" ).each(function( index ) {
+					var height = $( this ).height();
+					if(height > 0)
+						$(this).css('height', (height+1) + 'px');
+				});
+				
+				$( ".layout_table .heading" ).each(function( index ) {
+					var height2 = $( this ).height();
+					if(height2 > 0)
+						$(this).css('height', (height2+1) + 'px');
+				});
+				i = 1;
+			}
 		});
 		
 	});

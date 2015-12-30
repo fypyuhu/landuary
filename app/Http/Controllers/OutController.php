@@ -21,7 +21,14 @@ class OutController extends Controller {
         $carts = Cart::organization()->get();
         $customers = Customer::organization()->get();
         $depts = CustomerDepartment::organization()->get();
-        return view('admin.out.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts]);
+		$cart_id = '';
+		$current_customer = '';
+		if (session('status')) {
+			$ogc = OutgoingCart::orderBy('id', 'desc')->first();
+			$cart_id = $ogc->id;
+			$current_customer = $ogc->customer_id;
+		}
+        return view('admin.out.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'cart_id' => $cart_id, 'current_customer' => $current_customer]);
     }
 
     public function getCarts() {
@@ -92,11 +99,7 @@ class OutController extends Controller {
             $ogc_item->save();
         }
         //return redirect('/admin/out/receipt/' . $ogc->id);
-		
-		$carts = Cart::organization()->get();
-        $customers = Customer::organization()->get();
-        $depts = CustomerDepartment::organization()->get();
-        return view('admin.out.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'cart_id' => $ogc->id, 'current_customer' => $request->customer]);
+		return redirect('/admin/out')->with('status', 'Outgoing cart has been created successfully.');
     }
 
     public function getReceipt($id) {

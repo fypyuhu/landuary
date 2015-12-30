@@ -28,14 +28,15 @@
     </div>
     <!-- /Breadcrumb -->
 	
-    @if (isset($cart_id))
+    @if (session('status'))
         <div class="row">
             <div class="col m5 s12">
                 <div class="alert alert-success">
-                    Incoming cart has been created successfully.
+                    {{ session('status') }}
                 </div>
             </div>
         </div>
+        <a href="/admin/in/receipt/{{$cart_id}}" id="newtab_link" target="_blank" style="display:none;">Link</a>
     @endif
     
     <div id="loadAjaxFrom">
@@ -188,12 +189,27 @@
 
 @section('js')
 <script>
+	$( window ).load(function() {
+		@if (session('status'))
+			$("#newtab_link")[0].click();
+			
+			$('.loading').show();
+			var cus_id = $("#customer").val();
+            var url = "{{url('admin/in/ajax-form')}}";
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: {customer_id: cus_id},
+                success: function (response)
+                {
+                    $('#loadAjaxFrom').html(response);
+                    $('.loading').hide();
+                }
+            });
+		@endif	
+	});
+	
     $(document).ready(function () {
-		@if (isset($cart_id))
-			window.open("/admin/in/receipt/{{$cart_id}}", '_blank');
-			//window.location.href("/admin/in/receipt/{{$cart_id}}", '_blank');
-		@endif
-		
         $("#customer, #cart_number_dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});

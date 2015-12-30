@@ -22,7 +22,14 @@ class InController extends Controller {
         $carts = Cart::organization()->get();
         $customers = Customer::organization()->get();
         $depts = CustomerDepartment::organization()->get();
-        return view('admin.in.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts]);
+		$cart_id = '';
+		$current_customer = '';
+		if (session('status')) {
+			$ogc = IncomingCart::orderBy('id', 'desc')->first();
+			$cart_id = $ogc->id;
+			$current_customer = $ogc->customer_id;
+		}
+        return view('admin.in.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'cart_id' => $cart_id, 'current_customer' => $current_customer]);
     }
 
     public function getCarts() {
@@ -104,11 +111,7 @@ class InController extends Controller {
         }
 
         //return redirect('/admin/in/receipt/' . $ogc->id);
-		//return redirect('/admin/in')->with('status', 'Incoming cart has been created successfully.');
-		$carts = Cart::organization()->get();
-        $customers = Customer::organization()->get();
-        $depts = CustomerDepartment::organization()->get();
-		return view('admin.in.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'cart_id' => $ogc->id, 'current_customer' => $request->customer]);
+		return redirect('/admin/in')->with('status', 'Incoming cart has been created successfully.');
     }
 
     /**
