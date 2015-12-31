@@ -937,8 +937,8 @@ aside.yaybar {
   color: inherit;
 }
 .alert-success {
-  color: #3c763d;
-  background-color: #dff0d8;
+  color: #ffffff;
+  background-color: #0198cd;
   border-color: #d6e9c6;
 }
 .alert-success hr {
@@ -948,8 +948,8 @@ aside.yaybar {
   color: #2b542c;
 }
 .alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
+  color: #ffffff;
+  background-color: #0198cd;
   border-color: #bce8f1;
 }
 .alert-info hr {
