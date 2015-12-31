@@ -1,0 +1,8 @@
+To: ubaid_khan480@hotmail.com
+Subject: Registration Notification
+MIME-Version: 1.0
+Content-type:text/html;charset=UTF-8
+To: Ubaid Test <ubaid_khan480@hotmail.com>
+From: Laundrytek Systems <info@laundrytek.com>
+
+Dear Ubaid Test<br /><br />Congratulations! You have successfully registered with LaundryTek Systems. A sales representative will shortly be in touch with you to complete your software setup. We look forward to working with you.<br /><br />Thanks,<br />Team LaundryTek Systems Admin

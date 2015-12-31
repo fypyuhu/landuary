@@ -1,0 +1,23 @@
+To: beyond21st@gmail.com
+Subject: Registration Notification
+MIME-Version: 1.0
+Content-type:text/html;charset=UTF-8
+To: Ubaid Test <ubaid_khan480@hotmail.com>
+From: Laundrytek Systems <info@laundrytek.com>
+To: Laundrytek Systems <beyond21st@gmail.com>
+
+Dear Admin,<br /><br />A new user has been registered with LaundryTek with following information:<br /><br />
+		<strong>Legal Name:</strong> Ubaid Test<br />
+		<strong>Street Address:</strong> Ghazi road<br />
+		<strong>City:</strong> Lahore<br />
+		<strong>State:</strong> Punjab<br />
+		<strong>Zipcode:</strong> 51800<br />
+		<strong>Country:</strong> Pakistan<br />
+		<strong>Phone:</strong> 123456<br />
+		<strong>Fax:</strong> 123456<br />
+		<strong>Email:</strong> ubaid_khan480@hotmail.com<br />
+		<strong>Website:</strong> www.testing.com<br />
+		<strong>Contact Name:</strong> Ubaid<br />
+		<strong>Contact Designation:</strong> SE<br />
+		<strong>Contact Email:</strong> ubaid@gmail.com<br />
+		<br /><br />Thanks,<br />Team LaundryTek Systems Admin

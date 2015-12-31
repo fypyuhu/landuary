@@ -49,13 +49,28 @@ class ManageStepsForLogin
 			$url = Request::url();
 			if(strpos($url, 'step') === false && strpos($url, 'initial-values') === false) {
 				$skipped_at = intval($org->profile_skipped_at_step);
-				$current_step = intval(substr($url, -1));
+				//$current_step = substr($url, -1);
+				$current_step = 0;
+				
+				if(strpos($url, 'step1') === false)
+				$current_step = 1;
+				
+				if(strpos($url, 'step2') === false)
+				$current_step = 2;
+				
+				if(strpos($url, 'step3') === false)
+				$current_step = 3;
+				
+				if(strpos($url, 'step4') === false)
+				$current_step = 4; 
+				
 				if($skipped_at > 0 && $skipped_at < 5 && $skipped_at > $current_step) {
 					return redirect('admin/profile/step'.$skipped_at);
 				}
+				return $next($request);
 			}
+			return $next($request);
 		}
-		
 		return $next($request);
     }
 }
