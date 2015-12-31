@@ -67,9 +67,7 @@ class ManageStepsForLogin
 				if($skipped_at > 0 && $skipped_at < 5 && $skipped_at > $current_step) {
 					return redirect('admin/profile/step'.$skipped_at);
 				}
-				return $next($request);
 			}
-			return $next($request);
 		}
 		return $next($request);
     }
