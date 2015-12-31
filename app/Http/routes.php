@@ -32,11 +32,9 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-Route::group(['middleware' => 'auth', 'middleware' => 'verify.steps.completed'], function () {
+Route::group(['middleware' => ['auth', 'verify.steps.completed']], function () {
 	Route::controller('admin/profile', 'UserProfileController');
 });
-
-Route::get('admin', ['middleware' => 'auth', 'middleware' => 'profile.completed']);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller('items', 'ItemController');
@@ -53,3 +51,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 	Route::controller('rewash', 'RewashController');
     Route::controller('/', 'HomeController');
 });
+
+Route::get('admin', ['middleware' => ['auth', 'profile.completed']]);

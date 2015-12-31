@@ -397,9 +397,9 @@
                                 <div class="row edit-div">
                                     <div class="row">
                                         <div class="col s12">
-                                            <input type="checkbox" name="we_serve[]" id="hospitality" value="Hospitality (Hotel &amp; Restaurant)" <?php echo strpos($user->we_serve, 'Hospitality (Hotel & Restaurant)') !== false ? 'checked="checked"' : ''; ?>> <label for="hospitality">Hospitality (Hotel &amp; Restaurant)</label><br />
-                                            <input type="checkbox" name="we_serve[]" id="healthcare" value="Healthcare" <?php echo strpos($user->we_serve, 'Healthcare') !== false ? 'checked="checked"' : ''; ?>> <label for="healthcare">Healthcare</label><br />
-                                            <input type="checkbox" name="we_serve[]" id="vacational_rentals" value="Vacational Rentals" <?php echo strpos($user->we_serve, 'Vacational Rentals') !== false ? 'checked="checked"' : ''; ?>> <label for="vacational_rentals">Vacational Rentals</label><br />
+                                            <input type="checkbox" name="we_serve[]" id="hospitality" value="Hospitality (Hotel &amp; Restaurant)" {{ str_contains($user->we_serve, 'Hospitality (Hotel & Restaurant)') ? 'checked="checked"' : ''}}> <label for="hospitality">Hospitality (Hotel &amp; Restaurant)</label><br />
+                                            <input type="checkbox" name="we_serve[]" id="healthcare" value="Healthcare" {{ str_contains($user->we_serve, 'Healthcare') ? 'checked="checked"' : ''}}> <label for="healthcare">Healthcare</label><br />
+                                            <input type="checkbox" name="we_serve[]" id="vacational_rentals" value="Vacational Rentals" {{ str_contains($user->we_serve, 'Vacational Rentals') ? 'checked="checked"' : ''}}> <label for="vacational_rentals">Vacational Rentals</label><br />
                                             <label for="we_serve" class="error"></label>
                                         </div>
                                     </div>
@@ -426,8 +426,8 @@
                                 <div class="row edit-div">
                                     <div class="row">
                                         <div class="col s12">
-                                            <input type="checkbox" name="we_do[]" id="customer_own_goods" value="Customer Own Goods" <?php echo strpos($user->we_do, 'Customer Own Goods') !== false ? 'checked="checked"' : ''; ?>> <label for="customer_own_goods">Customer Own Goods</label><br />
-                                            <input type="checkbox" name="we_do[]" id="linen_rentals" value="Linen Rentals" <?php echo strpos($user->we_do, 'Linen Rentals') !== false ? 'checked="checked"' : ''; ?>> <label for="linen_rentals">Linen Rentals</label><br />
+                                            <input type="checkbox" name="we_do[]" id="customer_own_goods" value="Customer Own Goods" {{ str_contains($user->we_do, 'Customer Own Goods') ? 'checked="checked"' : ''}}> <label for="customer_own_goods">Customer Own Goods</label><br />
+                                            <input type="checkbox" name="we_do[]" id="linen_rentals" value="Linen Rentals" {{ str_contains($user->we_do, 'Linen Rentals') ? 'checked="checked"' : ''}}> <label for="linen_rentals">Linen Rentals</label><br />
                                             <label for="we_do" class="error"></label>
                                         </div>
                                     </div>
