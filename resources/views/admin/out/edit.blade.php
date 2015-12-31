@@ -163,7 +163,7 @@
                             <div class="col m4 s12">
                                 <label>Net Weight</label>
                                 <div class="input-field">
-                                    <input id="net_weight" type="text" value="{{$ogc->net_weight}}" readonly="readonly" name="net_weight" placeholder="Net Weight">
+                                    <input id="net_weight" type="text" value="{{$ogc->net_weight}}" readonly="readonly" name="net_weight">
                                 </div>
                             </div>
                         </div>

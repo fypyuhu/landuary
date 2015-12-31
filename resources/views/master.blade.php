@@ -341,29 +341,32 @@
 			$('.submenu').hide();	
 		});
 		
-		var i = 0;
+		var mousemove_counter = 0;
 		$( "body" ).on( "mousemove", document, function(e) {
-			if(i <= 0){
-				$( ".layout_table .records_list" ).each(function( index ) {
-					var height = $( this ).height();
-					if(height > 0)
-						$(this).css('height', (height+1) + 'px');
-				});
-				
-				$( ".layout_table .heading" ).each(function( index ) {
-					var height2 = $( this ).height();
-					if(height2 > 0)
-						$(this).css('height', (height2+1) + 'px');
-				});
-				i = 1;
+			if(mousemove_counter <= 0){
+				layout_table_auto_height(mousemove_counter);
+				mousemove_counter = 1;
 			}
 		});
-		
 	});
 	
 	function toggle(hide, show) {
 		$(hide).css('display', 'none');
 		$(show).fadeIn('slow');
+	}
+	
+	function layout_table_auto_height(mousemove_counter){
+		$( ".layout_table .records_list" ).each(function( index ) {
+			var height = $( this ).height();
+			if(height > 0)
+				$(this).css('height', (height+1) + 'px');
+		});
+		
+		$( ".layout_table .heading" ).each(function( index ) {
+			var height2 = $( this ).height();
+			if(height2 > 0)
+				$(this).css('height', (height2+1) + 'px');
+		});
 	}
   </script>
   

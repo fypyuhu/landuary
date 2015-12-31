@@ -7,6 +7,6 @@
 <div class="col m4 s12">
   <label>Net Weight</label>
   <div class="input-field">
-    <input id="net_weight" type="text" name="net_weight" value="{{$net_weight}}">
+    <input id="net_weight" type="text" name="net_weight" value="{{$net_weight}}" readonly="readonly">
   </div>
 </div>

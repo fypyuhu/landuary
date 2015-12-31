@@ -53,7 +53,7 @@
                     <div class="col m4 s12">
                         <label>Tare Weight</label>
                         <div class="input-field">
-                            <input id="tare_weight"  value="{{$initial_values->standard_tare_weight}}" type="text" name="tare_weight" readonly="readonly">
+                            <input id="tare_weight"  value="{{$initial_values->standard_tare_weight}}" type="text" name="tare_weight">
                         </div>
                     </div>
                     <div class="col m4 s12">
@@ -135,19 +135,23 @@
                     </div>
                 </div>
                 <div class="row" id="weights-div">
-                    <div class="col m4 s12">
-                        <label>Gross Weight</label>
+                    <div class="col m4 s12 loading-sm-parent">
+                        <label>Gross Weight <img src="{{URL::asset('images/ajax-loader-sm.gif')}}" alt="" class="loading-sm" /></label>
                         <div class="input-field">
-                            <input id="gross_weight" type="number" step="0.01" onblur="calculateNetWeight()" value="" name="gross_weight">
+                            <!--<input id="gross_weight" type="number" step="0.01" onblur="calculateNetWeight()" value="" name="gross_weight">-->
+                            <input id="gross_weight" type="number" step="0.01" value="" name="gross_weight">
                         </div>
                         <label for="gross_weight" class="error" id="error-gross_weight"></label>
                     </div>
                     <div class="col m4 s12">
                         <label>Net Weight</label>
                         <div class="input-field">
-                            <input id="net_weight" type="text" value="0" name="net_weight">
+                            <input id="net_weight" type="text" value="0" name="net_weight" readonly="readonly">
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <a href="javascript:void(0);" class="waves-effect btn" style="background: #279977; height: 20px; line-height: 20px; font-size: 9px;" id="btn-get-weight">Get Weight</a>
                 </div>
             </fieldset>
         </div>

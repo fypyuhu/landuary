@@ -97,7 +97,7 @@
                             <div class="col m4 s12">
                                 <label>Tare Weight</label>
                                 <div class="input-field">
-                                    <input id="tare_weight"  value="{{$initial_values->standard_tare_weight}}" type="text" name="tare_weight" readonly="readonly">
+                                    <input id="tare_weight"  value="{{$initial_values->standard_tare_weight}}" type="text" name="tare_weight">
                                 </div>
                             </div>
                             <div class="col m4 s12">
@@ -164,23 +164,22 @@
                             </div>
                         </div>
                         <div class="row" id="weights-div">
-                            <div class="col m4 s12">
-                                <label>Gross Weight</label>
+                            <div class="col m4 s12 loading-sm-parent">
+                                <label>Gross Weight <img src="{{URL::asset('images/ajax-loader-sm.gif')}}" alt="" class="loading-sm" /></label>
                                 <div class="input-field">
-                                	<?php 
-									$myfile = fopen('etc/weight.txt', "r") or die("Unable to open file!");
-									$value = fread($myfile,filesize('etc/weight.txt'));
-									fclose($myfile);
-									?>
-                                    <input id="gross_weight" value="<?php echo $value; ?>" type="text" onblur="calculateNetWeight()" name="gross_weight">
+                                    <!--<input id="gross_weight" value="" type="text" onblur="calculateNetWeight()" name="gross_weight">-->
+                                    <input id="gross_weight" value="" type="text" name="gross_weight">
                                 </div>
                             </div>
                             <div class="col m4 s12">
                                 <label>Net Weight</label>
                                 <div class="input-field">
-                                    <input id="net_weight" value="0" type="text" name="net_weight">
+                                    <input id="net_weight" value="0" type="text" name="net_weight" readonly="readonly">
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <a href="javascript:void(0);" class="waves-effect btn" style="background: #279977; height: 20px; line-height: 20px; font-size: 9px;" id="btn-get-weight">Get Weight</a>
                         </div>
                     </fieldset>
                 </div>
@@ -218,7 +217,24 @@
         $("#customer, #cart_number_dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
-        $("body").on("change", "#customer", function (e) {
+        
+		$("body").on("click", "#btn-get-weight", function (e) {
+			$('.loading-sm').show();
+            var url = "{{url('admin/carts/machine-weight')}}";
+            $.ajax({
+                url: url,
+                type: 'GET',
+                //data: {customer_id: cus_id},
+                success: function (response)
+                {
+                    $('#gross_weight').val(response);
+                    $('.loading-sm').hide();
+					calculateNetWeight();
+                }
+            });
+		});
+		
+		$("body").on("change", "#customer", function (e) {
             $('.loading').show();
             var cus_id = $(this).val();
             var url = "{{url('admin/in/ajax-form')}}";

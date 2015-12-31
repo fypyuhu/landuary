@@ -1,3 +1,12 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		mousemove_counter = 0;
+		if(mousemove_counter <= 0){
+			layout_table_auto_height(mousemove_counter);
+			mousemove_counter = 1;
+		}
+	});
+</script>
 <div class="row records_list">
     <div class="col s3">{{$item->name}} <input type="hidden" class="item-cart" name="item_cart[]" value="{{$item->id}}" /></div>
     <div class="col s3">{{$item->description}}</div>

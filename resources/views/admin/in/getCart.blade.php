@@ -17,7 +17,7 @@
     <div class="col m4 s12">
       <label>Tare Weight</label>
       <div class="input-field">
-        <input id="tare_weight" type="text" name="tare_weight" readonly="readonly" value="{{$current_cart->tare_weight}}">
+        <input id="tare_weight" type="text" name="tare_weight" value="{{$current_cart->tare_weight}}">
       </div>
     </div>
     <div class="col m4 s12">

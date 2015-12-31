@@ -985,12 +985,14 @@ aside.yaybar {
 }
 
 #s_department_div,
-#department_div {
+#department_div,
+.loading-sm-parent {
 	position: relative;
 }
 
 .loading-sm {
 	display: none;
 	position: absolute;
-	right: 0;
+	right: 15px;
+	top: 0;
 }
