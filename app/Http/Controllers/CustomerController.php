@@ -127,7 +127,12 @@ class CustomerController extends Controller {
 			}
 			return $return . "</select>";
 		} else {
-			return $return . '<strong style="padding-top:2px; font-size:16px; display:inline-block;" id="child_item">NA</strong>';
+			$return = "<div style='display:none;'><select name='child_item' id='child_item'><option value='-1'>Select Item</option>";
+			foreach ($items as $item) {
+				$return.="<option value='" . $item->id . "'>" . $item->name . "</option>";
+			}
+			$return .= "</select></div>";
+			return $return . '<strong style="padding-top:2px; font-size:16px; display:inline-block;">NA</strong>';
 		}
     }
     public function getGetDepartments($id) {
