@@ -127,6 +127,11 @@ class CustomerController extends Controller {
 			}
 			return $return . "</select>";
 		} else {
+			$return = "<select name='child_item' id='child_item' style='display:none;'><option value='-1'>Select Item</option>";
+			foreach ($items as $item) {
+				$return.="<option value='" . $item->id . "'>" . $item->name . "</option>";
+			}
+			return $return . "</select>";
 			return '<strong style="padding-top:2px; font-size:16px; display:inline-block;">NA</strong>';
 		}
     }
