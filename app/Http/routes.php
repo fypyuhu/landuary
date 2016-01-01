@@ -49,7 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller('carts-list', 'CartsListController');
 	Route::controller('invoices', 'InvoiceController');
 	Route::controller('rewash', 'RewashController');
-    //Route::controller('/', 'HomeController');
+    Route::controller('/', 'HomeController');
 });
 
 Route::get('admin', 'HomeController@getIndex')->middleware(['auth', 'profile.completed']);
