@@ -36,7 +36,9 @@
                 </div>
             </div>
         </div>
-        <a href="/admin/shiping-manifest/recipt/{{$rec_id}}" id="newtab_link" target="_blank" style="display:none;">Link</a>
+        @if($rec_id)
+        	<a href="/admin/shiping-manifest/recipt/{{$rec_id}}" id="newtab_link" target="_blank" style="display:none;">Link</a>
+        @endif
     @endif
 
     <div id="shipmant" class="row no-rightmargin">

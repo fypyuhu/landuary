@@ -25,7 +25,7 @@ class ShipmentController extends Controller
 		$current_customer = '';
 		if (session('status')) {
 			$last_rec = ShipManifest::orderBy('id', 'desc')->first();
-			$rec_id = $last_rec->id;
+			$rec_id = $last_rec ? $last_rec->id : 0;
 			$current_customer = $last_rec->customer_id;
 		}
         return view('admin.shiping.index',["customers"=>$customers, 'rec_id' => $rec_id, 'current_customer' => $current_customer]);

@@ -160,8 +160,8 @@ class OutController extends Controller {
     }
 
     public function postDelete($id, Request $request) {
-        $tax = OutgoingCart::find($id);
-        $tax->delete();
+        $rec = OutgoingCart::find($id);
+        $rec->delete();
 		return redirect('/admin/shiping-manifest')->with('status', 'Selected cart has been deleted successfully.');
     }
 
