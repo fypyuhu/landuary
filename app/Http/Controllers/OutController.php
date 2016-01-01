@@ -154,5 +154,14 @@ class OutController extends Controller {
         }
         return redirect($request->return_url);
     }
+	
+	public function getDelete($id) {
+        return view('admin.out.delete', ['id' => $id]);
+    }
+
+    public function postDelete($id, Request $request) {
+        $tax = OutgoingCart::find($id);
+        $tax->delete();
+    }
 
 }

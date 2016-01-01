@@ -37,11 +37,13 @@
                         <legend>Customer Information:</legend>
                         <div class="row">
                             <div class="col m6 s12">
+                            	<label>Customer</label>
                                 <select name="customer" id="customer" >
                                     <option value="{{$customer->id}}" >{{$customer->name}}</option>
                                 </select>
                             </div>
                             <div class="col m6 s12">
+                            	<label>Department</label>
                                 <select name="department" id="department" >
                                     <option value="{{$dept->id or ''}}">{{$dept->department_name or ''}}</option>
                                 </select>
@@ -50,6 +52,7 @@
 
                         <div class="row">
                             <div class="col s12">
+                            	<label>Customer Number</label>
                                 <div class="input-field">
                                     <input id="name" type="text" name="name" value="{{$customer->customer_number}}" placeholder="Name" readonly="readonly">
                                 </div>
@@ -61,6 +64,7 @@
                         <legend>Cart Information</legend>
                         <div class="row">
                             <div class="col m4 s12">
+                            	<label>Cart Number</label>
                                 <div class="input-field" id="exchange-cart-div" @if($ogc->is_exchange_cart==0) style="display: none;" @endif>
                                      <select name="cart_number_dropdown" id="cart_number_dropdown" disabled>
                                         <option value="{{$cart->id or ''}}">{{$cart->cart_number or ''}}</option>
@@ -70,13 +74,15 @@
                                      <input id="cart_number_textfield" readonly="readonly" type="text" value="{{$ogc->cart_id}}" name="cart_number_textfield" placeholder="Cart Number">
                                 </div>
                             </div>
-                            <div class="col m4 s12">
+                            <div class="col m3 s12">
+                            	<label>Tare Weight</label>
                                 <div class="input-field">
                                     <input id="tare_weight" type="text" value="{{$initial_values->standard_tare_weight}}" name="tare_weight" placeholder="Tare Weight">
                                 </div>
                             </div>
-                            <div class="col m4 s12">
-                                <div id="ship_date"   name="ship_date"  class="calendar"></div>
+                            <div class="col m5 s12">
+                            	<label>Shipping Date</label>
+                                <div id="ship_date" name="ship_date" class="calendar"></div>
                             </div>
                         </div>
                         <div class="row">
@@ -108,6 +114,7 @@
                             {{csrf_field()}}
                             <div class="row no-topmargin">
                                 <div class="col m8 s12">
+                                	<label>Item Name</label>
                                     <select name="item_id" id="item_id">
                                         @foreach ($items as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
@@ -115,6 +122,7 @@
                                     </select>
                                 </div>
                                 <div class="col m4 s12">
+                                	<label>Quantity</label>
                                     <div class="input-field">
                                         <input id="quantity" type="text" name="quantity" placeholder="Quantity">
                                     </div>

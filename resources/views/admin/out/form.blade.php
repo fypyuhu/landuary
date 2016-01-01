@@ -58,7 +58,7 @@
                     </div>
                     <div class="col m5 s12">
                     	<label>Shipping Date</label>
-                        <div id="ship_date"  name="ship_date"  class="calendar"></div>
+                        <div id="ship_date" name="ship_date" class="calendar"></div>
                     </div>
                 </div>
                 <div class="row">
