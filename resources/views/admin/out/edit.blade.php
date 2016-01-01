@@ -189,7 +189,7 @@
         $("#customer, #cart_number_dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true,disabled: true});
         $("#item_id").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
-        $(".calendar").jqxDateTimeInput({value:new Date("{{$ogc->shipping_date->format('Y-m-d')}}"), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy', disabled: true});
+        $(".calendar").jqxDateTimeInput({value:new Date("@date($ogc->shipping_date)"), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy', disabled: true});
         $("body").on("change", "#customer", function (e) {
             var cus_id = $(this).val();
             if (cus_id == "") {
