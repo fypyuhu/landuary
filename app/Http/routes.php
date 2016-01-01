@@ -36,8 +36,6 @@ Route::group(['middleware' => ['auth', 'verify.steps.completed']], function () {
 	Route::controller('admin/profile', 'UserProfileController');
 });
 
-Route::get('admin', ['middleware' => ['auth', 'profile.completed']]);
-
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller('items', 'ItemController');
     Route::controller('carts', 'CartController');
@@ -51,5 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller('carts-list', 'CartsListController');
 	Route::controller('invoices', 'InvoiceController');
 	Route::controller('rewash', 'RewashController');
-    Route::controller('/', 'HomeController');
+    //Route::controller('/', 'HomeController');
 });
+
+Route::get('admin', 'HomeController@getIndex')->middleware(['auth', 'profile.completed']);

@@ -124,7 +124,7 @@ class AuthController extends Controller
 		<strong>Contact Name:</strong> ".$request->contact_name."<br />
 		<strong>Contact Designation:</strong> ".$request->contact_designation."<br />
 		<strong>Contact Email:</strong> ".$request->contact_email."<br />
-		<br /><br />Thanks,<br />Team LaundryTek Systems";
+		<br />Thanks,<br />Team LaundryTek Systems";
 		
 		$headers .= "To: Laundrytek Systems <".$to.">" . "\r\n";
 		mail($to,$subject,$message,$headers);

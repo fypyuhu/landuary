@@ -33,7 +33,8 @@ class UserProfileController extends Controller {
         $user_id = $user->id;
         $user_profile = UserProfile::where('user_id', '=', $user_id)->first();
         $countries = Country::all();
-        return view('admin.profile.index', ['countries' => $countries, 'user' => $user_profile]);
+		$visited = intval($user->visited);
+        return view('admin.profile.index', ['countries' => $countries, 'user' => $user_profile, 'visited' => $visited]);
     }
 
     /**
@@ -308,9 +309,10 @@ class UserProfileController extends Controller {
     public function getView(Request $request) {
         $user = $request->user();
         $user_id = $user->id;
-        $user_profile = UserProfile::where('user_id', '=', $user_id)->get();
+        $user_profile = UserProfile::where('user_id', '=', $user_id)->first();
         $countries = Country::all();
-        return view('admin.profile.view', [ 'user' => $user_profile[0], 'countries' => $countries, 'showDashBoard' => true]);
+		$visited = intval($user->visited);
+        return view('admin.profile.view', [ 'user' => $user_profile, 'countries' => $countries, 'showDashBoard' => true, 'visited' => $visited]);
     }
 
     public function getResetPassword() {

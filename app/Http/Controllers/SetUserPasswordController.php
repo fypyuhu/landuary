@@ -63,6 +63,21 @@ class SetUserPasswordController extends Controller
 		if($user) {
 			$user->password = bcrypt($request->password);
 			$user->save();
+			
+			$to = $request->email;
+			$subject = "Password Notification";
+			$message = "Dear ".$request->legal_name.",<br /><br />Your password for LaundryTek account has been created. Please use following information to login:<br /><br />
+			<strong>Email:</strong> ".$request->email."<br />
+			<strong>Password:</strong> ".$request->password."<br />
+			<br />Thanks,<br />Team LaundryTek Systems";
+			
+			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+			$headers .= "To: ".$request->legal_name." <".$to.">" . "\r\n";
+			$headers .= "From: Laundrytek Systems <info@laundrytek.com>" . "\r\n";
+			
+			mail($to,$subject,$message,$headers);
+			
 			return redirect('setUserPassword')->with('status', 'Entered password for the specified email has been saved.');
 		} else {
 			return redirect('setUserPassword')->with('status', 'Entered email address does not exists in our records. Please enter valid email address and try again.');
