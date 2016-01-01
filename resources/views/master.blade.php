@@ -65,24 +65,27 @@
               <div class="col s12">
                 <h4>Reports</h4>
                 <ul class="col s6">
-                	<li style="display:none;"></li>
+                	<li><a href="javascript:void(0);">General</a>
+                    </li>
                     <li><a href="{{url('admin/manifests')}}">Manifests</a>
                     </li>
                     <li><a href="{{url('admin/carts-list')}}">Carts</a>
+                    </li>
+                    <li><a href="{{url('admin/rewash/list')}}">Rewash</a>
+                    </li>
+                    <li><a href="{{url('admin/reconciliation')}}">Reconciliation</a>
+                    </li>
+                </ul>
+                <ul class="col s6">
+                	<li><a href="javascript:void(0);">Accounting</a>
                     </li>
                     <li><a href="{{url('admin/invoices')}}">Invoices</a>
                     </li>
                     <li><a href="{{url('admin/taxes/list')}}">Tax</a>
                     </li>
-                </ul>
-                <ul class="col s6">
-                	<li style="display:none;"></li>
-                    <li><a href="{{url('admin/rewash/list')}}">Rewash</a>
-                    </li>
                     <li><a href="{{url('admin/invoices/income')}}">Income</a>
                     </li>
-                    <li><a href="{{url('admin/reconciliation')}}">Reconciliation</a>
-                    </li>
+                    
                 </ul>
               </div>
           </div>
@@ -204,9 +207,9 @@
             </ul>
           </li>
           
-          <li>
+          <!--<li>
             <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-today">Today</a>
-          </li>
+          </li>-->
           
         </ul>
 
@@ -318,10 +321,12 @@
 		
 		$( ".toggle-btn" ).click(function() {
 		    $('#reports-nav').slideToggle( "slow" );
+			$('#user-dropdown').slideUp( "slow" );
 		});
 		
 		$( ".dropdown-button" ).click(function() {
 		    $('#user-dropdown').slideToggle( "slow" );
+			$('#reports-nav').slideUp( "slow" );
 		});
 		
 		$('.content-wrap').click(function(e){
@@ -335,21 +340,6 @@
 		$('.mainmenu').mouseleave(function(e){
 			$('.submenu').hide();	
 		});
-		
-		$( "body" ).on( "click", "fieldset", function(e) {
-			$( ".layout_table .records_list" ).each(function( index ) {
-				var height = $( this ).height();
-				if(height > 0)
-					$(this).css('height', (height+1) + 'px');
-			});
-			
-			/*$( ".layout_table .heading" ).each(function( index ) {
-				var height2 = $( this ).height();
-				if(height2 > 0)
-					$(this).css('height', (height2+1) + 'px');
-			});*/
-		});
-		
 	});
 	
 	function toggle(hide, show) {
@@ -360,9 +350,9 @@
   
   <script src="{{URL::asset('js/print/jQuery.print.js')}}"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="{{URL::asset('js/custom.js')}}"></script>
   @section('js')
   @show
-  <script type="text/javascript" src="{{URL::asset('js/custom.js')}}"></script>
 </body>
 
 </html>

@@ -1,3 +1,12 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		mousemove_counter = 0;
+		if(mousemove_counter <= 0){
+			layout_table_auto_height(mousemove_counter);
+			mousemove_counter = 1;
+		}
+	});
+</script>
 <form action="/admin/shiping-manifest/create" Method="POST" id="pageForm">
     {{csrf_field()}}
     <div class="col s12 m5">
@@ -69,9 +78,9 @@
                             <label for="all_carts"></label>
                         </div>
                         <div class="col s2">Cart Number</div>
-                        <div class="col s2 center-align">Date Created</div>
+                        <div class="col s3">Date Created</div>
                         <div class="col s3 right-align">Net Weight lb/kg</div>
-                        <div class="col s2 center-align">Actions</div>
+                        <div class="col s3 center-align">Actions</div>
                     </div>
                     @if(!$carts->isEmpty())
                     @foreach($carts as $cart)
@@ -81,9 +90,9 @@
                             <label for="carts[{{$cart->id}}]"></label>
                         </div>
                         <div class="col s2">{{$cart->cart_id}}</div>
-                        <div class="col s2">{{date('d-m-Y',strtotime($cart->shipping_date))}}</div>
+                        <div class="col s3">@date($cart->shipping_date)</div>
                         <div class="col s3 right-align">{{$cart->net_weight}}</div>
-                        <div class="col s2 center-align"><a href="/admin/out/receipt/{{$cart->id}}"   class="edit-button">View</a> | <a href="/admin/out/edit/{{$cart->id}}"  class="edit-button">Edit</a></div>
+                        <div class="col s3 center-align"><a href="/admin/out/receipt/{{$cart->id}}" class="edit-button">View</a> | <a href="/admin/out/edit/{{$cart->id}}"  class="edit-button">Edit</a> | <a href="/admin/out/delete/{{$cart->id}}" data-mode="ajax">Delete</a></div>
                     </div>
                     @endforeach
                     @else
@@ -114,7 +123,7 @@
         });
         $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
-        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'dd-MM-yyyy'});
+        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'MMMM dd, yyyy'});
         $('#customer').on('change', function () {
             if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val() != "-1") {
                 $(".loading").css("display", "block");

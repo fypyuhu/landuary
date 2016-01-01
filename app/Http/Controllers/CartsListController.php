@@ -20,7 +20,7 @@ class CartsListController extends Controller {
         foreach ($incoming_carts as $cart) {
             $row = array();
             $row["incoming_cart_id"] = $cart->cart_id;
-            $row["receiving_date"] = $cart->receiving_date;
+            $row["receiving_date"] = date('d F, Y', strtotime($cart->receiving_date));
             $row["customer_name"] = $cart->name;
             $row["customer_number"] = $cart->customer_number;
             $row["department_name"] = $cart->department_name;
@@ -40,7 +40,7 @@ class CartsListController extends Controller {
         foreach ($outgoing_carts as $cart) {
             $row = array();
             $row["outgoing_cart_id"] = $cart->cart_id;
-            $row["shipping_date"] = $cart->shipping_date;
+            $row["shipping_date"] = date('d F, Y', strtotime($cart->shipping_date));
             $row["customer_name"] = $cart->name;
             $row["customer_number"] = $cart->customer_number;
             $row["department_name"] = $cart->department_name;
@@ -64,7 +64,7 @@ class CartsListController extends Controller {
         foreach ($outgoing_carts as $cart) {
             $row = array();
             $row["outgoing_cart_id"] = $cart->cart_id;
-            $row["shipping_date"] = $cart->shipping_date;
+            $row["shipping_date"] = date('d F, Y', strtotime($cart->shipping_date));
             $row["customer_name"] = $cart->name;
             $row["customer_number"] = $cart->customer_number;
             $row["department_name"] = $cart->department_name;

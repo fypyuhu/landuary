@@ -18,6 +18,7 @@
                             Business Model
                         </a>
                     </div>
+                    @if(isset($visited) && $visited)
                     <div>
             			<a id="link-reset-password" href="{{url('admin/profile/reset-password')}}" title="Password &amp; Security">
                             <i class="oIconLock oIconSmall oIconLight oLeftNavIconSmall"></i>
@@ -38,6 +39,7 @@
                             Logout
                         </a>
                     </div>
+                    @endif
         		</div>
             </div>
             

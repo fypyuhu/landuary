@@ -58,6 +58,18 @@ class ItemController extends Controller {
             $relation->save();
         }
     }
+	
+	/*public function import(Request $request) {
+		if ($request->hasFile('import') && $request->file('import')->isValid()) {
+            $fileName = time() . $request->file('import')->getClientOriginalName(); // getting image extension
+            $destinationPath = public_path() . "/uploads/import/items";
+            $request->file('import')->move($destinationPath, $fileName);
+            $up->logo = $fileName;
+        }
+		
+		$request = new Request;
+		$this->postCreate($request);
+	}*/
 
     public function getShow(Request $request) {
 		$search_filter = '';

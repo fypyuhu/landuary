@@ -37,11 +37,13 @@
                         <legend>Customer Information:</legend>
                         <div class="row">
                             <div class="col m6 s12">
+                            	<label>Customer</label>
                                 <select name="customer" id="customer" >
                                     <option value="{{$customer->id}}" >{{$customer->name}}</option>
                                 </select>
                             </div>
                             <div class="col m6 s12">
+                            	<label>Department</label>
                                 <select name="department" id="department" >
                                     <option value="{{$dept->id or ''}}">{{$dept->department_name or ''}}</option>
                                 </select>
@@ -50,6 +52,7 @@
 
                         <div class="row">
                             <div class="col s12">
+                            	<label>Customer Number</label>
                                 <div class="input-field">
                                     <input id="name" type="text" name="name" value="{{$customer->customer_number}}" placeholder="Name" readonly="readonly">
                                 </div>
@@ -61,6 +64,7 @@
                         <legend>Cart Information</legend>
                         <div class="row">
                             <div class="col m4 s12">
+                            	<label>Cart Number</label>
                                 <div class="input-field" id="exchange-cart-div" @if($ogc->is_exchange_cart==0) style="display: none;" @endif>
                                      <select name="cart_number_dropdown" id="cart_number_dropdown" disabled>
                                         <option value="{{$cart->id or ''}}">{{$cart->cart_number or ''}}</option>
@@ -70,12 +74,14 @@
                                      <input id="cart_number_textfield" readonly="readonly" type="text" value="{{$ogc->cart_id}}" name="cart_number_textfield" placeholder="Cart Number">
                                 </div>
                             </div>
-                            <div class="col m4 s12">
+                            <div class="col m3 s12">
+                            	<label>Tare Weight</label>
                                 <div class="input-field">
                                     <input id="tare_weight" type="text" value="{{$initial_values->standard_tare_weight}}" name="tare_weight" placeholder="Tare Weight">
                                 </div>
                             </div>
-                            <div class="col m4 s12">
+                            <div class="col m5 s12">
+                            	<label>Receiving Date</label>
                                 <div name="receiving_date" id="receiving_date" class="calendar"></div>
                             </div>
                         </div>
@@ -108,6 +114,7 @@
                             {{csrf_field()}}
                             <div class="row no-topmargin">
                                 <div class="col m8 s12">
+                                	<label>Item Name</label>
                                     <select name="item_id" id="item_id">
                                         @foreach ($items as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
@@ -115,6 +122,7 @@
                                     </select>
                                 </div>
                                 <div class="col m4 s12">
+                                	<label>Quantity</label>
                                     <div class="input-field">
                                         <input id="quantity" type="text" name="quantity" placeholder="Quantity">
                                     </div>
@@ -163,7 +171,7 @@
                             <div class="col m4 s12">
                                 <label>Net Weight</label>
                                 <div class="input-field">
-                                    <input id="net_weight" type="text" value="{{$ogc->net_weight}}" readonly="readonly" name="net_weight" placeholder="Net Weight">
+                                    <input id="net_weight" type="text" value="{{$ogc->net_weight}}" readonly="readonly" name="net_weight">
                                 </div>
                             </div>
                         </div>
@@ -181,7 +189,7 @@
         $("#customer, #cart_number_dropdown").jqxComboBox({width: '100%', autoDropDownHeight: true,disabled: true});
         $("#item_id").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
-        $(".calendar").jqxDateTimeInput({value:new Date("{{$ogc->receiving_date->format('Y-m-d')}}"), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy', disabled: true});
+        $(".calendar").jqxDateTimeInput({value:new Date("{{$ogc->receiving_date->format('Y-m-d')}}"), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy', disabled: true});
         $("body").on("change", "#customer", function (e) {
             var cus_id = $(this).val();
             if (cus_id == "") {
@@ -307,8 +315,9 @@
             submitHandler: function (form) {
 				$('.loading').show();
                 if(parseFloat($("#item_count").val())<1){
-                $("#item_count").parent().siblings(".error").html("Please add at least one item");
-                $("#item_count").parent().siblings(".error").show();
+					$('.loading').hide();
+					$("#item_count").parent().siblings(".error").html("Please add at least one item");
+					$("#item_count").parent().siblings(".error").show();
                 }
                 else{
                     $(form).validate().cancelSubmit = true;

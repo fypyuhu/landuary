@@ -60,9 +60,16 @@
         <div class="nav-wrapper" align="center">
     
           <!-- Logo -->
-          <a href="/admin" class="brand-logo" style="position:relative;">
+          <!--<a href="/admin" class="brand-logo" style="position:relative;">-->
+          @if (Auth::check())
+          <a href="javascript:void(0);" class="brand-logo" style="position:relative;">
             <img src="{{URL::asset('images/logo.png')}}" alt="Con">
           </a>
+          @else
+          <a href="/" class="brand-logo" style="position:relative;">
+            <img src="{{URL::asset('images/logo.png')}}" alt="Con">
+          </a>
+          @endif
           <!-- /Logo -->
           
         </div>
@@ -179,9 +186,9 @@
   </script>
   
   <script src="{{URL::asset('js/print/jQuery.print.js')}}"></script>
+  <script type="text/javascript" src="{{URL::asset('js/custom.js')}}"></script>
   @section('js')
   @show
-  <script type="text/javascript" src="{{URL::asset('js/custom.js')}}"></script>
 </body>
 
 </html>

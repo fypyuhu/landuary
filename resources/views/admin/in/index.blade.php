@@ -27,7 +27,18 @@
 
     </div>
     <!-- /Breadcrumb -->
-
+	
+    @if (session('status'))
+        <div class="row">
+            <div class="col m5 s12">
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            </div>
+        </div>
+        <a href="/admin/in/receipt/{{$rec_id}}" id="newtab_link" target="_blank" style="display:none;">Link</a>
+    @endif
+    
     <div id="loadAjaxFrom">
         
             {{csrf_field()}}
@@ -41,7 +52,7 @@
                                 <select name="customer" id="customer">
                                     <option value="">Customer</option>
                                     @foreach ($customers as $customer)
-                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                    <option value="{{$customer->id}}" {{isset($current_customer) && $customer->id == $current_customer ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -83,13 +94,13 @@
                                     <input id="cart_number_textfield" type="text" value="{{$initial_values->cart_number}}" readonly="readonly" name="cart_number_textfield">
                                 </div>
                             </div>
-                            <div class="col m4 s12">
+                            <div class="col m3 s12">
                                 <label>Tare Weight</label>
                                 <div class="input-field">
-                                    <input id="tare_weight"  value="{{$initial_values->standard_tare_weight}}" type="text" name="tare_weight" readonly="readonly">
+                                    <input id="tare_weight"  value="{{$initial_values->standard_tare_weight}}" type="text" name="tare_weight">
                                 </div>
                             </div>
-                            <div class="col m4 s12">
+                            <div class="col m5 s12">
                                 <label>Receiving Date</label>
                                 <div name="receiving_date" id="receiving_date" class="calendar"></div>
                             </div>
@@ -153,18 +164,21 @@
                             </div>
                         </div>
                         <div class="row" id="weights-div">
-                            <div class="col m4 s12">
-                                <label>Gross Weight</label>
+                            <div class="col m4 s12 loading-sm-parent">
+                                <label>Gross Weight <img src="{{URL::asset('images/ajax-loader-sm.gif')}}" alt="" class="loading-sm" /></label>
                                 <div class="input-field">
-                                    <input id="gross_weight" type="text" onblur="calculateNetWeight()" name="gross_weight">
+                                    <input id="gross_weight" value="" type="text" onblur="calculateNetWeight()" name="gross_weight">
                                 </div>
                             </div>
                             <div class="col m4 s12">
                                 <label>Net Weight</label>
                                 <div class="input-field">
-                                    <input id="net_weight" value="0" type="text" name="net_weight">
+                                    <input id="net_weight" value="0" type="text" name="net_weight" readonly="readonly">
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <a href="javascript:void(0);" class="waves-effect btn" style="background: #279977; height: 20px; line-height: 20px; font-size: 9px;" id="btn-get-weight">Get Weight</a>
                         </div>
                     </fieldset>
                 </div>
@@ -178,11 +192,48 @@
 
 @section('js')
 <script>
+	$( window ).load(function() {
+		@if (session('status'))
+			$("#newtab_link")[0].click();
+			
+			$('.loading').show();
+			var cus_id = $("#customer").val();
+            var url = "{{url('admin/in/ajax-form')}}";
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: {customer_id: cus_id},
+                success: function (response)
+                {
+                    $('#loadAjaxFrom').html(response);
+                    $('.loading').hide();
+                }
+            });
+		@endif	
+	});
+	
     $(document).ready(function () {
         $("#customer, #cart_number_dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
-        $("body").on("change", "#customer", function (e) {
+        
+		$("body").on("click", "#btn-get-weight", function (e) {
+			$('.loading-sm').show();
+            var url = "{{url('admin/carts/machine-weight')}}";
+            $.ajax({
+                url: url,
+                type: 'GET',
+                //data: {customer_id: cus_id},
+                success: function (response)
+                {
+                    $('#gross_weight').val(response);
+                    $('.loading-sm').hide();
+					calculateNetWeight();
+                }
+            });
+		});
+		
+		$("body").on("change", "#customer", function (e) {
             $('.loading').show();
             var cus_id = $(this).val();
             var url = "{{url('admin/in/ajax-form')}}";
@@ -214,7 +265,7 @@
                 }
             });
         });
-        $(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+        $(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
         $("body").on("click", "#button-add-item", function (e) {
             e.preventDefault();
 			$("#quantity").keyup(function(e){

@@ -33,7 +33,8 @@ class UserProfileController extends Controller {
         $user_id = $user->id;
         $user_profile = UserProfile::where('user_id', '=', $user_id)->first();
         $countries = Country::all();
-        return view('admin.profile.index', ['countries' => $countries, 'user' => $user_profile]);
+		$visited = intval($user->visited);
+        return view('admin.profile.index', ['countries' => $countries, 'user' => $user_profile, 'visited' => $visited]);
     }
 
     /**
@@ -66,11 +67,8 @@ class UserProfileController extends Controller {
         $up->contact_name = $request->contact_name;
         $up->contact_designation = $request->contact_designation;
         $up->contact_email = $request->contact_email;
-        /* $up->linen_rental = $request->linen_rental;
-          $up->healthcare = $request->healthcare;
-          $up->hospitality = $request->hospitality;
-          $up->vacational_rentals = $request->vacational_rentals;
-          $up->customer_own_goods = $request->customer_own_goods; */
+		$up->we_serve = implode(', ', $request->we_serve);
+		$up->we_do = implode(', ', $request->we_do);
         $up->save();
         return redirect()->route('admin/profile/view');
     }
@@ -99,11 +97,8 @@ class UserProfileController extends Controller {
         $up->contact_name = $request->contact_name;
         $up->contact_designation = $request->contact_designation;
         $up->contact_email = $request->contact_email;
-        /* $up->linen_rental = $request->linen_rental;
-          $up->healthcare = $request->healthcare;
-          $up->hospitality = $request->hospitality;
-          $up->vacational_rentals = $request->vacational_rentals;
-          $up->customer_own_goods = $request->customer_own_goods; */
+        $up->we_serve = implode(', ', $request->we_serve);
+		$up->we_do = implode(', ', $request->we_do);
         $up->save();
 		
 		if($this->skippedAt() <= 0) {
@@ -146,11 +141,8 @@ class UserProfileController extends Controller {
         $up->contact_name = $request->contact_name;
         $up->contact_designation = $request->contact_designation;
         $up->contact_email = $request->contact_email;
-        /* $up->linen_rental = $request->linen_rental;
-          $up->healthcare = $request->healthcare;
-          $up->hospitality = $request->hospitality;
-          $up->vacational_rentals = $request->vacational_rentals;
-          $up->customer_own_goods = $request->customer_own_goods; */
+        $up->we_serve = implode(', ', $request->we_serve);
+		$up->we_do = implode(', ', $request->we_do);
         $up->save();
         return $this->getAjaxForm($request->user_id);
     }
@@ -317,9 +309,10 @@ class UserProfileController extends Controller {
     public function getView(Request $request) {
         $user = $request->user();
         $user_id = $user->id;
-        $user_profile = UserProfile::where('user_id', '=', $user_id)->get();
+        $user_profile = UserProfile::where('user_id', '=', $user_id)->first();
         $countries = Country::all();
-        return view('admin.profile.view', [ 'user' => $user_profile[0], 'countries' => $countries, 'showDashBoard' => true]);
+		$visited = intval($user->visited);
+        return view('admin.profile.view', [ 'user' => $user_profile, 'countries' => $countries, 'showDashBoard' => true, 'visited' => $visited]);
     }
 
     public function getResetPassword() {

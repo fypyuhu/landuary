@@ -105,5 +105,12 @@ class CartController extends Controller {
         $cart->is_deleted = 0;
         $cart->save();
     }
+	
+	public function getMachineWeight() {
+		$myfile = fopen('etc/weight.txt', "r") or die("Unable to open file!");
+		$value = fread($myfile,filesize('etc/weight.txt'));
+		fclose($myfile);
+		return $value;
+	}
 
 }

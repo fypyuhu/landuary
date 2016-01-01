@@ -1,12 +1,14 @@
 @extends('master')
 @section('content')
   <!-- Main Content -->
-  <section class="content-wrap">
-    <div class="p-wrapper">
-    	<div class="row">
+  <section class="content-wrap" style="background: #ffffff;">
+  	<div class="row">
         	<a href="{{URL::previous()}}" class="waves-effect btn">Back</a>
             <button type="submit" class="waves-effect btn">Print</button>
         </div>
+    
+    <div class="row receipt">    
+    <div class="p-wrapper" id="printable">
         <div class="row">
             <h3 class="align-center">Receiving Manifest</h3>
         </div>
@@ -23,8 +25,8 @@
                 From: @date($manifest->date_from) - @date($manifest->date_to)</p>
             </div>
         </div>
-        <div class="row" style="background:#fdfdfd; padding:15px 25px 25px;">
-            <div class="pull-left">
+        <div class="row highlighted">
+            <div class="row">
                 <h4>Received From:</h4>
                 {{$customer->name}}<br />
                 {{$customer->shipping_address}}<br />
@@ -40,10 +42,10 @@
         </div>
         <div class="row">
             <table>
-                <tr>
+                <tr class="receipt-heading">
                     <th>Cart #</th>
                     <th>Item #</th>
-                    <th>Description</th>
+                    <th>Name</th>
                     <th class="align-right">Qty</th>
                     <th class="align-right">Net Weight</th>
                 </tr>
@@ -51,7 +53,7 @@
                 <tr>
                     <td>{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->cart_id}}</td>
                     <td>{{$item->item_number}}</td>
-                    <td>{{$item->description}}</td>
+                    <td>{{$item->name}}</td>
                     <td class="align-right">{{$item->quantity}}</td>
                     <td class="align-right">{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->net_weight}}</td>
                 </tr>
@@ -60,11 +62,12 @@
         </div>
         <hr />
         <div class="row">
-            <div class="pull-right align-right" style="font-weight: bold; background:#fdfdfd; padding:15px;">
+            <div class="pull-right align-right" style="font-weight: bold; padding:15px;">
                 <p>Total Gross Weight: {{$total_gross_weight}}<br />
                 Total Net Weight: {{$total_net_weight}}</p>
             </div>
         </div>
+    </div>
     </div>
   </section>
   <!-- End Content -->

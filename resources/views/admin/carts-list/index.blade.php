@@ -61,7 +61,7 @@
                             </div>
                             <div class="row">
                                 <div class="row">
-                                    <button type="button" onclick="$('#jqxgrid').jqxGrid('updatebounddata');" class="waves-effect btn">Filter</button>
+                                    <button type="button" onclick="$('#jqxgrid').jqxGrid('updatebounddata');" class="waves-effect btn">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="row">
                                 <div class="row">
-                                    <button type="button" onclick="$('#jqxgrid2').jqxGrid('updatebounddata');" class="waves-effect btn">Filter</button>
+                                    <button type="button" onclick="$('#jqxgrid2').jqxGrid('updatebounddata');" class="waves-effect btn">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                             </div>
                             <div class="row">
                                 <div class="row">
-                                    <button type="button" onclick="$('#jqxgrid1').jqxGrid('updatebounddata');" class="waves-effect btn">Filter</button>
+                                    <button type="button" onclick="$('#jqxgrid1').jqxGrid('updatebounddata');" class="waves-effect btn">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -168,8 +168,8 @@
         var oneWeekAgo = new Date();
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
         $("#r_customer, #i_customer, #s_customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
-        $(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
-        $(".r_calendar").jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+        $(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
+        $(".r_calendar").jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
         var url = "{{url('admin/carts-list/show-incoming')}}";
 // prepare the data
         var source =

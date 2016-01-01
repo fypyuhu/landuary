@@ -28,6 +28,19 @@
     </div>
     <!-- /Breadcrumb -->
 
+	@if (session('status'))
+        <div class="row">
+            <div class="col m5 s12">
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            </div>
+        </div>
+        @if($rec_id)
+        	<a href="/admin/shiping-manifest/recipt/{{$rec_id}}" id="newtab_link" target="_blank" style="display:none;">Link</a>
+        @endif
+    @endif
+
     <div id="shipmant" class="row no-rightmargin">
         <form action="/admin/shiping-manifest/create" Method="POST">
             <div class="col s12 m5">
@@ -39,7 +52,7 @@
                             <select name="customer" id="customer">
                                 <option value="-1" selected="selected">Please select a customer</option>
                                 @foreach($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                <option value="{{$customer->id}}" {{isset($current_customer) && $current_customer && $customer->id == $current_customer ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -110,9 +123,27 @@
 @endsection
 @section('js')
 <script type="text/javascript">
+	$( window ).load(function() {
+		@if (session('status'))
+			$("#newtab_link")[0].click();
+			
+			if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val()!="-1") {
+                $(".loading").css("display","block");
+                $.ajax({
+                    url: "/admin/shiping-manifest/details/" + $("#customer").val(),
+                    context: document.body
+                }).done(function (html) {
+                    $("#shipmant").html(html);
+                    $(".loading").css("display","none");
+                });
+            }
+		@endif	
+	});
+	
+	
     $(document).ready(function () {
          $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true,disabled:true});
-        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'dd-MM-yyyy'});
+        $("#ship_date").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px',formatString: 'MMMM dd, yyyy'});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true});
          $('#customer').on('change', function () {
             if ($("#customer").jqxComboBox('getSelectedIndex') != "-1" && $("#customer").val()!="-1") {

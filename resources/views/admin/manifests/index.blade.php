@@ -49,7 +49,7 @@
                                     </select>
                                 </div>
                                 <div class="col m6 s12" id="s_department_div">
-                                    <label>Select Department:</label>
+                                    <label>Select Department: <img src="{{URL::asset('images/ajax-loader-sm.gif')}}" alt="" class="loading-sm" /></label>
                                     <select name="s_department" id="s_department">
                                         <option value='-1'>Select Department</option>
                                     </select>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="row">
                                 <div class="row">
-                                    <button type="button" class="waves-effect btn" onclick="$('#jqxgrid').jqxGrid('updatebounddata');">Filter</button>
+                                    <button type="button" class="waves-effect btn" onclick="$('#jqxgrid').jqxGrid('updatebounddata');">Search</button>
                                     <button type="reset" class="waves-effect btn">Clear</button>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                             </div>
                             <div class="row">
                                 <div class="row">
-                                    <button type="buton" class="waves-effect btn" onclick="$('#jqxgrid1').jqxGrid('updatebounddata');">Filter</button>
+                                    <button type="buton" class="waves-effect btn" onclick="$('#jqxgrid1').jqxGrid('updatebounddata');">Search</button>
                                     <button type="reset" class="waves-effect btn">Clear</button>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
             });
         }
         $("body").on("change", "#s_customer", function (e) {
-            $('.loading').css('display', 'block');
+            $('.loading-sm').show();
             $.ajax({
                 url: "/admin/customers/get-departments/" + $("#s_customer").val(),
                 type: 'GET',
@@ -151,15 +151,15 @@
                     $('#s_department').jqxComboBox('destroy');
                     $('#s_department_div').html(html);
                     $("#s_department").jqxComboBox({width: '100%', autoDropDownHeight: true});
-                    $('.loading').css('display', 'none');
+                    $('.loading-sm').hide();
                 }
             });
         });
         var oneWeekAgo = new Date();
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-        $('#s_date_from, #r_date_from').jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+        $('#s_date_from, #r_date_from').jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
         $("#r_customer, #s_customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
-        $("#r_date_to,  #s_date_to").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+        $("#r_date_to,  #s_date_to").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
 
 
         var source =

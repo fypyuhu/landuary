@@ -98,9 +98,9 @@
                                     <label for="all_carts"></label>
                                 </div>
                                 <div class="col s2">Cart Number</div>
-                                <div class="col s2 center-align">Date Created</div>
+                                <div class="col s3">Date Created</div>
                                 <div class="col s3 right-align">Net Weight lb/kg</div>
-                                <div class="col s2 center-align">Actions</div>
+                                <div class="col s3 center-align">Actions</div>
                             </div>
                             @if(!$carts->isEmpty())
                             @foreach($carts as $cart)
@@ -110,9 +110,9 @@
                                     <label for="carts[{{$cart->id}}]"></label>
                                 </div>
                                 <div class="col s2">{{$cart->cart_id}}</div>
-                                <div class="col s2">{{date('d-m-Y',strtotime($cart->shipping_date))}}</div>
+                                <div class="col s3">@date($cart->shipping_date)</div>
                                 <div class="col s3 right-align">{{$cart->net_weight}}</div>
-                                <div class="col s2 center-align"><a href="/admin/out/receipt/{{$cart->id}}"   class="edit-button">View</a> | <a href="/admin/out/edit/{{$cart->id}}"  class="edit-button">Edit</a></div>
+                                <div class="col s3 center-align"><a href="/admin/out/receipt/{{$cart->id}}"   class="edit-button">View</a> | <a href="/admin/out/edit/{{$cart->id}}"  class="edit-button">Edit</a> | <a href="/admin/out/delete/{{$cart->id}}" data-mode="ajax">Delete</a></div>
                             </div>
                             @endforeach
                             @endif
@@ -143,7 +143,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#department").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true, disabled: true});
-        $("#ship_date").jqxDateTimeInput({value:new Date("{{$manifest->shipping_date}}"), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy', disabled: true});
+        $("#ship_date").jqxDateTimeInput({value:new Date("{{$manifest->shipping_date}}"), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy', disabled: true});
         $("#customer").jqxComboBox({width: '100%', autoComplete: true, autoDropDownHeight: true, disabled: true});
         $("#pageForm").validate({
                 ignore: [],

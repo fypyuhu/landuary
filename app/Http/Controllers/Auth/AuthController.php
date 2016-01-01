@@ -46,7 +46,7 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    /*protected function validator(array $data)
     {
         return Validator::make($data, [
 			'legal_name' => 'required|max:255',
@@ -56,9 +56,7 @@ class AuthController extends Controller
 			'zipcode' => 'required',
 			'country' => 'required',
 			'phone' => 'required',
-			'fax' => '',
 			'email' => 'required|email|max:255|unique:users',
-			'website' => '',
 			'contact_name' => 'required',
 			'contact_designation' => 'required',
 			'contact_email' => 'required|email|max:255',
@@ -66,7 +64,7 @@ class AuthController extends Controller
             //'email' => 'required|email|max:255|unique:users',
             //'password' => 'required|confirmed|min:6',
         ]);
-    }
+    }*/
 	
 	public function postRegister(Register $request) {
 		$org = new Organization;
@@ -99,6 +97,37 @@ class AuthController extends Controller
 		$up->contact_designation = $request->contact_designation;
 		$up->contact_email = $request->contact_email;
 		$up->save();
+		
+		$to = $request->email;
+		$subject = "Registration Notification";
+		$message = "Dear ".$request->legal_name."<br /><br />Congratulations! You have successfully registered with LaundryTek Systems. A sales representative will shortly be in touch with you to complete your software setup. We look forward to working with you.<br /><br />Thanks,<br />Team LaundryTek Systems";
+		
+		$headers = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+		$headers .= "To: ".$request->legal_name." <".$to.">" . "\r\n";
+		$headers .= "From: Laundrytek Systems <info@laundrytek.com>" . "\r\n";
+		mail($to,$subject,$message,$headers);
+		
+		$to = 'beyond21st@gmail.com';
+		$subject = "Registration Notification";
+		$message = "Dear Admin,<br /><br />A new user has been registered with LaundryTek with following information:<br /><br />
+		<strong>Legal Name:</strong> ".$request->legal_name."<br />
+		<strong>Street Address:</strong> ".$request->street_address."<br />
+		<strong>City:</strong> ".$request->city."<br />
+		<strong>State:</strong> ".$request->state."<br />
+		<strong>Zipcode:</strong> ".$request->zipcode."<br />
+		<strong>Country:</strong> ".$request->country."<br />
+		<strong>Phone:</strong> ".$request->phone."<br />
+		<strong>Fax:</strong> ".$request->fax."<br />
+		<strong>Email:</strong> ".$request->email."<br />
+		<strong>Website:</strong> ".$request->website."<br />
+		<strong>Contact Name:</strong> ".$request->contact_name."<br />
+		<strong>Contact Designation:</strong> ".$request->contact_designation."<br />
+		<strong>Contact Email:</strong> ".$request->contact_email."<br />
+		<br />Thanks,<br />Team LaundryTek Systems";
+		
+		$headers .= "To: Laundrytek Systems <".$to.">" . "\r\n";
+		mail($to,$subject,$message,$headers);
 		
 		return response()->view('registerSuccess', $request->all());
 		//return redirect('/registerSuccess');

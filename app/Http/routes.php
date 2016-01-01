@@ -14,6 +14,8 @@
 Route::get('/', ['middleware' => 'guest', ['except' => 'getLogout'], function () {
 	return view('welcome');
 }]);
+Route::get('setUserPassword', 'SetUserPasswordController@getIndex');
+Route::post('setUserPassword/edit', 'SetUserPasswordController@postEdit');
 Route::get('/logout', function () {
     Auth::logout();
     return view('welcome');
@@ -30,11 +32,11 @@ Route::post('password/email', 'Auth\PasswordController@postEmail');
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
-Route::group(['middleware' => 'auth', 'middleware' => 'verify.steps.completed'], function () {
+Route::group(['middleware' => ['auth', 'verify.steps.completed']], function () {
 	Route::controller('admin/profile', 'UserProfileController');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'profile.completed'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::controller('items', 'ItemController');
     Route::controller('carts', 'CartController');
     Route::controller('customers', 'CustomerController');
@@ -47,5 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'middleware' => 'prof
     Route::controller('carts-list', 'CartsListController');
 	Route::controller('invoices', 'InvoiceController');
 	Route::controller('rewash', 'RewashController');
-    Route::controller('/', 'HomeController');
+    //Route::controller('/', 'HomeController');
 });
+
+Route::get('admin', 'HomeController@getIndex')->middleware(['auth', 'profile.completed']);

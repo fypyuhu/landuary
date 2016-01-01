@@ -33,7 +33,7 @@ class ManifestController extends Controller {
             else{
                 $row["department"] ='';
             }
-            $row["date"] = $manifest->shipping_date;
+            $row["date"] = date('d F, Y', strtotime($manifest->shipping_date));
             if($manifest->invoiced==1){
                 $row["invoiced"] = "Yes";  
             }

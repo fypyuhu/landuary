@@ -27,7 +27,18 @@
 
     </div>
     <!-- /Breadcrumb -->
-
+	
+    @if (session('status'))
+        <div class="row">
+            <div class="col m5 s12">
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            </div>
+        </div>
+        <a href="/admin/rewash/list" id="newtab_link" target="_blank" style="display:none;">Link</a>
+    @endif
+    
     <div id="loadAjaxFrom">
         <div class="row no-rightmargin">
             <div class="col s12 m5 margin-right-md">
@@ -39,7 +50,7 @@
                             <select name="customer" id="customer">
                                 <option value="">Customer</option>
                                 @foreach ($customers as $customer)
-                                <option value="{{$customer->id}}">{{$customer->name}}</option>
+                                <option value="{{$customer->id}}" {{isset($current_customer) && $customer->id == $current_customer ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -132,11 +143,31 @@
 
 @section('js')
 <script>
+	$( window ).load(function() {
+		@if (session('status'))
+			$("#newtab_link")[0].click();
+			
+			$('.loading').show();
+            var cus_id = $("#customer").val();
+            var url = "{{url('admin/rewash/ajax-form')}}";
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: {customer_id: cus_id},
+                success: function (response)
+                {
+                    $('#loadAjaxFrom').html(response);
+                    $('.loading').hide();
+                }
+            });
+		@endif	
+	});
+	
     $(document).ready(function () {
         $("#customer").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
         $("#item_id").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
         $("#department").jqxComboBox({width: '100%', autoDropDownHeight: true, disabled: true});
-		$(".datepicker").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+		$(".datepicker").jqxDateTimeInput({ width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
         $("body").on("change", "#customer", function (e) {
             $('.loading').show();
             var cus_id = $(this).val();

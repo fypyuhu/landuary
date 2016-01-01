@@ -14,13 +14,13 @@
         <input id="cart_number_textfield" type="text" name="cart_number">
       </div>
     </div>
-    <div class="col m4 s12">
+    <div class="col m3 s12">
       <label>Tare Weight</label>
       <div class="input-field">
-        <input id="tare_weight" type="text" name="tare_weight" readonly="readonly" value="{{$current_cart->tare_weight}}">
+        <input id="tare_weight" type="text" name="tare_weight" value="{{$current_cart->tare_weight}}">
       </div>
     </div>
-    <div class="col m4 s12">
+    <div class="col m5 s12">
       <label>Shipping Date</label>
       <div id="ship_date" name="ship_date" class="calendar"></div>
     </div>
@@ -42,6 +42,6 @@
 <script>
     $(document).ready(function () {
 		$("#cart_number_dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
-		$(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy' });
+		$(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy' });
 	});
 </script>

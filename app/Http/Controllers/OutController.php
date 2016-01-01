@@ -21,7 +21,14 @@ class OutController extends Controller {
         $carts = Cart::organization()->get();
         $customers = Customer::organization()->get();
         $depts = CustomerDepartment::organization()->get();
-        return view('admin.out.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts]);
+		$cart_id = '';
+		$current_customer = '';
+		if (session('status')) {
+			$ogc = OutgoingCart::orderBy('id', 'desc')->first();
+			$cart_id = $ogc->id;
+			$current_customer = $ogc->customer_id;
+		}
+        return view('admin.out.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'cart_id' => $cart_id, 'current_customer' => $current_customer]);
     }
 
     public function getCarts() {
@@ -91,7 +98,8 @@ class OutController extends Controller {
             $ogc_item->quantity = $request->item_quantity[$key];
             $ogc_item->save();
         }
-        return redirect('/admin/out/receipt/' . $ogc->id);
+        //return redirect('/admin/out/receipt/' . $ogc->id);
+		return redirect('/admin/out')->with('status', 'Outgoing cart has been created successfully.');
     }
 
     public function getReceipt($id) {
@@ -145,6 +153,16 @@ class OutController extends Controller {
             $ogc_item->save();
         }
         return redirect($request->return_url);
+    }
+	
+	public function getDelete($id) {
+        return view('admin.out.delete', ['id' => $id]);
+    }
+
+    public function postDelete($id, Request $request) {
+        $rec = OutgoingCart::find($id);
+        $rec->delete();
+		return redirect('/admin/shiping-manifest')->with('status', 'Selected cart has been deleted successfully.');
     }
 
 }

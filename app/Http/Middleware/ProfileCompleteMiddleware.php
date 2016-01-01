@@ -50,7 +50,7 @@ class ProfileCompleteMiddleware
 					return redirect(URL::previous());
 				else 
 					return redirect('admin/profile');*/
-				return redirect('admin/profile');
+				return redirect('admin/profile/step1');
 			}
 		}
 

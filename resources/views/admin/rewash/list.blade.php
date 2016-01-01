@@ -52,7 +52,7 @@
                     </div>
                     <div class="row">
                         <div class="row">
-                            <button type="button" onclick="$('#jqxgrid').jqxGrid('updatebounddata');" class="waves-effect btn">Filter</button>
+                            <button type="button" onclick="$('#jqxgrid').jqxGrid('updatebounddata');" class="waves-effect btn">Search</button>
                         </div>
                     </div>
                 </div>
@@ -125,8 +125,8 @@
         var oneWeekAgo = new Date();
         oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
         $("#i_customer, #format-select").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
-        $(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
-        $(".r_calendar").jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'dd-MM-yyyy'});
+        $(".calendar").jqxDateTimeInput({min: new Date(), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
+        $(".r_calendar").jqxDateTimeInput({value: new Date(oneWeekAgo), width: 'auto', height: '25px', formatString: 'MMMM dd, yyyy'});
         var url = "{{url('admin/rewash/list-show')}}";
 // prepare the data
         var source =

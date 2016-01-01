@@ -18,7 +18,15 @@ class ReceivingManifestController extends Controller
     public function getIndex()
     {
 		$customers = ReceivingManifest::getCustomerByIncomingCart();
-        return view('admin.receiving-manifest.index', ['customers' => $customers]);
+		
+		$rec_id = '';
+		$current_customer = '';
+		if (session('status')) {
+			$last_rec = ReceivingManifest::orderBy('id', 'desc')->first();
+			$rec_id = $last_rec->id;
+			$current_customer = $last_rec->customer_id;
+		}
+        return view('admin.receiving-manifest.index', ['customers' => $customers, 'rec_id' => $rec_id, 'current_customer' => $current_customer]);
     }
 	
 	/**
@@ -52,7 +60,8 @@ class ReceivingManifestController extends Controller
 			$rm->date_to = date('Y-m-d', strtotime($request->date_to));
 			$rm->save();
 			
-			return redirect('/admin/receiving-manifest/receipt/'.$rm->id);
+			//return redirect('/admin/receiving-manifest/receipt/'.$rm->id);
+			return redirect('/admin/receiving-manifest')->with('status', 'Receiving manifest has been created successfully.');
 		} else {
 			return back()->with('status', 'No Carts/Items found within the selected date.');
 		}

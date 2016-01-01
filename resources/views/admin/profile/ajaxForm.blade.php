@@ -380,19 +380,19 @@
                     <div class="row oTable">
                         <div class="row">
                             <div class="col m3 s12">
-                                <strong>Linen Rental:</strong>
+                                <strong>Industries We Serve:</strong>
                             </div>
                             <div class="col m8 s12">
                                 <div class="row info-div">
-                                    Lorem ipsum
+                                    {{$user->we_serve}}
                                 </div>
                                 <div class="row edit-div">
                                     <div class="row">
-                                        <div class="col m6 s12">
-                                            <div class="input-field">
-                                                <input id="linen_rental" type="text" name="linen_rental">
-                                            </div>
-                                            <label for="linen_rental" class="error"></label>
+                                        <div class="col s12">
+                                            <input type="checkbox" name="we_serve[]" id="hospitality" value="Hospitality (Hotel &amp; Restaurant)" <?php echo strpos($user->we_serve, 'Hospitality (Hotel & Restaurant)') !== false ? 'checked="checked"' : ''; ?>> <label for="hospitality">Hospitality (Hotel &amp; Restaurant)</label><br />
+                                            <input type="checkbox" name="we_serve[]" id="healthcare" value="Healthcare" <?php echo strpos($user->we_serve, 'Healthcare') !== false ? 'checked="checked"' : ''; ?>> <label for="healthcare">Healthcare</label><br />
+                                            <input type="checkbox" name="we_serve[]" id="vacational_rentals" value="Vacational Rentals" <?php echo strpos($user->we_serve, 'Vacational Rentals') !== false ? 'checked="checked"' : ''; ?>> <label for="vacational_rentals">Vacational Rentals</label><br />
+                                            <label for="we_serve" class="error"></label>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 10px;">
@@ -409,108 +409,18 @@
                     <div class="row oTable">
                         <div class="row">
                             <div class="col m3 s12">
-                                <strong>Healthcare:</strong>
+                                <strong>We Do:</strong>
                             </div>
                             <div class="col m8 s12">
                                 <div class="row info-div">
-                                    Doller sit
+                                    {{$user->we_do}}
                                 </div>
                                 <div class="row edit-div">
                                     <div class="row">
-                                        <div class="col m6 s12">
-                                            <div class="input-field">
-                                                <input id="healthcare" type="text" name="healthcare">
-                                            </div>
-                                            <label for="healthcare" class="error"></label>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin-top: 10px;">
-                                         <button class="waves-effect btn" type="submit">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col m1 s12">
-                                <a href="javascript:void(0);" class="oBtn oBtnSubtle editButton">Edit</a>
-                                <a href="javascript:void(0);" class="cancelButton">Cancel</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row oTable">
-                        <div class="row">
-                            <div class="col m3 s12">
-                                <strong>Hospitality (Hotel/Motel):</strong>
-                            </div>
-                            <div class="col m8 s12">
-                                <div class="row info-div">
-                                    Holtel
-                                </div>
-                                <div class="row edit-div">
-                                    <div class="row">
-                                        <div class="col m6 s12">
-                                            <div class="input-field">
-                                                <input id="hospitality" type="text" name="hospitality">
-                                            </div>
-                                            <label for="hospitality" class="error"></label>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin-top: 10px;">
-                                         <button class="waves-effect btn" type="submit">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col m1 s12">
-                                <a href="javascript:void(0);" class="oBtn oBtnSubtle editButton">Edit</a>
-                                <a href="javascript:void(0);" class="cancelButton">Cancel</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row oTable">
-                        <div class="row">
-                            <div class="col m3 s12">
-                                <strong>Vacational Rentals:</strong>
-                            </div>
-                            <div class="col m8 s12">
-                                <div class="row info-div">
-                                    Lorem ispum
-                                </div>
-                                <div class="row edit-div">
-                                    <div class="row">
-                                        <div class="col m6 s12">
-                                            <div class="input-field">
-                                                <input id="vacational_rentals" type="text" name="vacational_rentals">
-                                            </div>
-                                            <label for="vacational_rentals" class="error"></label>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="margin-top: 10px;">
-                                         <button class="waves-effect btn" type="submit">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col m1 s12">
-                                <a href="javascript:void(0);" class="oBtn oBtnSubtle editButton">Edit</a>
-                                <a href="javascript:void(0);" class="cancelButton">Cancel</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row oTable">
-                        <div class="row">
-                            <div class="col m3 s12">
-                                <strong>Customer Own Goods:</strong>
-                            </div>
-                            <div class="col m8 s12">
-                                <div class="row info-div">
-                                    lorem ispum<br />
-                                    Doller Sit<br />
-                                    Amet Contexture
-                                </div>
-                                <div class="row edit-div">
-                                    <div class="row">
-                                        <div class="col m6 s12">
-                                            <div class="input-field">
-                                                <input id="customer_own_goods" type="text" name="customer_own_goods">
-                                            </div>
-                                            <label for="customer_own_goods" class="error"></label>
+                                        <div class="col s12">
+                                            <input type="checkbox" name="we_do[]" id="customer_own_goods" value="Customer Own Goods" <?php echo strpos($user->we_do, 'Customer Own Goods') !== false ? 'checked="checked"' : ''; ?>> <label for="customer_own_goods">Customer Own Goods</label><br />
+                                            <input type="checkbox" name="we_do[]" id="linen_rentals" value="Linen Rentals" <?php echo strpos($user->we_do, 'Linen Rentals') !== false ? 'checked="checked"' : ''; ?>> <label for="linen_rentals">Linen Rentals</label><br />
+                                            <label for="we_do" class="error"></label>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 10px;">

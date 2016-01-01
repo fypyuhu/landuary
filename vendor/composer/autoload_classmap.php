@@ -568,6 +568,7 @@ return array(
     'UpdateReceivingManifestTable' => $baseDir . '/database/migrations/2015_11_13_115226_update_receiving_manifest_table.php',
     'UpdateReceivingManifistTable' => $baseDir . '/database/migrations/2015_11_12_181958_update_receiving_manifist_table.php',
     'UpdateRewashTable' => $baseDir . '/database/migrations/2015_12_08_152153_update_rewash_table.php',
+    'UpdateUserProfileTable' => $baseDir . '/database/migrations/2015_12_28_134327_update_user_profile_table.php',
     'UpdateUsersTable' => $baseDir . '/database/migrations/2015_11_24_173416_update_users_table.php',
     'UpdateUsersTableSecond' => $baseDir . '/database/migrations/2015_12_11_124555_update_users_table_second.php',
     'UpdateUsersTableThird' => $baseDir . '/database/migrations/2015_12_11_131407_update_users_table_third.php',

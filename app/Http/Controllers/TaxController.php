@@ -146,7 +146,8 @@ class TaxController extends Controller {
             $row["invoice_number"] = $invoice->invoice_number;
             $row["customer"] = $invoice->customer->name;
             $row["total_tax"] = $invoice->total_tax;
-            $row["updated_at"] = $invoice->updated_at->format('d m Y');
+            //$row["updated_at"] = $invoice->updated_at->format('d m Y');
+			$row["updated_at"] = date('d F, Y', strtotime($invoice->updated_at));
             $row["actions"] = '<a href="/admin/taxes/detail/' . $invoice->id . '" data-mode="ajax">Tax Detail</a>';
             ;
             $data[] = $row;

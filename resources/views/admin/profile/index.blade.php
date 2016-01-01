@@ -163,46 +163,20 @@
                     <legend>Business model</legend>
                     <div class="row">
                         <div class="col m6 s12">
-                            <label>Linen Rental:</label>
-                            <div class="input-field">
-                                <input id="linen_rental" type="text" name="linen_rental">
-                            </div>
-                            <label for="linen_rental" class="error"></label>
+                            <strong>Industries We Serve:</strong><br />
+                            <input type="checkbox" name="we_serve[]" id="hospitality" value="Hospitality (Hotel &amp; Restaurant)" {{ str_contains($user->we_serve, 'Hospitality (Hotel & Restaurant)') ? 'checked="checked"' : ''}}> <label for="hospitality">Hospitality (Hotel &amp; Restaurant)</label><br />
+                            <input type="checkbox" name="we_serve[]" id="healthcare" value="Healthcare" {{ str_contains($user->we_serve, 'Healthcare') ? 'checked="checked"' : ''}}> <label for="healthcare">Healthcare</label><br />
+                            <input type="checkbox" name="we_serve[]" id="vacational_rentals" value="Vacational Rentals" {{ str_contains($user->we_serve, 'Vacational Rentals') ? 'checked="checked"' : ''}}> <label for="vacational_rentals">Vacational Rentals</label><br />
+                            <label for="we_serve" class="error"></label>
                         </div>
                         <div class="col m6 s12">
-                            <label>Healthcare:</label>
-                            <div class="input-field">
-                                <input id="healthcare" type="text" name="healthcare">
-                            </div>
-                            <label for="healthcare" class="error"></label>
+                            <strong>We Do:</strong><br />
+                            <input type="checkbox" name="we_do[]" id="customer_own_goods" value="Customer Own Goods" {{ str_contains($user->we_do, 'Customer Own Goods') ? 'checked="checked"' : ''}}> <label for="customer_own_goods">Customer Own Goods</label><br />
+                            <input type="checkbox" name="we_do[]" id="linen_rentals" value="Linen Rentals" {{ str_contains($user->we_do, 'Linen Rentals') ? 'checked="checked"' : ''}}> <label for="linen_rentals">Linen Rentals</label><br />
+                            <label for="we_do" class="error"></label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col m6 s12">
-                            <label>Hospitality (Hotel/Motel):</label>
-                            <div class="input-field">
-                                <input id="hospitality" type="text" name="hospitality">
-                            </div>
-                            <label for="healthcare" class="error"></label>
-                        </div>
-                        <div class="col m6 s12">
-                            <label>Vacational Rentals:</label>
-                            <div class="input-field">
-                                <input id="vacational_rentals" type="text" name="vacational_rentals">
-                            </div>
-                            <label for="vacational_rentals" class="error"></label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col m6 s12">
-                            <label>Customer Own Goods:</label>
-                            <div class="input-field">
-                                <input id="customer_own_goods" type="text" name="customer_own_goods">
-                            </div>
-                            <label for="customer_own_goods" class="error"></label>
-                        </div>
-                        <div class="col m6 s12">&nbsp;</div>
-                    </div>
+                    
                     <div class="row">
                     	<div class="pull-left">
                         	<a href="javascript:void(0);" class="waves-effect btn btnPrev" data-corr-link-id="#link-contact-person">Previous</a>
@@ -252,7 +226,9 @@
 					contact_email: {
 						required: true,
 						email: true
-					}
+					},
+					we_serve: "required",
+					we_do: "required"
 				}
 			});
 			

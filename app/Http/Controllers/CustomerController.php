@@ -120,14 +120,24 @@ class CustomerController extends Controller {
     public function getGetChildren($id) {
         $sql = "select items.id,items.name from items join item_relation on items.id=item_relation.child_id where items.deleted_at IS NULL AND item_relation.parent_id='" . $id . "' AND items.organization_id= ".Auth::user()->organization_id;
         $items = DB::select(DB::raw($sql));
-        $return = "<select name='child_item' id='child_item'><option value='-1'>Select Item</option>";
-        foreach ($items as $item) {
-            $return.="<option value='" . $item->id . "'>" . $item->name . "</option>";
-        }
-        return $return . "</select>";
+		if($items) {
+			$return = "<select name='child_item' id='child_item'><option value='-1'>Select Item</option>";
+			foreach ($items as $item) {
+				$return.="<option value='" . $item->id . "'>" . $item->name . "</option>";
+			}
+			return $return . "</select>";
+		} else {
+			$return = "<div style='display:none;'><select name='child_item' id='child_item'><option value='-1'>Select Item</option>";
+			foreach ($items as $item) {
+				$return.="<option value='" . $item->id . "'>" . $item->name . "</option>";
+			}
+			$return .= "</select></div>";
+			return $return . '<strong style="padding-top:2px; font-size:16px; display:inline-block;">NA</strong>';
+		}
     }
     public function getGetDepartments($id) {
-        $return = " <label>Select Department:</label><select name='s_department' id='s_department'><option value='-1'>Select Department</option>";
+		$image_path = asset('images/ajax-loader-sm.gif');
+        $return = " <label>Select Department: <img src=\"$image_path\" alt=\"\" class=\"loading-sm\" /></label><select name='s_department' id='s_department'><option value='-1'>Select Department</option>";
         $departments=CustomerDepartment::where('customer_id','=',$id)->get();
         foreach ($departments as $department) {
             $return.="<option value='" . $department->id . "'>" . $department->department_name . "</option>";

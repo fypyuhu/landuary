@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use App\Models\Organization;
 use Auth;
-use Request;
 
 class ManageStepsForLogin
 {
@@ -46,16 +45,17 @@ class ManageStepsForLogin
         } else if ($this->auth->check()) {
 			$org_id = Auth::user()->organization_id;
 			$org = Organization::where('id', '=', $org_id)->first();
-			$url = Request::url();
-			if(strpos($url, 'step') === false && strpos($url, 'initial-values') === false) {
+			$url = "admin/profile/step1";
+			if(!str_contains($url, 'step') && !str_contains($url, 'initial-values')) {
 				$skipped_at = intval($org->profile_skipped_at_step);
 				$current_step = intval(substr($url, -1));
-				if( $skipped_at > 0 && $skipped_at < 5 && $skipped_at > $current_step) {
-					return redirect('admin/profile/step'.$org->profile_skipped_at_step);
+				
+				if($skipped_at > 0 && $skipped_at < 5 && $skipped_at > $current_step) {
+					//return redirect('admin/profile/step'.$skipped_at);
+					return redirect('admin/profile/step1');
 				}
 			}
 		}
-		
 		return $next($request);
     }
 }

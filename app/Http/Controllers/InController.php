@@ -22,7 +22,14 @@ class InController extends Controller {
         $carts = Cart::organization()->get();
         $customers = Customer::organization()->get();
         $depts = CustomerDepartment::organization()->get();
-        return view('admin.in.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts]);
+		$rec_id = '';
+		$current_customer = '';
+		if (session('status')) {
+			$last_rec = IncomingCart::orderBy('id', 'desc')->first();
+			$rec_id = $last_rec->id;
+			$current_customer = $last_rec->customer_id;
+		}
+        return view('admin.in.index', ['carts' => $carts, 'customers' => $customers, 'depts' => $depts, 'rec_id' => $rec_id, 'current_customer' => $current_customer]);
     }
 
     public function getCarts() {
@@ -103,7 +110,8 @@ class InController extends Controller {
             $ogc_item->save();
         }
 
-        return redirect('/admin/in/receipt/' . $ogc->id);
+        //return redirect('/admin/in/receipt/' . $ogc->id);
+		return redirect('/admin/in')->with('status', 'Incoming cart has been created successfully.');
     }
 
     /**

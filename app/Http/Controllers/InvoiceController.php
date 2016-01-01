@@ -37,7 +37,15 @@ class InvoiceController extends Controller
      */
     public function getCreate(){
         $customers=Customer::organization()->get();
-        return view('admin.invoices.create',["customers"=>$customers]);
+		
+		$rec_id = '';
+		$current_customer = '';
+		if (session('status')) {
+			$last_rec = Invoice::orderBy('id', 'desc')->first();
+			$rec_id = $last_rec->id;
+			$current_customer = $last_rec->customer_id;
+		}
+        return view('admin.invoices.create',["customers"=>$customers, 'rec_id' => $rec_id, 'current_customer' => $current_customer]);
     }
     public function postCreate(Request $request)
     {
@@ -111,7 +119,8 @@ class InvoiceController extends Controller
                 $out_going_cart->save();
             }
         }
-        return redirect('/admin/invoices/receipt/' . $invoice->id);
+        //return redirect('/admin/invoices/receipt/' . $invoice->id);
+		return redirect('/admin/invoices')->with('status', 'Invoice has been created successfully.');
     }
     public function getDetails($id,$department_ids=""){
         $active_customer=Customer::find($id);
@@ -125,7 +134,11 @@ class InvoiceController extends Controller
        $invoice=Invoice::find($id);
        $customer=Customer::find($invoice->customer_id);
        $invoice_data=Invoice::getInvoicePriceByManifestIds($invoice->manifest_ids,$invoice->customer_id);
-       $departments=CustomerDepartment::whereRaw("FIND_IN_SET(id,'".$invoice->department_ids."')")->get();
+	   if(strpos($invoice->department_ids, '-1') === false) {
+       		$departments=CustomerDepartment::whereRaw("FIND_IN_SET(id,'".$invoice->department_ids."')")->get();
+	   } else {
+	   		$departments=CustomerDepartment::all();
+	   }
        $customer_tax=CustomerTax::where('customer_id','=',$invoice->customer_id)->first();
        $tax=Tax::find($customer_tax->tax_id);
        $tax_componenets=TaxComponent::where('tax_id','=',$tax->id)->get();
@@ -150,7 +163,8 @@ class InvoiceController extends Controller
        $data = array();
        foreach($invoices as $invoice){
            $row=array();
-           $row["created_date"]=$invoice->created_at->format('d m Y');
+           //$row["created_date"]=$invoice->created_at->format('d m Y');
+		   $row["created_date"]= date('d F, Y', strtotime($invoice->created_at));
            $row["customer"]=$invoice->customer->name;
            $departments=CustomerDepartment::whereRaw("FIND_IN_SET(id,'".$invoice->department_ids."')")->get();
            $row["department"]="";
@@ -166,7 +180,8 @@ class InvoiceController extends Controller
                $row["status"]='<input checked type="checkbox" value="'.$invoice->id.'" name="invoice_status_'.$invoice->id.'" id="invoice_status_'.$invoice->id.'" class="invoice_status_checkbox">
                             <label for="invoice_status_'.$invoice->id.'"></label>';
            }
-           $row["due_date"]=$invoice->due_date->format('d m Y');
+           //$row["due_date"]=$invoice->due_date->format('d m Y');
+		   $row["due_date"]= date('d F, Y', strtotime($invoice->due_date));
            $row["actions"]='<a href="/admin/invoices/receipt/' . $invoice->id . '">View</a>';;
            $data[] = $row;
        }
@@ -189,7 +204,8 @@ class InvoiceController extends Controller
             $row["invoice_number"] = $invoice->invoice_number;
             $row["customer"] = $invoice->customer->name;
             $row["total_price"] = $invoice->total_price;
-            $row["updated_at"] = $invoice->updated_at->format('d m Y');
+            //$row["updated_at"] = $invoice->updated_at->format('d m Y');
+			$row["updated_at"] = date('d F, Y', strtotime($invoice->updated_at));
             $data[] = $row;
         }
         echo "{\"data\":" . json_encode($data) . "}";

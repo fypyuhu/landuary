@@ -62,7 +62,7 @@
                         </div>
                         <div class="col m6 s12">
                             <label>Country:</label>
-                            <select name="country" id="country">
+                            <select name="country" id="country" autocomplete="false">
                                 <option value="">Please Select</option>
                                 @foreach($countries as $country)
                                 <option value="{{ $country->country_name }}" {{$country->country_name == old('country') ? 'selected="selected"' : ''}}>{{ $country->country_name }}</option>

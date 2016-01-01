@@ -21,7 +21,14 @@ class ShipmentController extends Controller
     public function getIndex()
     {
         $customers=Customer::organization()->get();
-        return view('admin.shiping.index',["customers"=>$customers]);
+		$rec_id = '';
+		$current_customer = '';
+		if (session('status')) {
+			$last_rec = ShipManifest::orderBy('id', 'desc')->first();
+			$rec_id = count($last_rec) > 0 ? $last_rec->id : 0;
+			$current_customer = count($last_rec) > 0 ? $last_rec->customer_id : 0;
+		}
+        return view('admin.shiping.index',["customers"=>$customers, 'rec_id' => $rec_id, 'current_customer' => $current_customer]);
     }
 
     public function getDetails($id,$department_id=-1){
@@ -53,7 +60,8 @@ class ShipmentController extends Controller
              }
         }
         $manifest->save();
-        return redirect('/admin/shiping-manifest/recipt/'.$manifest->id);
+        //return redirect('/admin/shiping-manifest/recipt/'.$manifest->id);
+		return redirect('/admin/shiping-manifest')->with('status', 'Shipping manifest has been created successfully.');
     }
 
     public function getRecipt($id){
@@ -87,7 +95,7 @@ class ShipmentController extends Controller
             $carts=OutgoingCart::organization()->where('customer_id','=',$manifest->customer_id)->where('status','=','Ready')->get();
         }
         else{
-            $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->where('department_id','=',$department_id)->get();    
+            $carts=OutgoingCart::organization()->where('customer_id','=',$id)->where('status','=','Ready')->where('department_id','=',$manifest->department_id)->get();    
         }
         $selected_carts=OutgoingCart::find(explode(",",$manifest->outgoing_cart_id));
         return view('admin.shiping.edit',['customer'=>$customer,'manifest'=>$manifest,
