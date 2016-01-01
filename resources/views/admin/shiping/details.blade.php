@@ -78,9 +78,9 @@
                             <label for="all_carts"></label>
                         </div>
                         <div class="col s2">Cart Number</div>
-                        <div class="col s2 center-align">Date Created</div>
+                        <div class="col s3">Date Created</div>
                         <div class="col s3 right-align">Net Weight lb/kg</div>
-                        <div class="col s2 center-align">Actions</div>
+                        <div class="col s3 center-align">Actions</div>
                     </div>
                     @if(!$carts->isEmpty())
                     @foreach($carts as $cart)
