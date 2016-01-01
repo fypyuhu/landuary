@@ -1,3 +1,12 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		mousemove_counter = 0;
+		if(mousemove_counter <= 0){
+			layout_table_auto_height(mousemove_counter);
+			mousemove_counter = 1;
+		}
+	});
+</script>
 <fieldset id="add-record" style="width: 850px;">
     <legend>Add Customer:</legend>
     <form action="/admin/customers/edit/{{$customer->id}}" Method="POST" id="customer-form">

@@ -120,11 +120,15 @@ class CustomerController extends Controller {
     public function getGetChildren($id) {
         $sql = "select items.id,items.name from items join item_relation on items.id=item_relation.child_id where items.deleted_at IS NULL AND item_relation.parent_id='" . $id . "' AND items.organization_id= ".Auth::user()->organization_id;
         $items = DB::select(DB::raw($sql));
-        $return = "<select name='child_item' id='child_item'><option value='-1'>Select Item</option>";
-        foreach ($items as $item) {
-            $return.="<option value='" . $item->id . "'>" . $item->name . "</option>";
-        }
-        return $return . "</select>";
+		if($items) {
+			$return = "<select name='child_item' id='child_item'><option value='-1'>Select Item</option>";
+			foreach ($items as $item) {
+				$return.="<option value='" . $item->id . "'>" . $item->name . "</option>";
+			}
+			return $return . "</select>";
+		} else {
+			return '<strong style="padding-top:2px; font-size:16px; display:inline-block;">NA</strong>';
+		}
     }
     public function getGetDepartments($id) {
 		$image_path = asset('images/ajax-loader-sm.gif');
