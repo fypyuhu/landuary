@@ -275,7 +275,6 @@
                         </div>
                         <label for="bill_type" class="error" id="error-bill_type"></label>
                         <div class="col s5" id="child_select_box_div">
-                        	<img src="{{URL::asset('images/ajax-loader-sm.gif')}}" alt="" class="loading-sm" />
                             <select name="child_item" id="child_item">
     
                             </select>
@@ -586,7 +585,6 @@
             }
         });
         $('#parent_item').on('change', function () {
-			$('.loading-sm').show();
             if ($(this).jqxComboBox('getSelectedIndex') != "-1") {
                 $.ajax({
                     url: "/admin/customers/get-children/" + $("#parent_item").val(),
@@ -601,12 +599,11 @@
                     else {
                         $("#child_item").jqxComboBox({autoComplete: true, width: '250', autoComplete: true, autoDropDownHeight: true, disabled: true});
                     }
-					$('.loading-sm').hide();
+
                 });
             }
         });
         if ($('#parent_item').jqxComboBox('getSelectedIndex') != "-1") {
-			$('.loading-sm').show();
             $.ajax({
                 url: "/admin/customers/get-children/" + $("#parent_item").val(),
                 context: document.body
@@ -620,7 +617,6 @@
                 else {
                     $("#child_item").jqxComboBox({width: '250', autoComplete: true, autoDropDownHeight: true, disabled: true});
                 }
-				$('.loading-sm').hide();
             });
         }
         $('#sales_tax_authority').on('change', function () {
