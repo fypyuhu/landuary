@@ -4,14 +4,14 @@
 <div id="clone-container" class="hidden">
     <div class="row records_list">
         <div class="col m4 s12">
-            <label>Component name</label>
+            <label>Component Name</label>
             <div class="input-field">
                 <input type="text" name="component_name[]" class="component_name" />
             </div>
             <label class="error">Example: New York City or Santa Clara County</label>
         </div>
         <div class="col m4 s12">
-            <label>Agency name</label>
+            <label>Agency Name</label>
             <div class="input-field">
                 <input type="text" name="component_agency_name[]" class="component_agency_name" />
             </div>

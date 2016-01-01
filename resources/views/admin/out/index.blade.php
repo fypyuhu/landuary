@@ -93,13 +93,13 @@
                                     <input id="cart_number_textfield" type="text" value="{{$initial_values->cart_number}}" readonly="readonly" name="cart_number_textfield">
                                 </div>
                             </div>
-                            <div class="col m4 s12">
+                            <div class="col m3 s12">
                             	<label>Tare Weight</label>
                                 <div class="input-field">
                                     <input id="tare_weight" type="text" value="{{$initial_values->standard_tare_weight}}" name="tare_weight">
                                 </div>
                             </div>
-                            <div class="col m4 s12">
+                            <div class="col m5 s12">
                             	<label>Shipping Date</label>
                                 <div id="ship_date" name="ship_date" class="calendar"></div>
                             </div>
@@ -167,8 +167,7 @@
                             <div class="col m4 s12 loading-sm-parent">
                                 <label>Gross Weight <img src="{{URL::asset('images/ajax-loader-sm.gif')}}" alt="" class="loading-sm" /></label>
                                 <div class="input-field">
-                                    <!--<input id="gross_weight" value="" type="text" onblur="calculateNetWeight()" name="gross_weight">-->
-                                    <input id="gross_weight" value="" type="text" name="gross_weight">
+                                    <input id="gross_weight" value="" type="text" onblur="calculateNetWeight()" name="gross_weight">
                                 </div>
                             </div>
                             <div class="col m4 s12">

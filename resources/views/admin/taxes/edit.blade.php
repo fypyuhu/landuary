@@ -25,7 +25,7 @@
                     <label for="tax_name" class="error">Example: New York City or Santa Clara County</label>
                 </div>
                 <div class="col m4 s12">
-                    <label>Agency name</label>
+                    <label>Agency Name</label>
                     <div class="input-field">
                         <input type="text" value="{{$tax->agency_name}}" name="agency_name" id="agency_name" value="test" />
                     </div>
@@ -68,14 +68,14 @@
                     @foreach($tax->components as $component)
                     <div class="row records_list">
                         <div class="col m4 s12">
-                            <label>Component name</label>
+                            <label>Component Name</label>
                             <div class="input-field">
                                 <input type="text" value="{{$component->component_name}}" name="component_name[{{$component->id}}]" id="component_name_1" />
                             </div>
                             <label for="component_name_1" class="error">Example: New York City or Santa Clara County</label>
                         </div>
                         <div class="col m4 s12">
-                            <label>Agency name</label>
+                            <label>Agency Name</label>
                             <div class="input-field">
                                 <input type="text" value="{{$component->agency_name}}" name="component_agency_name[{{$component->id}}]" id="component_agency_name_1" />
                             </div>
@@ -88,7 +88,9 @@
                             </div>
                             <label for="component_tax_rate_1" class="error">%</label>
                         </div>
-                        <div class="col m1 s12">&nbsp;</div>
+                        <div class="col m1 s12" style="padding-top:26px;">
+                            <a href="javascript:void(0);" onclick="$(this).parent().parent().remove();" class="waves-effect btn">X</a>
+                        </div>
                     </div>
                     @endforeach
                 </div>
