@@ -350,9 +350,9 @@
   
   <script src="{{URL::asset('js/print/jQuery.print.js')}}"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="{{URL::asset('js/custom.js')}}"></script>
   @section('js')
   @show
-  <script type="text/javascript" src="{{URL::asset('js/custom.js')}}"></script>
 </body>
 
 </html>
