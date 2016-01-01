@@ -52,7 +52,7 @@
                             <select name="customer" id="customer">
                                 <option value="-1" selected="selected">Please select a customer</option>
                                 @foreach($customers as $customer)
-                                <option value="{{$customer->id}}" {{isset($current_customer) && $customer->id == $current_customer ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
+                                <option value="{{$customer->id}}" {{isset($current_customer) && $current_customer && $customer->id == $current_customer ? 'selected="selected"' : ''}}>{{$customer->name}}</option>
                                 @endforeach
                             </select>
                         </div>
