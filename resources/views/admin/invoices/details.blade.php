@@ -93,7 +93,7 @@
                         <div class="col s2">{{$ship_manifest->id}}</div>
                         <div class="col s2">{{count($temp)}}</div>
                         <div class="col s2">{{$ship_manifest->department_name or ' '}}</div>
-                        <div class="col s2 right-align">{{date('d-m-Y',strtotime($ship_manifest->shipping_date))}}</div>
+                        <div class="col s2 right-align">@date($ship_manifest->shipping_date)</div>
                         <div class="col s2 center-align"><a href="/admin/shiping-manifest/recipt/{{$ship_manifest->id}}"   class="edit-button">View</a> | <a href="/admin/shiping-manifest/edit/{{$ship_manifest->id}}"  class="edit-button">Edit</a></div>
                     </div>
                     @endforeach
