@@ -42,7 +42,7 @@
             </tr>
             @foreach($invoice_data as $key=>$data)
             <tr>
-                <td>@date($data->shipping_date)</td>
+                <td>@if($key > 0 && $data->shipping_date == $invoice_data[$key-1]->shipping_date) '...' @else @date($data->shipping_date) @endif</td>
                 <td>{{$key > 0 && $data->id == $invoice_data[$key-1]->id ? '...' : $data->id}}</td>
                 <td>{{$key > 0 && $data->cart_number == $invoice_data[$key-1]->cart_number ? '...' : $data->cart_number}}</td>
                 <td>{{$data->item_number}}</td>
