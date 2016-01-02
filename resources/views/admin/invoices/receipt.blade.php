@@ -46,7 +46,7 @@
                 <td>@date($data->shipping_date)</td>
                 <td>{{$data->id}}</td>
                 <td>{{$data->cart_id}}</td>
-                <td>{{$data->item_id}}</td>
+                <td>{{$data->item_number}}</td>
                 <td>{{$data->item_name}}</td>
                 <td>{{$data->quantity}}</td>
             </tr>

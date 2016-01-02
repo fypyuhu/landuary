@@ -17,7 +17,7 @@ class Invoice extends Model
         parent::save($options); // Calls Default Save
     }
     public static function getInvoicePriceByManifestIds($manifest_ids,$customer_id){
-        $sql="select items.name as item_name,items.id as item_id,shipping_manifest.shipping_date,outgoing_carts.net_weight,customers_items.taxable,customers_outgoing_carts_items.quantity,customers_outgoing_carts_items.id as customer_item_id,shipping_manifest.id, outgoing_carts.id as cart_id,customers_items.price, customers_items.billing_by,customers_items.custom_price, items.weight "
+        $sql="select items.name as item_name,items.id as item_id, items.item_number, shipping_manifest.shipping_date,outgoing_carts.net_weight,customers_items.taxable,customers_outgoing_carts_items.quantity,customers_outgoing_carts_items.id as customer_item_id,shipping_manifest.id, outgoing_carts.id as cart_id,customers_items.price, customers_items.billing_by,customers_items.custom_price, items.weight "
                 . "from shipping_manifest "
                 . "join outgoing_carts on FIND_IN_SET (outgoing_carts.id, shipping_manifest.outgoing_cart_id) "
                 . "join customers_outgoing_carts_items on customers_outgoing_carts_items.outgoing_cart_id = outgoing_carts.id "
