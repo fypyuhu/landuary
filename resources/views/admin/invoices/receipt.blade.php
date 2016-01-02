@@ -40,11 +40,11 @@
                 <th>Item Name</th>
                 <th>Quantity</th>
             </tr>
-            @foreach($invoice_data as $data)
+            @foreach($invoice_data as $key=>$data)
             <tr>
-                <td>@date($data->shipping_date)</td>
-                <td>{{$data->id}}</td>
-                <td>{{$data->cart_number}}</td>
+                <td>@if($key > 0 && $data->shipping_date == $data[$key-1]->shipping_date) '...' @else @date($data->shipping_date) @endif</td>
+                <td>{{$key > 0 && $data->id == $data[$key-1]->id ? '...' : $data->id}}</td>
+                <td>{{$key > 0 && $data->cart_number == $data[$key-1]->cart_number ? '...' : $data->cart_number}}</td>
                 <td>{{$data->item_number}}</td>
                 <td>{{$data->item_name}}</td>
                 <td>{{$data->quantity}}</td>
