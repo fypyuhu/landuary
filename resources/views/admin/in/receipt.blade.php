@@ -63,7 +63,7 @@
                     </tr>
                     @foreach($items as $item)
                     <tr>
-                        <td>{{$item->id}}</td>
+                        <td>{{$item->item_number}}</td>
                         <td>{{$item->name}}</td>
                         <td class="align-right">{{$item->quantity}}</td>
                     </tr>
