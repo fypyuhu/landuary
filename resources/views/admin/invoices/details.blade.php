@@ -79,7 +79,7 @@
                         <div class="col s2">Manifest Number</div>
                         <div class="col s2">Number of Carts</div>
                         <div class="col s2">Department</div>
-                        <div class="col s2 center-align">Shipment Date</div>
+                        <div class="col s3">Shipment Date</div>
                         <div class="col s2 center-align">Actions</div>
                     </div>
                     @if($ship_manifests)
@@ -93,7 +93,7 @@
                         <div class="col s2">{{$ship_manifest->id}}</div>
                         <div class="col s2">{{count($temp)}}</div>
                         <div class="col s2">{{$ship_manifest->department_name or ' '}}</div>
-                        <div class="col s2 right-align">@date($ship_manifest->shipping_date)</div>
+                        <div class="col s3">@date($ship_manifest->shipping_date)</div>
                         <div class="col s2 center-align"><a href="/admin/shiping-manifest/recipt/{{$ship_manifest->id}}"   class="edit-button">View</a> | <a href="/admin/shiping-manifest/edit/{{$ship_manifest->id}}"  class="edit-button">Edit</a></div>
                     </div>
                     @endforeach
