@@ -22,6 +22,7 @@ class ShipManifest extends Model {
         return $query->where('organization_id', Auth::user()->organization_id);
     }
     public static function getManifestsForInvoice($customer_id,$department_ids){
+		$department_ids = $department_ids == '' ? -1 : $department_ids;
         $sql='Select shipping_manifest.id,customers_departments.department_name,shipping_manifest.outgoing_cart_id,shipping_manifest.shipping_date FROM shipping_manifest'
                 . ' LEFT JOIN customers_departments on customers_departments.id=shipping_manifest.department_id'
                 . ' WHERE shipping_manifest.customer_id="'.$customer_id.'" '
