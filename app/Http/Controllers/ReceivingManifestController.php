@@ -69,7 +69,7 @@ class ReceivingManifestController extends Controller
 	
 	public function getReceipt($id, Request $request) {
 		$manifest = ReceivingManifest::find($id);
-		$customer = Customer::find($manifest->customer_id)->first();
+		$customer = Customer::find($manifest->customer_id);
 		$organization = UserProfile::where('user_id', '=', Auth::user()->id)->first();
 		
 		/*$departments = '';
@@ -131,7 +131,7 @@ class ReceivingManifestController extends Controller
 	
 	public function getViewReceipt($id) {
 		$manifest = ReceivingManifest::find($id);
-		$customer = Customer::find($manifest->customer_id)->first();
+		$customer = Customer::find($manifest->customer_id);
 		$organization = UserProfile::where('user_id', '=', Auth::user()->id)->first();
 		
 		/*$departments = '';
