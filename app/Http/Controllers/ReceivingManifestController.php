@@ -122,6 +122,7 @@ class ReceivingManifestController extends Controller
 			$cart->save();
 		}
 		
+		$department = '';
 		if($items)
 			$department = $items[0]->department_name;
 			
