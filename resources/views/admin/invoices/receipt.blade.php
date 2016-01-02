@@ -23,12 +23,11 @@
     <div class="row highlighted">
     	<div class="row">
             <p>Ship To: {{$customer->name}}<br />
-                Customer Number: {{$customer->customer_number}}</p>
-        </div>
-        <div class="pull-right">
-            <p>{{$customer->shipping_address}} {{$customer->shipping_city}}<br />
+                Customer Number: {{$customer->customer_number}}<br /><br />
+                {{$customer->shipping_address}} {{$customer->shipping_city}}<br />
                 {{$customer->shipping_state}} {{$customer->shipping_zipcode}}<br />
-                {{$customer->shipping_country}}</p>
+                {{$customer->shipping_country}}
+                </p>
         </div>
     </div>
     <div class="row">

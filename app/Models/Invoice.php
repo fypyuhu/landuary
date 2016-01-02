@@ -24,7 +24,7 @@ class Invoice extends Model
                 . "join items on items.id=customers_outgoing_carts_items.item_id "
                 . "join customers_items on customers_items.item_id=items.id "
                 . "where FIND_IN_SET(shipping_manifest.id,'".$manifest_ids."') and customers_items.customer_id='".$customer_id."' "
-                . "order by shipping_manifest.id ASC";
+                . "order by shipping_manifest.id ASC, outgoing_carts.cart_id ASC";
          return  DB::select(DB::raw($sql));
     }
     public function customer() {
