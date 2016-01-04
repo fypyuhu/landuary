@@ -3,12 +3,6 @@ $(document).ready(function () {
 		$(this).select();
 	});
 	
-	if($('.jqx-action-button').length > 0) {
-		$('.jqx-action-button').each(function( index ) {
-			$(this).prop('style').removeProperty('left');
-		});
-	}
-	
 	/*if($('.jqx-combobox-arrow-normal').length > 0) {
 		$('.jqx-combobox-arrow-normal').each(function( index ) {
 			$(this).prop('style').removeProperty('left');
@@ -22,6 +16,15 @@ $(document).ready(function () {
 			mousemove_counter = 1;
 		}
 	});
+});
+
+$(window).load(function(e){
+	if($('.jqx-icon').length > 0) {
+		$('.jqx-icon').each(function( index ) {
+			$(this).parent().prop('style').removeProperty('left');
+			$(this).parent().css('right', '0');
+		});
+	}						
 });
 
 function layout_table_auto_height(mousemove_counter){

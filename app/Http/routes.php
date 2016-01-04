@@ -53,3 +53,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 });
 
 Route::get('admin', 'HomeController@getIndex')->middleware(['auth', 'profile.completed']);
+
+Route::group(['prefix' => 'production', 'middleware' => 'auth'], function () {
+	Route::controller('machine', 'Production\MachineController');
+	Route::controller('users', 'Production\UserController');
+	Route::controller('rules', 'Production\RuleController');
+    Route::controller('/', 'Production\HomeController');
+});

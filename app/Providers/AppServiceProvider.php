@@ -17,17 +17,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {	
-        view()->composer(['master', 'admin.index'], function($view){
+        /*view()->composer(['master', 'admin.index'], function($view){
 			$user = Auth::user();
 			$user_profile = UserProfile::where('user_id', '=', $user->id)->get();
 			$view->with( ['user' => $user, 'user_profile' => $user_profile[0], 'date' => date('D, F d Y') ] );
-		});
+		});*/
 		
 		view()->composer('*', function($view){
 			if (Auth::check()) {
 				$user = Auth::user();
+				$user_profile = UserProfile::where('user_id', '=', $user->id)->get();
 				$initial_values = InitialValue::where('organization_id', '=', $user->organization_id)->first();
-				$view->with( ['initial_values' => $initial_values] );
+				$view->with( ['initial_values' => $initial_values, 'user' => $user, 'user_profile' => $user_profile[0], 'date' => date('D, F d Y')] );
 			}
 		});
 		

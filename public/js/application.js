@@ -14,6 +14,22 @@ $(document).ready(function () {
 	  e.preventDefault();
 	});
 	
+	$( "body" ).on( "click", "a[data-mode='ajax2']", function(e) {
+	  var url = $(this).attr('href');
+	  $.fancybox({
+			width: 'auto',
+			height: 'auto',
+			autoSize: false,
+			href: url,
+			type: 'ajax',
+			wrapCSS: 'start-machine',
+			afterClose : function() {
+		  		parent.location.reload(true);
+		  	}
+		});
+	  e.preventDefault();
+	});
+	
 	$( "body" ).on( "click", ".radiobutton", function(e) {
 		var corr_div_id = $(this).data('corr-div-id');
 		var set_class = $(this).data('set-class');
