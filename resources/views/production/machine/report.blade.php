@@ -109,30 +109,30 @@
                               <div class="row layout_table no-topmargin">
                                 <div class="row heading">
                                     <div class="col s2">Machine Name</div>
-                                    <div class="col s2">State</div>
+                                    <div class="col s1">State</div>
                                     <div class="col s2">Start Time</div>
                                     <div class="col s2">Stop Time</div>
-                                    <div class="col s1">Total Runtime</div>
-                                    <div class="col s2">Item</div>
-                                    <div class="col s1">Weight Processed</div>
+                                    <div class="col s2">Total Runtime</div>
+                                    <div class="col s1">Item</div>
+                                    <div class="col s2">Weight Processed</div>
                                 </div>
                                 <div class="row records_list">
                                     <div class="col s2">Machine A</div>
-                                    <div class="col s2"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
+                                    <div class="col s1"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                     <div class="col s2">05:00 AM</div>
                                     <div class="col s2">11:00 AM</div>
-                                    <div class="col s1"><a href="/production/machine/search-link">06 Hours</a></div>
-                                    <div class="col s2">Item A</div>
-                                    <div class="col s1" style="font-weight:bold;">100 lbs</div>
+                                    <div class="col s2"><a href="/production/machine/search-link">06 Hours</a></div>
+                                    <div class="col s1">Item A</div>
+                                    <div class="col s2" style="font-weight:bold;">100 lbs</div>
                                 </div>
                                 <div class="row records_list">
                                     <div class="col s2">Machine A</div>
-                                    <div class="col s2"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
+                                    <div class="col s1"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                     <div class="col s2">11:00 AM</div>
                                     <div class="col s2">05:00 PM</div>
-                                    <div class="col s1"><a href="/production/machine/search-link">06 Hours</a></div>
-                                    <div class="col s2">Item B</div>
-                                    <div class="col s1" style="font-weight:bold;">100 lbs</div>
+                                    <div class="col s2"><a href="/production/machine/search-link">06 Hours</a></div>
+                                    <div class="col s1">Item B</div>
+                                    <div class="col s2" style="font-weight:bold;">100 lbs</div>
                                 </div>
                               </div>
                           @endif
@@ -140,30 +140,30 @@
                           <div class="row layout_table no-topmargin">
                             <div class="row heading">
                                 <div class="col s2">Machine Name</div>
-                                <div class="col s2">State</div>
+                                <div class="col s1">State</div>
                                 <div class="col s2">Start Time</div>
                                 <div class="col s2">Stop Time</div>
-                                <div class="col s1">Total Runtime</div>
-                                <div class="col s2">Item</div>
-                                <div class="col s1">Weight Processed</div>
+                                <div class="col s2">Total Runtime</div>
+                                <div class="col s1">Item</div>
+                                <div class="col s2">Weight Processed</div>
                             </div>
                             <div class="row records_list">
                                 <div class="col s2">Machine A</div>
-                                <div class="col s2"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
+                                <div class="col s1"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                 <div class="col s2">05:00 AM</div>
                                 <div class="col s2">11:00 AM</div>
-                                <div class="col s1"><a href="/production/machine/search-link">06 Hours</a></div>
-                                <div class="col s2">Item A</div>
-                                <div class="col s1" style="font-weight:bold;">100 lbs</div>
+                                <div class="col s2"><a href="/production/machine/search-link">06 Hours</a></div>
+                                <div class="col s1">Item A</div>
+                                <div class="col s2" style="font-weight:bold;">100 lbs</div>
                             </div>
                             <div class="row records_list">
                                 <div class="col s2">Machine A</div>
-                                <div class="col s2"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
+                                <div class="col s1"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                 <div class="col s2">11:00 AM</div>
                                 <div class="col s2">05:00 PM</div>
-                                <div class="col s1"><a href="/production/machine/search-link">06 Hours</a></div>
-                                <div class="col s2">Item B</div>
-                                <div class="col s1" style="font-weight:bold;">100 lbs</div>
+                                <div class="col s2"><a href="/production/machine/search-link">06 Hours</a></div>
+                                <div class="col s1">Item B</div>
+                                <div class="col s2" style="font-weight:bold;">100 lbs</div>
                             </div>
                           </div>
                       @endif
