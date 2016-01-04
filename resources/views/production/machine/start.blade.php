@@ -96,14 +96,14 @@
      $(document).ready(function () {
 	 	//$(".dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: false});
 		
-        $("#pageForm").validate({
+        /*$("#pageForm").validate({
             rules: {
                 machine: "required",
                 rule: "required",
                 client: "required",
                 item: "required",
             }
-        });
+        });*/
 		
 		$('.thumbs').find('img').click(function(e){
 			var thumbs_set = $(this).parent().parent().data('thumbs-set');

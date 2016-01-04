@@ -658,9 +658,8 @@ table td {
 }
 
 .logo-sect {
-	margin-top: 30px;
-	margin-bottom: 30px;
-	padding-bottom: 30px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
 	border-bottom: 5px solid #e3eaf3; 
 }
 
@@ -719,7 +718,6 @@ h4 span.guide {
 .graph-box {
 	padding: 30px;
 	background: #ecf0f4;
-	margin-top: 30px;
 }
 
 .graph-box h4 a {

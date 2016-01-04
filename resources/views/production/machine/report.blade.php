@@ -31,6 +31,7 @@
             <div class="col s9">
                 <fieldset>
                   <legend>Report:</legend>
+                  <div class="row"><div class="pull-right"><?php echo date('d F, Y'); ?></div></div>
                   <div class="row box">
                   	  <div class="row" style="margin-bottom:20px; margin-top:0">
                       	<form method="post" action="/production/machine/search">
@@ -94,13 +95,13 @@
                                 <div class="row records_list">
                                     <div class="col s3">Machine A</div>
                                     <div class="col s3"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
-                                    <div class="col s3"><a href="/production/machine/report/search-link">12 Hours</a></div>
+                                    <div class="col s3"><a href="/production/machine/search-link">12 Hours</a></div>
                                     <div class="col s3" style="font-weight:bold;">100 lbs</div>
                                 </div>
                                 <div class="row records_list">
                                     <div class="col s3">Machine B</div>
                                     <div class="col s3"><a href="/production/machine/machine-detail" target="_blank" class="machine-idle">Idle</a></div>
-                                    <div class="col s3"><a href="/production/machine/report/search-link">12 Hours</a></div>
+                                    <div class="col s3"><a href="/production/machine/search-link">12 Hours</a></div>
                                     <div class="col s3" style="font-weight:bold;">100 lbs</div>
                                 </div>
                               </div>
@@ -119,15 +120,15 @@
                                     <div class="col s2"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                     <div class="col s2">04:30 PM</div>
                                     <div class="col s2">05:30 PM</div>
-                                    <div class="col s2"><a href="/production/machine/report/search-link">12 Hours</a></div>
+                                    <div class="col s2"><a href="/production/machine/search-link">12 Hours</a></div>
                                     <div class="col s2" style="font-weight:bold;">100 lbs</div>
                                 </div>
                                 <div class="row records_list">
-                                    <div class="col s2">Machine B</div>
-                                    <div class="col s2"><a href="/production/machine/machine-detail" target="_blank" class="machine-idle">Idle</a></div>
+                                    <div class="col s2">Machine A</div>
+                                    <div class="col s2"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                     <div class="col s2">04:30 PM</div>
                                     <div class="col s2">05:30 PM</div>
-                                    <div class="col s2"><a href="/production/machine/report/search-link">12 Hours</a></div>
+                                    <div class="col s2"><a href="/production/machine/search-link">12 Hours</a></div>
                                     <div class="col s2" style="font-weight:bold;">100 lbs</div>
                                 </div>
                               </div>
@@ -147,15 +148,15 @@
                                 <div class="col s2"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                 <div class="col s2">04:30 PM</div>
                                 <div class="col s2">05:30 PM</div>
-                                <div class="col s2"><a href="/production/machine/report/search-link">12 Hours</a></div>
+                                <div class="col s2"><a href="/production/machine/search-link">12 Hours</a></div>
                                 <div class="col s2" style="font-weight:bold;">100 lbs</div>
                             </div>
                             <div class="row records_list">
-                                <div class="col s2">Machine B</div>
-                                <div class="col s2"><a href="/production/machine/machine-detail" target="_blank" class="machine-idle">Idle</a></div>
+                                <div class="col s2">Machine A</div>
+                                <div class="col s2"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                 <div class="col s2">04:30 PM</div>
                                 <div class="col s2">05:30 PM</div>
-                                <div class="col s2"><a href="/production/machine/report/search-link">12 Hours</a></div>
+                                <div class="col s2"><a href="/production/machine/search-link">12 Hours</a></div>
                                 <div class="col s2" style="font-weight:bold;">100 lbs</div>
                             </div>
                           </div>
