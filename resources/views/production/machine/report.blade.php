@@ -31,7 +31,7 @@
             <div class="col s9">
                 <fieldset>
                   <legend>Report:</legend>
-                  <div class="row"><div class="pull-right"><?php echo date('d F, Y'); ?></div></div>
+                  <div class="row"><div class="pull-right" style="font-size:16px; font-weight: bold;"><?php echo date('d F, Y'); ?></div></div>
                   <div class="row box">
                   	  <div class="row" style="margin-bottom:20px; margin-top:0">
                       	<form method="post" action="/production/machine/search">
