@@ -120,7 +120,7 @@ class InvoiceController extends Controller
             }
         }
         //return redirect('/admin/invoices/receipt/' . $invoice->id);
-		return redirect('/admin/invoices')->with('status', 'Invoice has been created successfully.');
+		return redirect('/admin/invoices/create')->with('status', 'Invoice has been created successfully.');
     }
 	
     public function getDetails($id,$department_ids=""){
