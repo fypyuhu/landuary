@@ -15,7 +15,7 @@
                         <a href="#"><i class="fa fa-home"></i> Home</a>  <i class="fa fa-angle-right"></i>
                     </li>
 
-                    <li><a href='/production/machine/report'>Today's Report</a>
+                    <li><a href='/production/washroom/report'>Today's Report</a>
                     </li>
                 </ul>
             </div>
@@ -34,7 +34,7 @@
                   <div class="row"><div class="pull-right" style="font-size:16px; font-weight: bold;"><?php echo date('d F, Y h:i a'); ?></div></div>
                   <div class="row box">
                   	  <div class="row" style="margin-bottom:20px; margin-top:0">
-                      	<form method="post" action="/production/machine/search">
+                      	<form method="post" action="/production/washroom/search">
                         	{{csrf_field()}}
                             <div class="col m6 s12" style="margin-top:0">
                                 <div class="row" style="margin-top:0">
@@ -82,7 +82,19 @@
                             </div>
                         </form>
                       </div>
-                      
+                      <div class="row" style="margin-bottom:15px;">
+                        <div class="col m3 s12">
+                            <label><strong>Sort By:</strong></label>
+                            <select name="sort" id="sort" class="dropdown">
+                                <option value="">Please Select</option>
+                                <option value="Machine Name">Machine Name</option>
+                                <option value="State">State</option>
+                                <option value="Total Runtime">Total Runtime</option>
+                                <option value="Weight Processed">Weight Processed</option>
+                            </select>
+                        </div>
+                        <div class="col m3 s12">&nbsp;</div>
+                      </div>
                       @if($link <= 0)
                           @if(!isset($machine) || (isset($machine) && $machine == ''))
                               <div class="row layout_table no-topmargin">
@@ -94,14 +106,14 @@
                                 </div>
                                 <div class="row records_list">
                                     <div class="col s3">Machine A</div>
-                                    <div class="col s3"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
-                                    <div class="col s3"><a href="/production/machine/search-link">12 Hours</a></div>
+                                    <div class="col s3"><a href="/production/washroom/machine-detail" target="_blank" class="machine-busy">Active</a></div>
+                                    <div class="col s3"><a href="/production/washroom/search-link">12 Hours</a></div>
                                     <div class="col s3" style="font-weight:bold;">100 lbs</div>
                                 </div>
                                 <div class="row records_list">
                                     <div class="col s3">Machine B</div>
-                                    <div class="col s3"><a href="/production/machine/machine-detail" target="_blank" class="machine-idle">Idle</a></div>
-                                    <div class="col s3"><a href="/production/machine/search-link">12 Hours</a></div>
+                                    <div class="col s3"><a href="/production/washroom/machine-detail" target="_blank" class="machine-idle">Idle</a></div>
+                                    <div class="col s3"><a href="/production/washroom/search-link">12 Hours</a></div>
                                     <div class="col s3" style="font-weight:bold;">100 lbs</div>
                                 </div>
                               </div>
@@ -118,19 +130,19 @@
                                 </div>
                                 <div class="row records_list">
                                     <div class="col s2">Machine A</div>
-                                    <div class="col s1"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
+                                    <div class="col s1"><a href="/production/washroom/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                     <div class="col s2">05:00 AM</div>
                                     <div class="col s2">11:00 AM</div>
-                                    <div class="col s2"><a href="/production/machine/search-link">06 Hours</a></div>
+                                    <div class="col s2"><a href="/production/washroom/search-link">06 Hours</a></div>
                                     <div class="col s1">Item A</div>
                                     <div class="col s2" style="font-weight:bold;">100 lbs</div>
                                 </div>
                                 <div class="row records_list">
                                     <div class="col s2">Machine A</div>
-                                    <div class="col s1"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
+                                    <div class="col s1"><a href="/production/washroom/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                     <div class="col s2">11:00 AM</div>
                                     <div class="col s2">05:00 PM</div>
-                                    <div class="col s2"><a href="/production/machine/search-link">06 Hours</a></div>
+                                    <div class="col s2"><a href="/production/washroom/search-link">06 Hours</a></div>
                                     <div class="col s1">Item B</div>
                                     <div class="col s2" style="font-weight:bold;">100 lbs</div>
                                 </div>
@@ -149,19 +161,19 @@
                             </div>
                             <div class="row records_list">
                                 <div class="col s2">Machine A</div>
-                                <div class="col s1"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
+                                <div class="col s1"><a href="/production/washroom/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                 <div class="col s2">05:00 AM</div>
                                 <div class="col s2">11:00 AM</div>
-                                <div class="col s2"><a href="/production/machine/search-link">06 Hours</a></div>
+                                <div class="col s2"><a href="/production/washroom/search-link">06 Hours</a></div>
                                 <div class="col s1">Item A</div>
                                 <div class="col s2" style="font-weight:bold;">100 lbs</div>
                             </div>
                             <div class="row records_list">
                                 <div class="col s2">Machine A</div>
-                                <div class="col s1"><a href="/production/machine/machine-detail" target="_blank" class="machine-busy">Active</a></div>
+                                <div class="col s1"><a href="/production/washroom/machine-detail" target="_blank" class="machine-busy">Active</a></div>
                                 <div class="col s2">11:00 AM</div>
                                 <div class="col s2">05:00 PM</div>
-                                <div class="col s2"><a href="/production/machine/search-link">06 Hours</a></div>
+                                <div class="col s2"><a href="/production/washroom/search-link">06 Hours</a></div>
                                 <div class="col s1">Item B</div>
                                 <div class="col s2" style="font-weight:bold;">100 lbs</div>
                             </div>

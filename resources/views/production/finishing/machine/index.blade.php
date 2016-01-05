@@ -15,7 +15,7 @@
                         <a href="#"><i class="fa fa-home"></i> Home</a>  <i class="fa fa-angle-right"></i>
                     </li>
 
-                    <li><a href='/production/machine'>Manage Machines</a>
+                    <li><a href='/production/washroom/machine'>Manage Machines</a>
                     </li>
                 </ul>
             </div>
@@ -26,7 +26,7 @@
 
     </div>
     <!-- /Breadcrumb -->
-    <a data-mode="ajax" href="/production/machine/create" class="waves-effect btn create-clone-button">Add Machine</a>
+    <a data-mode="ajax" href="/production/washroom/machine-create" class="waves-effect btn create-clone-button">Add Machine</a>
     <div class="row no-rightmargin">
         <div class="col s9">
             <fieldset>
@@ -72,7 +72,7 @@
             }
         });*/
 		
-		var url = "{{url('production/machine/show')}}";
+		var url = "{{url('production/washroom/machine-show')}}";
 		$("#search_form").submit(function(e){
 			e.preventDefault();
 			if($('#search_string').val() != '') {

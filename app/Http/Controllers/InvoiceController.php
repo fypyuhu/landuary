@@ -122,6 +122,7 @@ class InvoiceController extends Controller
         //return redirect('/admin/invoices/receipt/' . $invoice->id);
 		return redirect('/admin/invoices')->with('status', 'Invoice has been created successfully.');
     }
+	
     public function getDetails($id,$department_ids=""){
         $active_customer=Customer::find($id);
         $customers=Customer::organization()->get();
@@ -129,6 +130,7 @@ class InvoiceController extends Controller
         $ship_manifests=ShipManifest::getManifestsForInvoice($id,$department_ids);
         return view('admin.invoices.details',["ship_manifests"=>$ship_manifests,"customers"=>$customers,"active_customer"=>$active_customer,"departments"=>$departments,"department_ids"=>explode(",",$department_ids)]);
     }
+	
    public function getReceipt($id){
        $user=UserProfile::where('user_id','=',Auth::user()->id)->first();
        $invoice=Invoice::find($id);
@@ -153,6 +155,32 @@ class InvoiceController extends Controller
            "tax_data"=>$tax_data[0]
            ]);
    }
+   
+   public function getReceiptSummary($id){
+       $user=UserProfile::where('user_id','=',Auth::user()->id)->first();
+       $invoice=Invoice::find($id);
+       $customer=Customer::find($invoice->customer_id);
+       $invoice_data=Invoice::getInvoicePriceByManifestIds($invoice->manifest_ids,$invoice->customer_id);
+	   if(strpos($invoice->department_ids, '-1') === false) {
+       		$departments=CustomerDepartment::whereRaw("FIND_IN_SET(id,'".$invoice->department_ids."')")->get();
+	   } else {
+	   		$departments=CustomerDepartment::all();
+	   }
+       $customer_tax=CustomerTax::where('customer_id','=',$invoice->customer_id)->first();
+       $tax=Tax::find($customer_tax->tax_id);
+       $tax_componenets=TaxComponent::where('tax_id','=',$tax->id)->get();
+       $tax_data=Tax::getTaxRateById($tax->id);
+       return view('admin.invoices.receipt',["user"=>$user,
+           "invoice"=>$invoice,
+           "customer"=>$customer,
+           "departments"=>$departments,
+           "invoice_data"=>$invoice_data,
+           "tax"=>$tax,
+           "tax_componenets"=>$tax_componenets,
+           "tax_data"=>$tax_data[0]
+           ]);
+   }
+   
    public function getShow(Request $request){
        if($request->department!=""){
             $invoices=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->whereRaw("FIND_IN_SET('".$request->department."',department_ids)")->skip($request->recordstartindex)->take($request->pagesize)->get();

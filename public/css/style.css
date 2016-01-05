@@ -1150,6 +1150,14 @@ Productions CSS
 	text-decoration: none;
 }
 
+.date-group {
+	padding: 5px;
+	background: #666666;
+	color: #ffffff;
+	font-weight: bold;
+	text-indent: 10px;
+}
+
 /***
 End Productions CSS
 ***/

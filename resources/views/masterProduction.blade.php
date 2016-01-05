@@ -126,7 +126,7 @@
                   	<ul class="col s12">
                     	<li><a href="javascript:void(0);">Production Management</a>
                         </li>
-                        <li><a href="{{url('production/machine')}}">Machine Settings</a>
+                        <li><a href="{{url('production/washroom/machine')}}">Machine Settings</a>
                         </li>
                         <li><a href="{{url('production/users')}}">Users</a>
                         </li>
@@ -148,8 +148,8 @@
   <footer align="center">
   	<ul>
     	<li><a href="{{url('production/dashboard')}}" class="fag fa-homec">Dashboard</a></li>
-    	<li><a href="{{url('production/machine/start-machine')}}" class="fag fa-start" data-mode="ajax2">Start Machine</a></li>
-        <li><a href="{{url('production/machine/report')}}" class="fag fa-washroom">Wash Room</a></li>
+    	<li><a href="{{url('production/washroom/start-machine')}}" class="fag fa-start" data-mode="ajax2">Start Machine</a></li>
+        <li><a href="{{url('production/washroom/report')}}" class="fag fa-washroom">Wash Room</a></li>
         <!--<li><a href="#">Finishing</a></li>-->
     </ul>
   </footer>

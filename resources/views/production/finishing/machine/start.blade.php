@@ -2,7 +2,7 @@
 <fieldset>
                     <legend>Start Machine:</legend>
                     <div class="row alert alert-success" style="display:none;"></div>
-                    <form method="POST" action="{{url('production/machine/machine-detail')}}" id="pageForm">
+                    <form method="POST" action="{{url('production/washroom/machine-detail')}}" id="pageForm">
                         {{csrf_field()}}
                         <div class="row">
                             <div class="col m4 s12">
@@ -88,7 +88,7 @@
 						</div>
                         <div class="row">
                             <!--<button type="submit" class="waves-effect btn" style="background:#2b8f2d;">Start Machine</button>-->
-                            <a href="{{url('production/machine/machine-detail')}}" class="waves-effect btn" style="background:#2b8f2d;">Start Machine</a>
+                            <a href="{{url('production/washroom/machine-detail')}}" class="waves-effect btn" style="background:#2b8f2d;">Start Machine</a>
                         </div>
                     </form>
                 </fieldset>

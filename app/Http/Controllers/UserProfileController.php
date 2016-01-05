@@ -36,6 +36,45 @@ class UserProfileController extends Controller {
 		$visited = intval($user->visited);
         return view('admin.profile.index', ['countries' => $countries, 'user' => $user_profile, 'visited' => $visited]);
     }
+	
+	public function getUser() {
+		return view('admin.profile.users.index');
+	}
+	
+	public function getUserCreate()
+	{
+		return view('admin.profile.users.add');
+	}
+	
+	public function postUserCreate(Request $request)
+    {
+        //
+    }
+	
+	public function getUserShow(Request $request) {
+		$search_filter = '';
+		
+		if ($request->has('search_string')) {
+			$search_filter = " (machine_name like '%$request->search_string%' or machine_number = '$request->search_string') AND ";
+		}
+			
+        //$records = Rule::All();
+		$records = array(
+				array('user_type' => 'Driver', 'user_id' => '35689', 'user_password' => 'welcome1')
+		);
+		
+        $data = array();
+        foreach ($records as $key => $record) {
+            $row = array();
+			$row["user_type"] = $record['user_type'];
+            $row["user_id"] = $record['user_id'];
+            $row["user_password"] = $record['user_password'];
+            //$row["actions"] = '<a href="/production/machine/edit/' . $key . '" data-mode="ajax" >Edit</a> / <a href="/production/machine/delete/' . $key . '" data-mode="ajax">Delete</a>';
+			
+			$data[] = $row;
+        }
+        echo "{\"data\":" . json_encode($data) . "}";
+	}
 
     /**
      * Show the form for creating a new resource.

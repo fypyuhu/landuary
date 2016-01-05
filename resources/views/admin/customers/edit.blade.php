@@ -349,7 +349,7 @@
                         <div class="col s2 right-align" id="t-weight">Weight</div>
                         <div class="col s3" id="t-type">Transaction Type</div>
                         <div class="col s2 center-align">Taxable</div>
-                        <div class="col s2" style="display:none;" id="price-heading">Price</div>
+                        <div class="col s2" style="display:none;" id="price-heading">Specialty Item Pricing</div>
                         <div class="col s1">Del</div>
                     </div>
     

@@ -65,9 +65,11 @@
 				});
 				
 				$('.btns').click(function(e){
-					$('.frm').hide();
 					var corr_div_id = $(this).data('corr-id');
-					$(corr_div_id).slideDown('slow');
+					if(!$(corr_div_id).is(':visible')) {
+						$('.frm').slideUp('slow');
+						$(corr_div_id).slideDown('slow');
+					}						
 				});
 			});
 		</script>

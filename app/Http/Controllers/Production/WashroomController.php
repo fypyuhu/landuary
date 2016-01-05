@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Production\Machine;
 
-class MachineController extends Controller
+class WashroomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,12 @@ class MachineController extends Controller
      */
     public function getIndex()
     {
-        return view('production.machine.index');
+        return view('production.washroom.report', ['link' => 0]);
+    }
+	
+	public function getMachine()
+    {
+        return view('production.washroom.machine.index');
     }
 
     /**
@@ -26,12 +31,12 @@ class MachineController extends Controller
      * @return \Illuminate\Http\Response
      */
 	
-	public function getCreate()
+	public function getMachineCreate()
 	{
-		return view('production.machine.add');
+		return view('production.washroom.machine.add');
 	}
 	 
-    public function postCreate(Request $request)
+    public function postMachineCreate(Request $request)
     {
         $create = new Machine;
 		$create->machine_name = $request->machine_name;
@@ -50,24 +55,24 @@ class MachineController extends Controller
     }
 	
 	public function getStartMachine() {
-		return view('production.machine.start');
+		return view('production.washroom.machine.start');
 	}
 	
 	public function getMachineDetail() {
-		return view('production.machine.machineDetail');
+		return view('production.washroom.machine.machineDetail');
 	}
 	
 	public function getReport() {
-		return view('production.machine.report', ['link' => 0]);
+		return view('production.washroom.report', ['link' => 0]);
 	}
 	
 	public function postSearch(Request $request) {
 		$machine = $request->machine;
-		return view('production.machine.report', [ 'machine' => $machine, 'link' => 0 ]);
+		return view('production.washroom.report', [ 'machine' => $machine, 'link' => 0 ]);
 	}
 	
 	public function getSearchLink() {
-		return view('production.machine.report', [ 'link' => 1 ]);
+		return view('production.washroom.report', [ 'link' => 1 ]);
 	}
 
     /**
@@ -92,7 +97,7 @@ class MachineController extends Controller
         //
     }
 	
-	public function getShow(Request $request)
+	public function getMachineShow(Request $request)
     {
         $search_filter = '';
 		
@@ -100,7 +105,7 @@ class MachineController extends Controller
 			$search_filter = " (machine_name like '%$request->search_string%' or machine_number = '$request->search_string') AND ";
 		}
 			
-        $records = Machine::All();
+        $records = Washroom::All();
         $data = array();
         foreach ($records as $record) {
             $row = array();
@@ -122,8 +127,8 @@ class MachineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-	public function getEdit($id) {
-		return view('production.machine.edit');
+	public function getMachineEdit($id) {
+		return view('production.washroom.machine.edit');
 	}
 	
     public function postEdit($id)
@@ -150,13 +155,13 @@ class MachineController extends Controller
      * @return \Illuminate\Http\Response
      */
 	 
-	public function getDelete($id) {
-        return view('production.machine.delete', ['id' => $id]);
+	public function getMachineDelete($id) {
+        return view('production.washroom.machine.delete', ['id' => $id]);
     }
 	
-    public function postDelete($id)
+    public function postMachineDelete($id)
     {
-        $rec = Machine::find($id);
+        $rec = Washroom::find($id);
         $rec->delete();
     }
 }

@@ -15,7 +15,7 @@
                         <a href="#"><i class="fa fa-home"></i> Home</a>  <i class="fa fa-angle-right"></i>
                     </li>
 
-                    <li><a href='/production/machine/machine-details'>Machine Details</a>
+                    <li><a href='/production/washroom/machine-details'>Machine Details</a>
                     </li>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
                         Item: Towels<br /><br />
                         Started at: 10:00 PM<br />
                         Will stop at: 11:00 PM</strong></p>
-                        <p><a href="/production/machine/report">View Today's Report</a></p>
+                        <p><a href="/production/washroom/report">View Today's Report</a></p>
                     </div>
                     <div class="col m4 s12">
                     	<h4 style="text-align:right;">25 December, 2015</h4>

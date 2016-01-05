@@ -2,7 +2,7 @@
 <fieldset>
                     <legend>Add Machine:</legend>
                     <div class="row alert alert-success" style="display:none;"></div>
-                    <form method="POST" action="{{url('production/machine/create')}}" id="pageForm">
+                    <form method="POST" action="{{url('production/washroom/machine-create')}}" id="pageForm">
                         {{csrf_field()}}
                         <div class="row s12">
                             <label>Machine Name:</label>
@@ -47,6 +47,9 @@
                 </fieldset>
 <script>
      $(document).ready(function () {
+	 	$('fieldset').click(function(){
+			$('.alert-success').hide();
+		});
         $("#pageForm").validate({
             rules: {
                 machine_name: "required",
@@ -66,7 +69,7 @@
                 };
                 function showResponse(responseText, statusText, xhr, $form) {
                     //location.reload();
-					$('.field-set').load('/admin/machine/add-form',function(){
+					$('.field-set').load('/admin/washroom/add-form',function(){
 						$('.loading').hide();
 						$('.alert-success').html('Machine has been saved successfully. Please add next machine or close window.').show();
 					});
