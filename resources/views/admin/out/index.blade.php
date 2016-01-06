@@ -36,9 +36,8 @@
                 </div>
             </div>
         </div>
-        <a href="/admin/out/receipt/{{$cart_id}}" id="newtab_link" target="_blank" style="display:none;">Link</a>
+        <a href="javascript:void(0)" id="newtab_link" onclick="window.open('/admin/out/receipt/25', 'Receipt', 'height=' + (screen.height-150) + ',width=' + (screen.width-150));" style="display:none;">Link</a>
     @endif
-    
     <div id="loadAjaxFrom">
         
             <div class="row no-rightmargin">

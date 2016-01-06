@@ -15,7 +15,7 @@
 <section class="content-wrap" style="background: #ffffff;">
 	<div class="row">
     	<a href="{{URL::previous()}}" class="waves-effect btn">Back</a>
-    	<button class="waves-effect btn" onclick='$("#printable").print();'>Print</button>
+    	<button class="waves-effect btn" id="printable" onclick='$("#printable").print();'>Print</button>
     </div>
     <div class="row receipt">
         <div class="p-wrapper" style="width:384px;" id="printable">
@@ -87,8 +87,8 @@
 @endsection
 @section('js')
 <script type="text/javascript">
-    $(document).ready(function () {
-        
+    $( window ).load(function() {
+        $("#printable").trigger('click');
     });
     
 </script>
