@@ -46,11 +46,11 @@
             </div>
             
             <div class="row">
-                <div class="col m6 s12">
-                    <input type="radio" name="invoice_type" value="Summary Invoice" id="summary_invoice" /> <label for="summary_invoice">Summary Invoice</label>
+            	<div class="col m6 s12">
+                    <input type="radio" name="invoice_type" value="Detailed Invoice" id="detailed_invoice" checked="checked" /> <label for="detailed_invoice">Detailed Invoice</label>
                 </div>
                 <div class="col m6 s12">
-                    <input type="radio" name="invoice_type" value="Detailed Invoice" id="detailed_invoice" /> <label for="detailed_invoice">Detailed Invoice</label>
+                    <input type="radio" name="invoice_type" value="Summary Invoice" id="summary_invoice" /> <label for="summary_invoice">Summary Invoice</label>
                 </div>
             </div>
 

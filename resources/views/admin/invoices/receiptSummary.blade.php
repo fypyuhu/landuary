@@ -10,9 +10,9 @@
     <div class="p-wrapper" id="printable">
     <div class="row">
     	 <div class="pull-left">
-                <h4>{{$user->legal_name}}</h4>
-                <p style="font-size:17px;">{{$user->street_address}}<br />{{$user->city}} {{$user->state}}</p>
-                <p>Phone: {{$user->phone}}</p>
+                <h4>{{$user_p->legal_name}}</h4>
+                <p style="font-size:17px;">{{$user_p->street_address}}<br />{{$user_p->city}} {{$user_p->state}}</p>
+                <p>Phone: {{$user_p->phone}}</p>
             </div>
         <div class="pull-right">
             <p>Invoice #: {{$invoice->invoice_number}}<br />
@@ -35,7 +35,7 @@
         	<tr class="receipt-heading">
         		<th>Ship Date</th>
                 <th>Manifest #</th>
-                <th>Cart #</th>
+                <th>No. of Carts</th>
                 <th>No. of Items</th>
                 <th>Cart Net Weight</th>
             </tr>
@@ -43,8 +43,8 @@
             <tr>
                 <td>@if($key > 0 && $data->shipping_date == $invoice_data[$key-1]->shipping_date) ... @else @date($data->shipping_date) @endif</td>
                 <td>{{$key > 0 && $data->id == $invoice_data[$key-1]->id ? '...' : $data->id}}</td>
-                <td>{{$key > 0 && $data->cart_number == $invoice_data[$key-1]->cart_number ? '...' : $data->cart_number}}</td>
-                <td>{{$data->item_number}}</td>
+                <td>{{$data->total_carts}}</td>
+                <td>{{$data->total_items}}</td>
                 <td>{{$data->quantity}}</td>
             </tr>
             @endforeach
@@ -55,9 +55,6 @@
         <div class="pull-right align-right" style="font-weight: bold; padding:15px;">
             <p>Sub Total: ${{$invoice->price}}<br />
             {{$tax->tax_name}} Tax: ${{$invoice->total_tax}}<br /></p>
-            @foreach($tax_componenets as $component)
-            <p>{{$component->component_name}} Tax: ${{($invoice->total_tax)/(($tax_data->accumulative_rate)/100)*(($component->tax_rate)/100)}}</p>
-            @endforeach
             <hr />
             <p> Total Invoice: ${{$invoice->total_price}}</p>
         </div>

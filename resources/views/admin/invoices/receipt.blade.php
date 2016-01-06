@@ -10,9 +10,9 @@
     <div class="p-wrapper" id="printable">
     <div class="row">
     	 <div class="pull-left">
-                <h4>{{$user->legal_name}}</h4>
-                <p style="font-size:17px;">{{$user->street_address}}<br />{{$user->city}} {{$user->state}}</p>
-                <p>Phone: {{$user->phone}}</p>
+                <h4>{{$user_p->legal_name}}</h4>
+                <p style="font-size:17px;">{{$user_p->street_address}}<br />{{$user_p->city}} {{$user_p->state}}</p>
+                <p>Phone: {{$user_p->phone}}</p>
             </div>
         <div class="pull-right">
             <p>Invoice #: {{$invoice->invoice_number}}<br />
@@ -46,20 +46,18 @@
                 <td>{{$key > 0 && $data->id == $invoice_data[$key-1]->id ? '...' : $data->id}}</td>
                 <td>{{$key > 0 && $data->cart_number == $invoice_data[$key-1]->cart_number ? '...' : $data->cart_number}}</td>
                 <td>{{$data->item_number}}</td>
-                <td>{{$data->item_name}}</td>
+                <td>{{$data->item_name}} <?php echo $data->billing_by_generic > 0 ? '<span style="color: #ff0000;">***</span>' : ''; ?></td>
                 <td>{{$data->quantity}}</td>
             </tr>
             @endforeach
         </table>
     </div>
     <hr />
+    <div class="row"><span style="color: #ff0000;">*** = Items with specialty pricing.</span></div>
     <div class="row">
         <div class="pull-right align-right" style="font-weight: bold; padding:15px;">
             <p>Sub Total: ${{$invoice->price}}<br />
             {{$tax->tax_name}} Tax: ${{$invoice->total_tax}}<br /></p>
-            @foreach($tax_componenets as $component)
-            <p>{{$component->component_name}} Tax: ${{($invoice->total_tax)/(($tax_data->accumulative_rate)/100)*(($component->tax_rate)/100)}}</p>
-            @endforeach
             <hr />
             <p> Total Invoice: ${{$invoice->total_price}}</p>
         </div>

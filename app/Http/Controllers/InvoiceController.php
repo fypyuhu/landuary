@@ -120,7 +120,7 @@ class InvoiceController extends Controller
             }
         }
         //return redirect('/admin/invoices/receipt/' . $invoice->id);
-		return redirect('/admin/invoices/create')->with('status', 'Invoice has been created successfully.');
+		return redirect('/admin/invoices/create')->with('status', 'Invoice has been created successfully.')->withInput();
     }
 	
     public function getDetails($id,$department_ids=""){
@@ -132,7 +132,7 @@ class InvoiceController extends Controller
     }
 	
    public function getReceipt($id){
-       $user=UserProfile::where('user_id','=',Auth::user()->id)->first();
+       $user_p=UserProfile::where('user_id','=',Auth::user()->id)->first();
        $invoice=Invoice::find($id);
        $customer=Customer::find($invoice->customer_id);
        $invoice_data=Invoice::getInvoicePriceByManifestIds($invoice->manifest_ids,$invoice->customer_id);
@@ -145,7 +145,7 @@ class InvoiceController extends Controller
        $tax=Tax::find($customer_tax->tax_id);
        $tax_componenets=TaxComponent::where('tax_id','=',$tax->id)->get();
        $tax_data=Tax::getTaxRateById($tax->id);
-       return view('admin.invoices.receipt',["user"=>$user,
+       return view('admin.invoices.receipt',["user_p"=>$user_p,
            "invoice"=>$invoice,
            "customer"=>$customer,
            "departments"=>$departments,
@@ -157,7 +157,7 @@ class InvoiceController extends Controller
    }
    
    public function getReceiptSummary($id){
-       $user=UserProfile::where('user_id','=',Auth::user()->id)->first();
+       $user_p=UserProfile::where('user_id','=',Auth::user()->id)->first();
        $invoice=Invoice::find($id);
        $customer=Customer::find($invoice->customer_id);
        $invoice_data=Invoice::getInvoicePriceByManifestIds($invoice->manifest_ids,$invoice->customer_id);
@@ -170,7 +170,7 @@ class InvoiceController extends Controller
        $tax=Tax::find($customer_tax->tax_id);
        $tax_componenets=TaxComponent::where('tax_id','=',$tax->id)->get();
        $tax_data=Tax::getTaxRateById($tax->id);
-       return view('admin.invoices.receipt',["user"=>$user,
+       return view('admin.invoices.receiptSummary',["user_p"=>$user_p,
            "invoice"=>$invoice,
            "customer"=>$customer,
            "departments"=>$departments,

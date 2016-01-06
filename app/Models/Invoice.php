@@ -17,7 +17,7 @@ class Invoice extends Model
         parent::save($options); // Calls Default Save
     }
     public static function getInvoicePriceByManifestIds($manifest_ids,$customer_id){
-        $sql="select items.name as item_name,items.id as item_id, items.item_number, shipping_manifest.shipping_date,outgoing_carts.net_weight,customers_items.taxable,customers_outgoing_carts_items.quantity,customers_outgoing_carts_items.id as customer_item_id,shipping_manifest.id, outgoing_carts.id as cart_id, outgoing_carts.cart_id as cart_number,customers_items.price, customers_items.billing_by,customers_items.custom_price, items.weight "
+        $sql="select customers_items.billing_by_generic, count(outgoing_carts.cart_id) as total_carts, count(items.item_number) as total_items, items.name as item_name,items.id as item_id, items.item_number, shipping_manifest.shipping_date,outgoing_carts.net_weight,customers_items.taxable,customers_outgoing_carts_items.quantity,customers_outgoing_carts_items.id as customer_item_id,shipping_manifest.id, outgoing_carts.id as cart_id, outgoing_carts.cart_id as cart_number,customers_items.price, customers_items.billing_by,customers_items.custom_price, items.weight "
                 . "from shipping_manifest "
                 . "join outgoing_carts on FIND_IN_SET (outgoing_carts.id, shipping_manifest.outgoing_cart_id) "
                 . "join customers_outgoing_carts_items on customers_outgoing_carts_items.outgoing_cart_id = outgoing_carts.id "
@@ -27,6 +27,7 @@ class Invoice extends Model
                 . "order by shipping_manifest.id ASC, outgoing_carts.cart_id ASC";
          return  DB::select(DB::raw($sql));
     }
+	
     public function customer() {
         return $this->belongsTo('App\Models\Customer', 'customer_id');
     }

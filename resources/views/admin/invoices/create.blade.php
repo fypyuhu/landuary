@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <a href="/admin/invoices/receipt/{{$rec_id}}" id="newtab_link" target="_blank" style="display:none;">Link</a>
+        <a href="/admin/invoices/{{ old('invoice_type') == 'Detailed Invoice' ? 'receipt' : 'receipt-summary' }}/{{$rec_id}}" id="newtab_link" target="_blank" style="display:none;">Link</a>
     @endif
     
     <div id="shipmant" class="row no-rightmargin">
@@ -77,10 +77,10 @@
                     
                     <div class="row">
                     	<div class="col m6 s12">
-                    		<input type="radio" name="invoice_type" value="Summary Invoice" id="summary_invoice" /> <label for="summary_invoice">Summary Invoice</label>
+                            <input type="radio" name="invoice_type" value="Detailed Invoice" id="detailed_invoice" checked="checked" /> <label for="detailed_invoice">Detailed Invoice</label>
                         </div>
                         <div class="col m6 s12">
-                        	<input type="radio" name="invoice_type" value="Detailed Invoice" id="detailed_invoice" /> <label for="detailed_invoice">Detailed Invoice</label>
+                            <input type="radio" name="invoice_type" value="Summary Invoice" id="summary_invoice" /> <label for="summary_invoice">Summary Invoice</label>
                         </div>
                     </div>
 
