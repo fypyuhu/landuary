@@ -27,7 +27,7 @@ class CartsListController extends Controller {
             $row["number_of_items"] = $cart->number_of_items;
             $row["net_weight"] = $cart->net_weight;
             $row["gross_weight"] = $cart->gross_weight;
-            $row["actions"] = '<a href="/admin/in/receipt/' . $cart->id . '" >View</a>
+            $row["actions"] = '<a href="/admin/in/show-receipt/' . $cart->id . '" >View</a>
                                | <a href="/admin/in/edit/' . $cart->id . '" >Edit</a>';
             $data[] = $row;
         }
@@ -49,7 +49,7 @@ class CartsListController extends Controller {
             $row["gross_weight"] = $cart->gross_weight;
             $row["is_exchange_cart"] = $cart->is_exchange_cart > 0 ? 'Yes' : 'No';
             $row["invoiced"] = $cart->invoiced > 0 ? 'Yes' : 'No';
-            $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" >View</a>';
+            $row["actions"] = '<a href="/admin/out/show-receipt/' . $cart->id . '" >View</a>';
             if($cart->invoiced<1){
                 $row["actions"].='| <a href="/admin/out/edit/' . $cart->id . '" >Edit</a>';
             }
@@ -72,7 +72,7 @@ class CartsListController extends Controller {
             $row["net_weight"] = $cart->net_weight;
             $row["gross_weight"] = $cart->gross_weight;
             $row["is_exchange_cart"] = $cart->is_exchange_cart > 0 ? 'Yes' : 'No';
-            $row["actions"] = '<a href="/admin/out/receipt/' . $cart->id . '" >View</a>
+            $row["actions"] = '<a href="/admin/out/show-receipt/' . $cart->id . '" >View</a>
                                | <a href="/admin/out/edit/' . $cart->id . '" >Edit</a>';
             $data[] = $row;
         }

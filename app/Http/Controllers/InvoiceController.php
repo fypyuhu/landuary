@@ -131,6 +131,11 @@ class InvoiceController extends Controller
         return view('admin.invoices.details',["ship_manifests"=>$ship_manifests,"customers"=>$customers,"active_customer"=>$active_customer,"departments"=>$departments,"department_ids"=>explode(",",$department_ids)]);
     }
 	
+   public function getShowReceipt($id) {
+   		//DD($request);
+   		return redirect('/admin/invoices/receipt/'.$id)->with('status', 'view');
+   }	
+	
    public function getReceipt($id){
        $user_p=UserProfile::where('user_id','=',Auth::user()->id)->first();
        $invoice=Invoice::find($id);
@@ -210,7 +215,7 @@ class InvoiceController extends Controller
            }
            //$row["due_date"]=$invoice->due_date->format('d m Y');
 		   $row["due_date"]= date('d F, Y', strtotime($invoice->due_date));
-           $row["actions"]='<a href="/admin/invoices/receipt/' . $invoice->id . '">View</a>';;
+           $row["actions"]='<a href="/admin/invoices/show-receipt/' . $invoice->id . '">View</a>';;
            $data[] = $row;
        }
        echo "{\"data\":" . json_encode($data) . "}";

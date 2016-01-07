@@ -101,6 +101,11 @@ class OutController extends Controller {
         //return redirect('/admin/out/receipt/' . $ogc->id);
 		return redirect('/admin/out')->with('status', 'Outgoing cart has been created successfully.');
     }
+	
+	public function getShowReceipt($id) {
+   		//DD($request);
+   		return redirect('/admin/out/receipt/'.$id)->with('status', 'view');
+    }
 
     public function getReceipt($id) {
         $cart = OutgoingCart::find($id);

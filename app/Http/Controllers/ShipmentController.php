@@ -63,6 +63,11 @@ class ShipmentController extends Controller
         //return redirect('/admin/shiping-manifest/recipt/'.$manifest->id);
 		return redirect('/admin/shiping-manifest')->with('status', 'Shipping manifest has been created successfully.');
     }
+	
+	public function getShowReceipt($id) {
+   		//DD($request);
+   		return redirect('/admin/shiping-manifest/recipt/'.$id)->with('status', 'view');
+   }
 
     public function getRecipt($id){
         $manifest=ShipManifest::find($id);

@@ -120,6 +120,11 @@ class InController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+	public function getShowReceipt($id) {
+   		//DD($request);
+   		return redirect('/admin/in/receipt/'.$id)->with('status', 'view');
+    }
+	
     public function getReceipt($id) {
         $cart = IncomingCart::find($id);
         $department = CustomerDepartment::find($cart->department_id);

@@ -129,6 +129,11 @@ class ReceivingManifestController extends Controller
 		return view('admin.receiving-manifest.receipt', [ 'user'=>$user, 'manifest' => $manifest, 'customer' => $customer, 'department' => $department, 'items' => $items, 'total_gross_weight' => array_sum($gross_weight), 'total_net_weight' => array_sum($net_weight), 'organization' => $organization ]);
 	}
 	
+	public function getShowReceipt($id) {
+   		//DD($request);
+   		return redirect('/admin/receiving-manifest/view-receipt/'.$id)->with('status', 'view');
+   }
+	
 	public function getViewReceipt($id) {
 		$manifest = ReceivingManifest::find($id);
 		$customer = Customer::find($manifest->customer_id);

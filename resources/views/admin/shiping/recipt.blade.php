@@ -89,11 +89,13 @@
     </div>
 </section>
 @endsection
+
 @section('js')
-<script type="text/javascript">
-    $( window ).load(function() {
-        $("#btn-printable").trigger('click');
-    });
-    
-</script>
+    @if (!session('status'))
+        <script type="text/javascript">
+            $( window ).load(function() {
+                $("#btn-printable").trigger('click');
+            });
+        </script>
+    @endif
 @endsection
