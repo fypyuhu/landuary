@@ -25,7 +25,9 @@
     
     <div class="row receipt">    
     <div class="p-wrapper" id="printable">
-    	<img src="{{URL::asset('images/c1.jpg')}}" class="client-logo" />
+    	@if ($user_profile->logo != '')
+        <img src="{{URL::asset('uploads/profile')}}/{{$user_profile->logo}}" alt="{{$user->first_name}}" class="client-logo">
+        @endif
         <div class="row">
             <h3 class="align-center">Receiving Manifest</h3>
         </div>

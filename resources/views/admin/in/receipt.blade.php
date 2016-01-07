@@ -32,7 +32,9 @@
     </div>
     <div class="row receipt">
         <div class="p-wrapper" style="width:384px;" id="printable">
-        	<img src="{{URL::asset('images/c1.jpg')}}" class="client-logo" />
+            @if ($user_profile->logo != '')
+            <img src="{{URL::asset('uploads/profile')}}/{{$user_profile->logo}}" alt="{{$user->first_name}}" class="client-logo">
+            @endif
         	<div class="row">
                 <h3 class="align-center">{{$organization->name}}</h3>
                 <h4 class="align-center">Date: @date($cart->receiving_date)</h4>
