@@ -64,15 +64,15 @@
                         <th>Item #</th>
                         <th>Name</th>
                         <th class="align-right">Qty</th>
-                        <th class="align-right">Net Weight</th>
+                        <th class="align-right">Cart Net Weight</th>
                     </tr>
                     @foreach($items as $key=>$item)
                     <tr>
-                        <td>{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->cart_id}}</td>
+                        <td><strong>{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->cart_id}}</strong></td>
                         <td>{{$item->item_number}}</td>
                         <td>{{$item->name}}</td>
                         <td class="align-right">{{$item->quantity}}</td>
-                        <td class="align-right">{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->net_weight}}</td>
+                        <td class="align-right"><strong>{{$key > 0 && $item->cart_id == $items[$key-1]->cart_id ? '...' : $item->net_weight}}</strong></td>
                     </tr>
                     @endforeach
                     
