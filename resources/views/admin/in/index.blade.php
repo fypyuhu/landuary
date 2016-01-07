@@ -36,7 +36,9 @@
                 </div>
             </div>
         </div>
-        <a href="/admin/in/receipt/{{$rec_id}}" id="newtab_link" target="_blank" style="display:none;">Link</a>
+        @if($rec_id)
+        <a href="javascript:void(0)" id="newtab_link" onclick="window.open('/admin/in/receipt/{{$rec_id}}', 'Receipt', 'height=' + (screen.height-150) + ',width=' + (screen.width-150));" style="display:none;">Link</a>
+        @endif
     @endif
     
     <div id="loadAjaxFrom">

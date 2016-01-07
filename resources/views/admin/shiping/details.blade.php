@@ -92,7 +92,7 @@
                         <div class="col s2">{{$cart->cart_id}}</div>
                         <div class="col s3">@date($cart->shipping_date)</div>
                         <div class="col s3 right-align">{{$cart->net_weight}}</div>
-                        <div class="col s3 center-align"><a href="/admin/out/receipt/{{$cart->id}}" class="edit-button">View</a> | <a href="/admin/out/edit/{{$cart->id}}"  class="edit-button">Edit</a> | <a href="/admin/out/delete/{{$cart->id}}" data-mode="ajax">Delete</a></div>
+                        <div class="col s3 center-align"><a href="/admin/out/show-receipt/{{$cart->id}}" class="edit-button">View</a> | <a href="/admin/out/edit/{{$cart->id}}"  class="edit-button">Edit</a> | <a href="/admin/out/delete/{{$cart->id}}" data-mode="ajax">Delete</a></div>
                     </div>
                     @endforeach
                     @else

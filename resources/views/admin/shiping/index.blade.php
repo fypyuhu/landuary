@@ -37,7 +37,7 @@
             </div>
         </div>
         @if($rec_id)
-        	<a href="/admin/shiping-manifest/recipt/{{$rec_id}}" id="newtab_link" target="_blank" style="display:none;">Link</a>
+            <a href="javascript:void(0)" id="newtab_link" onclick="window.open('/admin/shiping-manifest/recipt/{{$rec_id}}', 'Receipt', 'height=' + (screen.height-150) + ',width=' + (screen.width-150));" style="display:none;">Link</a>
         @endif
     @endif
 
