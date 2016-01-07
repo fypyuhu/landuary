@@ -9,16 +9,30 @@
     table td {
         padding: 5px 10px;
     }
+	
+	.p-wrapper {
+		position: relative;
+	}
+	
+	.client-logo {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0.1;
+		width: 100%;
+		height: 100%;
+	}
 </style>
 @endsection
 @section('content')
 <section class="content-wrap" style="background: #ffffff;">
 	<div class="row">
     	<a href="{{URL::previous()}}" class="waves-effect btn">Back</a>
-    	<button class="waves-effect btn" id="printable" onclick='$("#printable").print();'>Print</button>
+    	<button class="waves-effect btn" id="btn-printable" onclick='$("#printable").print();'>Print</button>
     </div>
     <div class="row receipt">
         <div class="p-wrapper" style="width:384px;" id="printable">
+        	<img src="{{URL::asset('images/c1.jpg')}}" class="client-logo" />
         	<div class="row">
                 <h3 class="align-center">{{$organization->name}}</h3>
                 <h4 class="align-center">Date: @date($shipping_date)</h4>
@@ -88,9 +102,8 @@
 @section('js')
 <script type="text/javascript">
     $( window ).load(function() {
-        $("#printable").trigger('click');
+        $("#btn-printable").trigger('click');
     });
     
 </script>
-
 @endsection
