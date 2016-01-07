@@ -1,13 +1,3 @@
-/*!
- * Name: Con - Admin Dashboard with Material Design
- * Version: 2.3.0
- * Author: nK
- * Website: http://nkdev.info
- * Support: http://nk.ticksy.com
- * Purchase: http://themeforest.net/item/con-material-admin-dashboard-template/10621512?ref=nKdev
- * License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
- * Copyright 2015.
- */
 /*
  *
  * Demo script to create settings form
