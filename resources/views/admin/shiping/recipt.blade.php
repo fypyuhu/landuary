@@ -10,16 +10,17 @@
 		padding: 5px 10px;
 	}
 	
-	content-wrap::after {
-		content: "";
-		background: url({{URL::asset('images/c1.jpg')}}) repeat-x;
-		opacity: 0.5;
+	.p-wrapper {
+		position: relative;
+	}
+	
+	.client-logo {
+		position: absolute;
 		top: 0;
 		left: 0;
-		bottom: 0;
-		right: 0;
-		position: absolute;
-		z-index: -1;
+		opacity: 0.1;
+		width: 100%;
+		height: 100%;
 	}
 </style>
 @endsection
@@ -31,8 +32,8 @@
     </div>
     <div class="row receipt">
         <div class="p-wrapper" id="printable">
-        	@if ($user_profile->logo != '')
-            <img src="{{URL::asset('uploads/profile')}}/{{$user_profile->logo}}" alt="{{$user->first_name}}" class="client-logo">
+        	@if ($user_profile_global->logo != '')
+            <img src="{{URL::asset('uploads/profile')}}/{{$user_profile_global->logo}}" alt="{{$user_global->first_name}}" class="client-logo">
             @endif
             <div class="row">
                 <h3 class="align-center">Shipping Manifest</h3>

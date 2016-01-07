@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
 		view()->composer('*', function($view){
 			if (Auth::check()) {
 				$user = Auth::user();
-				$user_profile = UserProfile::where('user_id', '=', $user->id)->get();
+				$user_profile = UserProfile::where('user_id', '=', $user->id)->first();
 				$initial_values = InitialValue::where('organization_id', '=', $user->organization_id)->first();
-				$view->with( ['initial_values' => $initial_values, 'user' => $user, 'user_profile' => $user_profile[0], 'date' => date('D, F d Y')] );
+				$view->with( ['initial_values' => $initial_values, 'user_global' => $user, 'user_profile_global' => $user_profile, 'date' => date('D, F d Y')] );
 			}
 		});
 		

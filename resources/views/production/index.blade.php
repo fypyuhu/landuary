@@ -27,13 +27,13 @@
     </div>
 
     <div class="row logo-sect">
-    	@if ($user_profile->logo != '')
+    	@if ($user_profile_global->logo != '')
         <div class="logo-cont pull-left">
-            <img src="{{URL::asset('uploads/profile')}}/{{$user_profile->logo}}" alt="{{$user->first_name}}" width="100%" height="100%" />
+            <img src="{{URL::asset('uploads/profile')}}/{{$user_profile_global->logo}}" alt="{{$user_global->first_name}}" width="100%" height="100%" />
         </div>
         @endif
         <div class="pull-left">
-            <h4>{{$user->first_name}}</h4>
+            <h4>{{$user_global->first_name}}</h4>
             @date($date)
         </div>
     </div>
