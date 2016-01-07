@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="row highlighted">
-    	<div class="row">
+    	<div class="row" align="center">
             <p>Ship To: {{$customer->name}}<br />
                 Customer Number: {{$customer->customer_number}}<br /><br />
                 {{$customer->shipping_address}} {{$customer->shipping_city}}<br />

@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="row highlighted">
-            <div class="row">
+            <div class="row" align="center">
                 <h4>Received From:</h4>
                 {{$customer->name}}<br />
                 {{$customer->shipping_address}}<br />
