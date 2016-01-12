@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="row">
-        	<a href="/admin/profile/step2" class="waves-effect btn">Next Step</a>
+        	<div class="pull-right"><a href="/admin/profile/step2" class="waves-effect btn">Next Step</a></div>
         </div>
     </div>
 </section>

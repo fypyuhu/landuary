@@ -47,6 +47,7 @@ class InvoiceController extends Controller
 		}
         return view('admin.invoices.create',["customers"=>$customers, 'rec_id' => $rec_id, 'current_customer' => $current_customer]);
     }
+	
     public function postCreate(Request $request)
     {
         $invoice=new Invoice;

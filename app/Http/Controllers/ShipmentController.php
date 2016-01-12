@@ -11,6 +11,8 @@ use App\Models\ShipManifest;
 use App\Models\CustomerOutgoingCartItem;
 use Auth;
 use App\Models\UserProfile;
+use App\Models\InitialValue;
+
 class ShipmentController extends Controller
 {
     /**
@@ -46,6 +48,8 @@ class ShipmentController extends Controller
     public function postCreate(Request $request)
     {
         $manifest=new ShipManifest;
+		$initial_values = InitialValue::where('organization_id', '=', Auth::user()->organization_id)->first();
+		$manifest->manifest_number=$initial_values->manifest_number;
         $manifest->customer_id=$request->customer;
         $manifest->department_id=$request->department;
         $manifest->shipping_date=date('Y-m-d',strtotime($request->ship_date));
@@ -60,6 +64,8 @@ class ShipmentController extends Controller
              }
         }
         $manifest->save();
+		$initial_values->manifest_number+=1;
+        $initial_values->save();
         //return redirect('/admin/shiping-manifest/recipt/'.$manifest->id);
 		return redirect('/admin/shiping-manifest')->with('status', 'Shipping manifest has been created successfully.');
     }

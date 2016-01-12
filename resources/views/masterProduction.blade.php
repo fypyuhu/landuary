@@ -110,19 +110,19 @@
       <ul>
         <li class="user">
           <a class="dropdown-button" href="javascript:void(0);">
-          	@if ($user_profile->logo != '')
-            <img src="{{URL::asset('uploads/profile')}}/{{$user_profile->logo}}" alt="{{$user->first_name}}" class="circle">
+          	@if ($user_profile_global->logo != '')
+            <img src="{{URL::asset('uploads/profile')}}/{{$user_profile_global->logo}}" alt="{{$user_global->first_name}}" class="circle">
             @else 
-            <span class="logo">{{$user->first_name}}</span>&nbsp;&nbsp;&nbsp;
+            <span class="logo">{{$user_global->first_name}}</span>&nbsp;&nbsp;&nbsp;
             @endif
-            {{$user->first_name}}<i class="mdi-navigation-expand-more right"></i>
+            {{$user_global->first_name}}<i class="mdi-navigation-expand-more right"></i>
           </a>
 
           <div id="user-dropdown" class="dropdown-content" style="width: 249.484px !important;">
           	<!--<h1>Lorem ipsum</h1>-->
               <div class="row">
                   <div class="col s12">
-                  	<h4>{{$user_profile->legal_name}}</h4>
+                  	<h4>{{$user_profile_global->legal_name}}</h4>
                   	<ul class="col s12">
                     	<li><a href="javascript:void(0);">Production Management</a>
                         </li>

@@ -13,6 +13,8 @@ use App\Models\IncomingCart;
 use App\Models\Item;
 use Auth;
 use App\Models\UserProfile;
+use App\Models\InitialValue;
+
 class ReceivingManifestController extends Controller
 {
     public function getIndex()
@@ -53,12 +55,17 @@ class ReceivingManifestController extends Controller
 			
 		if(count($ic_ids) > 0) {	
 			$rm = new ReceivingManifest;
+			$initial_values = InitialValue::where('organization_id', '=', Auth::user()->organization_id)->first();
+			$rm->manifest_number=$initial_values->manifest_number;
 			$rm->customer_id = $request->customer;
 			$rm->department_id = $request->department;
 			$rm->incoming_cart_ids = implode(',',$ic_ids);
 			$rm->date_from = date('Y-m-d', strtotime($request->date_from));
 			$rm->date_to = date('Y-m-d', strtotime($request->date_to));
 			$rm->save();
+			
+			$initial_values->manifest_number+=1;
+        	$initial_values->save();
 			
 			//return redirect('/admin/receiving-manifest/receipt/'.$rm->id);
 			return redirect('/admin/receiving-manifest')->with('status', 'Receiving manifest has been created successfully.');

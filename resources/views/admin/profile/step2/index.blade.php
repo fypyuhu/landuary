@@ -16,11 +16,14 @@
                 <input type="text" name="component_agency_name[]" />
             </div>
         </div>
-        <div class="col m4 s12">
+        <div class="col m3 s12">
             <label>Rate</label>
             <div class="input-field">
                 <input type="text" name="component_tax_rate[]" />
             </div>
+        </div>
+        <div class="col m1 s12" style="padding-top:26px;">
+            <a href="javascript:void(0);" onclick="$(this).parent().parent().remove();" class="waves-effect btn">X</a>
         </div>
     </div>
 </div>
@@ -60,7 +63,8 @@
             </div>
         </div>
         <div class="row">
-        	<a href="/admin/profile/step3" class="waves-effect btn">Next Step</a>
+        	<div class="pull-left"><a href="/admin/profile/step1" class="waves-effect btn">Previous Step</a></div>
+        	<div class="pull-right"><a href="/admin/profile/step3" class="waves-effect btn">Next Step</a></div>
         </div>
     </div>
 </section>

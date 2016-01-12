@@ -385,14 +385,14 @@
         var net_weight=gross-tare;
         var daviation= my_groos_weight*0.1;
         if(net_weight>my_groos_weight+daviation){
-            alert("Your net weight is 10% higher than the item weights saved in the system");
+            alert("Your net weight is more than 10% higher than the item weights saved in the system\n\nActual Scale Net Weight: "+net_weight+" lbs\nNet Weight Calculated by Piece Weight: 400 lbs\n======================================\nDifference: 100 lbs");
         }
         else if(net_weight<my_groos_weight-daviation){
-            alert("Your net weight is 10% less than the item weights saved in the system");
+            alert("Your net weight is more than 10% less than the item weights saved in the system");
         }
          $("#net_weight").val(net_weight);
         if(gross<tare){
-            $("#gross_weight").parent().siblings(".error").html("Gross weight can't be less than tear weight");
+            $("#gross_weight").parent().siblings(".error").html("Gross weight can't be less than tare weight");
             $("#gross_weight").parent().siblings(".error").show();
             return;
         }

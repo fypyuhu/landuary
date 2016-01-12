@@ -59,7 +59,7 @@ class TaxController extends Controller {
         $data = array();
         foreach ($records as $record) {
             $row = array();
-            $row["tax_type"] = $record->tax_type;
+            $row["tax_type"] = ucfirst($record->tax_type);
             $row["tax_name"] = $record->tax_name;
             $row["agency_name"] = $record->agency_name;
             $row["tax_rate"] = $record->tax_rate > 0 ? $record->tax_rate : '';

@@ -45,6 +45,7 @@
                 </div>
             </fieldset>
             <div class="row">
+            	<div class="pull-left"><a href="/admin/profile/step3" class="waves-effect btn">Previous Step</a></div>
                 <div class="col pull-right">
                   <button type="submit" class="waves-effect btn">Finish</button>
                   <button type="reset" class="waves-effect btn">Clear</button>

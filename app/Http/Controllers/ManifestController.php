@@ -24,14 +24,14 @@ class ManifestController extends Controller {
         $data = array();
         foreach ($ship_manifests as $manifest) {
             $row = array();
-            $row["id"] = $manifest->id;
+            $row["id"] = $manifest->manifest_number;
             $row["name"] = $manifest->customer->name;
             $department=CustomerDepartment::find($manifest->department_id);
             if($department){
-                $row["department"] =$department->department_name;
+                $row["department"] = $department->department_name;
             }
             else{
-                $row["department"] ='';
+                $row["department"] = '';
             }
             $row["date"] = date('d F, Y', strtotime($manifest->shipping_date));
             if($manifest->invoiced==1){
@@ -58,7 +58,7 @@ class ManifestController extends Controller {
         $data = array();
         foreach ($receiving_manifests as $manifest) {
             $row = array();
-            $row["id"] = $manifest->id;
+            $row["id"] = $manifest->manifest_number;
             $row["name"] = $manifest->customer->name;
             $department=CustomerDepartment::find($manifest->department_id);
             if($department){

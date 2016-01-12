@@ -5,7 +5,7 @@
 
     <div class="row getting-started">
         <div class="row">
-            <h4>Getting Started With Laundry | <span class="guide">Welcome Guide</span></h4>
+            <h4>Quick Summary | <span class="guide">Welcome Guide</span></h4>
         </div>
         <div class="row" style="margin-top:20px; margin-bottom:20px;">
             <div class="col m3 s12 video-box one">

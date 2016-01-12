@@ -85,6 +85,15 @@
                     Total Net Weight: {{$total_net_weight}}</p>
                 </div>
             </div>
+            <hr />
+            <div class="row">
+                <div class="pull-left">
+                    Driver Signature: _____________________
+                </div>
+                <div class="pull-right align-right">
+                    Receiver Signature: _____________________
+                </div>
+            </div>
         </div>
     </div>
 </section>
