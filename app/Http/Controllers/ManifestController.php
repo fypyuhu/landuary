@@ -17,9 +17,9 @@ class ManifestController extends Controller {
 
     public function getShowShipping(Request $request) {
         if ($request->department != "-1") {
-            $ship_manifests = ShipManifest::with('customer')->organization()->where('department_id','=',$request->department)->where('customer_id', '=', $request->name)->whereBetween('shipping_date', [date("Y-m-d 00:00:00", strtotime($request->start_date)), date("Y-m-d 23:59:59", strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+            $ship_manifests = ShipManifest::with('customer')->organization()->where('department_id','=',$request->department)->where('customer_id', '=', $request->name)->whereBetween('shipping_date', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
         } else {
-            $ship_manifests = ShipManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('shipping_date', [date("Y-m-d 00:00:00", strtotime($request->start_date)), date("Y-m-d 23:59:59", strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+            $ship_manifests = ShipManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('shipping_date', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->get();
         }
         $data = array();
         foreach ($ship_manifests as $manifest) {
