@@ -102,7 +102,7 @@
                         <div class="col s2">{{count($temp)}}</div>
                         <div class="col s2">{{$ship_manifest->department_name or ' '}}</div>
                         <div class="col s3">@date($ship_manifest->shipping_date)</div>
-                        <div class="col s2 center-align"><a href="/admin/shiping-manifest/show-recipt/{{$ship_manifest->id}}"   class="edit-button">View</a> | <a href="/admin/shiping-manifest/edit/{{$ship_manifest->id}}"  class="edit-button">Edit</a></div>
+                        <div class="col s2 center-align"><a href="/admin/shiping-manifest/show-receipt/{{$ship_manifest->id}}"   class="edit-button">View</a> | <a href="/admin/shiping-manifest/edit/{{$ship_manifest->id}}" class="edit-button">Edit</a></div>
                     </div>
                     @endforeach
                     @else
