@@ -76,7 +76,9 @@ class RewashController extends Controller
 	
 	public function getListShow(Request $request) {
         $rewash_list = Rewash::rewashList($request);
-        $data = array();
+		$sql = DB::select(DB::raw("SELECT FOUND_ROWS() AS `found_rows`;"));
+		$total_rows = $sql[0]->found_rows;
+        $dataa = array();
 		foreach ($rewash_list as $rec) {
 			$row = array();
 			$row["rewash_date"] = date('d F, Y', strtotime($rec->rewash_date));
@@ -86,9 +88,14 @@ class RewashController extends Controller
 			$row["number_of_items"] = $rec->number_of_items;
 			$row["total_weight"] = $rec->total_weight;
 			$row["actions"] = '<a href="/admin/rewash/delete/' . $rec->id . '" data-mode="ajax">Delete</a>';
-			$data[] = $row;
+			$dataa[] = $row;
 		}
-		echo "{\"data\":" . json_encode($data) . "}";
+		
+		$data[] = array(
+			'TotalRows' => $total_rows,
+			'Rows' => $dataa
+		);
+		echo json_encode($data);
 	}
 	
 	public function getList(Request $request) {

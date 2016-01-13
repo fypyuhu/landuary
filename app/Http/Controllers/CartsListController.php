@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\IncomingCart;
 use App\Models\OutgoingCart;
 use App\Models\Customer;
+use DB;
+
 class CartsListController extends Controller {
 
     public function getIndex() {
@@ -16,7 +18,9 @@ class CartsListController extends Controller {
 
     public function getShowIncoming(Request $request) {
         $incoming_carts = IncomingCart::inCartsList($request);
-        $data = array();
+		$sql = DB::select(DB::raw("SELECT FOUND_ROWS() AS `found_rows`;"));
+		$total_rows = $sql[0]->found_rows;
+        $dataa = array();
         foreach ($incoming_carts as $cart) {
             $row = array();
             $row["incoming_cart_id"] = $cart->cart_id;
@@ -29,14 +33,21 @@ class CartsListController extends Controller {
             //$row["gross_weight"] = $cart->gross_weight;
             $row["actions"] = '<a href="/admin/in/show-receipt/' . $cart->id . '" >View</a>
                                | <a href="/admin/in/edit/' . $cart->id . '" >Edit</a>';
-            $data[] = $row;
+            $dataa[] = $row;
         }
-        echo "{\"data\":" . json_encode($data) . "}";
+		
+        $data[] = array(
+			'TotalRows' => $total_rows,
+			'Rows' => $dataa
+		);
+		echo json_encode($data);
     }
 
     public function getShowOutgoing(Request $request) {
         $outgoing_carts = OutgoingCart::outCartsList($request);
-        $data = array();
+		$sql = DB::select(DB::raw("SELECT FOUND_ROWS() AS `found_rows`;"));
+		$total_rows = $sql[0]->found_rows;
+        $dataa = array();
         foreach ($outgoing_carts as $cart) {
             $row = array();
             $row["outgoing_cart_id"] = $cart->cart_id;
@@ -54,14 +65,21 @@ class CartsListController extends Controller {
             if($cart->invoiced<1){
                 $row["actions"].='| <a href="/admin/out/edit/' . $cart->id . '" >Edit</a>';
             }
-            $data[] = $row;
+            $dataa[] = $row;
         }
-        echo "{\"data\":" . json_encode($data) . "}";
+		
+        $data[] = array(
+			'TotalRows' => $total_rows,
+			'Rows' => $dataa
+		);
+		echo json_encode($data);
     }
 
     public function getShowReady(Request $request) {
         $outgoing_carts = OutgoingCart::readyCartsList($request);
-        $data = array();
+		$sql = DB::select(DB::raw("SELECT FOUND_ROWS() AS `found_rows`;"));
+		$total_rows = $sql[0]->found_rows;
+        $dataa = array();
         foreach ($outgoing_carts as $cart) {
             $row = array();
             $row["outgoing_cart_id"] = $cart->cart_id;
@@ -76,9 +94,14 @@ class CartsListController extends Controller {
             $row["actions"] = '<a href="/admin/out/show-receipt/' . $cart->id . '" >View</a>
                                | <a href="/admin/out/edit/' . $cart->id . '" >Edit</a>
 							   | <a href="/admin/out/delete/' . $cart->id . '" data-mode="ajax">Delete</a>';
-            $data[] = $row;
+            $dataa[] = $row;
         }
-        echo "{\"data\":" . json_encode($data) . "}";
+		
+        $data[] = array(
+			'TotalRows' => $total_rows,
+			'Rows' => $dataa
+		);
+		echo json_encode($data);
     }
 
 }

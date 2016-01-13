@@ -149,12 +149,12 @@
                         // update the grid and send a request to the server.
                         $("#jqxgrid").jqxGrid('updatebounddata', 'filter');
                     },
-                    root: 'data',
+                    root: 'Rows',
                     beforeprocessing: function (data)
                     {
                         if (data != null)
                         {
-                            source.totalrecords = data.TotalRows;
+                            source.totalrecords = data[0].TotalRows;
                         }
                     }
                 };
@@ -170,7 +170,7 @@
                     start_date: $("#i_date_from").val(),
                     end_date: $("#i_date_to").val()
                 });
-				drawChart();
+				//drawChart();
                 return data;
             }
         });

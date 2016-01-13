@@ -139,8 +139,9 @@ class TaxController extends Controller {
     }
 
     public function getShowList(Request $request) {
-        $invoices = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d", strtotime($request->to_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
-        $data = array();
+        $invoices = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d", strtotime($request->to_date))])->orderBy('id', 'desc')->skip($request->recordstartindex)->take($request->pagesize)->get();
+		$invoices_total = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d", strtotime($request->to_date))])->get();
+        $dataa = array();
         foreach ($invoices as $invoice) {
             $row = array();
             $row["invoice_number"] = $invoice->invoice_number;
@@ -150,9 +151,14 @@ class TaxController extends Controller {
 			$row["updated_at"] = date('d F, Y', strtotime($invoice->updated_at));
             $row["actions"] = '<a href="/admin/taxes/detail/' . $invoice->id . '" data-mode="ajax">Tax Detail</a>';
             ;
-            $data[] = $row;
+            $dataa[] = $row;
         }
-        echo "{\"data\":" . json_encode($data) . "}";
+		
+		$data[] = array(
+			'TotalRows' => $invoices_total->count(),
+			'Rows' => $dataa
+		);
+		echo json_encode($data);
     }
 
     public function getDetail($id) {

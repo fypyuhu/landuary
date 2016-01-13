@@ -181,12 +181,12 @@
                         // update the grid and send a request to the server.
                         $("#jqxgrid").jqxGrid('updatebounddata', 'filter');
                     },
-                    root: 'data',
+                    root: 'Rows',
                     beforeprocessing: function (data)
                     {
                         if (data != null)
                         {
-                            source.totalrecords = data.TotalRows;
+                            source.totalrecords = data[0].TotalRows;
                         }
                     }
                 };
@@ -229,8 +229,9 @@
                         {text: 'Actions', width: '10%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
-        url = "{{url('admin/manifests/show-receiving')}}";
-        source =
+        
+		var url2 = "{{url('admin/manifests/show-receiving')}}";
+        var source2 =
                 {
                     datatype: "json",
                     datafields: [
@@ -242,23 +243,23 @@
 
                     ],
                     cache: false,
-                    url: url,
+                    url: url2,
                     filter: function ()
                     {
                         // update the grid and send a request to the server.
                         $("#jqxgrid1").jqxGrid('updatebounddata', 'filter');
                     },
-                    root: 'data',
+                    root: 'Rows',
                     beforeprocessing: function (data)
                     {
                         if (data != null)
                         {
-                            source.totalrecords = data.TotalRows;
+                            source2.totalrecords = data[0].TotalRows;
                         }
                     }
                 };
 
-        var dataAdapter = new $.jqx.dataAdapter(source, {
+        var dataAdapter2 = new $.jqx.dataAdapter(source2, {
             loadError: function (xhr, status, error)
             {
                 alert(error);
@@ -275,7 +276,7 @@
         $("#jqxgrid1").jqxGrid(
                 {
                     width: "100%",
-                    source: dataAdapter,
+                    source: dataAdapter2,
                     filterable: true,
                     sortable: false,
                     autoheight: true,
@@ -294,6 +295,7 @@
                         {text: 'Actions', width: '20%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
+		
     });
 
 </script>

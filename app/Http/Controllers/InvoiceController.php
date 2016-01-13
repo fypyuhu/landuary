@@ -189,12 +189,14 @@ class InvoiceController extends Controller
    
    public function getShow(Request $request){
        if($request->department!=""){
-            $invoices=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->whereRaw("FIND_IN_SET('".$request->department."',department_ids)")->skip($request->recordstartindex)->take($request->pagesize)->get();
+            $invoices=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->whereRaw("FIND_IN_SET('".$request->department."',department_ids)")->orderBy('id', 'desc')->skip($request->recordstartindex)->take($request->pagesize)->get();
+			$invoices_total=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->whereRaw("FIND_IN_SET('".$request->department."',department_ids)")->get();
        }
        else{
-           $invoices=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+           $invoices=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->orderBy('id', 'desc')->skip($request->recordstartindex)->take($request->pagesize)->get();
+		   $invoices_total=Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->where('status', '=', $request->status)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->get();
        }
-       $data = array();
+       $dataa = array();
        foreach($invoices as $invoice){
            $row=array();
            //$row["created_date"]=$invoice->created_at->format('d m Y');
@@ -217,9 +219,14 @@ class InvoiceController extends Controller
            //$row["due_date"]=$invoice->due_date->format('d m Y');
 		   $row["due_date"]= date('d F, Y', strtotime($invoice->due_date));
            $row["actions"]='<a href="/admin/invoices/show-receipt/' . $invoice->id . '">View</a>';;
-           $data[] = $row;
+           $dataa[] = $row;
        }
-       echo "{\"data\":" . json_encode($data) . "}";
+	   
+	    $data[] = array(
+			'TotalRows' => $invoices_total->count(),
+			'Rows' => $dataa
+		);
+		echo json_encode($data);
    }
    public function getChangeStatus($id,$status){
        $invoice=Invoice::find($id);
@@ -231,8 +238,9 @@ class InvoiceController extends Controller
        return view('admin.invoices.income', ["customers" => $customers]);
    }
    public function getShowList(Request $request) {
-        $invoices = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
-        $data = array();
+        $invoices = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->orderBy('id', 'desc')->skip($request->recordstartindex)->take($request->pagesize)->get();
+		$invoices_total = Invoice::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d", strtotime($request->from_date)), date("Y-m-d 23:29:29", strtotime($request->to_date))])->get();
+        $dataa = array();
         foreach ($invoices as $invoice) {
             $row = array();
             $row["invoice_number"] = $invoice->invoice_number;
@@ -240,8 +248,13 @@ class InvoiceController extends Controller
             $row["total_price"] = $invoice->total_price;
             //$row["updated_at"] = $invoice->updated_at->format('d m Y');
 			$row["updated_at"] = date('d F, Y', strtotime($invoice->updated_at));
-            $data[] = $row;
+            $dataa[] = $row;
         }
-        echo "{\"data\":" . json_encode($data) . "}";
+        
+		$data[] = array(
+			'TotalRows' => $invoices_total->count(),
+			'Rows' => $dataa
+		);
+		echo json_encode($data);
     }
 }

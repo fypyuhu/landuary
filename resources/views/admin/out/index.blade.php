@@ -384,8 +384,15 @@
         tare=parseFloat($('#tare_weight').val());
         var net_weight=gross-tare;
         var daviation= my_groos_weight*0.1;
+		
+		var totalNetWeightByPieceWeight = 0;
+		$( ".item_quantity" ).each(function( index ) {
+			totalNetWeightByPieceWeight += parseInt($(this).text()) * parseFloat($('.item_weight').eq( index ).text());
+		});
+		
+		
         if(net_weight>my_groos_weight+daviation){
-            alert("Your net weight is more than 10% higher than the item weights saved in the system\n\nActual Scale Net Weight: "+net_weight+" lbs\nNet Weight Calculated by Piece Weight: 400 lbs\n======================================\nDifference: 100 lbs");
+            alert("Your net weight is more than 10% higher than the item weights saved in the system\n\nActual Scale Net Weight: "+net_weight+" lbs\nNet Weight Calculated by Piece Weight: "+totalNetWeightByPieceWeight+" lbs\n======================================\nDifference: "+(net_weight-totalNetWeightByPieceWeight)+" lbs");
         }
         else if(net_weight<my_groos_weight-daviation){
             alert("Your net weight is more than 10% less than the item weights saved in the system");

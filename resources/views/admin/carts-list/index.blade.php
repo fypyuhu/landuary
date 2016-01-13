@@ -192,12 +192,12 @@
                         // update the grid and send a request to the server.
                         $("#jqxgrid").jqxGrid('updatebounddata', 'filter');
                     },
-                    root: 'data',
+                    root: 'Rows',
                     beforeprocessing: function (data)
                     {
                         if (data != null)
                         {
-                            source.totalrecords = data.TotalRows;
+                            source.totalrecords = data[0].TotalRows;
                         }
                     }
                 };
@@ -243,8 +243,8 @@
 
 
 
-        url = "{{url('admin/carts-list/show-outgoing')}}";
-        source =
+        var url2 = "{{url('admin/carts-list/show-outgoing')}}";
+        var source2 =
                 {
                     datatype: "json",
                     datafields: [
@@ -261,23 +261,23 @@
 
                     ],
                     cache: false,
-                    url: url,
+                    url: url2,
                     filter: function ()
                     {
                         // update the grid and send a request to the server.
                         $("#jqxgrid1").jqxGrid('updatebounddata', 'filter');
                     },
-                    root: 'data',
+                    root: 'Rows',
                     beforeprocessing: function (data)
                     {
                         if (data != null)
                         {
-                            source.totalrecords = data.TotalRows;
+                            source2.totalrecords = data[0].TotalRows;
                         }
                     }
                 };
 
-        dataAdapter = new $.jqx.dataAdapter(source, {
+        var dataAdapter2 = new $.jqx.dataAdapter(source2, {
             loadError: function (xhr, status, error)
             {
                 alert(error);
@@ -294,7 +294,7 @@
         $("#jqxgrid1").jqxGrid(
                 {
                     width: "100%",
-                    source: dataAdapter,
+                    source: dataAdapter2,
                     filterable: true,
                     sortable: false,
                     autoheight: true,
@@ -318,8 +318,9 @@
                         {text: 'Actions', width: '10%', cellsalign: 'center', dataField: 'actions', sortable: false, filterable: false, exportable: false}
                     ]
                 });
-        url = "{{url('admin/carts-list/show-ready')}}";
-        source =
+        
+		var url3 = "{{url('admin/carts-list/show-ready')}}";
+        var source3 =
                 {
                     datatype: "json",
                     datafields: [
@@ -334,23 +335,23 @@
 
                     ],
                     cache: false,
-                    url: url,
+                    url: url3,
                     filter: function ()
                     {
                         // update the grid and send a request to the server.
                         $("#jqxgrid2").jqxGrid('updatebounddata', 'filter');
                     },
-                    root: 'data',
+                    root: 'Rows',
                     beforeprocessing: function (data)
                     {
                         if (data != null)
                         {
-                            source.totalrecords = data.TotalRows;
+                            source3.totalrecords = data[0].TotalRows;
                         }
                     }
                 };
 
-        dataAdapter = new $.jqx.dataAdapter(source, {
+        var dataAdapter3 = new $.jqx.dataAdapter(source3, {
             loadError: function (xhr, status, error)
             {
                 alert(error);
@@ -368,7 +369,7 @@
                 {
                     width: "100%",
                     width: "100%",
-                            source: dataAdapter,
+                    source: dataAdapter3,
                     filterable: true,
                     sortable: false,
                     autoheight: true,

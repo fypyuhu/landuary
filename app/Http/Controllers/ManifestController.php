@@ -17,11 +17,13 @@ class ManifestController extends Controller {
 
     public function getShowShipping(Request $request) {
         if ($request->department != "-1") {
-            $ship_manifests = ShipManifest::with('customer')->organization()->where('department_id','=',$request->department)->where('customer_id', '=', $request->name)->whereBetween('shipping_date', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+            $ship_manifests = ShipManifest::with('customer')->organization()->where('department_id','=',$request->department)->where('customer_id', '=', $request->name)->whereBetween('shipping_date', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->orderBy('id', 'desc')->skip($request->recordstartindex)->take($request->pagesize)->get();
+			$ship_manifests_total = ShipManifest::with('customer')->organization()->where('department_id','=',$request->department)->where('customer_id', '=', $request->name)->whereBetween('shipping_date', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->get();
         } else {
-            $ship_manifests = ShipManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('shipping_date', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->get();
+            $ship_manifests = ShipManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('shipping_date', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->orderBy('id', 'desc')->skip($request->recordstartindex)->take($request->pagesize)->get();
+			$ship_manifests_total = ShipManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('shipping_date', [date("Y-m-d", strtotime($request->start_date)), date("Y-m-d", strtotime($request->end_date))])->get();
         }
-        $data = array();
+        $dataa = array();
         foreach ($ship_manifests as $manifest) {
             $row = array();
             $row["id"] = $manifest->manifest_number;
@@ -44,18 +46,26 @@ class ManifestController extends Controller {
             if($manifest->shipping_date==date("Y-m-d",time())){
                 $row["actions"].= ' | <a href="/admin/shiping-manifest/edit/' . $manifest->id . '">Edit</a>';
             }
-            $data[] = $row;
+			
+			$dataa[] = $row;
         }
-        echo "{\"data\":" . json_encode($data) . "}";
+        
+		$data[] = array(
+			'TotalRows' => $ship_manifests_total->count(),
+			'Rows' => $dataa
+		);
+		echo json_encode($data);
     }
 
     public function getShowReceiving(Request $request) {
         if ($request->name != "-1") {
-            $receiving_manifests = ReceivingManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d 00:00:00", strtotime($request->start_date)), date("Y-m-d 23:59:59", strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+            $receiving_manifests = ReceivingManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d 00:00:00", strtotime($request->start_date)), date("Y-m-d 23:59:59", strtotime($request->end_date))])->orderBy('id', 'desc')->skip($request->recordstartindex)->take($request->pagesize)->get();
+			$receiving_manifests_total = ReceivingManifest::with('customer')->organization()->where('customer_id', '=', $request->name)->whereBetween('created_at', [date("Y-m-d 00:00:00", strtotime($request->start_date)), date("Y-m-d 23:59:59", strtotime($request->end_date))])->get();
         } else {
-            $receiving_manifests = ReceivingManifest::with('customer')->organization()->whereBetween('created_at', [date("Y-m-d 00:00:00", strtotime($request->start_date)), date("Y-m-d 23:59:59", strtotime($request->end_date))])->skip($request->recordstartindex)->take($request->pagesize)->get();
+            $receiving_manifests = ReceivingManifest::with('customer')->organization()->whereBetween('created_at', [date("Y-m-d 00:00:00", strtotime($request->start_date)), date("Y-m-d 23:59:59", strtotime($request->end_date))])->orderBy('id', 'desc')->skip($request->recordstartindex)->take($request->pagesize)->get();
+			$receiving_manifests_total = ReceivingManifest::with('customer')->organization()->whereBetween('created_at', [date("Y-m-d 00:00:00", strtotime($request->start_date)), date("Y-m-d 23:59:59", strtotime($request->end_date))])->get();
         }
-        $data = array();
+        $dataa = array();
         foreach ($receiving_manifests as $manifest) {
             $row = array();
             $row["id"] = $manifest->manifest_number;
@@ -69,9 +79,14 @@ class ManifestController extends Controller {
             }
             $row["date"] = date('d F, Y', strtotime($manifest->created_at));
             $row["actions"] = '<a href="/admin/receiving-manifest/show-receipt/' . $manifest->id . '">View</a>';
-            $data[] = $row;
+            $dataa[] = $row;
         }
-        echo "{\"data\":" . json_encode($data) . "}";
+        
+		$data[] = array(
+			'TotalRows' => $receiving_manifests_total->count(),
+			'Rows' => $dataa
+		);
+		echo json_encode($data);
     }
 
 }
