@@ -43,6 +43,13 @@
                     </div>
                     <label for="cart_number" class="error"></label>
                 </div>
+                <div class="row">
+                	<label>Manifest Number:</label>
+                    <div class="input-field">
+                        <input id="manifest_number" type="text" name="manifest_number" value="{{$iv_id->manifest_number}}">
+                    </div>
+                    <label for="cart_number" class="error"></label>
+                </div>
             </fieldset>
             <div class="row">
             	<div class="pull-left"><a href="/admin/profile/step3" class="waves-effect btn">Previous Step</a></div>
@@ -70,6 +77,10 @@
 					digits: true
 				},
 				cart_number: {
+					required: true,
+					digits: true
+				},
+				manifest_number: {
 					required: true,
 					digits: true
 				}

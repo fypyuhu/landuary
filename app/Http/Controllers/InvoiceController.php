@@ -172,6 +172,31 @@ class InvoiceController extends Controller
 	   } else {
 	   		$departments=CustomerDepartment::all();
 	   }
+	   
+	   $manifests = array();
+	   $total_carts = array();
+	   $total_items = array();
+	   $total_net_weight = array();
+	   
+	   foreach($invoice_data as $key=>$value) {
+	   		if($key > 0 && $value->id != $invoice_data[$key-1]->id) {
+				$total_carts = array();
+				$total_items = array();
+				$total_net_weight = array();
+			}
+			
+			$total_carts[] = $value->cart_number;
+			$total_items[] = $value->quantity;
+			$total_net_weight[] = $value->net_weight;
+			
+	   		$manifests[$value->id] = array('manifest_number' => $value->manifest_number, 
+											'shipping_date' => $value->shipping_date, 
+											'total_carts' => count(array_unique($total_carts)), 
+											'total_items' => array_sum($total_items), 
+											'total_net_weight' => array_sum(array_unique($total_net_weight))
+											);
+	   }
+	   
        $customer_tax=CustomerTax::where('customer_id','=',$invoice->customer_id)->first();
        $tax=Tax::find($customer_tax->tax_id);
        $tax_componenets=TaxComponent::where('tax_id','=',$tax->id)->get();
@@ -180,7 +205,7 @@ class InvoiceController extends Controller
            "invoice"=>$invoice,
            "customer"=>$customer,
            "departments"=>$departments,
-           "invoice_data"=>$invoice_data,
+           "invoice_data"=>$manifests,
            "tax"=>$tax,
            "tax_componenets"=>$tax_componenets,
            "tax_data"=>$tax_data[0]

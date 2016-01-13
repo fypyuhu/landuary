@@ -244,8 +244,8 @@ class UserProfileController extends Controller {
 		
         $current = array('current', 'current', 'current', 'current');
         $user = Auth::user();
-        $iv_id = InitialValue::where('organization_id', '=', $user->organization_id)->get();
-        return view('admin.profile.step4.index', [ 'current' => $current, 'iv_id' => $iv_id[0]]);
+        $iv_id = InitialValue::where('organization_id', '=', $user->organization_id)->first();
+        return view('admin.profile.step4.index', [ 'current' => $current, 'iv_id' => $iv_id]);
     }
 
     public function getTaxesShow() {
@@ -336,6 +336,7 @@ class UserProfileController extends Controller {
         $init_val->invoice_number = $request->invoice_number;
         $init_val->standard_tare_weight = $request->standard_tare_weight;
         $init_val->cart_number = $request->cart_number;
+		$init_val->manifest_number = $request->manifest_number;
         $init_val->save();
 
         $user = User::find($user->id);

@@ -60,11 +60,11 @@
             </tr>
             @foreach($invoice_data as $key=>$data)
             <tr>
-                <td>@if($key > 0 && $data->shipping_date == $invoice_data[$key-1]->shipping_date) ... @else @date($data->shipping_date) @endif</td>
-                <td>{{$key > 0 && $data->id == $invoice_data[$key-1]->id ? '...' : $data->id}}</td>
-                <td>{{$data->total_carts}}</td>
-                <td>{{$data->total_items}}</td>
-                <td>{{$data->quantity}}</td>
+                <td>@date($data['shipping_date'])</td>
+                <td>{{$data['manifest_number']}}</td>
+                <td>{{$data['total_carts']}}</td>
+                <td>{{$data['total_items']}}</td>
+                <td>{{$data['total_net_weight']}} lbs</td>
             </tr>
             @endforeach
         </table>
