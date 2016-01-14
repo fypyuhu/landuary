@@ -44,6 +44,69 @@
   <!--[if lt IE 9]>
     <script src="assets/html5shiv/html5shiv.min.js"></script>
   <![endif]-->
+  
+  <style type="text/css">
+  	.content-wrap {
+		margin-left: 0;
+		min-height: calc(100vh - 80px);
+	}
+	
+	footer {
+		padding: 0;
+		background: #749e35;
+		height: 63px;
+	}
+	
+	footer ul {
+		padding: 0;
+		width: auto;
+		display: table;
+		margin: 0;
+	}
+	
+	footer ul li {
+		display: inline-block;
+	}
+	
+	footer ul li:hover {
+		background-color: #7aa978 !important;
+	}
+	
+	footer ul li a {
+		color: #ffffff;
+		height: 62px; 
+		line-height: 62px;
+		padding: 0 20px;
+		display: block;
+		border-right: 1px solid #fafafa;
+		font-size: 16px;
+		padding-left: 45px !important;
+	}
+	
+	footer ul li a.fag {
+		background-position: 15px 21px !important;
+	}
+	
+	footer ul li:last-child a {
+		border-right: 0;
+	}
+	
+	aside {
+		background: #264d99 !important;
+	}
+	
+	.yaybar ul li.first-child {
+		font-weight: bold !important;
+		font-size: 18px !important;
+		text-align: center;
+		height: 50px !important;
+		line-height: 50px !important;
+	}
+	
+	.yaybar ul li.first-child:hover {
+		background: none !important;
+	}
+  </style>
 </head>
 
 <body>
@@ -59,7 +122,7 @@
   <nav class="navbar-top">
     <div class="nav-wrapper">
       
-      <div class="toggle-btn"></div>
+      <!--<div class="toggle-btn"></div>
       <div id="reports-nav" class="dropdown-content">
           <div class="row">
               <div class="col s12">
@@ -89,7 +152,7 @@
                 </ul>
               </div>
           </div>
-      </div>
+      </div>-->
 
       <!-- Menu -->
       <ul>
@@ -171,7 +234,34 @@
     <div class="nano">
       <div class="nano-content">
         <ul>
-          <li class="label">Menu</li>
+        	<li class="label first-child">Reports</li>
+            <li class="mainmenu">
+            	<a href="javascript:void(0);" class="waves-effect waves-blue fag fa-general">General <span>&nbsp;</span></a>
+                <ul class="submenu">
+                    <li><a href="{{url('admin/manifests')}}" class="waves-effect waves-blue">Manifests</a></li>
+                    <li><a href="{{url('admin/carts-list')}}" class="waves-effect waves-blue">Carts</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="{{url('admin/rewash/list')}}" class="waves-effect waves-blue fag fa-rewash">Rewash</a></li>
+            <li><a href="{{url('admin/reconciliation')}}" class="waves-effect waves-blue fag fa-reconcile">Reconciliation</a></li>
+            <li class="mainmenu">
+            	<a href="javascript:void(0);" class="waves-effect waves-blue fag fa-accounting">Accounting <span>&nbsp;</span></a>
+                <ul class="submenu">
+                    <li><a href="{{url('admin/invoices')}}" class="waves-effect waves-blue fag fa-shipping">Invoices</a></li>
+                    <li><a href="{{url('admin/taxes/list')}}">Tax</a></li>
+                    <li><a href="{{url('admin/invoices/income')}}">Income</a></li>
+                </ul>
+            </li>
+            <li><a href="javascript:void(0);" class="waves-effect waves-blue fag fa-inventory">Inventory</a></li>
+            <li class="mainmenu">
+                <a href="javascript:void(0);" class="fag fa-adjustment">Adjustment</a>
+                <ul class="submenu">
+                    <li><a href="{{url('admin/manifests')}}" class="waves-effect waves-blue">&gt; Manifests</a></li>
+                    <li><a href="{{url('admin/carts-list')}}" class="waves-effect waves-blue">&gt; Carts</a></li>
+                </ul>
+            </li>
+          <!--<li class="label">Menu</li>
           <li>
             <a href="{{url('admin')}}" class="waves-effect waves-blue fag fa-homec">Dashboard</a>
           </li>
@@ -205,7 +295,7 @@
             	<li><a href="{{url('admin/manifests')}}" class="waves-effect waves-blue">&gt; Manifests</a></li>
                 <li><a href="{{url('admin/carts-list')}}" class="waves-effect waves-blue">&gt; Carts</a></li>
             </ul>
-          </li>
+          </li>-->
           
           <!--<li>
             <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-today">Today</a>
@@ -221,12 +311,35 @@
         
 
 
-  <!--
-  Chat
-    .chat-light - light color scheme
--->
-
-  <footer>&copy; 2015 <strong>nK</strong>. All rights reserved. <a href="http://themeforest.net/item/con-material-admin-dashboard-template/10621512?ref=_nK">Purchase</a>
+  <footer align="center" style="position:fixed; bottom:0; left:0; width: 100%;">
+  	<ul>
+    	<li>
+            <a href="{{url('admin')}}" class="fag fa-homec">Dashboard</a>
+          </li>
+          
+          <li>
+            <a href="{{url('admin/in')}}" class="fag fa-in">In</a>
+          </li>
+          
+          <li>
+            <a href="{{url('admin/out')}}" class="fag fa-out">Out</a>
+          </li>
+          
+          <li>
+            <a href="{{url('admin/shiping-manifest')}}" class="fag fa-shipping">Shipping Manifest</a>
+          </li>
+          
+          <li>
+            <a href="{{url('admin/receiving-manifest')}}" class="fag fa-receiving">Receiving Manifest</a>
+          </li>
+          <li>
+            <a href="{{url('admin/invoices/create')}}" class="fag fa-shipping">Create Invoice</a>
+          </li>
+          
+          <li>
+            <a href="{{url('admin/rewash')}}" class="fag fa-rewash">Rewash</a>
+          </li>
+    </ul>
   </footer>
 
   <!-- jQuery -->
@@ -333,12 +446,12 @@
 			$('#reports-nav, #user-dropdown').slideUp( "slow" );
 		});
 		
-		$('.mainmenu').mouseover(function(e){
-			$('.submenu').show();	
+		$('.mainmenu').click(function(e){
+			$(this).find('.submenu').slideDown("slow");	
 		});
 		
 		$('.mainmenu').mouseleave(function(e){
-			$('.submenu').hide();	
+			$(this).find('.submenu').slideUp("slow");	
 		});
 	});
 	

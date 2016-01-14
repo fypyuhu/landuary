@@ -762,6 +762,18 @@ aside.yaybar {
 	background-position: 14px 12px !important;
 }
 
+.fa-accounting {
+	background-image: url(../images/accounting-ico.png) !important;
+}
+
+.fa-reconcile {
+	background-image: url(../images/reconcile-ico.png) !important;
+}
+
+.fa-general {
+	background-image: url(../images/general-ico.png) !important;
+}
+
 .fa-homec {
 	background-image: url(../images/home-ico.png) !important;
 }
@@ -794,6 +806,10 @@ aside.yaybar {
 	background-image: url(../images/shipping-ico.png) !important;
 }
 
+.fa-inventory {
+	background-image: url(../images/inventory-ico.png) !important;
+}
+
 .fa-today {
 	background-image: url(../images/cal-ico.png) !important;
 }
@@ -807,13 +823,12 @@ aside.yaybar {
 }
 
 .brand-logo {
-	background-color: #0f2134;
-	padding-top:25px;
-	margin-bottom:20px;
-	display: block;
-	text-align: center;
-	border-bottom: 1px solid #3d5772;
-	padding-bottom: 25px;
+	padding-top: 12px;
+    margin-bottom: 24px;
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid #910f1b;
+    padding-bottom: 7px;
 }
 
 .brand-logo img {
@@ -1161,3 +1176,21 @@ Productions CSS
 /***
 End Productions CSS
 ***/
+
+.mainmenu > a {
+	position: relative;
+}
+
+.mainmenu > a span {
+	position: absolute;
+	top: 50%;
+	margin-top: -4px;
+	right: 10px;
+	width: 13px;
+	height: 8px;
+	background: url(../images/down.png) !important;
+}
+
+.yaybar.yay-shrink~.content-wrap {
+	padding-bottom: 80px;
+}

@@ -9,9 +9,8 @@
                             <div class="input-field">
                                 <select id="user_type" name="user_type" class="dropdown">
                                 	<option value="">Please Select</option>
-                                    <option value="Driver">Driver</option>
-                                    <option value="Manager">Manager</option>
-                                    <option value="User A">User A</option>
+                                    <option value="w">Washroom Manager</option>
+                                    <option value="f">Finishing Manager</option>
                                 </select>
                             </div>
                             <label for="user_type" class="error"></label>
