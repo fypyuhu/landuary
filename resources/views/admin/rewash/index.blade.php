@@ -36,7 +36,6 @@
                 </div>
             </div>
         </div>
-        <a href="javascript:void(0)" id="newtab_link" onclick="window.open('/admin/rewash/list', 'Receipt', 'height=' + (screen.height-150) + ',width=' + (screen.width-150));" style="display:none;">Link</a>
     @endif
     
     <div id="loadAjaxFrom">
@@ -145,8 +144,6 @@
 <script>
 	$( window ).load(function() {
 		@if (session('status'))
-			$("#newtab_link")[0].click();
-			
 			$('.loading').show();
             var cus_id = $("#customer").val();
             var url = "{{url('admin/rewash/ajax-form')}}";
