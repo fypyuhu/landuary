@@ -170,7 +170,7 @@
                     start_date: $("#i_date_from").val(),
                     end_date: $("#i_date_to").val()
                 });
-				//drawChart();
+				drawChart();
                 return data;
             }
         });

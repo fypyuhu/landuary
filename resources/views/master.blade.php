@@ -255,7 +255,7 @@
             </li>
             <li><a href="javascript:void(0);" class="waves-effect waves-blue fag fa-inventory">Inventory</a></li>
             <li class="mainmenu">
-                <a href="javascript:void(0);" class="fag fa-adjustment">Adjustment</a>
+                <a href="javascript:void(0);" class="fag fa-adjustment">Adjustment <span>&nbsp;</span></a>
                 <ul class="submenu">
                     <li><a href="{{url('admin/manifests')}}" class="waves-effect waves-blue">&gt; Manifests</a></li>
                     <li><a href="{{url('admin/carts-list')}}" class="waves-effect waves-blue">&gt; Carts</a></li>
