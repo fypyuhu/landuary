@@ -6183,3 +6183,21 @@ input[type=password].jqx-input {
 	height: auto;
 	line-height: normal;
 }
+
+.jqx-grid-cell.jqx-item,
+.jqx-grid-column-header.jqx-widget-header {
+	border-left: 1px solid #c0d0e4;
+}
+
+.jqx-grid-column-header.jqx-widget-header {
+	background-color: #e3eaf3;
+	font-weight: 400;
+}
+
+.jqx-grid-cell-hover, .jqx-fill-state-hover {
+	background-color: #e3eaf3;
+}
+
+.jqx-widget-header {
+	background-color: #e3eaf3;
+}

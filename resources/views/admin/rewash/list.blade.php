@@ -67,6 +67,7 @@
                     </fieldset>
                 </div>
                 <div class="col m5 s12">
+                	<div id="customer_name">All</div>
                     <!--<select id="format-select">
                       <option value="">none</option>
                       <option value="decimal" selected>decimal</option>
@@ -170,6 +171,10 @@
                     start_date: $("#i_date_from").val(),
                     end_date: $("#i_date_to").val()
                 });
+				
+				if($('#i_customer').val() != -1)
+	  				$('#customer_name').html($('#i_customer_jqxComboBox option:selected').text());
+					
 				drawChart();
                 return data;
             }

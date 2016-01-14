@@ -770,6 +770,10 @@ aside.yaybar {
 	background-image: url(../images/reconcile-ico.png) !important;
 }
 
+.fa-production {
+	background-image: url(../images/production-ico.png) !important;
+}
+
 .fa-general {
 	background-image: url(../images/general-ico.png) !important;
 }

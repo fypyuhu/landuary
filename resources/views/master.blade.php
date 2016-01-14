@@ -238,24 +238,30 @@
             <li class="mainmenu">
             	<a href="javascript:void(0);" class="waves-effect waves-blue fag fa-general">General <span>&nbsp;</span></a>
                 <ul class="submenu">
-                    <li><a href="{{url('admin/manifests')}}" class="waves-effect waves-blue">Manifests</a></li>
-                    <li><a href="{{url('admin/carts-list')}}" class="waves-effect waves-blue">Carts</a></li>
+                    <li><a href="{{url('admin/manifests')}}" class="waves-effect waves-blue">&gt; Manifests</a></li>
+                    <li><a href="{{url('admin/carts-list')}}" class="waves-effect waves-blue">&gt; Carts</a></li>
                 </ul>
             </li>
-            
             <li><a href="{{url('admin/rewash/list')}}" class="waves-effect waves-blue fag fa-rewash">Rewash</a></li>
             <li><a href="{{url('admin/reconciliation')}}" class="waves-effect waves-blue fag fa-reconcile">Reconciliation</a></li>
             <li class="mainmenu">
             	<a href="javascript:void(0);" class="waves-effect waves-blue fag fa-accounting">Accounting <span>&nbsp;</span></a>
                 <ul class="submenu">
-                    <li><a href="{{url('admin/invoices')}}" class="waves-effect waves-blue fag fa-shipping">Invoices</a></li>
-                    <li><a href="{{url('admin/taxes/list')}}">Tax</a></li>
-                    <li><a href="{{url('admin/invoices/income')}}">Income</a></li>
+                    <li><a href="{{url('admin/invoices')}}" class="waves-effect waves-blue fag fa-shipping">&gt; Invoices</a></li>
+                    <li><a href="{{url('admin/taxes/list')}}">&gt; Tax</a></li>
+                    <li><a href="{{url('admin/invoices/income')}}">&gt; Income</a></li>
                 </ul>
             </li>
             <li><a href="javascript:void(0);" class="waves-effect waves-blue fag fa-inventory">Inventory</a></li>
             <li class="mainmenu">
-                <a href="javascript:void(0);" class="fag fa-adjustment">Adjustment <span>&nbsp;</span></a>
+                <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-production">Production <span>&nbsp;</span></a>
+                <ul class="submenu">
+                    <li><a href="javascript:void(0);" class="waves-effect waves-blue">Washroom</a></li>
+                    <li><a href="javascript:void(0);" class="waves-effect waves-blue">Finishing</a></li>
+                </ul>
+            </li>
+            <li class="mainmenu">
+                <a href="javascript:void(0);" class="waves-effect waves-blue fag fa-adjustment">Adjustments <span>&nbsp;</span></a>
                 <ul class="submenu">
                     <li><a href="{{url('admin/manifests')}}" class="waves-effect waves-blue">&gt; Manifests</a></li>
                     <li><a href="{{url('admin/carts-list')}}" class="waves-effect waves-blue">&gt; Carts</a></li>
