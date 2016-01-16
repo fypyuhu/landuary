@@ -107,8 +107,8 @@ class CartController extends Controller {
     }
 	
 	public function getMachineWeight() {
-		$myfile = fopen('etc/weight.txt', "r") or die("Unable to open file!");
-		$value = fread($myfile,filesize('etc/weight.txt'));
+		$myfile = fopen('C:\weight.txt', "r") or die("Unable to open file!");
+		$value = fread($myfile,filesize('C:\weight.txt'));
 		fclose($myfile);
 		return $value;
 	}
