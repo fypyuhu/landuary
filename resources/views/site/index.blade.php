@@ -106,7 +106,7 @@
       <!-- Start login section -->
       <div id="login-content" class="modal-content">
         <div class="modal-header">
-          <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+          <button aria-label="Close" data-dismiss="modal" class="close" onClick="$(this).parents('#login-form').fadeOut('slow');" type="button"><span aria-hidden="true">×</span></button>
           <h4 class="modal-title"><i class="fa fa-unlock-alt"></i>Login</h4>
         </div>
         <div class="modal-body">
