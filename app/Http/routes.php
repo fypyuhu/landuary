@@ -63,3 +63,7 @@ Route::group(['prefix' => 'production', 'middleware' => 'auth'], function () {
 	Route::controller('finishing', 'Production\FinishingController');
     Route::controller('/', 'Production\HomeController');
 });
+
+Route::get('/about', function () {
+	return view('site/about');
+});

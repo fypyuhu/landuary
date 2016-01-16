@@ -207,11 +207,11 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
             <li class="active"><a href="index.html">Home</a></li>
-            <li><a href="about.html">About EAZY Linen</a></li>
-            <li><a href="service.html">Features</a></li>
-            <li><a href="portfolio.html">Testimonials</a></li>
-            <li><a href="portfolio.html">Videos</a></li>
-            <li><a href="portfolio.html">FAQ's</a></li>
+            <li><a href="/about">About EAZY Linen</a></li>
+            <li><a href="javascript:void(0);">Features</a></li>
+            <li><a href="javascript:void(0);">Testimonials</a></li>
+            <li><a href="javascript:void(0);">Videos</a></li>
+            <li><a href="javascript:void(0);">FAQ's</a></li>
             <!--<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <span class="fa fa-angle-down"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -222,7 +222,7 @@
               </ul>
             </li>
             <li><a href="404.html">404 Page</a></li>-->               
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="javascript:void(0);">Contact Us</a></li>
           </ul>                     
         </div><!--/.nav-collapse -->
         <a href="#" id="search-icon">
@@ -299,9 +299,9 @@
       <div class="row">
         <div class="col-md-12">
           <div class="title-area">
-            <h2 class="title">Features</h2>
+            <h2 class="title">About LinenTek</h2>
             <span class="line"></span>
-            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour</p>
+            <p>LinenTek is a comprehensive large and medium scale industrial/commercial laundry operations management software. The software completely simplifies management operations of laundries serving hotel, restaurant, and healthcare industries. LinenTek software is really a one stop shop for a laundry’s client management, billing and financials, production control, inventory management, productivity tracking, record keeping and much more.</p>
           </div>
         </div>
         <div class="col-md-12">
@@ -310,15 +310,22 @@
               <div class="col-md-4 col-sm-6">
                 <div class="single-feature wow zoomIn">
                   <i class="fa fa-shopping-cart feature-icon"></i>
-                  <h4 class="feat-title">Cart Management &amp; Tracking</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut. <a href="javascript:void(0);" class="read-more">read more</a></p>
+                  <h4 class="feat-title">Cart Management &amp; Linen Tracking</h4>
+                  <p> LinenTek's cart and linen tracking feature enables you to create and track incoming and outgoing carts on daily basis. The cart details include customer details, customer department, cart net weight, item list, cart net weight and many other relevant cart details. <a href="javascript:void(0);" class="read-more">read more</a></p>
                 </div>
               </div>
               <div class="col-md-4 col-sm-6">
                 <div class="single-feature wow zoomIn">
                   <i class="fa fa-inventory feature-icon"></i>
-                  <h4 class="feat-title">Inventory Management</h4>
-                  <p>Aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui. <a href="javascript:void(0);" class="read-more">read more</a></p>
+                  <h4 class="feat-title" style="margin-top: 5px;">Inventory Management / Rental Linen</h4>
+                  <p>Through the inventory management module of LinenTek, you can maintain a complete track of all your incoming and outgoing linen.  Through customized reporting, LinenTek lets you view your current inventory level for each one of your product. <a href="javascript:void(0);" class="read-more">read more</a></p>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <div class="single-feature wow zoomIn">
+                  <i class="fa fa-dollar feature-icon"></i>
+                  <h4 class="feat-title">Billing, Invoicing &amp; Other Financials</h4>
+                  <p>Completely automate your billing and invoicing system through LinenTek Financials. Maintain completely different or exactly same price rates for all your customers. Charge your clients by weigh, by item quantity or both. Maintain specialty item pricing for certain products.<a href="javascript:void(0);" class="read-more">read more</a></p>
                 </div>
               </div>
               <div class="col-md-4 col-sm-6">
@@ -326,13 +333,6 @@
                   <i class="fa fa-file-text feature-icon"></i>
                   <h4 class="feat-title">Production Reports &amp; Productivity Tracking</h4>
                   <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia. <a href="javascript:void(0);" class="read-more">read more</a></p>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <div class="single-feature wow zoomIn">
-                  <i class="fa fa-dollar feature-icon"></i>
-                  <h4 class="feat-title">Billing, Invoicing &amp; Other Financials</h4>
-                  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta. <a href="javascript:void(0);" class="read-more">read more</a></p>
                 </div>
               </div>
               <div class="col-md-4 col-sm-6">
@@ -830,28 +830,28 @@
                     <img src="{{URL::asset('site.assets/assets/images/testi1.jpg')}}" alt="testimonial image">
                   </div>
                   <div class="testimonial-content">
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-                    <h6>Bernice Neumann, <span>Designer</span></h6>
+                    <p>I started using LinenTek on one my laundries and in less than a year I have implemented it across all the branches. A very simple to use software that brings all the information you need to your finger tips.</p>
+                    <h6>Raja Younas, <span>CEO Premier Luandries</span></h6>
                   </div>
                 </div>
                 <!-- Start single slider -->
-                <div class="single-slider">
+                <!--<div class="single-slider">
                   <div class="testimonial-img">
                     <img src="{{URL::asset('site.assets/assets/images/testi3.jpg')}}" alt="testimonial image">
                   </div>
                   <div class="testimonial-content">
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-                    <h6>John Dow, <span>CEO</span></h6>
+                    <p>Greatly impressed by the support provided by LaundryTek team, and the fact they have customized their software to meet our individual requirements is fantastic. All in all a great software to manage various laundry operations.</p>
+                    <h6>John Dow, <span>CEO Hygiene Luandry</span></h6>
                   </div>
-                </div>
+                </div>-->
                 <!-- Start single slider -->
                 <div class="single-slider">
                   <div class="testimonial-img">
                     <img src="{{URL::asset('site.assets/assets/images/testi2.jpg')}}" alt="testimonial image">
                   </div>
                   <div class="testimonial-content">
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
-                    <h6>Michel, <span>Developer</span></h6>
+                    <p>Greatly impressed by the support provided by LaundryTek team, and the fact they have customized their software to meet our individual requirements is fantastic. All in all a great software to manage various laundry operations.</p>
+                    <h6>Michel, <span>Manager Hygiene Luandry</span></h6>
                   </div>
                 </div>
               </div>
