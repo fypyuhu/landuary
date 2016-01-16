@@ -358,7 +358,7 @@
   <!-- End Feature -->
 
   <!-- Start about  -->
-  <section id="about">
+  <!--<section id="about">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -368,7 +368,7 @@
             <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour</p>
           </div>
         </div>
-        <!--<div class="col-md-12">
+        <div class="col-md-12">
           <div class="about-content">
             <div class="row">
               <div class="col-md-6">
@@ -461,10 +461,10 @@
               </div>              
             </div>
           </div>
-        </div>-->
+        </div>
       </div>
     </div>
-  </section>
+  </section>-->
   <!-- end about -->
 
   <!-- Start counter -->
