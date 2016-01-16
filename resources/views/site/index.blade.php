@@ -1010,12 +1010,12 @@
   <footer id="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-sm-6">
+        <!--<div class="col-md-6 col-sm-6">
           <div class="footer-left">
             <p>Designed by <a href="http://www.markups.io/">MarkUps.io</a></p>
           </div>
-        </div>
-        <div class="col-md-6 col-sm-6">
+        </div>-->
+        <div class="col-sm-12">
           <div class="footer-right">
             <a href="index.html"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
