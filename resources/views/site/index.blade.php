@@ -83,7 +83,7 @@
                 <li>
                   <div class="mail">
                     <i class="fa fa-envelope"></i>
-                    linentek@domain.com
+                    info@linentek.com
                   </div>
                 </li>
               </ul>
