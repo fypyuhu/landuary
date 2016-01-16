@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>LINENTEK</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/icon" href="{{URL::asset('site.assets/assets/images/favicon.ico')}}"/>
+    <!--<link rel="shortcut icon" type="image/icon" href="{{URL::asset('site.assets/assets/images/favicon.ico')}}"/>-->
     <!-- Font Awesome -->
     <link href="{{URL::asset('site.assets/assets/css/font-awesome.css')}}" rel="stylesheet">
     <!-- Bootstrap -->
@@ -77,13 +77,13 @@
                 <li>
                   <div class="phone">
                     <i class="fa fa-phone"></i>
-                    +1(800) 699-7071
+                    +1(800)-LINENTEK
                   </div>
                 </li>
                 <li>
                   <div class="mail">
                     <i class="fa fa-envelope"></i>
-                    iam@domain.com
+                    linentek@domain.com
                   </div>
                 </li>
               </ul>
@@ -200,7 +200,7 @@
           </button>
           <!-- LOGO -->              
           <!-- TEXT BASED LOGO -->
-          <a class="navbar-brand" href="index.html">Intensely</a>              
+          <a class="navbar-brand" href="index.html">LINENTEK</a>              
           <!-- IMG BASED LOGO  -->
            <!-- <a class="navbar-brand" href="index.html"><img src="{{URL::asset('site.assets/assets/images/logo.png')}}" alt="logo"></a> -->
         </div>
