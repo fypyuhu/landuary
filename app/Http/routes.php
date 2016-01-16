@@ -12,13 +12,15 @@
  */
 
 Route::get('/', ['middleware' => 'guest', ['except' => 'getLogout'], function () {
-	return view('welcome');
+	//return view('welcome');
+	return view('site/index');
 }]);
 Route::get('setUserPassword', 'SetUserPasswordController@getIndex');
 Route::post('setUserPassword/edit', 'SetUserPasswordController@postEdit');
 Route::get('/logout', function () {
     Auth::logout();
-    return view('welcome');
+    //return view('welcome');
+	return view('site/index');
 });
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('register', 'Auth\AuthController@getRegister');

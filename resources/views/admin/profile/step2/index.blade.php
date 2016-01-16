@@ -30,7 +30,7 @@
 
 <section class="content-wrap" id="customers" style="margin-left:0; width: 1000px; margin:0 auto; padding:0; background:#ffffff; margin-top:25px; margin-bottom:25px;">
     @include('admin.profile.steps')
-    <div class="row starter" style="border: 1px solid #d0cece; background:#f5f5f5; padding:30px;">
+    <!--<div class="row starter" style="border: 1px solid #d0cece; background:#f5f5f5; padding:30px;">
     	<h4>Tax Master List</h4>
         <ul class="custom-list-style pull-left">
             <li>Add the list of all your taxes to the tax master list.</li>
@@ -40,11 +40,17 @@
         <div class="pull-right" style="margin-top:-30px;">
             <img src="{{URL::asset('images/tax.jpg')}}" alt="" width="300" />
         </div>
-        <!--<div class="row">
-        	<button onclick="$(this).parents('.starter').css('display', 'none'); $('#taxes-div').fadeIn('slow');" class="waves-effect btn">Next</button>
-        </div>-->
-    </div>
+    </div>-->
     <div class="row" id="taxes-div" style="border: 1px solid #d0cece; background:#f5f5f5; padding:30px;">
+    	<div class="row starter" style="margin-bottom: 30px;">
+            <h4>Tax Master List</h4>
+            <ul class="custom-list-style pull-left">
+                <li>Add the list of all your taxes to the tax master list.</li>
+                <li>Add single or multiple tax rates.</li>
+                <li>Add item tracking type, item number.</li>
+            </ul>
+        </div>
+    
         <a data-mode="ajax" href="/admin/taxes/create" class="waves-effect btn create-clone-button">Add Tax</a>
         <div class="row no-rightmargin">
             <div class="col s12">
