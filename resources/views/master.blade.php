@@ -194,7 +194,7 @@
                         </li>
                         <li><a href="{{url('admin/profile/view')}}">Account</a>
                         </li>
-                        <li><a href="{{url('admin/profile/user')}}">Users</a>
+                        <li><a href="{{url('admin/users')}}">Users</a>
                         </li>
                         <li style="background:none !important;">&nbsp;
                         </li>

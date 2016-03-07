@@ -15,7 +15,7 @@
                         <a href="#"><i class="fa fa-home"></i> Home</a>  <i class="fa fa-angle-right"></i>
                     </li>
 
-                    <li><a href='/admin/profile/users'>Manage Users</a>
+                    <li><a href='/admin/users'>Manage Users</a>
                     </li>
                 </ul>
             </div>
@@ -26,7 +26,7 @@
 
     </div>
     <!-- /Breadcrumb -->
-    <a data-mode="ajax" href="/admin/profile/user-create" class="waves-effect btn create-clone-button">Add User</a>
+    <a data-mode="ajax" href="/admin/users/create" class="waves-effect btn create-clone-button">Add User</a>
     <div class="row no-rightmargin">
         <div class="col s9">
             <fieldset>
@@ -72,7 +72,7 @@
             }
         });*/
 		
-		var url = "{{url('admin/profile/user-show')}}";
+		var url = "{{url('admin/users/show')}}";
 		$("#search_form").submit(function(e){
 			e.preventDefault();
 			if($('#search_string').val() != '') {
@@ -91,9 +91,11 @@
                 {
                     datatype: "json",
                     datafields: [
-						{name: 'user_type'},
-                        {name: 'user_id'},
-                        {name: 'user_password'}
+						{name: 'role_name'},
+                        {name: 'first_name'},
+                        {name: 'last_name'},
+                        {name: 'email'},
+                        {name: 'actions'}
                     ],
                     id: 'id',
                     url: url,
@@ -121,9 +123,11 @@
                     sortable: true,
                     filterable: true,
                     columns: [
-						{text: 'User Type', width:'34%',dataField: 'user_type', sortable: false,cellsrenderer: rowRenderer},
-                        {text: 'User ID', width:'33%',dataField: 'user_id', sortable: false,cellsrenderer: rowRenderer},
-                        {text: 'Password', width:'33%' ,dataField: 'user_password', sortable: false,cellsrenderer: rowRenderer}
+			{text: 'User Type', width:'20%',dataField: 'role_name', sortable: false,cellsrenderer: rowRenderer},
+                        {text: 'First Name', width:'20%',dataField: 'first_name', sortable: false,cellsrenderer: rowRenderer},
+                        {text: 'Last Name', width:'20%' ,dataField: 'last_name', sortable: false,cellsrenderer: rowRenderer},
+                        {text: 'Email', width:'20%' ,dataField: 'email', sortable: false,cellsrenderer: rowRenderer},
+                        {text: 'Actions', width:'20%' ,dataField: 'actions', sortable: false,cellsrenderer: rowRenderer},
                     ]
                 });
 	}

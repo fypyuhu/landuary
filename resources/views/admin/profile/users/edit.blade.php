@@ -1,44 +1,32 @@
 <div class="field-set">
     <fieldset>
-        <legend>Add User:</legend>
+        <legend>Edit User:</legend>
         <div class="row alert alert-success" style="display:none;"></div>
-        <form method="POST" action="{{url('admin/users/create')}}" id="pageForm">
+        <form method="POST" action="{{url('admin/users/edit')}}" id="pageForm">
             {{csrf_field()}}
-            <div class="row m12">
-                <label>User Type:</label>
-                <div class="input-field">
-                    <select id="user_type" name="user_type" class="dropdown">
-                        <option value="">Please Select</option>
-                        <option value="3">Washroom Manager</option>
-                        <option value="4">Finishing Manager</option>
-                    </select>
-                </div>
-                <label for="user_type" class="error"></label>
-            </div>
-
             <div class="row m12">
                 <label>First Name:</label>
                 <div class="input-field">
-                    <input id="first_name" type="text" name="first_name">
+                    <input id="first_name" value="{{$user->first_name}}" type="text" name="first_name">
                 </div>
                 <label for="first_name" class="error"></label>
             </div>
             <div class="row m12">
                 <label>Last Name:</label>
                 <div class="input-field">
-                    <input id="last_name" type="text" name="last_name">
+                    <input id="last_name" value="{{$user->last_name}}" type="text" name="last_name">
                 </div>
                 <label for="last_name" class="error"></label>
             </div>
             <div class="row m12">
                 <label>Email:</label>
                 <div class="input-field">
-                    <input id="email" type="text" name="email">
+                    <input id="email" type="text" value="{{$user->email}}" name="email">
                 </div>
                 <label for="email" class="error"></label>
             </div>
             <div class="row m12">
-                <label>Password:</label>
+                <label>Password:<span>Leave blank if you don't want to change the password</span></label>
                 <div class="input-field">
                     <input id="password" type="password" name="password">
                 </div>
@@ -52,13 +40,10 @@
     </fieldset>
     <script>
         $(document).ready(function () {
-            $(".dropdown").jqxComboBox({autoComplete: true, width: '100%', autoDropDownHeight: true});
             $("#pageForm").validate({
                 rules: {
-                    user_type: "required",
                     first_name: "required",
                     last_name: "required",
-                    password: "required",
                     email: {
                         required: true,
                         email: true
